@@ -22,7 +22,7 @@ test("public data contains only the approved contact fields at foundation stage"
   const profile = await read("src/content/public-profile.ts");
   assert.match(profile, /displayName: "오리온"/);
   assert.match(profile, /contactEmail: "lionoh00@gmail.com"/);
-  assert.match(profile, /narrative: readonly ApprovedNarrative\[\] = \[\]/);
+  assert.match(profile, /export \{ narrative \} from "\.\/approved-narrative"/);
   assert.match(profile, /evidenceMetrics: readonly EvidenceMetric\[\] = \[\]/);
 });
 
@@ -82,4 +82,51 @@ test("header Contact scrolls to the contact section while footer email opens the
   assert.match(lab, /className="header-contact" href="#contact"/);
   assert.match(lab, /id="contact" aria-labelledby="contact-title"/);
   assert.ok(lab.includes('className="contact-mail" href={"mailto:" + contactEmail}'));
+});
+
+test("issue #2 publishes only author-approved narrative in three factual chapters", async () => {
+  const story = await read("src/content/approved-narrative.ts");
+  const lab = await read("src/components/trace-lab.tsx");
+  const page = await read("src/app/page.tsx");
+  const approved = story.match(/status: "approved"/g) ?? [];
+  assert.equal(approved.length, 10);
+  assert.match(story, /모르는 문제가 생기면 제가 아는 지식 내에서 차근차근 찾아보는 사람입니다\./);
+  assert.match(story, /앞으로 새로운 기술과 낯선 문제를 피하기보다 구조를 이해하고, 원인을 파악하는 해결 과정을 자신의 경험이나 지식으로 쌓는 개발자가 되려고 합니다\./);
+  assert.match(page, /approvedOnly\(narrative\)/);
+  for (const id of ["difficulty", "turning", "growth", "closing"]) {
+    assert.ok(lab.includes('chapter === "' + id + '"') || lab.includes('id: "' + id + '"'));
+  }
+  assert.match(lab, /구체적인 개인 역할은 추가 검증이 필요합니다/);
+  assert.doesNotMatch(lab, /원고와 실제 기록을 대조한 자기소개 본문은 사용자 검토 후 추가할 예정입니다/);
+  assert.doesNotMatch(story, /\b(?:ghp_|sk_live_|-----BEGIN PRIVATE KEY)/);
+});
+
+test("three capabilities have distinct evidence boundaries", async () => {
+  const lab = await read("src/components/trace-lab.tsx");
+  for (const term of ["자기조절력", "대인관계력", "자기동기력", "세부 행동 보완 예정"]) {
+    assert.ok(lab.includes(term));
+  }
+});
+
+test("approved story has scroll-led timeline with subtle nonblocking visual cues", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(lab, /className="story-chapters" ref=\{storyTimelineRef\}/);
+  assert.match(lab, /className="story-timeline-fill" aria-hidden="true"/);
+  assert.match(lab, /--timeline-progress/);
+  assert.match(lab, /IntersectionObserver/);
+  assert.match(lab, /entry\.target\.classList\.add\("is-in-view"\)/);
+  assert.match(css, /\.story-chapter\[data-step="02"\] \.story-chapter-body/);
+  assert.match(css, /translateY\(12px\)/);
+  assert.match(css, /\.ability-grid article:hover \{ transform: translateY\(-3px\)/);
+});
+
+test("narrative is readable without motion APIs or for reduced-motion users", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(lab, /typeof IntersectionObserver === "undefined"/);
+  assert.match(lab, /prefers-reduced-motion: reduce/);
+  assert.match(css, /\.story-chapter\.reveal-ready:not\(\.is-in-view\) \.story-chapter-body \{ opacity: 1; transform: none; \}/);
+  assert.doesNotMatch(lab, /aria-hidden=\{[^}]*chapter/);
+  assert.doesNotMatch(lab, /문장.*본인 승인 후 추가됩니다/);
 });
