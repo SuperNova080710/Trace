@@ -49,6 +49,29 @@ test("T01-like structure uses light sections with a restrained navy hero", async
   assert.doesNotMatch(lab, /orbit-outer|stage-coordinate|PERSPECTIVE \/|SIGNAL: GROWTH/);
 });
 
+test("cursor-follow glow is decorative and motion-aware", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(lab, /onPointerMove=\{onSpotlightMove\}/);
+  assert.match(lab, /pointerType !== "mouse"/);
+  assert.match(css, /radial-gradient\(340px circle at var\(--spotlight-x/);
+  assert.match(css, /pointer-events: none/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)/);
+  assert.match(css, /\.spotlight-card::after \{ display: none; \}/);
+});
+
+test("accordion animates its height but still hides collapsed content accessibly", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(css, /grid-template-rows: 0fr/);
+  assert.match(css, /grid-template-rows: 1fr/);
+  assert.match(css, /visibility: hidden/);
+  assert.match(css, /\.approach-detail-inner \{ min-height: 0; overflow: hidden; \}/);
+  assert.match(lab, /aria-hidden=\{!isOpen\}/);
+  assert.match(lab, /aria-expanded=\{isOpen\}/);
+  assert.doesNotMatch(lab, /hidden=\{!isOpen\}/);
+});
+
 test("no private folder present in project root", async () => {
   const root = await readdir(process.cwd());
   assert.ok(!root.includes(".trace-private"));

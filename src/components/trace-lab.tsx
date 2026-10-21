@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import type { ApprovedNarrative, EvidenceMetric } from "@/content/public-profile";
 
 type Props = {
@@ -94,6 +94,15 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
     };
   }, []);
 
+  // Pointer coordinates are written to CSS variables without triggering React re-renders.
+  // The overlay remains decorative and is disabled for reduced-motion users in CSS.
+  function onSpotlightMove(event: PointerEvent<HTMLElement>) {
+    if (event.pointerType !== "mouse") return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty("--spotlight-x", `${event.clientX - bounds.left}px`);
+    event.currentTarget.style.setProperty("--spotlight-y", `${event.clientY - bounds.top}px`);
+  }
+
   function onApproachKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     let next: number;
@@ -164,7 +173,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
           </div>
 
           <div className="hero-visual" aria-label="문제의 관찰, 분석, 검증을 순서대로 정리한 과정 카드">
-            <div className="trace-panel">
+            <div className="trace-panel spotlight-card" onPointerMove={onSpotlightMove}>
               <div className="trace-panel-top">
                 <span className="window-dots" aria-hidden="true"><i /><i /><i /></span>
                 <span>trace / workflow</span>
@@ -220,7 +229,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 </div>
               )}
             </div>
-            <aside className="about-aside" aria-label="프로필 요약">
+            <aside className="about-aside spotlight-card" aria-label="프로필 요약" onPointerMove={onSpotlightMove}>
               <p className="aside-label">PROFILE</p>
               <div className="profile-row"><span>이름</span><strong>{displayName}</strong></div>
               <div className="profile-row"><span>관심 분야</span><strong>Web · Systems · Research</strong></div>
@@ -259,13 +268,20 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                     >
                       <span className="approach-number">{item.number}</span>
                       <span className="approach-title">{item.title}</span>
-                      <span className="approach-toggle" aria-hidden="true">{isOpen ? "−" : "+"}</span>
+                      <span className="approach-toggle" aria-hidden="true">
+                        <span className="toggle-stroke toggle-horizontal" />
+                        <span className="toggle-stroke toggle-vertical" />
+                      </span>
                     </button>
                   </h3>
-                  <div className="approach-detail" id={contentId} hidden={!isOpen}>
-                    <p className="approach-lead">{item.lead}</p>
-                    <p>{item.description}</p>
-                    <div className="approach-tags">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                  <div className="approach-detail" id={contentId} aria-hidden={!isOpen}>
+                    <div className="approach-detail-inner">
+                      <div className="approach-detail-content">
+                        <p className="approach-lead">{item.lead}</p>
+                        <p>{item.description}</p>
+                        <div className="approach-tags">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                      </div>
+                    </div>
                   </div>
                 </article>
               );
@@ -286,7 +302,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
           </div>
           <div className="project-grid">
             {projects.map((project) => (
-              <article className="project-card" key={project.number}>
+              <article className="project-card spotlight-card" key={project.number} onPointerMove={onSpotlightMove}>
                 <div className={"project-art project-art-" + project.tone}>
                   <span className="art-number">{project.number} / {project.type}</span>
                   <span className="art-monogram" aria-hidden="true">{project.monogram}</span>
@@ -302,7 +318,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 </div>
               </article>
             ))}
-            <article className="project-card project-future">
+            <article className="project-card project-future spotlight-card" onPointerMove={onSpotlightMove}>
               <div className="project-art project-art-future">
                 <span className="art-number">03 / NEXT CHAPTER</span>
                 <span className="art-monogram" aria-hidden="true">NEXT</span>
