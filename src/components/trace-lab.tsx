@@ -145,8 +145,8 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <a href="#projects">프로젝트</a>
             <a href="#evidence">기록</a>
           </nav>
-          <a className="header-contact" href={"mailto:" + contactEmail}>
-            Contact <span aria-hidden="true">↗</span>
+          <a className="header-contact" href="#contact">
+            Contact <span aria-hidden="true">↓</span>
           </a>
         </div>
       </header>

@@ -76,3 +76,10 @@ test("no private folder present in project root", async () => {
   const root = await readdir(process.cwd());
   assert.ok(!root.includes(".trace-private"));
 });
+
+test("header Contact scrolls to the contact section while footer email opens the mail app", async () => {
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(lab, /className="header-contact" href="#contact"/);
+  assert.match(lab, /id="contact" aria-labelledby="contact-title"/);
+  assert.match(lab, /className="contact-mail" href=\{"mailto:" \+ contactEmail \}/);
+});
