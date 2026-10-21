@@ -1,0 +1,32 @@
+name: Trace quality gate
+on:
+  push:
+    branches: ["issue-*", "main"]
+  pull_request:
+    branches: ["main"]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+      - name: Lint
+        run: npm run lint
+      - name: TypeScript
+        run: npm run typecheck
+      - name: Data contract and privacy tests
+        run: npm run test
+      - name: Public source scan
+        run: npm run check:public
+      - name: Static export
+        run: npm run build
+      - name: Assert static output
+        run: test -f out/index.html
