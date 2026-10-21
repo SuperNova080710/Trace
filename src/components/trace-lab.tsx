@@ -207,7 +207,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Trac
         <div className="section-intro">
           <span className="section-counter">[ 03 / 03 ]</span>
           <div>
-            <p className="section-eyebrow">LET'S CONNECT</p>
+            <p className="section-eyebrow">LET&apos;S CONNECT</p>
             <h2 id="connect-title">다음 흔적을 <span>함께 만들고 싶습니다.</span></h2>
             <p className="section-description">현재 Trace의 기반을 제작하고 있습니다. 공개 포트폴리오가 완성되기 전에도 이메일로 연락하실 수 있습니다.</p>
           </div>
