@@ -62,6 +62,8 @@ const projects = [
 
 export function TraceLab({ displayName, contactEmail, narrative, metrics }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const storyTimelineRef = useRef<HTMLDivElement>(null);
   const triggersRef = useRef<Array<HTMLButtonElement | null>>([]);
@@ -140,6 +142,16 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
     return () => observer.disconnect();
   }, []);
 
+  // Close the mobile menu on viewport changes, without altering desktop navigation.
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 761px)");
+    const onChange = () => {
+      if (media.matches) setMobileMenuOpen(false);
+    };
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
+
   // Pointer coordinates are written to CSS variables without triggering React re-renders.
   // The overlay remains decorative and is disabled for reduced-motion users in CSS.
   function onSpotlightMove(event: PointerEvent<HTMLElement>) {
@@ -177,7 +189,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
   return (
     <div className="trace-page" id="top">
       <div className="reading-progress" ref={progressRef} aria-hidden="true" />
-      <a className="skip-link" href="#about">본문 바로가기</a>
+      <a className="skip-link" href="#main-content">본문 바로가기</a>
 
       <header className="site-header">
         <div className="container header-inner">
@@ -185,11 +197,34 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <span className="brand-mark">T<span>.</span></span>
             <span className="brand-name">TRACE <small>DEVELOPER PORTFOLIO</small></span>
           </a>
-          <nav className="main-nav" aria-label="주요 메뉴">
-            <a href="#about">소개</a>
-            <a href="#approach">작업 방식</a>
-            <a href="#projects">프로젝트</a>
-            <a href="#evidence">기록</a>
+          <button
+            className={mobileMenuOpen ? "menu-button is-open" : "menu-button"}
+            type="button"
+            ref={mobileMenuButtonRef}
+            aria-label={mobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="trace-main-nav"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            <span className="menu-button-lines" aria-hidden="true"><i /><i /><i /></span>
+          </button>
+          <nav
+            className={mobileMenuOpen ? "main-nav is-open" : "main-nav"}
+            id="trace-main-nav"
+            aria-label="주요 메뉴"
+            onKeyDown={(event) => {
+              if (event.key === "Escape" && mobileMenuOpen) {
+                setMobileMenuOpen(false);
+                mobileMenuButtonRef.current?.focus();
+              }
+            }}
+          >
+            <a href="#about" onClick={() => setMobileMenuOpen(false)}>소개</a>
+            <a href="#approach" onClick={() => setMobileMenuOpen(false)}>작업 방식</a>
+            <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
+            <a href="#evidence" onClick={() => setMobileMenuOpen(false)}>기록</a>
+            <a href="#documents" onClick={() => setMobileMenuOpen(false)}>지원 서류</a>
+            <a href="#contact" className="mobile-contact-link" onClick={() => setMobileMenuOpen(false)}>연락하기 <span aria-hidden="true">↓</span></a>
           </nav>
           <a className="header-contact" href="#contact">
             Contact <span aria-hidden="true">↓</span>
@@ -204,6 +239,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <p className="eyebrow light"><span className="eyebrow-line" /> DEVELOPER · PERSONAL ARCHIVE</p>
             <p className="hero-hello">안녕하세요. 개발자 <strong>{displayName}</strong>입니다.</p>
             <h1 id="hero-title">문제의 흐름을 읽고,<span>과정으로 답을 찾습니다.</span></h1>
+            <p className="hero-identity"><span aria-hidden="true" className="identity-mark" />문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람</p>
             <p className="hero-description">
               기록을 통해 지나온 과정을 이해하고,<br className="desktop-break" />
               검증 가능한 결과로 다음 단계를 준비합니다.
@@ -216,6 +252,9 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div className="hero-tags" aria-label="핵심 주제">
               <span>Root Cause</span><span>Documentation</span><span>Verification</span>
             </div>
+            <a className="hero-email" href="#contact" aria-label="하단 연락처에서 이메일 주소 확인하기">
+              <span>EMAIL</span> {contactEmail} <span aria-hidden="true">↓</span>
+            </a>
           </div>
 
           <div className="hero-visual" aria-label="문제의 관찰, 분석, 검증을 순서대로 정리한 과정 카드">
@@ -466,6 +505,24 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <span>공개 활동 근거</span>
             <a href="https://github.com/SuperNova080710/ech-beacon-detection" target="_blank" rel="noopener noreferrer">T10 연구 기록 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
             <a href="https://github.com/SuperNova080710/Blog-backend" target="_blank" rel="noopener noreferrer">Backend 코드 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-white documents-section" id="documents" aria-labelledby="documents-title">
+        <div className="container">
+          <div className="section-heading">
+            <div className="section-side"><span>05</span><span className="side-rule" /></div>
+            <div>
+              <p className="eyebrow">APPLICATION DOCUMENTS</p>
+              <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
+              <p className="section-subtitle">이력서, 자기소개서, 프로젝트 경험기술서는 Issue #6에서 제작합니다. 아직 다운로드 가능한 파일이 아닙니다.</p>
+            </div>
+          </div>
+          <div className="document-list" aria-label="서류 준비 현황">
+            <div className="document-item"><span className="document-number">01</span><strong>이력서</strong><span className="document-status">준비 중</span></div>
+            <div className="document-item"><span className="document-number">02</span><strong>자기소개서</strong><span className="document-status">준비 중</span></div>
+            <div className="document-item"><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><span className="document-status">준비 중</span></div>
           </div>
         </div>
       </section>
