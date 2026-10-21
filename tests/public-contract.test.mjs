@@ -107,3 +107,26 @@ test("three capabilities have distinct evidence boundaries", async () => {
     assert.ok(lab.includes(term));
   }
 });
+
+test("approved story has scroll-led timeline with subtle nonblocking visual cues", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(lab, /className="story-chapters" ref=\{storyTimelineRef\}/);
+  assert.match(lab, /className="story-timeline-fill" aria-hidden="true"/);
+  assert.match(lab, /--timeline-progress/);
+  assert.match(lab, /IntersectionObserver/);
+  assert.match(lab, /entry\.target\.classList\.add\("is-in-view"\)/);
+  assert.match(css, /\.story-chapter\[data-step="02"\] \.story-chapter-body/);
+  assert.match(css, /translateY\(12px\)/);
+  assert.match(css, /\.ability-grid article:hover \{ transform: translateY\(-3px\)/);
+});
+
+test("narrative is readable without motion APIs or for reduced-motion users", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(lab, /typeof IntersectionObserver === "undefined"/);
+  assert.match(lab, /prefers-reduced-motion: reduce/);
+  assert.match(css, /\.story-chapter\.reveal-ready:not\(\.is-in-view\) \.story-chapter-body \{ opacity: 1; transform: none; \}/);
+  assert.doesNotMatch(lab, /aria-hidden=\{[^}]*chapter/);
+  assert.doesNotMatch(lab, /문장.*본인 승인 후 추가됩니다/);
+});

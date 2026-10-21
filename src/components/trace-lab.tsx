@@ -63,6 +63,7 @@ const projects = [
 export function TraceLab({ displayName, contactEmail, narrative, metrics }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
   const progressRef = useRef<HTMLDivElement>(null);
+  const storyTimelineRef = useRef<HTMLDivElement>(null);
   const triggersRef = useRef<Array<HTMLButtonElement | null>>([]);
 
   useEffect(() => {
@@ -75,6 +76,26 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       const maximum = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = maximum > 0 ? Math.min(1, Math.max(0, window.scrollY / maximum)) : 1;
       indicator.style.transform = "scaleX(" + ratio + ")";
+
+      const timeline = storyTimelineRef.current;
+      if (timeline) {
+        const rect = timeline.getBoundingClientRect();
+        const start = rect.top + 60;
+        const end = rect.bottom - 60;
+        const cursor = window.innerHeight * 0.52;
+        const fill = end > start
+          ? Math.min(1, Math.max(0, (cursor - start) / (end - start)))
+          : 0;
+        timeline.style.setProperty("--timeline-progress", String(fill));
+
+        const chapters = Array.from(timeline.querySelectorAll<HTMLElement>(".story-chapter"));
+        const focused = chapters.reduce((index, chapter, current) => {
+          return chapter.getBoundingClientRect().top < cursor ? current : index;
+        }, 0);
+        chapters.forEach((chapter, index) => {
+          chapter.classList.toggle("is-current", index === focused);
+        });
+      }
     };
     const schedule = () => {
       if (frame === 0) frame = window.requestAnimationFrame(update);
@@ -92,6 +113,31 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       observer?.disconnect();
       if (frame) window.cancelAnimationFrame(frame);
     };
+  }, []);
+
+  // Reveal only chapter content that begins below the viewport. Without JavaScript
+  // or with reduced motion enabled, the full narrative remains readable.
+  useEffect(() => {
+    const timeline = storyTimelineRef.current;
+    if (!timeline || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const chapters = Array.from(timeline.querySelectorAll<HTMLElement>(".story-chapter"));
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("is-in-view");
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+
+    for (const chapter of chapters) {
+      if (chapter.getBoundingClientRect().top > window.innerHeight * 0.88) {
+        chapter.classList.add("reveal-ready");
+        observer.observe(chapter);
+      }
+    }
+    return () => observer.disconnect();
   }, []);
 
   // Pointer coordinates are written to CSS variables without triggering React re-renders.
@@ -162,7 +208,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               기록을 통해 지나온 과정을 이해하고,<br className="desktop-break" />
               검증 가능한 결과로 다음 단계를 준비합니다.
             </p>
-            <p className="hero-note">이 페이지는 BR-A 포트폴리오 제작 중인 버전입니다. 최종 자기소개 문장은 본인 승인 후 추가됩니다.</p>
+            <p className="hero-note">이 페이지는 BR-A 포트폴리오 제작 중인 버전입니다. 자기소개 본문은 본인의 검토와 승인을 거쳐 반영했습니다.</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">프로젝트 살펴보기 <span aria-hidden="true">↗</span></a>
               <a className="button button-outline" href="#about">소개 더 보기 <span aria-hidden="true">↓</span></a>
@@ -232,6 +278,12 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
           </div>
 
           <div className="approved-story" aria-label="오리온의 자기소개 본문">
+            <div className="story-timeline-heading">
+              <span className="story-timeline-eyebrow">MY JOURNEY · 2024—2026</span>
+              <p>한 번에 완성된 결과가 아니라, 문제를 마주하고 다시 시도해 온 기록입니다.</p>
+            </div>
+            <div className="story-chapters" ref={storyTimelineRef}>
+              <span className="story-timeline-fill" aria-hidden="true" />
             {([
               { id: "difficulty", number: "01", title: "막혔던 순간", subtitle: "2024 · 디지털 트윈 캡스톤" },
               { id: "turning", number: "02", title: "접근 방식을 바꾸다", subtitle: "2024–2026 · 다시 확인하고 다시 시작하기" },
@@ -240,8 +292,8 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               const paragraphs = narrative.filter((entry) => entry.chapter === chapter.id);
               if (paragraphs.length === 0) return null;
               return (
-                <section className="story-chapter" key={chapter.id} aria-labelledby={`story-${chapter.id}`}>
-                  <div className="story-chapter-number" aria-hidden="true">{chapter.number}</div>
+                <section className="story-chapter" data-step={chapter.number} key={chapter.id} aria-labelledby={`story-${chapter.id}`}>
+                  <div className="story-chapter-number" aria-hidden="true"><span>{chapter.number}</span></div>
                   <div className="story-chapter-body">
                     <p className="story-chapter-kicker">{chapter.subtitle}</p>
                     <h3 id={`story-${chapter.id}`}>{chapter.title}</h3>
@@ -250,6 +302,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 </section>
               );
             })}
+            </div>
             {narrative.filter((entry) => entry.chapter === "closing").map((entry) => (
               <blockquote className="story-closing" key={entry.id}>
                 <span className="story-closing-label">앞으로의 방향</span>
