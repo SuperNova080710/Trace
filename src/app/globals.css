@@ -101,6 +101,28 @@ section[id] { scroll-margin-top: 85px; }
 .about-main > p { margin: 0 0 17px; }
 .about-lead { color: #172f53; font-size: clamp(19px,2.1vw,24px); line-height: 1.72; font-weight: 800; letter-spacing: -.045em; }
 .about-main .pending-copy { color: #657fa2; font-size: 12px; background: #f4f8ff; border-left: 3px solid #b8ceef; padding: 11px 13px; margin-top: 20px; }
+.about-main .about-context { color: #657a99; font-size: 13px; line-height: 1.9; max-width: 580px; margin-top: 22px; }
+.approved-opening { max-width: 610px; }
+.approved-story { margin: 62px 0 0 130px; border-top: 1px solid var(--line); }
+.story-chapter { display: grid; grid-template-columns: 63px minmax(0,1fr); gap: 22px; padding: 38px 0 28px; border-bottom: 1px solid #e1eaf5; }
+.story-chapter-number { font-size: 13px; font-weight: 800; color: #2c68c4; padding-top: 6px; }
+.story-chapter-body { max-width: 830px; }
+.story-chapter-kicker { font-size: 11px !important; color: #2c68c4 !important; font-weight: 700; margin: 0 0 8px !important; }
+.story-chapter-body h3 { color: #16325a; font-size: clamp(19px,2.2vw,26px); margin: 0 0 21px; letter-spacing: -.045em; }
+.story-chapter-body > p:not(.story-chapter-kicker) { color: #435d7e; line-height: 2; font-size: 14px; margin: 0 0 18px; overflow-wrap: anywhere; }
+.story-closing { background: #edf5ff; border-left: 3px solid #3f80ec; border-radius: 0 10px 10px 0; padding: 27px 33px; margin: 34px 0 0; }
+.story-closing-label { display: block; color: #2864b6; font-size: 11px; font-weight: 800; margin-bottom: 9px; }
+.story-closing p { margin: 0; color: #153969; font-size: clamp(16px,1.8vw,21px); line-height: 1.8; font-weight: 700; letter-spacing: -.035em; }
+.ability-summary { margin-top: 52px; }
+.ability-summary > h3 { font-size: 22px; letter-spacing: -.04em; margin: 0 0 22px; color: #17355f; }
+.ability-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; }
+.ability-grid article { background: #f7faff; border: 1px solid #d9e6f6; border-radius: 12px; padding: 23px 20px; }
+.ability-index { font-size: 9px; font-weight: 800; letter-spacing: .06em; color: #3876cc; }
+.ability-grid h4 { font-size: 17px; margin: 13px 0 9px; letter-spacing: -.04em; color: #183765; }
+.ability-grid p { font-size: 12px; color: #526d90; line-height: 1.85; margin: 0 0 18px; }
+.ability-grid small { color: #6a84a8; font-size: 10px; }
+.story-source-note { color: #7486a0; font-size: 11px; line-height: 1.8; margin: 17px 0 0; }
+
 .approved-notes { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 14px; }
 .about-aside { align-self: start; border: 1px solid #dce7f5; background: #f7faff; border-radius: 14px; padding: 26px 29px; }
 .aside-label { margin: 0 0 8px; color: var(--blue); font-size: 10px; letter-spacing: .13em; font-weight: 800; }
@@ -200,6 +222,7 @@ section[id] { scroll-margin-top: 85px; }
   .hero-inner { gap: 30px; }
   .hero h1 { font-size: clamp(35px,4.5vw,49px); }
   .about-grid { gap: 26px; }
+  .ability-grid { grid-template-columns: 1fr; }
   .project-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .project-future { grid-column: span 2; }
 }
@@ -218,6 +241,7 @@ section[id] { scroll-margin-top: 85px; }
   .section-heading { grid-template-columns: 1fr; gap: 10px; }
   .section-side { padding: 0; }
   .about-grid,.approach-list,.project-grid,.evidence-placeholder,.metrics-grid,.evidence-links { margin-left: 0; }
+  .approved-story { margin-left: 0; }
   .about-grid { grid-template-columns: 1fr; }
   .section { padding: 72px 0; }
   .contact-inner { flex-direction: column; align-items: flex-start; }
@@ -243,6 +267,12 @@ section[id] { scroll-margin-top: 85px; }
   .section-heading h2 { font-size: 28px; }
   .section-subtitle { font-size: 13px; }
   .about-lead { font-size: 20px; }
+  .approved-story { margin-top: 40px; }
+  .story-chapter { grid-template-columns: 33px minmax(0,1fr); gap: 12px; padding-top: 29px; }
+  .story-chapter-body > p:not(.story-chapter-kicker) { font-size: 13px; }
+  .story-closing { padding: 21px; }
+  .ability-grid { grid-template-columns: 1fr; }
+  .ability-grid article { padding: 21px; }
   .about-aside { padding: 20px; }
   .approach-trigger { padding: 20px 15px; gap: 12px; }
   .approach-title { font-size: 16px; }

@@ -11,8 +11,11 @@ export const publicProfile = {
 
 export type ApprovalStatus = "pending" | "approved";
 
+export type NarrativeChapter = "opening" | "difficulty" | "turning" | "growth" | "closing";
+
 export type ApprovedNarrative = {
   id: string;
+  chapter: NarrativeChapter;
   text: string;
   status: ApprovalStatus;
   evidenceIds: readonly string[];
@@ -36,6 +39,8 @@ export function approvedOnly<T extends { status: ApprovalStatus }>(
   return entries.filter((entry) => entry.status === "approved");
 }
 
-/** Populated after review in issues #2 and #4. Never publish drafts. */
-export const narrative: readonly ApprovedNarrative[] = [];
+/** User-approved BR-A narrative: published only after explicit full-text approval. */
+export { narrative } from "./approved-narrative";
+
+/** Official attendance and activity metrics are still awaiting verification in issue #4. */
 export const evidenceMetrics: readonly EvidenceMetric[] = [];

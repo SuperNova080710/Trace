@@ -217,17 +217,10 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
           </div>
           <div className="about-grid">
             <div className="about-main">
-              <p className="about-lead">답을 빨리 찾는 것만큼,<br />그 답에 어떻게 도달했는지 설명할 수 있어야 한다고 생각합니다.</p>
-              <p>
-                개발 과정에서 새로운 기술을 만날 때마다 작게 나누어 이해하고, 막히는 지점은 기록으로 남기려 합니다.
-                경험이 쌓일수록 중요한 것은 단순한 결과보다 다시 재현하고 설명할 수 있는 과정이라고 느낍니다.
-              </p>
-              <p className="pending-copy">T09·T11 원고와 실제 기록을 대조한 자기소개 본문은 사용자 검토 후 추가할 예정입니다.</p>
-              {narrative.length > 0 && (
-                <div className="approved-notes" aria-label="승인된 자기소개 문단">
-                  {narrative.map((entry) => <p key={entry.id}>{entry.text}</p>)}
-                </div>
-              )}
+              {narrative.filter((entry) => entry.chapter === "opening").map((entry) => (
+                <p className="about-lead approved-opening" key={entry.id}>{entry.text}</p>
+              ))}
+              <p className="about-context">2024년의 캡스톤디자인과 2026년의 문제 해결 기록을 바탕으로, 제가 무엇을 어려워했고 어떻게 접근 방식을 바꿨는지 정리했습니다.</p>
             </div>
             <aside className="about-aside spotlight-card" aria-label="프로필 요약" onPointerMove={onSpotlightMove}>
               <p className="aside-label">PROFILE</p>
@@ -236,6 +229,57 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               <div className="profile-row"><span>작업 습관</span><strong>Observe → Build → Verify</strong></div>
               <div className="profile-row"><span>공개 활동</span><a href="https://github.com/SuperNova080710" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
             </aside>
+          </div>
+
+          <div className="approved-story" aria-label="오리온의 자기소개 본문">
+            {([
+              { id: "difficulty", number: "01", title: "막혔던 순간", subtitle: "2024 · 디지털 트윈 캡스톤" },
+              { id: "turning", number: "02", title: "접근 방식을 바꾸다", subtitle: "2024–2026 · 다시 확인하고 다시 시작하기" },
+              { id: "growth", number: "03", title: "지금도 남기는 기록", subtitle: "2026 · 기록, 협업, AI의 검증" },
+            ] as const).map((chapter) => {
+              const paragraphs = narrative.filter((entry) => entry.chapter === chapter.id);
+              if (paragraphs.length === 0) return null;
+              return (
+                <section className="story-chapter" key={chapter.id} aria-labelledby={`story-${chapter.id}`}>
+                  <div className="story-chapter-number" aria-hidden="true">{chapter.number}</div>
+                  <div className="story-chapter-body">
+                    <p className="story-chapter-kicker">{chapter.subtitle}</p>
+                    <h3 id={`story-${chapter.id}`}>{chapter.title}</h3>
+                    {paragraphs.map((entry) => <p key={entry.id}>{entry.text}</p>)}
+                  </div>
+                </section>
+              );
+            })}
+            {narrative.filter((entry) => entry.chapter === "closing").map((entry) => (
+              <blockquote className="story-closing" key={entry.id}>
+                <span className="story-closing-label">앞으로의 방향</span>
+                <p>{entry.text}</p>
+              </blockquote>
+            ))}
+            <div className="ability-summary" aria-labelledby="abilities-title">
+              <h3 id="abilities-title">경험 속 세 가지 역량</h3>
+              <div className="ability-grid">
+                <article>
+                  <span className="ability-index">01 · SELF-REGULATION</span>
+                  <h4>자기조절력</h4>
+                  <p>오류가 반복될 때 시스템을 구간별로 분리하고, 원인과 현재 상태를 단계적으로 확인했습니다.</p>
+                  <small>근거: 2024 캡스톤 · 2026-09-30</small>
+                </article>
+                <article>
+                  <span className="ability-index">02 · RELATIONSHIP</span>
+                  <h4>대인관계력</h4>
+                  <p>팀으로 시스템을 구현하며 설명과 공유의 필요성을 배웠습니다. 구체적인 개인 역할은 추가 검증이 필요합니다.</p>
+                  <small>근거: 2024 캡스톤 · 세부 행동 보완 예정</small>
+                </article>
+                <article>
+                  <span className="ability-index">03 · MOTIVATION</span>
+                  <h4>자기동기력</h4>
+                  <p>이미 투자한 시간이 있어도 문제가 된 구조를 다시 시작하고, 해결 과정을 다음 작업의 지식으로 남겼습니다.</p>
+                  <small>근거: 2026-09-17 · 2026-09-16</small>
+                </article>
+              </div>
+              <p className="story-source-note">본문은 본인이 승인한 자기소개를 바탕으로 작성했습니다. 소설 T11의 허구화된 장면이나 미확인 수치는 사실처럼 사용하지 않았습니다.</p>
+            </div>
           </div>
         </div>
       </section>
