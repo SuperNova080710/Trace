@@ -26,14 +26,27 @@ test("public data contains only the approved contact fields at foundation stage"
   assert.match(profile, /evidenceMetrics: readonly EvidenceMetric\[\] = \[\]/);
 });
 
-test("app has Korean semantics and accessible interaction scaffold", async () => {
+test("app has Korean semantics and keyboard-operable accordion", async () => {
   const layout = await read("src/app/layout.tsx");
   const lab = await read("src/components/trace-lab.tsx");
   assert.match(layout, /lang="ko"/);
-  assert.match(lab, /role="tablist"/);
-  assert.match(lab, /role="tabpanel"/);
+  assert.match(lab, /aria-expanded=/);
+  assert.match(lab, /aria-controls=/);
   assert.match(lab, /ArrowRight/);
   assert.match(lab, /ArrowLeft/);
+  assert.match(lab, /ArrowDown/);
+  assert.match(lab, /ArrowUp/);
+  assert.match(lab, /Home/);
+  assert.match(lab, /End/);
+});
+
+test("T01-like structure uses light sections with a restrained navy hero", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(css, /\.section-white\s*\{\s*background:\s*#fff/);
+  assert.match(css, /\.hero\s*\{[^}]*var\(--navy\)/s);
+  assert.match(lab, /className="project-grid"/);
+  assert.doesNotMatch(lab, /orbit-outer|stage-coordinate|PERSPECTIVE \/|SIGNAL: GROWTH/);
 });
 
 test("no private folder present in project root", async () => {
