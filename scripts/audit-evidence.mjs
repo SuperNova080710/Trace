@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
+import { summarizeAttendanceSnapshot, summarizeChallengeSnapshot } from "./audit-official-snapshot.mjs";
 
 /**
  * Offline, read-only candidate metrics. Never publishes or edits src/content/.
@@ -180,16 +181,16 @@ export function summarizeApprovals(raw, digest = "not-provided") {
   };
 }
 
-const handlers = { ritual: summarizeRitual, attendance: summarizeAttendance, approvals: summarizeApprovals };
+const handlers = { ritual: summarizeRitual, attendance: summarizeAttendance, approvals: summarizeApprovals, "attendance-snapshot": summarizeAttendanceSnapshot, "challenge-snapshot": summarizeChallengeSnapshot };
 export function summarize(kind, raw, digest = "not-provided") {
-  if (!Object.hasOwn(handlers, kind)) throw new Error("Expected kind: ritual|attendance|approvals");
+  if (!Object.hasOwn(handlers, kind)) throw new Error("Expected kind: ritual|attendance|approvals|attendance-snapshot|challenge-snapshot");
   return handlers[kind](raw, digest);
 }
 
 async function main() {
   const [kind, file] = process.argv.slice(2);
   if (!file || !Object.hasOwn(handlers, kind)) {
-    console.error("Usage: node scripts/audit-evidence.mjs ritual|attendance|approvals <path-to-local-private-json>");
+    console.error("Usage: node scripts/audit-evidence.mjs ritual|attendance|approvals|attendance-snapshot|challenge-snapshot <path-to-local-private-json>");
     process.exitCode = 2;
     return;
   }
