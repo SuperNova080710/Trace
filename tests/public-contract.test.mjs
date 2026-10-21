@@ -81,5 +81,5 @@ test("header Contact scrolls to the contact section while footer email opens the
   const lab = await read("src/components/trace-lab.tsx");
   assert.match(lab, /className="header-contact" href="#contact"/);
   assert.match(lab, /id="contact" aria-labelledby="contact-title"/);
-  assert.match(lab, /className="contact-mail" href=\{"mailto:" \+ contactEmail \}/);
+  assert.ok(lab.includes('className="contact-mail" href={"mailto:" + contactEmail}'));
 });
