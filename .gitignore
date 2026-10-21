@@ -1,0 +1,27 @@
+# Dependencies and generated builds
+/node_modules
+/.next
+/out
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# Machine-local or sensitive data (do not place private data in tracked paths)
+/.env*
+!/.env.example
+/data/private/
+/generated/private/
+/.private/
+/.trace-private/
+ritual-history-*.json
+*credentials*.json
+*.pem
+*.key
+
+# Local tooling
+.DS_Store
+npm-debug.log*
+yarn-error.log*
+/coverage
+/playwright-report
+/test-results
