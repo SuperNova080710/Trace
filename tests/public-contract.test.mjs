@@ -169,3 +169,17 @@ test("Tab after scrolling keeps the reading position without changing normal Tab
   assert.match(lab, /document\.removeEventListener\("keydown", handleTab, true\)/);
   assert.match(css, /\.reading-resume-focus:focus \{/);
 });
+
+
+test("accordion title keeps identical geometry while details open and close", async () => {
+  const css = await read("src/app/globals.css");
+  const closed = css.match(/\.approach-item \{([^}]+)\}/)?.[1] ?? "";
+  const open = css.match(/\.approach-item\.is-open \{([^}]+)\}/)?.[1] ?? "";
+  assert.match(closed, /border:\s*1px solid transparent/);
+  assert.match(closed, /border-bottom-color:\s*#cfddf0/);
+  assert.match(closed, /margin-block:\s*0/);
+  assert.match(open, /border-color:\s*#d5e4f7/);
+  assert.doesNotMatch(open, /(?:^|;)\s*(?:border\s*:|margin(?:-(?:block|top|bottom))?\s*:|padding(?:-[\w-]+)?\s*:)/);
+  assert.match(css, /\.approach-trigger \{[^}]*padding: 25px 27px/);
+  assert.match(css, /\.approach-item\.is-open \.approach-detail \{[^}]*grid-template-rows: 1fr/);
+});

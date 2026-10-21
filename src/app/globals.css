@@ -157,8 +157,8 @@ section[id] { scroll-margin-top: 85px; }
 .profile-row a { color: var(--blue); }
 
 .approach-list { margin-left: 130px; border-top: 1px solid #cfdff3; }
-.approach-item { border-bottom: 1px solid #cfddf0; background: transparent; transition: background .2s ease, box-shadow .2s ease; }
-.approach-item.is-open { background: #fff; box-shadow: 0 12px 36px #204b8720; border-radius: 11px; border: 1px solid #d5e4f7; margin-block: 9px; }
+.approach-item { border: 1px solid transparent; border-bottom-color: #cfddf0; border-radius: 11px; margin-block: 0; background: transparent; transition: background .2s ease, box-shadow .2s ease; }
+.approach-item.is-open { background: #fff; box-shadow: 0 12px 36px #204b8720; border-color: #d5e4f7; }
 .approach-item h3 { margin: 0; font-size: inherit; }
 
 /* Outline belongs to the accordion item, so it grows with expanded details. */
