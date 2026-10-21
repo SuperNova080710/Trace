@@ -146,3 +146,40 @@ test("issue #3 provides accessible mobile navigation and distinct future documen
   assert.match(css, /\.main-nav\.is-open \{ display: flex; \}/);
   assert.match(page, /id="main-content" tabIndex=\{-1\}/);
 });
+
+test("accordion keyboard outline surrounds the entire expanded article", async () => {
+  const css = await read("src/app/globals.css");
+  const lab = await read("src/components/trace-lab.tsx");
+  assert.match(css, /\.approach-item:has\(> h3 > \.approach-trigger:focus-visible\) \{/);
+  assert.match(css, /\.approach-item:has\(> h3 > \.approach-trigger:focus-visible\) \.approach-trigger:focus-visible/);
+  assert.match(lab, /className=\{"approach-item" \+ \(isOpen \? " is-open" : ""\)\}/);
+  assert.match(lab, /aria-expanded=\{isOpen\}/);
+  assert.match(css, /\.approach-item\.is-open \.approach-detail \{/);
+});
+
+test("Tab after scrolling keeps the reading position without changing normal Tab navigation", async () => {
+  const lab = await read("src/components/trace-lab.tsx");
+  const css = await read("src/app/globals.css");
+  assert.match(lab, /event\.key !== "Tab" \|\| event\.shiftKey/);
+  assert.match(lab, /event\.defaultPrevented/);
+  assert.match(lab, /scrolledSinceFocus/);
+  assert.match(lab, /bounds\.bottom > 88 && bounds\.top < window\.innerHeight - 24/);
+  assert.match(lab, /event\.preventDefault\(\);[\s\S]*target\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(lab, /originalTabIndex === null\) target\.removeAttribute\("tabindex"\)/);
+  assert.match(lab, /document\.removeEventListener\("keydown", handleTab, true\)/);
+  assert.match(css, /\.reading-resume-focus:focus \{/);
+});
+
+
+test("accordion title keeps identical geometry while details open and close", async () => {
+  const css = await read("src/app/globals.css");
+  const closed = css.match(/\.approach-item \{([^}]+)\}/)?.[1] ?? "";
+  const open = css.match(/\.approach-item\.is-open \{([^}]+)\}/)?.[1] ?? "";
+  assert.match(closed, /border:\s*1px solid transparent/);
+  assert.match(closed, /border-bottom-color:\s*#cfddf0/);
+  assert.match(closed, /margin-block:\s*0/);
+  assert.match(open, /border-color:\s*#d5e4f7/);
+  assert.doesNotMatch(open, /(?:^|;)\s*(?:border\s*:|margin(?:-(?:block|top|bottom))?\s*:|padding(?:-[\w-]+)?\s*:)/);
+  assert.match(css, /\.approach-trigger \{[^}]*padding: 25px 27px/);
+  assert.match(css, /\.approach-item\.is-open \.approach-detail \{[^}]*grid-template-rows: 1fr/);
+});

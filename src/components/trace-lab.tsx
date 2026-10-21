@@ -152,6 +152,70 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
     return () => media.removeEventListener("change", onChange);
   }, []);
 
+  // A reader may scroll through long non-interactive content while keyboard focus
+  // remains in the off-screen header. Restore a visible reading position on the
+  // next forward Tab; otherwise preserve the browser's native Tab order.
+  useEffect(() => {
+    let scrolledSinceFocus = window.scrollY > 160;
+
+    const markScroll = () => { scrolledSinceFocus = true; };
+    const resetOnFocus = () => { scrolledSinceFocus = false; };
+
+    const handleTab = (event: globalThis.KeyboardEvent) => {
+      if (
+        event.key !== "Tab" || event.shiftKey || event.defaultPrevented ||
+        event.altKey || event.ctrlKey || event.metaKey || !scrolledSinceFocus
+      ) return;
+
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && active !== document.body && active !== document.documentElement) {
+        const bounds = active.getBoundingClientRect();
+        // Visible controls always retain their normal sequential Tab behavior.
+        if (bounds.bottom > 88 && bounds.top < window.innerHeight - 24) return;
+      }
+
+      const main = document.getElementById("main-content");
+      if (!main) return;
+      const readingNodes = Array.from(main.querySelectorAll<HTMLElement>(
+        ".about-main p, .story-chapter-body h3, .story-chapter-body p, " +
+        ".story-closing p, .ability-summary h3, .section-heading h2, " +
+        ".project-content h3, .evidence-placeholder h3, .document-item strong, " +
+        ".contact-inner h2"
+      ));
+      const visible = readingNodes
+        .map((node) => ({ node, bounds: node.getBoundingClientRect() }))
+        .filter(({ bounds }) => bounds.bottom > 100 && bounds.top < window.innerHeight - 44);
+      const target = visible.sort((a, b) => {
+        const preferred = window.innerHeight * 0.35;
+        return Math.abs(a.bounds.top - preferred) - Math.abs(b.bounds.top - preferred);
+      })[0]?.node;
+      if (!target) return;
+
+      // A temporary -1 target is not added to the sequential Tab order.
+      // preventScroll preserves the reading position for the first Tab.
+      event.preventDefault();
+      const originalTabIndex = target.getAttribute("tabindex");
+      target.setAttribute("tabindex", "-1");
+      target.classList.add("reading-resume-focus");
+      target.addEventListener("blur", () => {
+        target.classList.remove("reading-resume-focus");
+        if (originalTabIndex === null) target.removeAttribute("tabindex");
+        else target.setAttribute("tabindex", originalTabIndex);
+      }, { once: true });
+      target.focus({ preventScroll: true });
+      scrolledSinceFocus = false;
+    };
+
+    window.addEventListener("scroll", markScroll, { passive: true });
+    document.addEventListener("focusin", resetOnFocus);
+    document.addEventListener("keydown", handleTab, true);
+    return () => {
+      window.removeEventListener("scroll", markScroll);
+      document.removeEventListener("focusin", resetOnFocus);
+      document.removeEventListener("keydown", handleTab, true);
+    };
+  }, []);
+
   // Pointer coordinates are written to CSS variables without triggering React re-renders.
   // The overlay remains decorative and is disabled for reduced-motion users in CSS.
   function onSpotlightMove(event: PointerEvent<HTMLElement>) {
