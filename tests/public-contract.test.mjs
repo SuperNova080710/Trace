@@ -69,7 +69,7 @@ test("accordion animates its height but still hides collapsed content accessibly
   assert.match(css, /\.approach-detail-inner \{ min-height: 0; overflow: hidden; \}/);
   assert.match(lab, /aria-hidden=\{!isOpen\}/);
   assert.match(lab, /aria-expanded=\{isOpen\}/);
-  assert.doesNotMatch(lab, /hidden=\{!isOpen\}/);
+  assert.doesNotMatch(lab, /id=\{contentId\} hidden=/);
 });
 
 test("no private folder present in project root", async () => {
