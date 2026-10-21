@@ -130,3 +130,19 @@ test("narrative is readable without motion APIs or for reduced-motion users", as
   assert.doesNotMatch(lab, /aria-hidden=\{[^}]*chapter/);
   assert.doesNotMatch(lab, /문장.*본인 승인 후 추가됩니다/);
 });
+
+test("issue #3 provides accessible mobile navigation and distinct future documents state", async () => {
+  const lab = await read("src/components/trace-lab.tsx");
+  const css = await read("src/app/globals.css");
+  const page = await read("src/app/page.tsx");
+  assert.match(lab, /aria-expanded=\{mobileMenuOpen\}/);
+  assert.match(lab, /aria-controls="trace-main-nav"/);
+  assert.match(lab, /event\.key === "Escape"/);
+  assert.match(lab, /href="#documents"/);
+  assert.match(lab, /id="documents"/);
+  assert.match(lab, /href="#contact"/);
+  assert.match(lab, /문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람/);
+  assert.match(lab, /아직 다운로드 가능한 파일이 아닙니다/);
+  assert.match(css, /\.main-nav\.is-open \{ display: flex; \}/);
+  assert.match(page, /id="main-content" tabIndex=\{-1\}/);
+});

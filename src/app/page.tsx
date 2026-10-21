@@ -6,7 +6,7 @@ export default function Home() {
   const publishedMetrics = approvedOnly(evidenceMetrics);
 
   return (
-    <main id="main-content">
+    <main id="main-content" tabIndex={-1}>
       <TraceLab
         displayName={publicProfile.displayName}
         contactEmail={publicProfile.contactEmail}
