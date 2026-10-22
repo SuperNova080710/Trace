@@ -10,9 +10,10 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "check:public": "node scripts/check-public-surface.mjs",
-    "check": "npm run lint && npm run typecheck && npm run test && npm run check:public && npm run build && npm run check:export && npm run check:release",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run check:brb-data && npm run check:public && npm run build && npm run check:export && npm run check:release",
     "check:export": "node scripts/check-export.mjs",
-    "check:release": "node scripts/check-release-surface.mjs"
+    "check:release": "node scripts/check-release-surface.mjs",
+    "check:brb-data": "node scripts/build-br-b-heldout.mjs --check"
   },
   "dependencies": {
     "next": "16.3.8",
