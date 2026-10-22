@@ -31,3 +31,25 @@ for (const term of [
 }
 assert.ok(!html.includes("본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며"), "Pre-approval placeholder must not be shown after author approval");
 console.log("PASS: public static HTML contains all required anchors, contact and visible approved content");
+
+const explorerHtml = await readFile(new URL("../out/ech-beacon-explorer.html", import.meta.url), "utf8")
+  .catch(async (error) => {
+    if (error?.code !== "ENOENT") throw error;
+    return readFile(new URL("../out/ech-beacon-explorer/index.html", import.meta.url), "utf8");
+  });
+for (const expected of [
+  'id="explorer-title"',
+  'id="explorer-main"',
+  "ECH Beacon Explorer",
+  "Native ECH 환경에서 지터가 적용된 HTTPS Beacon",
+  "보안 학습자와 트래픽 분석자",
+  "정상 오탐",
+  "Recall 1.0000",
+  "T10 논문",
+  "실시간 탐지하는 서비스가 아닙니다",
+]) {
+  assert.ok(explorerHtml.includes(expected), "BRB-C03 static export missing: " + expected);
+}
+assert.ok(explorerHtml.includes('href="/"' ), "BR-B must link to TRACE home");
+console.log("PASS: BRB-C03 research application first screen is statically exported");
+
