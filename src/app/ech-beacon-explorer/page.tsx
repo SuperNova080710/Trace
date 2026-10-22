@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import research from "@/content/br-b-research-contract.json";
 import styles from "./explorer.module.css";
+import InteractiveExplorer from "./interactive-explorer";
 
 export const metadata: Metadata = {
   title: "ECH Beacon Explorer | TRACE",
@@ -118,7 +119,7 @@ export default function ExplorerIntro() {
               <p className={styles.sectionEyebrow}>03 / THREE THINGS TO EXPLORE</p>
               <h2 id="actions-title">이 앱에서 할 세 가지</h2>
             </div>
-            <span className={styles.stageTag}>탐색 인터페이스 구현 준비 중</span>
+            <span className={styles.stageTag}>실험 표본 탐색 가능</span>
           </div>
           <div className={styles.stepGrid}>
             {tasks.map((task) => (
@@ -130,8 +131,10 @@ export default function ExplorerIntro() {
               </article>
             ))}
           </div>
-          <p className={styles.stageNote}>현재 공개된 화면은 첫 단계의 연구 소개 페이지입니다. 시나리오 선택·Trial 비교·상세 분석 조작은 후속 작업에서 구현하며, 아직 작동하는 것으로 표시하지 않습니다.</p>
+          <p className={styles.stageNote}>아래 연구 랩에서 세 작업을 직접 수행할 수 있습니다. 예측은 T10 연구의 동결된 표본을 사용합니다.</p>
         </section>
+
+        <InteractiveExplorer />
 
         <footer className={styles.footer}>
           <span>ECH BEACON EXPLORER · TRACE / ALEPH BR-B</span>

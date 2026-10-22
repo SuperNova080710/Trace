@@ -35,7 +35,8 @@ test("route is isolated from existing TRACE homepage before explicit portfolio i
   const home = await readFile("src/app/page.tsx", "utf8");
   const lab = await readFile("src/components/trace-lab.tsx", "utf8");
   assert.match(home, /<TraceLab/);
-  assert.match(lab, /T13 · 차기 앱 예정/);
+  assert.match(lab, /ECH Beacon Explorer/);
+  assert.match(lab, /href="\/ech-beacon-explorer"/);
   assert.match(source, /href="\/#projects"/);
   assert.match(source, /target="_blank" rel="noopener noreferrer"/);
 });
@@ -50,8 +51,8 @@ test("styles are accessible, responsive and respect reduced motion", () => {
 });
 
 test("the first route does not falsely imply finished interactive sample exploration", () => {
-  assert.match(source, /탐색 인터페이스 구현 준비 중/);
-  assert.match(source, /아직 작동하는 것으로 표시하지 않습니다/);
-  assert.doesNotMatch(source, /use client/);
+  assert.match(source, /실험 표본 탐색 가능/);
+  assert.match(source, /<InteractiveExplorer \/>/);
+  assert.match(source, /import InteractiveExplorer/);
   assert.doesNotMatch(source, /localStorage|fetch\(|navigator|window\./);
 });

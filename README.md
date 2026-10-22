@@ -96,3 +96,15 @@ npm run dev
 - [#6 지원 서류 3종](https://github.com/SuperNova080710/Trace/issues/6) — 제작 완료, 실제 제출과 수동 검토 대기
 - [#7 결정적 기록 갱신 장치](https://github.com/SuperNova080710/Trace/issues/7) — 구현·독립 재현 완료, 개인 날짜별 근거 최종 대조는 별도
 - [#8 보안·BR-A 최종 제출](https://github.com/SuperNova080710/Trace/issues/8) — **실제 제출 미완료**, 잔여 항목 추적
+
+
+## BR-B — ECH Beacon Explorer (2026-10-22 개발 브랜치)
+
+- **연구 기반 대화형 앱:** `/ech-beacon-explorer` (병합 및 Vercel 재배포 이전에는 공개 적용 미확정)
+- **대표작 연계:** 홈의 기존 T13 예정 카드를 ECH Beacon Explorer로 대체.
+- **세 가지 사용자 작업:** ① 합성 Held-out 트래픽의 유형·지터·프로필을 선택해 필터링 ② 같은 Trial의 Timing-only 및 Multi-feature 판정과 혼동행렬을 비교 ③ 전체 동결 평가의 오탐 감소(10→7건)와 순수 추론 배치 중앙값(0.080385→1.408802ms)을 살펴보기.
+- **데이터 출처:** [ech-beacon-detection](https://github.com/SuperNova080710/ech-beacon-detection) 동결 커밋 `daae3300003527958d7cd4a0865fbc8b911d1966`. `src/content/br-b-research-contract.json` 및 `src/content/br-b-heldout-trials.json`을 사용. 예측을 재학습하거나 실제 운영망을 실시간 판정하지 않음.
+- **연구의 한계:** 고지터에서 Multi-feature가 Recall 우위를 보인 것은 아니며, 두 탐지기 Recall은 모두 1.0. 실측 운영망 성능 및 특징 추출 시간을 포함한 종단 간 추론 비용을 주장하지 않음.
+- **기술 검사:** `npm run check` (lint, typecheck, node tests, 고정 데이터 검증, 정적 빌드, HTML/개인정보 검사). PR의 실제 CI 상태가 최종 판단 기준.
+- **미완료 수동 검증:** 병합 후 실제 공개 URL 시크릿 창 접근, 모바일 키보드/스크린리더, 처음 보는 동료 1명의 이름 없는 감상, BR-B 제출.
+- **변경 PR:** [#44](https://github.com/SuperNova080710/Trace/pull/44). BR-A 제출 완료 여부는 위 과거 README 내용 대신 현재 ALEPH의 마스터 승인 상태를 따름.

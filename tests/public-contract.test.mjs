@@ -192,7 +192,8 @@ test("T10 research display is limited to supported Held-out evaluation", async (
   assert.match(data, /timingOnly: \{ tp: 50, fp: 10, tn: 50, fn: 0 \}/);
   assert.match(data, /multiFeature: \{ tp: 50, fp: 7, tn: 53, fn: 0 \}/);
   assert.match(page, /id="project-t10"/);
-  assert.match(page, /T13 · 차기 앱 예정/);
+  assert.match(page, /ECH Beacon Explorer/);
+  assert.match(page, /href="\/ech-beacon-explorer"/);
   assert.match(page, /가설은 지지되지 않았습니다/);
   assert.match(page, /학술지 게재 실적으로 표시하지 않습니다/);
 });
