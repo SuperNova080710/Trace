@@ -24,10 +24,10 @@ jobs:
           set -e
           if [ "$audit_exit" -eq 0 ]; then
             echo "Production dependency audit: PASS" >> "$GITHUB_STEP_SUMMARY"
-          elif jq -e '.error | (.code == "E503" or (.summary // "" | test("Service Unavailable|503"; "i")) or (.detail // "" | test("Service Unavailable|503"; "i")))' "${RUNNER_TEMP}/trace-npm-audit.json" > /dev/null ||
+          elif jq -e '((.message // "") | test("network timeout at: https://registry[.]npmjs[.]org/-/npm/v1/security/audits/quick"; "i")) or (.error | (.code == "E503" or (.summary // "" | test("Service Unavailable|503"; "i")) or (.detail // "" | test("Service Unavailable|503"; "i"))))' "${RUNNER_TEMP}/trace-npm-audit.json" > /dev/null ||
               grep -Eq '503 Service Unavailable|audit 503 Service Unavailable' "${RUNNER_TEMP}/trace-npm-audit.stderr"; then
-            echo "::warning::npm audit endpoint returned HTTP 503; audit is INCONCLUSIVE, not passed."
-            echo "Production dependency audit: INCONCLUSIVE (npm registry HTTP 503; retry outside CI before release)" >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::npm security audit endpoint timed out or returned HTTP 503; audit is INCONCLUSIVE, not passed."
+            echo "Production dependency audit: INCONCLUSIVE (registry audit timeout/503; retry locally before final release)" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "::error::Production dependency audit failed; investigate reported vulnerabilities."
             cat "${RUNNER_TEMP}/trace-npm-audit.json"
