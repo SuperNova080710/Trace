@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import type { ApprovedNarrative, EvidenceMetric } from "@/content/public-profile";
+import { detectorMetrics, t10Research } from "@/content/research-evidence";
 
 type Props = {
   displayName: string;
@@ -37,28 +38,11 @@ const approaches = [
   },
 ] as const;
 
-const projects = [
-  {
-    number: "01",
-    type: "RESEARCH",
-    title: "ECH Beacon Detection",
-    description: "암호화된 연결 환경의 비콘 탐지에 관한 연구 코드와 실험 기록입니다. 논문 및 성과의 세부 설명은 검증 후 추가합니다.",
-    href: "https://github.com/SuperNova080710/ech-beacon-detection",
-    link: "연구 저장소 보기",
-    tone: "research",
-    monogram: "ECH",
-  },
-  {
-    number: "02",
-    type: "WEB DEVELOPMENT",
-    title: "Full-stack Blog",
-    description: "Next.js 프런트엔드와 NestJS 백엔드를 나누어 구현한 웹 프로젝트입니다. 기능과 역할에 대한 상세 내용은 순차적으로 보강합니다.",
-    href: "https://github.com/SuperNova080710/Blog-frontend",
-    link: "프런트엔드 코드 보기",
-    tone: "web",
-    monogram: "WEB",
-  },
-] as const;
+const projects = [{
+  number: "02", type: "WEB DEVELOPMENT", title: "Full-stack Blog",
+  description: "Next.js 프런트엔드와 NestJS 백엔드를 나누어 구현한 웹 프로젝트입니다. 기능과 역할은 순차적으로 보강합니다.",
+  href: "https://github.com/SuperNova080710/Blog-frontend", link: "프런트엔드 코드 보기", tone: "web", monogram: "WEB",
+}] as const;
 
 export function TraceLab({ displayName, contactEmail, narrative, metrics }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
@@ -497,9 +481,43 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">SELECTED WORK</p>
               <h2 id="projects-title">결과를 확인할 수 있는 <span>프로젝트</span></h2>
-              <p className="section-subtitle">공개 저장소를 통해 실제 작업을 확인할 수 있습니다. 상세 성과는 출처 검증 후 작성합니다.</p>
+              <p className="section-subtitle">T10의 연구 원고·평가 원본·재현 데이터를 공개 근거와 함께 확인할 수 있습니다.</p>
             </div>
           </div>
+          <article className="research-feature" id="project-t10" aria-labelledby="t10-title">
+            <div className="research-feature-top">
+              <p className="research-eyebrow">01 / FEATURED RESEARCH · ALEPH T10 · main-v1</p>
+              <h3 id="t10-title">{t10Research.title}</h3>
+              <p>{t10Research.paperTitle}</p>
+              <p>Native ECH 환경의 합성 HTTPS Beacon 탐지에서 Timing-only와 Multi-feature 탐지기를 비교한 연구 원고와 실험 결과입니다.</p>
+            </div>
+            <div className="research-numbers" aria-label="T10 평가 결과">
+              <div><span>전체 합성 실험</span><strong>{t10Research.totalTrials}<small> Trials</small></strong><small>Beacon 100 · Normal 100</small></div>
+              <div><span>Held-out 평가</span><strong>{t10Research.heldout.trials}<small> Trials</small></strong><small>Beacon 50 · Normal 60</small></div>
+              <div><span>오탐 · Timing → Multi</span><strong>{t10Research.timingOnly.fp}<small> → </small>{t10Research.multiFeature.fp}<small>건</small></strong><small>동일 정상 표본 기준</small></div>
+              <div><span>F1 · Timing → Multi</span><strong className="research-f1">{detectorMetrics(t10Research.timingOnly).f1.toFixed(4)}<small> → </small>{detectorMetrics(t10Research.multiFeature).f1.toFixed(4)}</strong><small>두 모델 Recall 1.0000</small></div>
+            </div>
+            <div className="research-detail">
+              <div>
+                <h4>상황 · 행동 · 결과</h4>
+                <p><b>상황</b> ECH 환경에서 비콘의 연결 간격에 지터가 발생할 때 탐지 성능을 비교할 필요가 있었습니다.</p>
+                <p><b>행동</b> Native ECH 테스트베드와 200개 Trial을 구성하고, 사전 고정된 Calibration/Held-out 분할로 두 탐지기를 평가했습니다.</p>
+                <p><b>결과</b> Held-out 110개에서 Multi-feature는 정상 오탐 10건을 7건으로 줄였습니다. 두 모델 모두 Recall 1.0000으로, 고지터 재현율 우위 가설은 지지되지 않았습니다.</p>
+                <p className="research-crosslink">연결 역량: <a href="#approach">원인 분석과 검증</a> · <a href="#about">성장 서사</a></p>
+              </div>
+              <aside aria-label="연구 결과 해석상의 한계">
+                <h4>해석의 한계</h4>
+                <p>단일 통제 환경의 합성 트래픽 실험입니다. 실제 악성 트래픽 및 운영망 일반화 성능을 검증한 결과가 아닙니다. Multi-feature는 추론 비용도 더 높았습니다.</p>
+              </aside>
+            </div>
+            <div className="research-links" aria-label="T10 공개 근거">
+              <a href={t10Research.sources.manuscript} target="_blank" rel="noopener noreferrer">연구 원고 <span aria-hidden="true">↗</span></a>
+              <a href={t10Research.sources.evaluation} target="_blank" rel="noopener noreferrer">평가 JSON <span aria-hidden="true">↗</span></a>
+              <a href={t10Research.sources.release} target="_blank" rel="noopener noreferrer">PCAP 200개 Release <span aria-hidden="true">↗</span></a>
+              <a href={t10Research.sources.log} target="_blank" rel="noopener noreferrer">연구 기록 <span aria-hidden="true">↗</span></a>
+            </div>
+            <p className="research-footnote">T10은 별도의 연구 원고이며 이전 Digital Twin 논문과 다릅니다. 학술지 게재 실적으로 표시하지 않습니다.</p>
+          </article>
           <div className="project-grid">
             {projects.map((project) => (
               <article className="project-card spotlight-card" key={project.number} onPointerMove={onSpotlightMove}>
@@ -520,13 +538,13 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             ))}
             <article className="project-card project-future spotlight-card" onPointerMove={onSpotlightMove}>
               <div className="project-art project-art-future">
-                <span className="art-number">03 / NEXT CHAPTER</span>
+                <span className="art-number">03 / T13 · NEXT APP</span>
                 <span className="art-monogram" aria-hidden="true">NEXT</span>
               </div>
               <div className="project-content">
                 <span className="project-category">UPCOMING</span>
-                <h3>다음 프로젝트를 위한 자리</h3>
-                <p>향후 공개할 애플리케이션을 위한 영역입니다. 아직 구현되거나 검증된 성과로 표기하지 않습니다.</p>
+                <h3>T13 · 차기 앱 예정</h3>
+                <p>ALEPH T13 앱 과제를 위한 자리입니다. 구현·배포·성과는 확인 전이므로 준비 중으로 표시합니다.</p>
                 <span className="future-label">준비 중</span>
               </div>
             </article>
