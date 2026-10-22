@@ -20,8 +20,8 @@ https://trace-eight-topaz.vercel.app/
 
 ```bash
 cd ~/ALEPH/Trace
-git switch issue-8-release-readiness
-git pull --ff-only origin issue-8-release-readiness
+git switch main
+git pull --ff-only origin main
 npm ci
 npm run check
 ```
@@ -59,6 +59,16 @@ python3 scripts/verify-reproduction.py generated/private/issue7-reproduction.zip
 **AI 제안 기각:** 리추얼 기록만으로 출석 47일·연속 작성으로 표시하는 것을 제외했고, 실제 근거가 부족한 강점·경력·지표를 공개하지 않기로 결정했습니다.
 
 본 항목은 제출 전 사용자 본인이 실제 경험과 일치하는지 확인해야 합니다.
+
+## 실제 BR-A 제출 양식에서 확인한 범위 (2026-10-22)
+
+- 로그인 없이 열리는 공개 HTTPS 결과물 URL **1개 필수**, 소스 URL은 입력하지 않음.
+- 이력서·자기소개서·경력/프로젝트 경험기술서와 갱신 장치 ZIP은 **1~4개 파일 또는 단일 ZIP**으로 업로드할 수 있음.
+- 업로드 제한: **10개 파일·합계 8MB**가 보이지만, 이 과제에서는 권장 **1~4개**를 지키는 편이 좋음. 기존 사용자 로컬 제출 ZIP이 8MB 이하인지 별도 확인.
+- 재현·통과 확인 4항목 및 AI·내 판단 3줄은 후행 채점에 중요하므로 공란으로 두지 않음.
+- BRA-C05는 **실제 공개 사이트에 출처별 활동 숫자 표시가 필수**. 현재 승인 전이므로 충족으로 표시할 수 없음.
+- 제출 파일 업로드는 플랫폼상 비공개이며, 이를 사이트 웹 공개 승인과 동일하게 취급하지 않음.
+- 과제 원문에 2026-10-22까지 신규 리추얼 기록이 보임. 현재 로컬 입력 스냅샷의 기준일(2026-10-21)과 혼합하거나 최신이라고 표시하지 않음.
 
 ## 남은 주의
 
