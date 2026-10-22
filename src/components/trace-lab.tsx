@@ -597,7 +597,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               <span className="evidence-icon" aria-hidden="true">↗</span>
               <div>
                 <h3>검증한 기록만 보여드리겠습니다.</h3>
-                <p>날짜, 집계 기준, 원본 출처를 확인 중입니다. 승인되지 않은 개인 기록이나 미확인 출석 수치를 임의로 표시하지 않습니다.</p>
+                <p>리추얼 기록과 공식 출석·과제 수치는 서로 다른 출처와 산식으로 검증했습니다. 다만 본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며, 확정 전 출석은 잠정값으로 다룹니다.</p>
               </div>
               <span className="evidence-badge">DATA REVIEW</span>
             </div>
@@ -617,13 +617,13 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
-              <p className="section-subtitle">이력서, 자기소개서, 프로젝트 경험기술서는 Issue #6에서 제작합니다. 아직 다운로드 가능한 파일이 아닙니다.</p>
+              <p className="section-subtitle">이력서, 자기소개서, 프로젝트 경험기술서는 제작·검증을 마쳤고 BR-A 제출 시 비공개 파일로 제공할 예정입니다. 사이트에서는 아직 다운로드 가능한 파일이 아닙니다.</p>
             </div>
           </div>
           <div className="document-list" aria-label="서류 준비 현황">
-            <div className="document-item"><span className="document-number">01</span><strong>이력서</strong><span className="document-status">준비 중</span></div>
-            <div className="document-item"><span className="document-number">02</span><strong>자기소개서</strong><span className="document-status">준비 중</span></div>
-            <div className="document-item"><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><span className="document-status">준비 중</span></div>
+            <div className="document-item"><span className="document-number">01</span><strong>이력서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
+            <div className="document-item"><span className="document-number">02</span><strong>자기소개서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
+            <div className="document-item"><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
           </div>
         </div>
       </section>
