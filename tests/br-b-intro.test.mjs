@@ -50,8 +50,8 @@ test("styles are accessible, responsive and respect reduced motion", () => {
 });
 
 test("the first route does not falsely imply finished interactive sample exploration", () => {
-  assert.match(source, /탐색 인터페이스 구현 준비 중/);
-  assert.match(source, /아직 작동하는 것으로 표시하지 않습니다/);
-  assert.doesNotMatch(source, /use client/);
+  assert.match(source, /실험 표본 탐색 가능/);
+  assert.match(source, /<InteractiveExplorer \/>/);
+  assert.match(source, /import InteractiveExplorer/);
   assert.doesNotMatch(source, /localStorage|fetch\(|navigator|window\./);
 });
