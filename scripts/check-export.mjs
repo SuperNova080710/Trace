@@ -15,7 +15,8 @@ assert.ok(html.includes("문제의 원인을 확인하고 해결 과정을 기�
 assert.ok(html.includes("모르는 문제가 생기면 제가 아는 지식 내에서 차근차근 찾아보는 사람입니다"), "Approved narrative opening missing");
 assert.ok(html.includes("프로젝트 경험기술서"), "Documents status section missing");
 assert.ok(html.includes("Native ECH Beacon Detection"), "T10 research missing");
-assert.ok(html.includes("T13 · 차기 앱 예정"), "T13 future slot missing");
+assert.ok(html.includes("ECH Beacon Explorer"), "BR-B featured application missing");
+assert.ok(html.includes('href="/ech-beacon-explorer"'), "BR-B app route missing from portfolio");
 assert.ok(html.includes("아직 다운로드 가능한 파일이 아닙니다"), "Documents must not falsely claim available downloads");
 assert.ok(!html.includes("ritual-history-2026-10-21.json"), "Private source filename must not be rendered");
 for (const term of [
@@ -40,7 +41,7 @@ for (const term of [
   "시나리오를 선택합니다",
   "두 탐지기의 판정을 비교합니다",
   "탐지 효과와 비용을 함께 판단합니다",
-  "탐색 인터페이스 구현 준비 중",
+  "실험 표본 탐색 가능",
 ]) {
   assert.ok(brbHtml.includes(term), "BR-B static page missing required introductory content: " + term);
 }
