@@ -1,0 +1,43 @@
+{
+  "schema": "trace.generator-input.v1",
+  "rituals": {
+    "days": [
+      {
+        "date": "2026-01-01",
+        "openHasText": true,
+        "closeHasText": true,
+        "focusTags": [
+          "self_regulation"
+        ]
+      },
+      {
+        "date": "2026-01-02",
+        "openHasText": true,
+        "closeHasText": false,
+        "focusTags": [
+          "self_motivation"
+        ]
+      },
+      {
+        "date": "2026-01-03",
+        "openHasText": false,
+        "closeHasText": true,
+        "focusTags": [
+          "relationships"
+        ]
+      }
+    ]
+  },
+  "attendance": {
+    "enrolledDays": 5,
+    "presentDays": 3,
+    "pendingDays": 2,
+    "absentDays": 0
+  },
+  "challenges": {
+    "coreTotal": 3,
+    "coreApproved": 2,
+    "finalA": "in_progress",
+    "finalB": "locked"
+  }
+}
