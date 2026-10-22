@@ -23,8 +23,8 @@ test("original research evidence is linked at its pinned commit and the app admi
   assert.match(page, /study.source.paths.evaluation/);
   assert.match(page, /target="_blank" rel="noopener noreferrer"/);
   assert.match(page, /실제 악성 트래픽이나 운영망을 실시간 탐지하는 서비스가 아닙니다/);
-  assert.match(page, /같은 정상 60건을 재사용/);
-  assert.match(page, /Rec all|Recall 1\.0000/);
+  assert.match(page, /동일 정상 60건을 재사용/);
+  assert.match(page, /Recall 1\.0000/);
 });
 
 test("the first screen is honest about future interactive stages", () => {
