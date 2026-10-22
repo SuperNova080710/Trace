@@ -70,3 +70,36 @@ ZIP에서 압축을 풀면 `node --test tests/*.test.mjs`로 핵심 재현 테�
 - [ ] 실제 행위별 3개 태그의 날짜 근거를 확인하고 승인 범위 명시
 - [ ] ZIP 압축 해제 환경의 `node --test` 및 SHA 검증
 - [ ] 사용자 공개 승인 전 배포 파일 미변경 확인
+
+
+## 실제 원본 + 공식 스냅샷 연계 (추가 구현)
+
+`scripts/prepare-private-candidates.mjs`는 **2026-10-21 기준 공식 출석·과제 스냅샷 두 개**와 개인 리추얼 JSON을 로컬에서만 결합한다.
+
+입력은 다음 네 경로다.
+
+- `data/private/ritual-history-2026-10-21.json`: 개인 리추얼 원본
+- `data/private/attendance-snapshot.json`: 사용자 확인 공식 출석 요약
+- `data/private/challenge-snapshot.json`: 사용자 확인 공식 과제 상태
+- `data/private/reviewed-tags.json`: 사용자가 실제 기록을 읽고 태그를 부여한 경우에만 존재하는 **선택 파일**
+
+세 필수 자료는 기존 `audit-evidence.mjs` 집계/요약 검증기를 통과한 후 연계한다. 출석·과제 스냅샷의 `asOf`가 다르거나 개인 리추얼에 스냅샷보다 새로운 날짜가 있으면 거부한다.
+
+```bash
+cd ~/ALEPH/Trace
+node scripts/prepare-private-candidates.mjs
+node --test tests/private-integration.test.mjs
+git status --short
+```
+
+결과는 `data/private/candidate-input.json`, `generated/private/candidates.json`에만 기록한다. 원문은 출력 파일에 보관하지 않으며 `pending` 상태를 변경하지 않는다. 원본 출석과 과제 요약은 **각기 다른 출처의 잠정 스냅샷**이며 날짜 레코드가 출석일 수로 바뀌지 않는다.
+
+검토 태그 파일이 없으면 도구가 임의로 역량 근거를 배정하지 않는다. 예를 들어 사용자가 개인 기록을 읽고 *직접* 확인한 뒤에만 다음 JSON을 `data/private/reviewed-tags.json`에 작성한다. 아래는 **가상 날짜 예시**다.
+
+```json
+{"2026-01-01":["self_regulation"],"2026-01-02":["relationships"]}
+```
+
+태그를 부여한 뒤 명령을 다시 실행하면 대응하는 후보의 날짜 근거만 갱신된다. **실제 사용자 검토·승인 전에는 이 파일을 자동 생성하거나 배포하지 않는다.**
+
+중요: 이번 연계 스크립트는 기존 사용자 검증이 끝난 **합성 데이터 재현 ZIP 안에는 포함되지 않는다.** 이미 검사한 ZIP/최종 제출 합본의 SHA-256을 묵시적으로 변경하지 않으며, 연계 기능의 별도 검증이 완료되면 재패키징 필요 여부를 별도로 결정한다.
