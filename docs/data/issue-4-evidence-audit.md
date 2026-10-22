@@ -94,3 +94,28 @@ node scripts/audit-evidence.mjs challenge-snapshot data/private/challenge-snapsh
 ```
 
 모든 출력은 `pending` 상태이며 사용자 공개 승인 전에는 사이트에 반영하지 않습니다.
+
+
+## 공개 지표 컴포넌트 사전 준비 (별도 PR)
+
+Issue #4의 UI는 공개 가능 상태가 **명시적으로 승인된** `EvidenceMetric`만 렌더링한다. 타입 계약은 다음 항목을 구분한다.
+
+- `sourceKind`: `ritual` / `official-attendance-snapshot` / `official-challenge-snapshot`
+- `from`, `to`, `asOf`: 집계 기간과 화면 스냅샷 확인일의 차이
+- `definition`, `calculation`, `denominator`: 무엇을 어떻게 집계했는지, 분모가 없으면 `null`
+- `provisional`: 미확정 출석/추후 승인 변동이 가능한 자료의 잠정 상태
+- `limitations`: 원본이 증명하지 못하는 사실과 해석상 주의점
+- `status`: `approved`만 렌더링
+
+`src/content/public-profile.ts`의 `evidenceMetrics`는 현재 **빈 목록을 유지**한다. 이는 실제 검증을 마친 로컬 스냅샷에 대한 웹 공개 승인과는 별개의 단계이며, 실험 중 생성한 비공개 JSON이나 숫자를 import/복사하지 않는다. 현재 배포 페이지는 기존 **검토 중** 안내를 계속 보여준다.
+
+사용자 명시적 공개 승인 전에는 `status: "approved"` 데이터를 작성할 수 없으며, 개인 원본/타인 이름/일별 출결/리추얼 원문을 공개 저장소에 추가하지 않는다.
+
+검토 완료 이후에도 출석 스냅샷의 강사 미확정일이 남아 있다면 `provisional: true`로 표시하고, 비공개 날짜별 강점 태그를 출석 증빙으로 재해석하지 않는다.
+
+검사:
+```bash
+npm run check
+```
+
+이 PR의 완료 기준은 **UI 계약·빌드·테스트 통과**이지 개인 지표의 게시나 Issue #4 전체 완료가 아니다.
