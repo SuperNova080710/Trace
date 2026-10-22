@@ -559,7 +559,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">GROWTH & EVIDENCE</p>
               <h2 id="evidence-title">기록은 숫자가 아니라 <span>근거와 함께</span></h2>
-              <p className="section-subtitle">리추얼 기록과 출석, 과제 수행은 각각 다른 기준으로 집계한 뒤 공개합니다.</p>
+              <p className="section-subtitle">2026년 10월 21일 기준으로 검증·공개 승인한 과거 집계입니다. 이후 추가된 기록이나 현재 진행 상황은 반영하지 않았습니다.</p>
             </div>
           </div>
           {metrics.length > 0 ? (
@@ -568,8 +568,27 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 <article className="metric-card" key={metric.id}>
                   <p>{metric.label}</p>
                   <strong>{metric.value.toLocaleString("ko-KR")} <small>{metric.unit}</small></strong>
-                  <span>{metric.from} ~ {metric.to}</span>
-                  <small>출처: {metric.source}</small>
+                  <span>{metric.from === metric.to ? "자료 기준일: " + metric.to : "집계 기간: " + metric.from + " ~ " + metric.to}</span>
+                  <dl className="metric-facts">
+                    <div><dt>자료 유형</dt><dd>{({
+                      ritual: "개인 리추얼 기록",
+                      "official-attendance-snapshot": "공식 출석 요약",
+                      "official-challenge-snapshot": "공식 과제 승인 요약",
+                    } as const)[metric.sourceKind]}</dd></div>
+                    <div><dt>기준일</dt><dd>{metric.asOf}</dd></div>
+                    <div><dt>출처</dt><dd>{metric.source}</dd></div>
+                    <div><dt>정의</dt><dd>{metric.definition}</dd></div>
+                    <div><dt>산식</dt><dd>{metric.calculation}</dd></div>
+                    <div><dt>분모</dt><dd>{metric.denominator === null ? "원본에 별도 분모 없음" : metric.denominator.toLocaleString("ko-KR")}</dd></div>
+                  </dl>
+                  {metric.provisional && (
+                    <p className="metric-provisional">잠정 수치 · 공식 확정 또는 승인 상태 변경 시 재검증 필요</p>
+                  )}
+                  {metric.limitations.length > 0 && (
+                    <ul className="metric-limitations" aria-label="해석상의 한계">
+                      {metric.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}
+                    </ul>
+                  )}
                 </article>
               ))}
             </div>
@@ -578,7 +597,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               <span className="evidence-icon" aria-hidden="true">↗</span>
               <div>
                 <h3>검증한 기록만 보여드리겠습니다.</h3>
-                <p>날짜, 집계 기준, 원본 출처를 확인 중입니다. 승인되지 않은 개인 기록이나 미확인 출석 수치를 임의로 표시하지 않습니다.</p>
+                <p>리추얼 기록과 공식 출석·과제 수치는 서로 다른 출처와 산식으로 검증했습니다. 다만 본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며, 확정 전 출석은 잠정값으로 다룹니다.</p>
               </div>
               <span className="evidence-badge">DATA REVIEW</span>
             </div>
@@ -598,13 +617,13 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
-              <p className="section-subtitle">이력서, 자기소개서, 프로젝트 경험기술서는 Issue #6에서 제작합니다. 아직 다운로드 가능한 파일이 아닙니다.</p>
+              <p className="section-subtitle">이력서, 자기소개서, 프로젝트 경험기술서는 제작·검증을 마쳤고 BR-A 제출 시 비공개 파일로 제공할 예정입니다. 사이트에서는 아직 다운로드 가능한 파일이 아닙니다.</p>
             </div>
           </div>
           <div className="document-list" aria-label="서류 준비 현황">
-            <div className="document-item"><span className="document-number">01</span><strong>이력서</strong><span className="document-status">준비 중</span></div>
-            <div className="document-item"><span className="document-number">02</span><strong>자기소개서</strong><span className="document-status">준비 중</span></div>
-            <div className="document-item"><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><span className="document-status">준비 중</span></div>
+            <div className="document-item"><span className="document-number">01</span><strong>이력서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
+            <div className="document-item"><span className="document-number">02</span><strong>자기소개서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
+            <div className="document-item"><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
           </div>
         </div>
       </section>

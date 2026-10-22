@@ -11,7 +11,7 @@ https://trace-eight-topaz.vercel.app/
 | 이야기 | `#about` | 승인된 1인칭 자기소개 |
 | 역량 | `#approach` | 문제 분석·기록·협업 |
 | 대표작 | `#projects` 및 `#project-t10` | T10 Native ECH 연구 및 Held-out 평가 |
-| 지표 | `#evidence` | 개인 지표 공개 **미승인**. 수치 대신 검토 안내 |
+| 지표 | `#evidence` | 사용자 승인된 2026-10-21 기준 활동 지표 3종 (PR #18 병합·실제 배포 반영은 별도 확인) |
 | 서류 | `#documents` | 서류 3종 내용 검토 완료, **공개 다운로드 미승인** |
 | 갱신 장치 | GitHub Trace `scripts/` | 합성 예제 기반 생성기, 비공개 후보 승인 |
 | 연락 | `#contact` | 승인된 공개 이메일 |
@@ -20,8 +20,8 @@ https://trace-eight-topaz.vercel.app/
 
 ```bash
 cd ~/ALEPH/Trace
-git switch issue-8-release-readiness
-git pull --ff-only origin issue-8-release-readiness
+git switch main
+git pull --ff-only origin main
 npm ci
 npm run check
 ```
@@ -47,7 +47,8 @@ python3 scripts/verify-reproduction.py generated/private/issue7-reproduction.zip
 - [ ] Tab / Enter / Escape / Shift+Tab 이동, 초점 표시, 축소 모션 확인
 - [ ] 정적 공개 내용에서 개인 기록·동료 이름·다른 연락처를 사람이 최종 검토
 - [ ] 서류 3종의 공개 허용 여부 결정 (현재 공개 금지)
-- [ ] 실제 원본 출석·리추얼 지표 승인 (현재 미확정·비공개)
+- [x] 2026-10-21 기준 리추얼 기록일·공식 출석일·핵심 과제 승인 3개 집계의 웹 공개 승인 (2026-10-22)
+- [ ] 최신 운영 URL에 승인된 지표가 실제 반영되었는지 확인
 - [ ] 최종 제출을 사용자가 직접 승인
 
 ## AI 사용과 본인 판단 (제출 문구 초안, 최종 사용자 검토 필요)
@@ -59,6 +60,16 @@ python3 scripts/verify-reproduction.py generated/private/issue7-reproduction.zip
 **AI 제안 기각:** 리추얼 기록만으로 출석 47일·연속 작성으로 표시하는 것을 제외했고, 실제 근거가 부족한 강점·경력·지표를 공개하지 않기로 결정했습니다.
 
 본 항목은 제출 전 사용자 본인이 실제 경험과 일치하는지 확인해야 합니다.
+
+## 실제 BR-A 제출 양식에서 확인한 범위 (2026-10-22)
+
+- 로그인 없이 열리는 공개 HTTPS 결과물 URL **1개 필수**, 소스 URL은 입력하지 않음.
+- 이력서·자기소개서·경력/프로젝트 경험기술서와 갱신 장치 ZIP은 **1~4개 파일 또는 단일 ZIP**으로 업로드할 수 있음.
+- 업로드 제한: **10개 파일·합계 8MB**가 보이지만, 이 과제에서는 권장 **1~4개**를 지키는 편이 좋음. 기존 사용자 로컬 제출 ZIP이 8MB 이하인지 별도 확인.
+- 재현·통과 확인 4항목 및 AI·내 판단 3줄은 후행 채점에 중요하므로 공란으로 두지 않음.
+- BRA-C05는 **실제 공개 사이트에 출처별 활동 숫자 표시가 필수**. 사용자 공개 승인은 완료됐으며, PR #18 병합·실제 배포 확인 전까지 충족으로 확정하지 않음.
+- 제출 파일 업로드는 플랫폼상 비공개이며, 이를 사이트 웹 공개 승인과 동일하게 취급하지 않음.
+- 과제 원문에 2026-10-22까지 신규 리추얼 기록이 보임. 현재 로컬 입력 스냅샷의 기준일(2026-10-21)과 혼합하거나 최신이라고 표시하지 않음.
 
 ## 남은 주의
 

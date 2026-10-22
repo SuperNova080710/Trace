@@ -23,7 +23,7 @@ test("public data contains only the approved contact fields at foundation stage"
   assert.match(profile, /displayName: "오리온"/);
   assert.match(profile, /contactEmail: "lionoh00@gmail.com"/);
   assert.match(profile, /export \{ narrative \} from "\.\/approved-narrative"/);
-  assert.match(profile, /evidenceMetrics: readonly EvidenceMetric\[\] = \[\]/);
+  assert.match(profile, /evidenceMetrics: readonly EvidenceMetric\[\] = \[/);
 });
 
 test("app has Korean semantics and keyboard-operable accordion", async () => {

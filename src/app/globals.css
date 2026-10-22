@@ -243,6 +243,14 @@ section[id] { scroll-margin-top: 85px; }
 .metric-card strong { font-size: 36px; letter-spacing: -.05em; color: var(--blue); }
 .metric-card strong small { font-size: 14px; color: #6082b3; }
 .metric-card > span, .metric-card > small { color: #7286a0; font-size: 11px; }
+
+.metric-facts { display: grid; gap: 8px; margin: 11px 0 0; padding-top: 16px; border-top: 1px solid #e0eaf8; }
+.metric-facts > div { display: grid; grid-template-columns: 63px minmax(0,1fr); gap: 9px; }
+.metric-facts dt { color: #6d84a3; font-size: 11px; font-weight: 800; }
+.metric-facts dd { margin: 0; color: #304f78; font-size: 11px; line-height: 1.7; overflow-wrap: anywhere; }
+.metric-card .metric-provisional { margin: 5px 0 0; padding: 10px 12px; border-radius: 7px; background: #f4f7fc; color: #4f6687; font-size: 11px; line-height: 1.6; }
+.metric-limitations { margin: 4px 0 0; padding-left: 18px; color: #687f9d; font-size: 11px; line-height: 1.7; }
+.metric-limitations li + li { margin-top: 5px; }
 .evidence-links { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin: 23px 0 0 130px; color: #526c8e; font-size: 12px; font-weight: 700; }
 .evidence-links a { color: #205ab0; border-bottom: 1px solid #92b7e8; }
 .evidence-links a span[aria-hidden] { margin-left: 3px; }

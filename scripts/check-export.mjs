@@ -18,4 +18,16 @@ assert.ok(html.includes("Native ECH Beacon Detection"), "T10 research missing");
 assert.ok(html.includes("T13 · 차기 앱 예정"), "T13 future slot missing");
 assert.ok(html.includes("아직 다운로드 가능한 파일이 아닙니다"), "Documents must not falsely claim available downloads");
 assert.ok(!html.includes("ritual-history-2026-10-21.json"), "Private source filename must not be rendered");
+for (const term of [
+  "리추얼 기록 날짜",
+  "공식 출석일",
+  "핵심 과제 마스터 승인",
+  "2026-10-21",
+  "리추얼 원본에 날짜별 기록",
+  "2일은 미확정 상태",
+  "마지막 A·B 과제는 이 수치에 포함하지 않습니다",
+]) {
+  assert.ok(html.includes(term), "Approved historic evidence missing from static export: " + term);
+}
+assert.ok(!html.includes("본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며"), "Pre-approval placeholder must not be shown after author approval");
 console.log("PASS: public static HTML contains all required anchors, contact and visible approved content");

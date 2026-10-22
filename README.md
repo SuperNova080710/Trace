@@ -1,73 +1,69 @@
-# TRACE
+# Trace — 오리온의 개발 기록
 
 > 작은 과정이 모여 한 사람의 기록이 됩니다.
 
-오리온의 작업 과정·검증된 근거·성장 기록을 연결하는 **독립적인 공개 포트폴리오**입니다.
+ALEPH BR-A 공개 진로 포트폴리오. 문제를 해결하는 과정, 확인 가능한 연구 결과, 사용자가 2026-10-22에 공개를 승인한 **2026-10-21 기준 세 활동 집계**와, 웹 미공개 지원 서류를 구분해 관리합니다.
 
-- **현재 상태:** BR-A Issue #1 기반 구현 및 디자인 개선; 전체 과제 완성 또는 배포가 아닙니다.
-- **공개 이름:** 오리온
-- **연락:** [lionoh00@gmail.com](mailto:lionoh00@gmail.com)
-- **스택:** Next.js 16.3.8 App Router, React 19.2.8, TypeScript, CSS
-- **디자인:** T01의 차분한 파란색 포트폴리오 분위기를 참고한 네이비 히어로 + 밝은 본문 + 카드 레이아웃
-- **가벼운 상호작용:** 작업 방식 아코디언(키보드 화살표/Home/End), 페이지 스크롤 게이지
-- **배포 형식:** Next.js 정적 내보내기 (output: "export")
+- **공개 사이트:** https://trace-eight-topaz.vercel.app/
+- **공개 연락처:** [lionoh00@gmail.com](mailto:lionoh00@gmail.com)
+- **기술:** Next.js 16.3.8 · React 19.2.8 · TypeScript · 정적 HTML 내보내기(`output: "export"`)
+- **대표작:** Native ECH 기반 합성 HTTPS Beacon 탐지 비교 연구 (T10); T13 앱은 예정 자리만 준비
+- **진행 상태:** 서사·연구 근거·디자인·로컬 재현 장치 완료. 과거 기준 활동 지표 3종은 **사용자 공개 승인 완료·배포 반영 대기** 상태입니다. 지원 서류의 웹 다운로드는 별도 승인 전입니다.
 
-## 시작하기
+## 처음 확인하는 분께
 
-Node.js 22 이상 및 npm이 필요합니다.
+공개 사이트에서 다음 위치로 이동하세요.
 
-~~~bash
+| 항목 | 위치 | 확인 내용 |
+|---|---|---|
+| 나의 이야기 | `#about` | 승인된 사실 기반 자기소개, 세 가지 역량 |
+| 작업 방식 | `#approach` | 문제를 관찰·분석·검증하는 방식 |
+| 대표작 | `#projects` / `#project-t10` | T10 원고·평가 JSON·PCAP Release 공개 링크, T13 예정 |
+| 활동 지표 | `#evidence` | 사용자 공개 승인 완료된 2026-10-21 기준 리추얼 기록일·공식 출석일·핵심 과제 승인 수치 및 한계 (PR #18 병합·배포 후 표시) |
+| 지원 문서 | `#documents` | 이력서·자기소개서·프로젝트 경험기술서의 준비 상태. 제출 파일은 비공개 채점 제출물 |
+| 연락 | `#contact` | 승인된 공개 이메일 |
+
+BR-A 재현 절차 및 제출 상태: [docs/quality/issue-8-final-reproduction.md](docs/quality/issue-8-final-reproduction.md)
+
+## 개발 및 로컬 품질 검사
+
+Node.js 22 이상을 사용합니다.
+
+```bash
 git clone https://github.com/SuperNova080710/Trace.git
 cd Trace
-git switch issue-1-architecture
-npm install
-npm run dev
-~~~
-
-브라우저에서 http://localhost:3000 을 열어 확인하세요.
-
-## 품질 확인
-
-~~~bash
+npm ci
 npm run check
-~~~
+npm run dev
+```
 
-린트·타입·Node 테스트·공개 소스 보조검사·정적 빌드를 순차 실행합니다. 배포 대상은 out/에 생성됩니다.
+`npm run check`는 린트, TypeScript, 단위 테스트, 공개 파일 보조검사, 정적 빌드, HTML/링크 계약, 산출물 비공개 검사까지 실행합니다. 배포 대상은 `out/`에 생성됩니다. GitHub CI의 `npm audit`는 npm 감사 서버가 503일 경우 **검사 미확정**으로 기록하며, 이를 취약점 없음으로 해석하지 않습니다.
 
-## 디렉터리
+## 비공개 갱신 장치
 
-~~~text
-Trace/
-├─ .github/workflows/ci.yml
-├─ docs/architecture/
-├─ src/
-│  ├─ app/
-│  │  ├─ layout.tsx
-│  │  ├─ page.tsx
-│  │  └─ globals.css
-│  ├─ components/trace-lab.tsx
-│  └─ content/public-profile.ts
-├─ scripts/check-public-surface.mjs
-├─ tests/public-contract.test.mjs
-└─ package.json
-~~~
+- `scripts/audit-evidence.mjs`: 개인 리추얼 수집 현황 요약
+- `scripts/audit-official-snapshot.mjs`: 공식 출석·과제 스냅샷 개별 검증
+- `scripts/prepare-private-candidates.mjs`: 서로 다른 출처의 입력을 연결해 비공개 근거 후보 생성
+- `scripts/review-private-tags.mjs`: 사용자가 로컬에서 날짜별 역량을 검토해 태그 기록
+- `scripts/build-candidates.mjs`: 결정적 후보·SHA-256 생성
+- `scripts/package-generator.py`, `scripts/verify-reproduction.py`: 오프라인 재현 ZIP 구성 및 검증
 
-## 공개 데이터 원칙
+로컬의 `data/private/` 및 `generated/private/` 안에 보관된 문장·일별 근거·공식 스냅샷은 **GitHub 또는 사이트에 올리지 않습니다.** 세 집계 항목만 별도 사용자 승인을 받았으며, 그 외 원본·날짜별 내용·서류는 별도 검토와 명시적 승인이 필요합니다. 리추얼 기록일 수는 **출석일 수 또는 연속 작성일 수**를 뜻하지 않습니다.
 
-- 리추얼/출석/제출 원본은 공개 저장소에 넣지 않습니다.
-- 승인 전 자기소개 본문, 지표 및 제3자 정보는 실제 화면에 게시하지 않습니다.
-- 공개 승인 데이터만 src/content/public-profile.ts를 통해 전달합니다.
-- 특정 공개 GitHub 프로젝트 링크는 확인 가능한 공개 근거로 안내합니다.
-- 패턴 스캔은 개인정보 완전 탐지를 보장하지 않으며, 사람이 최종 검토해야 합니다.
+장치 실행과 독립 ZIP 검증: [docs/data/issue-7-generator.md](docs/data/issue-7-generator.md).
 
-## 남은 과제
+## 제출 준비
 
-- #2 자기소개 서사와 사실 검증
-- #3 UI 완성도·키보드/모바일 실사용 검증
-- #4 출석·리추얼·과제 근거 지표
-- #5 T10 논문 성과와 T13 앱 예정 슬롯
-- #6 지원 문서 3종
-- #7 결정적 기록 갱신 장치
-- #8 배포·보안·과제 제출 검증
+BR-A는 로그인 없는 HTTPS URL **한 개**와 이력서·자기소개서·경험기술서 및 실행 장치 ZIP을 **1~4개 파일(하나의 ZIP 허용)**로 받습니다. 파일 합계는 과제 화면에 표시된 **8MB 제한**을 준수해야 하며, 소스 URL은 받지 않습니다.
 
-기술 선택 결정 근거: docs/architecture/stack-decision.md
+- 제출된 모든 URL은 새 시크릿 창에서 로그인·초대·CAPTCHA 없이 열려야 합니다.
+- 제출 양식에는 **재현·통과 확인 4항목**과 **AI/본인 판단 3줄**을 입력합니다.
+- 지원 서류의 웹 공개는 사용자 허가 전까지 금지합니다. 채점용 비공개 파일 제출과 공개 다운로드는 별개의 결정을 필요로 합니다.
+- 개인정보 검출은 자동 검사만으로 완전하지 않으므로 실제 URL·문서·ZIP의 최종 수동 검토가 필요합니다.
+
+## 작업 기록
+
+- [#4 활동 지표](https://github.com/SuperNova080710/Trace/issues/4)
+- [#6 제출 서류](https://github.com/SuperNova080710/Trace/issues/6)
+- [#7 결정적 갱신 장치](https://github.com/SuperNova080710/Trace/issues/7)
+- [#8 보안 및 제출 점검](https://github.com/SuperNova080710/Trace/issues/8)
