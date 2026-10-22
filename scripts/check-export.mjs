@@ -31,3 +31,19 @@ for (const term of [
 }
 assert.ok(!html.includes("본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며"), "Pre-approval placeholder must not be shown after author approval");
 console.log("PASS: public static HTML contains all required anchors, contact and visible approved content");
+
+const brbHtml = await readFile(new URL("../out/ech-beacon-explorer.html", import.meta.url), "utf8");
+for (const term of [
+  'id="explorer-title"',
+  "Native ECH 환경에서 지터가 적용된 HTTPS Beacon 트래픽의 경량 메타데이터 기반 탐지 비교",
+  "보안 학습자와 분석자",
+  "시나리오를 선택합니다",
+  "두 탐지기의 판정을 비교합니다",
+  "탐지 효과와 비용을 함께 판단합니다",
+  "탐색 인터페이스 구현 준비 중",
+]) {
+  assert.ok(brbHtml.includes(term), "BR-B static page missing required introductory content: " + term);
+}
+assert.ok(brbHtml.includes('href="/#projects"'), "BR-B backlink to portfolio missing");
+assert.ok(!brbHtml.includes("ritual-history-2026-10-21.json"), "BR-B static page must not expose private input name");
+console.log("PASS: BR-B independent static research introduction exported with clear limitations");
