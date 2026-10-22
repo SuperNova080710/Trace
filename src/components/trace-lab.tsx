@@ -559,7 +559,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">GROWTH & EVIDENCE</p>
               <h2 id="evidence-title">기록은 숫자가 아니라 <span>근거와 함께</span></h2>
-              <p className="section-subtitle">리추얼 기록과 출석, 과제 수행은 각각 다른 기준으로 집계한 뒤 공개합니다.</p>
+              <p className="section-subtitle">2026년 10월 21일 기준으로 검증·공개 승인한 과거 집계입니다. 이후 추가된 기록이나 현재 진행 상황은 반영하지 않았습니다.</p>
             </div>
           </div>
           {metrics.length > 0 ? (
@@ -568,7 +568,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 <article className="metric-card" key={metric.id}>
                   <p>{metric.label}</p>
                   <strong>{metric.value.toLocaleString("ko-KR")} <small>{metric.unit}</small></strong>
-                  <span>집계 기간: {metric.from} ~ {metric.to}</span>
+                  <span>{metric.from === metric.to ? "자료 기준일: " + metric.to : "집계 기간: " + metric.from + " ~ " + metric.to}</span>
                   <dl className="metric-facts">
                     <div><dt>자료 유형</dt><dd>{({
                       ritual: "개인 리추얼 기록",
