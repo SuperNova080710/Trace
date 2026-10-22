@@ -86,14 +86,14 @@ GitHub Issue/PR, README, 공개 페이지에 원본 또는 출력값을 그대�
 
 ## 공식 요약 스냅샷 처리
 
-공식 출석 요약과 챌린지 진행 현황은 일별 기록과 별도의 입력 유형으로 처리합니다. `attendance-snapshot`은 강사 미확정일을 분모에 포함하며, 공가 값이 확인되지 않으면 `null`로 유지합니다. `challenge-snapshot`은 핵심 승인 수 및 마지막 A/B의 진행·잠금 상태를 독립적으로 검증합니다. 공식 화면 전사 수치는 코드·테스트·문서에 고정하지 않습니다.
+공식 출석 요약과 챌린지 진행 현황은 일별 기록과 별도의 입력 유형으로 처리합니다. `attendance-snapshot`은 강사 미확정일을 분모에 포함하며, 공가 값이 확인되지 않으면 `null`로 유지합니다. `challenge-snapshot`은 핵심 승인 수 및 마지막 A/B의 진행·잠금 상태를 독립적으로 검증합니다. 공식 화면 전체 원본이나 개별 출결은 코드·테스트·문서에 복제하지 않습니다. **공개 승인된 집계 3개**만 2026-10-21 기준이라는 기간·출처·한계와 함께 코드에 고정했습니다.
 
 ```bash
 node scripts/audit-evidence.mjs attendance-snapshot data/private/attendance-snapshot.json
 node scripts/audit-evidence.mjs challenge-snapshot data/private/challenge-snapshot.json
 ```
 
-모든 출력은 `pending` 상태이며 사용자 공개 승인 전에는 사이트에 반영하지 않습니다.
+로컬 갱신 장치의 **새 후보 출력은 언제나 `pending`**입니다. 별도로 작성자가 허가한 과거 집계 3개만 `public-profile.ts`에 `approved`로 반영되며, 자동으로 공개 숫자를 업데이트하지 않습니다.
 
 
 ## 공개 지표 컴포넌트 사전 준비 (별도 PR)
