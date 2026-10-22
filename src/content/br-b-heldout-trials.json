@@ -1,0 +1,1561 @@
+{
+  "schemaVersion": 1,
+  "dataset": "main-v1-heldout",
+  "provenance": {
+    "repository": "SuperNova080710/ech-beacon-detection",
+    "commit": "daae3300003527958d7cd4a0865fbc8b911d1966",
+    "sourceFiles": {
+      "timing": {
+        "path": "results/timing-only/main-v1/predictions.csv",
+        "sha256": "afb3ab1fd99461e2cd56f54a8acde3e899d7bbdd3fefd9096b7c330b7079642a"
+      },
+      "multi": {
+        "path": "results/multi-feature/main-v1/predictions.csv",
+        "sha256": "ffa99bcb98eb0b15e0ce9fff3dfa60c58404e39e255c44d28c5705aea67e7ec0"
+      }
+    }
+  },
+  "note": "Synthetic fixed held-out predictions; labels derived from source trial IDs for evaluation only, never inferred by the detectors. Scores have different units, not probabilities.",
+  "trials": [
+    {
+      "id": "beacon-j00-t11",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0014960274429328317,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.285262463041504,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t12",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0018403416050639264,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.1566029926468797,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t13",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0028113529048536348,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.24318249858177,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t14",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0016480888314914384,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 4.161648559651266,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t15",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.002748811596360334,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.0452379922643016,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t16",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0009634744349188547,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.425062625451189,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t17",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0009009200550746593,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.4664464957908034,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t18",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0016653061315790236,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.895531598020617,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t19",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0014028284171609306,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.137655272177566,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j00-t20",
+      "kind": "beacon",
+      "jitterPercent": 0,
+      "profile": null,
+      "timing": {
+        "score": 0.0021421588807991705,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.6409594808695505,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t11",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.05691588305576023,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.942019185158862,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t12",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.05550602435238866,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.8614657909437295,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t13",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.053294703923912626,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.7973146690633444,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t14",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.047374082028199455,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.8426398227338905,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t15",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.04952733120258572,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.708878069972541,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t16",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.053859936757788336,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.1253031624465977,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t17",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.04921238043084087,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.2093849887134915,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t18",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.059004300225234306,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.578206666254483,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t19",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.06015597770713952,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.786695358481558,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j10-t20",
+      "kind": "beacon",
+      "jitterPercent": 10,
+      "profile": null,
+      "timing": {
+        "score": 0.050898536988051586,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.2962234287706695,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t11",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.16810643418606983,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.2911176192684595,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t12",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.17092266743385445,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.3362346121270345,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t13",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.15994282425809744,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.3893544441795322,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t14",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.14202316164297205,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.7289327559353205,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t15",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.14742336876571202,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.307718194097918,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t16",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.1571399898775971,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.618993617945486,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t17",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.1534508577010712,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.810336533411974,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t18",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.17194503353550708,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.8418067824674136,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t19",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.18544189393217284,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.290413871762624,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j30-t20",
+      "kind": "beacon",
+      "jitterPercent": 30,
+      "profile": null,
+      "timing": {
+        "score": 0.15365163585509473,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.753271529365851,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t11",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.2754459485548715,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.7277061197504615,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t12",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.2939627616697378,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.8848503638251735,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t13",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.2666938747963049,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.789267805877766,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t14",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.2375737652362489,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 3.1417586428840862,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t15",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.2456737295409622,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.7243816149180777,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t16",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.2523312171028538,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.999279264722924,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t17",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.26493360158289003,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.5331738773219747,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t18",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.27803642364077447,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.2756514780277493,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t19",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.32102879881777374,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.808740477178191,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j50-t20",
+      "kind": "beacon",
+      "jitterPercent": 50,
+      "profile": null,
+      "timing": {
+        "score": 0.257325970756274,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.31566615631609,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t11",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.38062384747300665,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.020871205806296,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t12",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.42500883303488535,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.2358240653909542,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t13",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.37293531886780673,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.1587497599188503,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t14",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.33408814506725754,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 2.526229504353503,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t15",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.34430754746302117,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.1539017300363206,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t16",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.34231982869967337,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.3091542784455508,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t17",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.38095087819649454,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.6968034546272182,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t18",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.3794800170701781,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.591453898069363,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t19",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.46763656700664963,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 0.7313166842400969,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "beacon-j70-t20",
+      "kind": "beacon",
+      "jitterPercent": 70,
+      "profile": null,
+      "timing": {
+        "score": 0.36185669675335425,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 1.7683889257085157,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t17",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.3705123491126658,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.3898522882998066,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t18",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.344121160903517,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.5079510888835794,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t19",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.2391879573044016,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.9957580134998552,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t20",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.3579801860525722,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.575453228484384,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t21",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.4770164712689673,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.0744040329750613,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t22",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.399692825344383,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -4.307288149498551,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t23",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.1866177840767298,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.3882122917429363,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t24",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.2811297238471624,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.407817286361031,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t25",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.4770059392113102,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.6993801941226914,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t26",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.3234441949518387,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.956401505242953,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t27",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.2022584126601628,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.3349646060939273,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t28",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.3812235890820304,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.1151524681561376,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t29",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.5171337248787775,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.486167468868124,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t30",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.201328106597095,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.1963567497738494,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t31",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.295880960255456,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.116625997399399,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t32",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.3487705462402417,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.782283889278495,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t33",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.4436209377250782,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.557819830360892,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t34",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.408790429018789,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.3184122373250102,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t35",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.304319265761339,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.803295218773701,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t36",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.2581933748589298,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.578084761521834,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t37",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.4423930566365972,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.156577758041984,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t38",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.2516304241075698,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.9027573637665707,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t39",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.358298054298434,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.4401559402584623,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-interactive-burst-t40",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "interactive-burst",
+      "timing": {
+        "score": 1.4320261242082306,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.5875905511315413,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t13",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7884978878526023,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.919580632203809,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t14",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7394821386418842,
+        "prediction": 1
+      },
+      "multi": {
+        "score": -2.439595569365059,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t15",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.5733005756066716,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 0.9840916555473713,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t16",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.8142899413688229,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.8404707650093106,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t17",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 1.0171897170437298,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.675284667539702,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t18",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7224303301234906,
+        "prediction": 1
+      },
+      "multi": {
+        "score": -0.638717420182457,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t19",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.6651629289616228,
+        "prediction": 1
+      },
+      "multi": {
+        "score": -0.06961757998839918,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t20",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.9636523501679328,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.925919307502793,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t21",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.6989369206327386,
+        "prediction": 1
+      },
+      "multi": {
+        "score": -1.4764001523353356,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t22",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.593417363898111,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 0.14975266692285322,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t23",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7283805579088211,
+        "prediction": 1
+      },
+      "multi": {
+        "score": -0.42473873134036627,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t24",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.835028429082838,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.759110849612192,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t25",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7054030653371856,
+        "prediction": 1
+      },
+      "multi": {
+        "score": -0.454178307922211,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t26",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7635147390882475,
+        "prediction": 1
+      },
+      "multi": {
+        "score": -1.715052644082957,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t27",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7870332285671598,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.4327628398494867,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t28",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.7984467473756528,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.524441139497447,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t29",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.6726871755269109,
+        "prediction": 1
+      },
+      "multi": {
+        "score": 0.6692007466491937,
+        "prediction": 1
+      }
+    },
+    {
+      "id": "normal-irregular-lognormal-t30",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "irregular-lognormal",
+      "timing": {
+        "score": 0.86189161911798,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.7152156213691525,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t13",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.8299342226781389,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -4.037985558203159,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t14",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.9092624052153312,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -4.6467493531207,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t15",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 1.0667014513230806,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.6442271075518913,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t16",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 1.0411343253671121,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.6123256507140102,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t17",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.989561118204335,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.2726000481193216,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t18",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.9087160722958558,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.474563086735965,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t19",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.863520619559134,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.0688903487160744,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t20",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.9158224005711942,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -4.487184356918264,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t21",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.8983497026228848,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.3354377373278834,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t22",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.9818635535000444,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.5099741372552344,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t23",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.8979276193519433,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -5.510901854373235,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t24",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 1.079120072123071,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.1643498493604527,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t25",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.9113591737819988,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.726883070976155,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t26",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 1.0736099600477391,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -3.2318960836782717,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t27",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 1.0372391136731771,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -2.5403290267890393,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t28",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.9587324818280977,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.329888385248367,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t29",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 1.1153888805112573,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -4.000318296917572,
+        "prediction": 0
+      }
+    },
+    {
+      "id": "normal-mixed-activity-t30",
+      "kind": "normal",
+      "jitterPercent": null,
+      "profile": "mixed-activity",
+      "timing": {
+        "score": 0.9979724312134347,
+        "prediction": 0
+      },
+      "multi": {
+        "score": -1.56943114113603,
+        "prediction": 0
+      }
+    }
+  ]
+}
