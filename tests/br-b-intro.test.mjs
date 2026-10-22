@@ -35,7 +35,8 @@ test("route is isolated from existing TRACE homepage before explicit portfolio i
   const home = await readFile("src/app/page.tsx", "utf8");
   const lab = await readFile("src/components/trace-lab.tsx", "utf8");
   assert.match(home, /<TraceLab/);
-  assert.match(lab, /T13 · 차기 앱 예정/);
+  assert.match(lab, /ECH Beacon Explorer/);
+  assert.match(lab, /href="\/ech-beacon-explorer"/);
   assert.match(source, /href="\/#projects"/);
   assert.match(source, /target="_blank" rel="noopener noreferrer"/);
 });
