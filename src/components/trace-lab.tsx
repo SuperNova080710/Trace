@@ -568,8 +568,27 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 <article className="metric-card" key={metric.id}>
                   <p>{metric.label}</p>
                   <strong>{metric.value.toLocaleString("ko-KR")} <small>{metric.unit}</small></strong>
-                  <span>{metric.from} ~ {metric.to}</span>
-                  <small>출처: {metric.source}</small>
+                  <span>집계 기간: {metric.from} ~ {metric.to}</span>
+                  <dl className="metric-facts">
+                    <div><dt>자료 유형</dt><dd>{({
+                      ritual: "개인 리추얼 기록",
+                      "official-attendance-snapshot": "공식 출석 요약",
+                      "official-challenge-snapshot": "공식 과제 승인 요약",
+                    } as const)[metric.sourceKind]}</dd></div>
+                    <div><dt>기준일</dt><dd>{metric.asOf}</dd></div>
+                    <div><dt>출처</dt><dd>{metric.source}</dd></div>
+                    <div><dt>정의</dt><dd>{metric.definition}</dd></div>
+                    <div><dt>산식</dt><dd>{metric.calculation}</dd></div>
+                    <div><dt>분모</dt><dd>{metric.denominator === null ? "원본에 별도 분모 없음" : metric.denominator.toLocaleString("ko-KR")}</dd></div>
+                  </dl>
+                  {metric.provisional && (
+                    <p className="metric-provisional">잠정 수치 · 공식 확정 또는 승인 상태 변경 시 재검증 필요</p>
+                  )}
+                  {metric.limitations.length > 0 && (
+                    <ul className="metric-limitations" aria-label="해석상의 한계">
+                      {metric.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}
+                    </ul>
+                  )}
                 </article>
               ))}
             </div>
