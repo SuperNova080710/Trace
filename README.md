@@ -9,9 +9,9 @@ ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소�
 - **공개 사이트:** https://trace-eight-topaz.vercel.app/
 - **공개 연락처:** [lionoh00@gmail.com](mailto:lionoh00@gmail.com)
 - **기술:** Next.js 16.3.8 · React 19.2.8 · TypeScript · 정적 HTML 내보내기 (`output: "export"`)
-- **운영 기준:** 2026-10-22, PR [#17](https://github.com/SuperNova080710/Trace/pull/17)·[#18](https://github.com/SuperNova080710/Trace/pull/18) 병합. 최신 확인된 `main`은 `01b08db`이고 GitHub Actions가 성공했습니다.
+- **운영 기준:** 2026-10-22 · BR-A 마스터 승인, BR-B PR #44 main 병합 완료.
 - **배포 확인:** 사용자가 2026-10-22 Vercel 운영 페이지에서 세 활동 지표가 실제 표시되는 것을 확인했습니다.
-- **과제 상태:** BR-A **제출 준비 단계**. 제출 버튼 전송 및 마스터 최종 승인은 아직 확인되지 않았습니다. 뒤이은 BR-B는 BR-A 최종 승인 후 진행합니다.
+- **과제 상태:** BR-A 마스터 승인 완료. BR-B 공개 앱 구현·배포·시크릿 창 비로그인 접근 사용자 확인. 동료 테스트와 실제 제출은 미완료.
 
 ## 공개 페이지 탐색
 
@@ -19,7 +19,7 @@ ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소�
 | --- | --- | --- |
 | 첫 화면·자기소개 | [`#about`](https://trace-eight-topaz.vercel.app/#about) | 공개명·'…한 사람' 한 줄 소개, 고난→문제 해결→성장에 관한 승인된 사실 기반 이야기 |
 | 세 가지 역량 | `#about` / [`#approach`](https://trace-eight-topaz.vercel.app/#approach) | 자기조절력·대인관계력·자기동기력. **대인관계력의 개인 행동 장면은 추가 대조가 필요합니다** |
-| 대표작 | [`#projects`](https://trace-eight-topaz.vercel.app/#projects) | T10 Native ECH 연구 원고·Held-out 평가·공개 근거. T13 앱은 이번 BR-A에서 **예정 자리**만 제공 |
+| 대표작 | [`#projects`](https://trace-eight-topaz.vercel.app/#projects) | T10 Native ECH 연구 원고·Held-out 평가·공개 근거. BR-B ECH Beacon Explorer 앱 카드 및 링크 제공 |
 | 활동 근거 | [`#evidence`](https://trace-eight-topaz.vercel.app/#evidence) | 사용자 승인된 **2026-10-21 기준** 리추얼·공식 출석·핵심 승인 집계 3종과 출처·산식·한계 |
 | 지원 문서 | [`#documents`](https://trace-eight-topaz.vercel.app/#documents) | 이력서·자기소개서·프로젝트 경험기술서 제작 상태. **사이트 다운로드는 미승인**이며 채점용 비공개 ZIP에 별도 포함 |
 | 연락 | [`#contact`](https://trace-eight-topaz.vercel.app/#contact) | 승인된 공개 이메일 |
@@ -34,7 +34,7 @@ ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소�
 
 이 수치는 사용자로부터 **웹 공개 승인을 받은 집계값만** 표시합니다. 원본 날짜별 리추얼, 타인 발언, 일별 출결, 역량 태그 및 전체 서류는 공개하지 않았습니다. 2026-10-22 기준 리추얼 48일과 2026-10-21 공식 스냅샷을 혼합하지 않습니다.
 
-## BR-A 과제 충족 상황
+## BR-A 과제 충족 상황 (승인 당시 기록 · 현재 마스터 승인 완료)
 
 | 범위 | 판단 |
 | --- | --- |
@@ -71,7 +71,7 @@ npm run dev
 
 `npm run check`는 ESLint, TypeScript, Node 테스트, 공개 소스 검사, 정적 빌드, HTML·링크·릴리스 표면 검사를 실행합니다. 최근 `main`에서 CI와 **55/55 자동 테스트**가 통과했습니다. npm Registry의 보안 감사 엔드포인트가 타임아웃/503을 반환한 감사는 **미확정**으로 기록했으며, 취약점이 없음을 증명하지 않습니다.
 
-## 최종 제출 준비
+## 최종 제출 준비 (BR-A 과거 기록 · 현재 마스터 승인 완료)
 
 **결과물 URL:** https://trace-eight-topaz.vercel.app/ (로그인 없이 열리는 HTTPS 주소 하나)
 
@@ -98,13 +98,21 @@ npm run dev
 - [#8 보안·BR-A 최종 제출](https://github.com/SuperNova080710/Trace/issues/8) — **실제 제출 미완료**, 잔여 항목 추적
 
 
-## BR-B — ECH Beacon Explorer (2026-10-22 개발 브랜치)
+## BR-B — ECH Beacon Explorer (2026-10-22 main 병합·배포 완료)
 
-- **연구 기반 대화형 앱:** `/ech-beacon-explorer` (병합 및 Vercel 재배포 이전에는 공개 적용 미확정)
+- **연구 기반 대화형 앱:** https://trace-eight-topaz.vercel.app/ech-beacon-explorer · 사용자 공개 접근·시크릿 창 비로그인 확인.
 - **대표작 연계:** 홈의 기존 T13 예정 카드를 ECH Beacon Explorer로 대체.
 - **세 가지 사용자 작업:** ① 합성 Held-out 트래픽의 유형·지터·프로필을 선택해 필터링 ② 같은 Trial의 Timing-only 및 Multi-feature 판정과 혼동행렬을 비교 ③ 전체 동결 평가의 오탐 감소(10→7건)와 순수 추론 배치 중앙값(0.080385→1.408802ms)을 살펴보기.
 - **데이터 출처:** [ech-beacon-detection](https://github.com/SuperNova080710/ech-beacon-detection) 동결 커밋 `daae3300003527958d7cd4a0865fbc8b911d1966`. `src/content/br-b-research-contract.json` 및 `src/content/br-b-heldout-trials.json`을 사용. 예측을 재학습하거나 실제 운영망을 실시간 판정하지 않음.
 - **연구의 한계:** 고지터에서 Multi-feature가 Recall 우위를 보인 것은 아니며, 두 탐지기 Recall은 모두 1.0. 실측 운영망 성능 및 특징 추출 시간을 포함한 종단 간 추론 비용을 주장하지 않음.
-- **기술 검사:** `npm run check` (lint, typecheck, node tests, 고정 데이터 검증, 정적 빌드, HTML/개인정보 검사). PR의 실제 CI 상태가 최종 판단 기준.
-- **미완료 수동 검증:** 병합 후 실제 공개 URL 시크릿 창 접근, 모바일 키보드/스크린리더, 처음 보는 동료 1명의 이름 없는 감상, BR-B 제출.
-- **변경 PR:** [#44](https://github.com/SuperNova080710/Trace/pull/44). BR-A 제출 완료 여부는 위 과거 README 내용 대신 현재 ALEPH의 마스터 승인 상태를 따름.
+- **기술 검사:** PR #44에서 CI 성공. Node 테스트·정적 빌드·동결 데이터 검사·공개 데이터 검사 포함.
+- **완료한 사용자 검증:** PR #44 병합, Vercel 배포, 공개 앱 및 시크릿 창 접근. **미완료:** 동료 무설명 테스트·익명 한 줄 후기·BR-B 제출, 모바일/스크린리더 실사용 확인.
+- **변경 PR:** [#44](https://github.com/SuperNova080710/Trace/pull/44) 병합 완료.
+
+### BR-B 현재 과제 진행상황 (2026-10-22)
+
+- **공개 앱:** https://trace-eight-topaz.vercel.app/ech-beacon-explorer
+- **병합·배포 확인:** PR #44가 main에 병합됐고 사용자가 Vercel 앱 공개 접근 및 새 시크릿 창 비로그인을 확인했습니다.
+- **제출 형태:** 공개 URL 단독 제출 가능. 독립 ZIP은 선택 사항이므로 중복 제작하지 않습니다.
+- **잔여 사용자 수행:** 처음 보는 동료의 실제 무설명 테스트와 이름 없는 한 줄 감상(#37), BR-B 제출란에 재현 확인 4항목·AI와 내 판단 3줄·URL을 입력한 뒤 실제 제출(#38).
+- **품질 추적:** 코드 회귀 테스트와 실제 모바일/키보드/스크린리더 수동 테스트를 구분합니다. 자동 검사 성공을 실사용 완료로 표기하지 않습니다.
