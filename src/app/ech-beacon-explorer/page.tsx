@@ -48,8 +48,8 @@ export default function ExplorerIntro() {
           <div className={styles.heroContent}>
             <p className={styles.kicker}><span className={styles.liveDot} aria-hidden="true" /> ALEPH BR-B · T10 RESEARCH APPLICATION</p>
             <h1 id="explorer-title">
-              암호화된 연결 뒤의 탐지 결과를<br />
-              <span>숫자로 검증하다.</span>
+              <span className={styles.heroHeadline}>암호화된 연결 뒤의 탐지 결과를</span>
+              <span className={styles.heroAccent}>숫자로 검증하다.</span>
             </h1>
             <p className={styles.lead}>
               ECH 환경의 HTTPS Beacon 탐지를 연구하는 <strong>보안 학습자와 분석자</strong>가
