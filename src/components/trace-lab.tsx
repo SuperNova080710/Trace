@@ -538,14 +538,14 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             ))}
             <article className="project-card project-future spotlight-card" onPointerMove={onSpotlightMove}>
               <div className="project-art project-art-future">
-                <span className="art-number">03 / T13 · NEXT APP</span>
-                <span className="art-monogram" aria-hidden="true">NEXT</span>
+                <span className="art-number">03 / BR-B · RESEARCH APPLICATION</span>
+                <span className="art-monogram" aria-hidden="true">ECH</span>
               </div>
               <div className="project-content">
-                <span className="project-category">UPCOMING</span>
-                <h3>T13 · 차기 앱 예정</h3>
-                <p>ALEPH T13 앱 과제를 위한 자리입니다. 구현·배포·성과는 확인 전이므로 준비 중으로 표시합니다.</p>
-                <span className="future-label">준비 중</span>
+                <span className="project-category">INTERACTIVE RESEARCH LAB</span>
+                <h3>ECH Beacon Explorer</h3>
+                <p>T10 논문을 바탕으로 보안 학습자가 합성 Held-out 110건의 판정을 직접 비교하고 오탐 감소와 추론 비용의 균형을 살펴보는 공개 앱입니다.</p>
+                <a href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">↗</span></a>
               </div>
             </article>
           </div>
