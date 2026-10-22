@@ -39,6 +39,8 @@ jobs:
         run: npm run typecheck
       - name: Data contract and privacy tests
         run: npm run test
+      - name: Verify pinned BR-B Held-out import
+        run: npm run check:brb-data
       - name: Public source scan
         run: npm run check:public
       - name: Static export
@@ -47,3 +49,5 @@ jobs:
         run: test -f out/index.html
       - name: Public HTML and navigation contract
         run: npm run check:export
+      - name: Release artifact privacy scan
+        run: npm run check:release

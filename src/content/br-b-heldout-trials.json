@@ -1,0 +1,1108 @@
+{
+  "schemaVersion": 1,
+  "study": "main-v1",
+  "sourceCommit": "daae3300003527958d7cd4a0865fbc8b911d1966",
+  "scope": "frozen synthetic heldout 110 trials; not live detection",
+  "trials": [
+    {
+      "trialId": "beacon-j00-t11",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0014960274429328317,
+      "multiFeatureLogit": 3.285262463041504
+    },
+    {
+      "trialId": "beacon-j00-t12",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0018403416050639264,
+      "multiFeatureLogit": 3.1566029926468797
+    },
+    {
+      "trialId": "beacon-j00-t13",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0028113529048536348,
+      "multiFeatureLogit": 3.24318249858177
+    },
+    {
+      "trialId": "beacon-j00-t14",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0016480888314914384,
+      "multiFeatureLogit": 4.161648559651266
+    },
+    {
+      "trialId": "beacon-j00-t15",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.002748811596360334,
+      "multiFeatureLogit": 3.0452379922643016
+    },
+    {
+      "trialId": "beacon-j00-t16",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0009634744349188547,
+      "multiFeatureLogit": 3.425062625451189
+    },
+    {
+      "trialId": "beacon-j00-t17",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0009009200550746593,
+      "multiFeatureLogit": 3.4664464957908034
+    },
+    {
+      "trialId": "beacon-j00-t18",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0016653061315790236,
+      "multiFeatureLogit": 3.895531598020617
+    },
+    {
+      "trialId": "beacon-j00-t19",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0014028284171609306,
+      "multiFeatureLogit": 3.137655272177566
+    },
+    {
+      "trialId": "beacon-j00-t20",
+      "groundTruth": "beacon",
+      "jitterPercent": 0,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.0021421588807991705,
+      "multiFeatureLogit": 3.6409594808695505
+    },
+    {
+      "trialId": "beacon-j10-t11",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.05691588305576023,
+      "multiFeatureLogit": 2.942019185158862
+    },
+    {
+      "trialId": "beacon-j10-t12",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.05550602435238866,
+      "multiFeatureLogit": 2.8614657909437295
+    },
+    {
+      "trialId": "beacon-j10-t13",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.053294703923912626,
+      "multiFeatureLogit": 2.7973146690633444
+    },
+    {
+      "trialId": "beacon-j10-t14",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.047374082028199455,
+      "multiFeatureLogit": 3.8426398227338905
+    },
+    {
+      "trialId": "beacon-j10-t15",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.04952733120258572,
+      "multiFeatureLogit": 2.708878069972541
+    },
+    {
+      "trialId": "beacon-j10-t16",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.053859936757788336,
+      "multiFeatureLogit": 3.1253031624465977
+    },
+    {
+      "trialId": "beacon-j10-t17",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.04921238043084087,
+      "multiFeatureLogit": 3.2093849887134915
+    },
+    {
+      "trialId": "beacon-j10-t18",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.059004300225234306,
+      "multiFeatureLogit": 3.578206666254483
+    },
+    {
+      "trialId": "beacon-j10-t19",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.06015597770713952,
+      "multiFeatureLogit": 2.786695358481558
+    },
+    {
+      "trialId": "beacon-j10-t20",
+      "groundTruth": "beacon",
+      "jitterPercent": 10,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.050898536988051586,
+      "multiFeatureLogit": 3.2962234287706695
+    },
+    {
+      "trialId": "beacon-j30-t11",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.16810643418606983,
+      "multiFeatureLogit": 2.2911176192684595
+    },
+    {
+      "trialId": "beacon-j30-t12",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.17092266743385445,
+      "multiFeatureLogit": 2.3362346121270345
+    },
+    {
+      "trialId": "beacon-j30-t13",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.15994282425809744,
+      "multiFeatureLogit": 2.3893544441795322
+    },
+    {
+      "trialId": "beacon-j30-t14",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.14202316164297205,
+      "multiFeatureLogit": 3.7289327559353205
+    },
+    {
+      "trialId": "beacon-j30-t15",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.14742336876571202,
+      "multiFeatureLogit": 2.307718194097918
+    },
+    {
+      "trialId": "beacon-j30-t16",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.1571399898775971,
+      "multiFeatureLogit": 2.618993617945486
+    },
+    {
+      "trialId": "beacon-j30-t17",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.1534508577010712,
+      "multiFeatureLogit": 2.810336533411974
+    },
+    {
+      "trialId": "beacon-j30-t18",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.17194503353550708,
+      "multiFeatureLogit": 2.8418067824674136
+    },
+    {
+      "trialId": "beacon-j30-t19",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.18544189393217284,
+      "multiFeatureLogit": 2.290413871762624
+    },
+    {
+      "trialId": "beacon-j30-t20",
+      "groundTruth": "beacon",
+      "jitterPercent": 30,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.15365163585509473,
+      "multiFeatureLogit": 2.753271529365851
+    },
+    {
+      "trialId": "beacon-j50-t11",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.2754459485548715,
+      "multiFeatureLogit": 1.7277061197504615
+    },
+    {
+      "trialId": "beacon-j50-t12",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.2939627616697378,
+      "multiFeatureLogit": 1.8848503638251735
+    },
+    {
+      "trialId": "beacon-j50-t13",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.2666938747963049,
+      "multiFeatureLogit": 1.789267805877766
+    },
+    {
+      "trialId": "beacon-j50-t14",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.2375737652362489,
+      "multiFeatureLogit": 3.1417586428840862
+    },
+    {
+      "trialId": "beacon-j50-t15",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.2456737295409622,
+      "multiFeatureLogit": 1.7243816149180777
+    },
+    {
+      "trialId": "beacon-j50-t16",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.2523312171028538,
+      "multiFeatureLogit": 1.999279264722924
+    },
+    {
+      "trialId": "beacon-j50-t17",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.26493360158289003,
+      "multiFeatureLogit": 2.5331738773219747
+    },
+    {
+      "trialId": "beacon-j50-t18",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.27803642364077447,
+      "multiFeatureLogit": 2.2756514780277493
+    },
+    {
+      "trialId": "beacon-j50-t19",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.32102879881777374,
+      "multiFeatureLogit": 1.808740477178191
+    },
+    {
+      "trialId": "beacon-j50-t20",
+      "groundTruth": "beacon",
+      "jitterPercent": 50,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.257325970756274,
+      "multiFeatureLogit": 2.31566615631609
+    },
+    {
+      "trialId": "beacon-j70-t11",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.38062384747300665,
+      "multiFeatureLogit": 1.020871205806296
+    },
+    {
+      "trialId": "beacon-j70-t12",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.42500883303488535,
+      "multiFeatureLogit": 1.2358240653909542
+    },
+    {
+      "trialId": "beacon-j70-t13",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.37293531886780673,
+      "multiFeatureLogit": 1.1587497599188503
+    },
+    {
+      "trialId": "beacon-j70-t14",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.33408814506725754,
+      "multiFeatureLogit": 2.526229504353503
+    },
+    {
+      "trialId": "beacon-j70-t15",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.34430754746302117,
+      "multiFeatureLogit": 1.1539017300363206
+    },
+    {
+      "trialId": "beacon-j70-t16",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.34231982869967337,
+      "multiFeatureLogit": 1.3091542784455508
+    },
+    {
+      "trialId": "beacon-j70-t17",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.38095087819649454,
+      "multiFeatureLogit": 1.6968034546272182
+    },
+    {
+      "trialId": "beacon-j70-t18",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.3794800170701781,
+      "multiFeatureLogit": 1.591453898069363
+    },
+    {
+      "trialId": "beacon-j70-t19",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.46763656700664963,
+      "multiFeatureLogit": 0.7313166842400969
+    },
+    {
+      "trialId": "beacon-j70-t20",
+      "groundTruth": "beacon",
+      "jitterPercent": 70,
+      "normalProfile": null,
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.36185669675335425,
+      "multiFeatureLogit": 1.7683889257085157
+    },
+    {
+      "trialId": "normal-interactive-burst-t17",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.3705123491126658,
+      "multiFeatureLogit": -3.3898522882998066
+    },
+    {
+      "trialId": "normal-interactive-burst-t18",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.344121160903517,
+      "multiFeatureLogit": -2.5079510888835794
+    },
+    {
+      "trialId": "normal-interactive-burst-t19",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.2391879573044016,
+      "multiFeatureLogit": -1.9957580134998552
+    },
+    {
+      "trialId": "normal-interactive-burst-t20",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.3579801860525722,
+      "multiFeatureLogit": -2.575453228484384
+    },
+    {
+      "trialId": "normal-interactive-burst-t21",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.4770164712689673,
+      "multiFeatureLogit": -2.0744040329750613
+    },
+    {
+      "trialId": "normal-interactive-burst-t22",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.399692825344383,
+      "multiFeatureLogit": -4.307288149498551
+    },
+    {
+      "trialId": "normal-interactive-burst-t23",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.1866177840767298,
+      "multiFeatureLogit": -2.3882122917429363
+    },
+    {
+      "trialId": "normal-interactive-burst-t24",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.2811297238471624,
+      "multiFeatureLogit": -2.407817286361031
+    },
+    {
+      "trialId": "normal-interactive-burst-t25",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.4770059392113102,
+      "multiFeatureLogit": -3.6993801941226914
+    },
+    {
+      "trialId": "normal-interactive-burst-t26",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.3234441949518387,
+      "multiFeatureLogit": -2.956401505242953
+    },
+    {
+      "trialId": "normal-interactive-burst-t27",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.2022584126601628,
+      "multiFeatureLogit": -3.3349646060939273
+    },
+    {
+      "trialId": "normal-interactive-burst-t28",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.3812235890820304,
+      "multiFeatureLogit": -2.1151524681561376
+    },
+    {
+      "trialId": "normal-interactive-burst-t29",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.5171337248787775,
+      "multiFeatureLogit": -2.486167468868124
+    },
+    {
+      "trialId": "normal-interactive-burst-t30",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.201328106597095,
+      "multiFeatureLogit": -3.1963567497738494
+    },
+    {
+      "trialId": "normal-interactive-burst-t31",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.295880960255456,
+      "multiFeatureLogit": -3.116625997399399
+    },
+    {
+      "trialId": "normal-interactive-burst-t32",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.3487705462402417,
+      "multiFeatureLogit": -2.782283889278495
+    },
+    {
+      "trialId": "normal-interactive-burst-t33",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.4436209377250782,
+      "multiFeatureLogit": -3.557819830360892
+    },
+    {
+      "trialId": "normal-interactive-burst-t34",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.408790429018789,
+      "multiFeatureLogit": -2.3184122373250102
+    },
+    {
+      "trialId": "normal-interactive-burst-t35",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.304319265761339,
+      "multiFeatureLogit": -2.803295218773701
+    },
+    {
+      "trialId": "normal-interactive-burst-t36",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.2581933748589298,
+      "multiFeatureLogit": -3.578084761521834
+    },
+    {
+      "trialId": "normal-interactive-burst-t37",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.4423930566365972,
+      "multiFeatureLogit": -3.156577758041984
+    },
+    {
+      "trialId": "normal-interactive-burst-t38",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.2516304241075698,
+      "multiFeatureLogit": -1.9027573637665707
+    },
+    {
+      "trialId": "normal-interactive-burst-t39",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.358298054298434,
+      "multiFeatureLogit": -1.4401559402584623
+    },
+    {
+      "trialId": "normal-interactive-burst-t40",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "interactive-burst",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.4320261242082306,
+      "multiFeatureLogit": -2.5875905511315413
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t13",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.7884978878526023,
+      "multiFeatureLogit": -1.919580632203809
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t14",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.7394821386418842,
+      "multiFeatureLogit": -2.439595569365059
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t15",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.5733005756066716,
+      "multiFeatureLogit": 0.9840916555473713
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t16",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.8142899413688229,
+      "multiFeatureLogit": -1.8404707650093106
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t17",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.0171897170437298,
+      "multiFeatureLogit": -1.675284667539702
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t18",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.7224303301234906,
+      "multiFeatureLogit": -0.638717420182457
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t19",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.6651629289616228,
+      "multiFeatureLogit": -0.06961757998839918
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t20",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9636523501679328,
+      "multiFeatureLogit": -3.925919307502793
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t21",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.6989369206327386,
+      "multiFeatureLogit": -1.4764001523353356
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t22",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.593417363898111,
+      "multiFeatureLogit": 0.14975266692285322
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t23",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.7283805579088211,
+      "multiFeatureLogit": -0.42473873134036627
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t24",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.835028429082838,
+      "multiFeatureLogit": -2.759110849612192
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t25",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.7054030653371856,
+      "multiFeatureLogit": -0.454178307922211
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t26",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.7635147390882475,
+      "multiFeatureLogit": -1.715052644082957
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t27",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.7870332285671598,
+      "multiFeatureLogit": -1.4327628398494867
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t28",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.7984467473756528,
+      "multiFeatureLogit": -2.524441139497447
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t29",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 1,
+      "multiFeaturePrediction": 1,
+      "iatCv": 0.6726871755269109,
+      "multiFeatureLogit": 0.6692007466491937
+    },
+    {
+      "trialId": "normal-irregular-lognormal-t30",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "irregular-lognormal",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.86189161911798,
+      "multiFeatureLogit": -1.7152156213691525
+    },
+    {
+      "trialId": "normal-mixed-activity-t13",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.8299342226781389,
+      "multiFeatureLogit": -4.037985558203159
+    },
+    {
+      "trialId": "normal-mixed-activity-t14",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9092624052153312,
+      "multiFeatureLogit": -4.6467493531207
+    },
+    {
+      "trialId": "normal-mixed-activity-t15",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.0667014513230806,
+      "multiFeatureLogit": -3.6442271075518913
+    },
+    {
+      "trialId": "normal-mixed-activity-t16",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.0411343253671121,
+      "multiFeatureLogit": -1.6123256507140102
+    },
+    {
+      "trialId": "normal-mixed-activity-t17",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.989561118204335,
+      "multiFeatureLogit": -3.2726000481193216
+    },
+    {
+      "trialId": "normal-mixed-activity-t18",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9087160722958558,
+      "multiFeatureLogit": -3.474563086735965
+    },
+    {
+      "trialId": "normal-mixed-activity-t19",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.863520619559134,
+      "multiFeatureLogit": -3.0688903487160744
+    },
+    {
+      "trialId": "normal-mixed-activity-t20",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9158224005711942,
+      "multiFeatureLogit": -4.487184356918264
+    },
+    {
+      "trialId": "normal-mixed-activity-t21",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.8983497026228848,
+      "multiFeatureLogit": -2.3354377373278834
+    },
+    {
+      "trialId": "normal-mixed-activity-t22",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9818635535000444,
+      "multiFeatureLogit": -2.5099741372552344
+    },
+    {
+      "trialId": "normal-mixed-activity-t23",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.8979276193519433,
+      "multiFeatureLogit": -5.510901854373235
+    },
+    {
+      "trialId": "normal-mixed-activity-t24",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.079120072123071,
+      "multiFeatureLogit": -2.1643498493604527
+    },
+    {
+      "trialId": "normal-mixed-activity-t25",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9113591737819988,
+      "multiFeatureLogit": -3.726883070976155
+    },
+    {
+      "trialId": "normal-mixed-activity-t26",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.0736099600477391,
+      "multiFeatureLogit": -3.2318960836782717
+    },
+    {
+      "trialId": "normal-mixed-activity-t27",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.0372391136731771,
+      "multiFeatureLogit": -2.5403290267890393
+    },
+    {
+      "trialId": "normal-mixed-activity-t28",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9587324818280977,
+      "multiFeatureLogit": -1.329888385248367
+    },
+    {
+      "trialId": "normal-mixed-activity-t29",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 1.1153888805112573,
+      "multiFeatureLogit": -4.000318296917572
+    },
+    {
+      "trialId": "normal-mixed-activity-t30",
+      "groundTruth": "normal",
+      "jitterPercent": null,
+      "normalProfile": "mixed-activity",
+      "timingOnlyPrediction": 0,
+      "multiFeaturePrediction": 0,
+      "iatCv": 0.9979724312134347,
+      "multiFeatureLogit": -1.56943114113603
+    }
+  ]
+}
