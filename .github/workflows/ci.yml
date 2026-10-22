@@ -49,3 +49,5 @@ jobs:
         run: test -f out/index.html
       - name: Public HTML and navigation contract
         run: npm run check:export
+      - name: Release artifact privacy scan
+        run: npm run check:release
