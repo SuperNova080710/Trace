@@ -21,14 +21,25 @@ export type ApprovedNarrative = {
   evidenceIds: readonly string[];
 };
 
+/** One explicitly approved, source-scoped public measure (never a raw audit output). */
 export type EvidenceMetric = {
   id: string;
   label: string;
   value: number;
   unit: string;
   source: string;
+  sourceKind: "ritual" | "official-attendance-snapshot" | "official-challenge-snapshot";
   from: string;
   to: string;
+  /** Date of the source snapshot, which need not be the end of the measured period. */
+  asOf: string;
+  /** Do not invent a denominator where the source never provided one. */
+  denominator: number | null;
+  definition: string;
+  calculation: string;
+  /** Not a publication approval; indicates the official measure may still change. */
+  provisional: boolean;
+  limitations: readonly string[];
   status: ApprovalStatus;
 };
 
@@ -42,5 +53,5 @@ export function approvedOnly<T extends { status: ApprovalStatus }>(
 /** User-approved BR-A narrative: published only after explicit full-text approval. */
 export { narrative } from "./approved-narrative";
 
-/** Official attendance and activity metrics are still awaiting verification in issue #4. */
+/** No author-approved public activity metrics yet: leave this empty until explicit approval. */
 export const evidenceMetrics: readonly EvidenceMetric[] = [];
