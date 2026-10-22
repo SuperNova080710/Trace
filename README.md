@@ -48,7 +48,7 @@ npm run dev
 - `scripts/build-candidates.mjs`: 결정적 후보·SHA-256 생성
 - `scripts/package-generator.py`, `scripts/verify-reproduction.py`: 오프라인 재현 ZIP 구성 및 검증
 
-로컬의 `data/private/` 및 `generated/private/` 안에 보관된 문장·일별 근거·공식 스냅샷은 **GitHub 또는 사이트에 올리지 않습니다.** 공개 데이터로 전달하려면 별도의 실제 내용 검토와 명시적 사용자 승인이 필요합니다. 47일의 리추얼 기록은 **47일 출석 또는 47일 연속 작성**을 의미하지 않습니다.
+로컬의 `data/private/` 및 `generated/private/` 안에 보관된 문장·일별 근거·공식 스냅샷은 **GitHub 또는 사이트에 올리지 않습니다.** 공개 데이터로 전달하려면 별도의 실제 내용 검토와 명시적 사용자 승인이 필요합니다. 리추얼 기록일 수는 **출석일 수 또는 연속 작성일 수**를 뜻하지 않습니다.
 
 장치 실행과 독립 ZIP 검증: [docs/data/issue-7-generator.md](docs/data/issue-7-generator.md).
 
