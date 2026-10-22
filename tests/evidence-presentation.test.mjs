@@ -4,13 +4,28 @@ import { readFile } from "node:fs/promises";
 
 const read = (path) => readFile(path, "utf8");
 
-test("unapproved private activity metrics remain absent from public data", async () => {
+test("only the three author-approved historical aggregates are public", async () => {
   const profile = await read("src/content/public-profile.ts");
   const page = await read("src/app/page.tsx");
-  assert.match(profile, /evidenceMetrics: readonly EvidenceMetric\[\] = \[\]/);
+  assert.match(profile, /evidenceMetrics: readonly EvidenceMetric\[\] = \[/);
   assert.match(profile, /entry\.status === "approved"/);
   assert.match(page, /approvedOnly\(evidenceMetrics\)/);
+  assert.equal((profile.match(/status: "approved",/g) ?? []).length, 3);
+  assert.equal((profile.match(/asOf: "2026-10-21"/g) ?? []).length, 3);
+  for (const [label, count, denominator] of [
+    ["리추얼 기록 날짜", 47, null],
+    ["공식 출석일", 45, 47],
+    ["핵심 과제 마스터 승인", 11, 11],
+  ]) {
+    assert.ok(profile.includes('label: "' + label + '"'));
+    assert.match(profile, new RegExp("value: " + count + ","));
+    assert.ok(profile.includes("denominator: " + (denominator === null ? "null" : denominator)));
+  }
+  assert.match(profile, /2일은 미확정 상태/);
+  assert.match(profile, /매일 연속 작성/);
+  assert.match(profile, /마지막 A·B 과제는 이 수치에 포함하지 않습니다/);
   assert.doesNotMatch(profile, /data\/private\/|generated\/private\/|ritual-history-/);
+  assert.doesNotMatch(profile, /asOf: "2026-10-22"/);
 });
 
 test("approved metric schema requires independent sources and explicit denominator", async () => {
