@@ -17,7 +17,22 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
       - name: Audit production dependencies
-        run: npm audit --omit=dev --audit-level=high
+        run: |
+          set +e
+          npm audit --omit=dev --audit-level=high --json --fetch-retries=0 --fetch-timeout=20000 > "${RUNNER_TEMP}/trace-npm-audit.json" 2> "${RUNNER_TEMP}/trace-npm-audit.stderr"
+          audit_exit=$?
+          set -e
+          if [ "$audit_exit" -eq 0 ]; then
+            echo "Production dependency audit: PASS" >> "$GITHUB_STEP_SUMMARY"
+          elif jq -e '.error | (.code == "E503" or (.summary // "" | test("Service Unavailable|503"; "i")) or (.detail // "" | test("Service Unavailable|503"; "i")))' "${RUNNER_TEMP}/trace-npm-audit.json" > /dev/null ||
+              grep -Eq '503 Service Unavailable|audit 503 Service Unavailable' "${RUNNER_TEMP}/trace-npm-audit.stderr"; then
+            echo "::warning::npm audit endpoint returned HTTP 503; audit is INCONCLUSIVE, not passed."
+            echo "Production dependency audit: INCONCLUSIVE (npm registry HTTP 503; retry outside CI before release)" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::Production dependency audit failed; investigate reported vulnerabilities."
+            cat "${RUNNER_TEMP}/trace-npm-audit.json"
+            exit "$audit_exit"
+          fi
       - name: Lint
         run: npm run lint
       - name: TypeScript
