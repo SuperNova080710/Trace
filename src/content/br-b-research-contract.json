@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "dataset": "main-v1",
+  "title": "Native ECH 환경에서 지터가 적용된 HTTPS Beacon 트래픽의 경량 메타데이터 기반 탐지 비교",
+  "source": {
+    "repository": "SuperNova080710/ech-beacon-detection",
+    "commit": "daae3300003527958d7cd4a0865fbc8b911d1966",
+    "paths": {
+      "evaluation": "results/metrics/main-v1/heldout-evaluation.json",
+      "timingPredictions": "results/timing-only/main-v1/predictions.csv",
+      "multiPredictions": "results/multi-feature/main-v1/predictions.csv",
+      "processingCost": "results/metrics/main-v1/processing-cost-benchmark.json"
+    },
+    "predictionDigests": {
+      "evaluation": "b357dee703565d98b65467b94f488f9681e53f3ed41b1e3153f432279be9f46b",
+      "timingPredictions": "afb3ab1fd99461e2cd56f54a8acde3e899d7bbdd3fefd9096b7c330b7079642a",
+      "multiPredictions": "ffa99bcb98eb0b15e0ce9fff3dfa60c58404e39e255c44d28c5705aea67e7ec0"
+    }
+  },
+  "datasetCounts": {
+    "total": 200,
+    "calibration": 90,
+    "heldout": 110,
+    "heldoutBeacon": 50,
+    "heldoutNormal": 60,
+    "heldoutDistinctIds": 110
+  },
+  "normalProfiles": {
+    "interactive-burst": 24,
+    "irregular-lognormal": 18,
+    "mixed-activity": 18
+  },
+  "jitterPercent": [
+    0,
+    10,
+    30,
+    50,
+    70
+  ],
+  "heldoutBeaconPerJitter": 10,
+  "detectors": {
+    "timingOnly": {
+      "TP": 50,
+      "FP": 10,
+      "TN": 50,
+      "FN": 0
+    },
+    "multiFeature": {
+      "TP": 50,
+      "FP": 7,
+      "TN": 53,
+      "FN": 0
+    }
+  },
+  "pairedNormal": {
+    "bothFalsePositive": 7,
+    "timingOnlyFalsePositive": 3,
+    "multiOnlyFalsePositive": 0,
+    "bothTrueNegative": 50
+  },
+  "inferenceBench": {
+    "sourceScope": "pure_prediction_on_preextracted_features",
+    "trialsPerBatch": 110,
+    "timingMedianBatchMs": 0.080385,
+    "multiMedianBatchMs": 1.408802,
+    "ratio": 17.5256
+  },
+  "interpretation": {
+    "syntheticControlledTraffic": true,
+    "heldoutLabelsUsedOnlyForEvaluation": true,
+    "reuseSame60NormalAcrossJitter": true,
+    "recallAdvantageAtHighJitterSupported": false,
+    "productionDetectionValidated": false,
+    "includeFeatureExtractionInLatency": false
+  }
+}
