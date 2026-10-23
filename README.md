@@ -4,6 +4,17 @@
 
 ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소개·실제 프로젝트 근거·출처별 활동 지표를 공개하고, 개인 원본 기록·지원 문서·후보 생성 결과는 공개 페이지와 분리합니다.
 
+## BR-B 제출·심사 현황 — 2026-10-23
+
+- **BR-B 과제 제출:** 사용자가 ALEPH 제출을 직접 확인했습니다. 플랫폼의 내부 제출 기록을 별도로 조회한 것은 아닙니다.
+- **제출 URL:** https://trace-eight-topaz.vercel.app/ech-beacon-explorer
+- **최종 문서:** PR [#50](https://github.com/SuperNova080710/Trace/pull/50) `main` 병합 완료.
+- **개발/검증:** Next.js 16.4.2, 품질·보안 및 Chromium CI 성공. 익명 동료 후기와 3가지 기능 무설명 사용 확인 완료.
+- **과제 상태:** 제출 작업 [#38](https://github.com/SuperNova080710/Trace/issues/38) 종료. **강사·마스터 최종 승인 미확인**으로 후속 [#51](https://github.com/SuperNova080710/Trace/issues/51) Open, 상위 [#24](https://github.com/SuperNova080710/Trace/issues/24) Open.
+- **별도 품질 과제:** 수동 키보드·스크린리더 검사는 [#30](https://github.com/SuperNova080710/Trace/issues/30)에서 미완료로 관리. 제출 완료를 전체 접근성 검증 완료로 오해하지 않습니다.
+
+이 섹션이 최신 기준입니다. 하단의 이전 '미제출' 표기는 당시 진행 기록입니다.
+
 ## 현재 진행 상태 — 2026-10-23
 
 - **BR-A:** 마스터 승인 완료.
