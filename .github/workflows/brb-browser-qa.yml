@@ -22,7 +22,8 @@ jobs:
       - name: Install disposable browser test dependency
         run: |
           npm install --no-save --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.56.1
-          npx playwright install --with-deps chromium
+          command -v google-chrome
+          google-chrome --version
       - name: Serve static HTML and test responsive layout and UI
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 --directory out > /tmp/trace-qa-server.log 2>&1 &
@@ -32,4 +33,4 @@ jobs:
             if curl -fsS http://127.0.0.1:4173/ech-beacon-explorer.html -o /dev/null; then break; fi
             sleep 1
           done
-          node scripts/check-brb-browser.mjs
+          BRB_CHROME_BIN=/usr/bin/google-chrome node scripts/check-brb-browser.mjs
