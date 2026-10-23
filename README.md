@@ -8,7 +8,7 @@ ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소�
 
 - **공개 사이트:** https://trace-eight-topaz.vercel.app/
 - **공개 연락처:** [lionoh00@gmail.com](mailto:lionoh00@gmail.com)
-- **기술:** Next.js 16.3.8 · React 19.2.8 · TypeScript · 정적 HTML 내보내기 (`output: "export"`)
+- **기술:** Next.js 16.4.2 · React 19.2.8 · TypeScript · 정적 HTML 내보내기 (`output: "export"`)
 - **운영 기준:** 2026-10-22 · BR-A 마스터 승인, BR-B PR #44 main 병합 완료.
 - **배포 확인:** 사용자가 2026-10-22 Vercel 운영 페이지에서 세 활동 지표가 실제 표시되는 것을 확인했습니다.
 - **과제 상태:** BR-A 마스터 승인 완료. BR-B 공개 앱 구현·배포·시크릿 창 비로그인 접근 사용자 확인. 동료 테스트와 실제 제출은 미완료.
@@ -69,7 +69,7 @@ npm run check
 npm run dev
 ```
 
-`npm run check`는 ESLint, TypeScript, Node 테스트, 공개 소스 검사, 정적 빌드, HTML·링크·릴리스 표면 검사를 실행합니다. 최근 `main`에서 CI와 **55/55 자동 테스트**가 통과했습니다. npm Registry의 보안 감사 엔드포인트가 타임아웃/503을 반환한 감사는 **미확정**으로 기록했으며, 취약점이 없음을 증명하지 않습니다.
+`npm run check`는 ESLint, TypeScript, Node 테스트, 공개 소스 검사, 정적 빌드, HTML·링크·릴리스 표면 검사를 실행합니다. 2026-10-23 보안 패치 작업(이슈 #48)에서 Next.js 16.4.2 및 동일 버전 eslint-config-next로 업그레이드하고 정식 npm lockfile을 재생성했습니다. 패치 브랜치의 잠금 의존성 설치, 프로덕션 `npm audit --omit=dev --audit-level=high`, 린트·타입 검사·기존 자동 테스트·정적 내보내기·공개 검사 CI가 성공했습니다. CI 기록은 현재 브랜치와 커밋 단위로 확인해야 하며 병합 전 결과를 운영 버전으로 표시하지 않습니다.
 
 ## 최종 제출 준비 (BR-A 과거 기록 · 현재 마스터 승인 완료)
 
@@ -95,7 +95,7 @@ npm run dev
 - [#4 13주 활동 지표](https://github.com/SuperNova080710/Trace/issues/4) — 기능 구현·실배포 확인 완료
 - [#6 지원 서류 3종](https://github.com/SuperNova080710/Trace/issues/6) — 제작 완료, 실제 제출과 수동 검토 대기
 - [#7 결정적 기록 갱신 장치](https://github.com/SuperNova080710/Trace/issues/7) — 구현·독립 재현 완료, 개인 날짜별 근거 최종 대조는 별도
-- [#8 보안·BR-A 최종 제출](https://github.com/SuperNova080710/Trace/issues/8) — **실제 제출 미완료**, 잔여 항목 추적
+- [#8 보안·BR-A 최종 제출](https://github.com/SuperNova080710/Trace/issues/8) — **마스터 승인 완료**, BR-B와 별도
 
 
 ## BR-B — ECH Beacon Explorer (2026-10-22 main 병합·배포 완료)
@@ -106,7 +106,7 @@ npm run dev
 - **데이터 출처:** [ech-beacon-detection](https://github.com/SuperNova080710/ech-beacon-detection) 동결 커밋 `daae3300003527958d7cd4a0865fbc8b911d1966`. `src/content/br-b-research-contract.json` 및 `src/content/br-b-heldout-trials.json`을 사용. 예측을 재학습하거나 실제 운영망을 실시간 판정하지 않음.
 - **연구의 한계:** 고지터에서 Multi-feature가 Recall 우위를 보인 것은 아니며, 두 탐지기 Recall은 모두 1.0. 실측 운영망 성능 및 특징 추출 시간을 포함한 종단 간 추론 비용을 주장하지 않음.
 - **기술 검사:** PR #44에서 CI 성공. Node 테스트·정적 빌드·동결 데이터 검사·공개 데이터 검사 포함.
-- **완료한 사용자 검증:** PR #44 병합, Vercel 배포, 공개 앱 및 시크릿 창 접근. **미완료:** 동료 무설명 테스트·익명 한 줄 후기·BR-B 제출, 모바일/스크린리더 실사용 확인.
+- **완료한 사용자 검증:** PR #44 병합, Vercel 배포, 공개 앱 및 시크릿 창 접근. **확보한 동료 의견:** 제목 줄바꿈에 관한 실제 익명 후기 1건(이슈 #37). **미완료:** 동료의 3가지 조작 무설명 수행 여부 확인, BR-B 실제 제출, 모바일/스크린리더 수동 확인.
 - **변경 PR:** [#44](https://github.com/SuperNova080710/Trace/pull/44) 병합 완료.
 
 ### BR-B 현재 과제 진행상황 (2026-10-22)
@@ -114,5 +114,13 @@ npm run dev
 - **공개 앱:** https://trace-eight-topaz.vercel.app/ech-beacon-explorer
 - **병합·배포 확인:** PR #44가 main에 병합됐고 사용자가 Vercel 앱 공개 접근 및 새 시크릿 창 비로그인을 확인했습니다.
 - **제출 형태:** 공개 URL 단독 제출 가능. 독립 ZIP은 선택 사항이므로 중복 제작하지 않습니다.
-- **잔여 사용자 수행:** 처음 보는 동료의 실제 무설명 테스트와 이름 없는 한 줄 감상(#37), BR-B 제출란에 재현 확인 4항목·AI와 내 판단 3줄·URL을 입력한 뒤 실제 제출(#38).
+- **잔여 사용자 수행:** 실제 익명 후기는 확보했으나 동료가 3가지 작업을 설명 없이 모두 완료했는지는 추가 확인(#37), BR-B 제출란에 재현 확인 4항목·AI와 내 판단 3줄·URL을 입력한 뒤 실제 제출(#38).
 - **품질 추적:** 코드 회귀 테스트와 실제 모바일/키보드/스크린리더 수동 테스트를 구분합니다. 자동 검사 성공을 실사용 완료로 표기하지 않습니다.
+
+### BR-B 품질·보안 후속 (2026-10-23)
+
+- 제목 줄바꿈 제보 → PR [#47](https://github.com/SuperNova080710/Trace/pull/47) `main` 병합 확인. 1366/1920px 데스크톱 제목은 첫째 줄 ‘암호화된 연결 뒤의 탐지 결과를’, 둘째 줄 ‘숫자로 검증하다.’ 형태로 설계했으며, 모바일에서는 줄바꿈 가능하도록 분리합니다.
+- 실제 동료 후기 원문 중 핵심: “/ 기준으로 줄바꿈이 되어있어 불편합니다.” 익명으로 #37에 기록. 세 가지 작업을 전부 테스트했다고 추정하지 않습니다.
+- 2026-10-23 기존 `main` CI의 프로덕션 감사에서 Next.js 16.3.8의 심각한 취약점이 발견되어 [#48](https://github.com/SuperNova080710/Trace/issues/48)에서 16.4.2 패치를 진행했습니다. 임시 잠금 파일 생성 CI 워크플로는 사용 후 삭제했습니다.
+- 정적 UI 브라우저 QA: `scripts/check-brb-browser.mjs`, `.github/workflows/brb-browser-qa.yml`; 여러 데스크톱·모바일 폭과 필터·빈 결과·판정 비교 흐름을 자동 검사합니다. 이는 동료/스크린리더 수동 평가를 대체하지 않습니다.
+- **실제 BR-B 플랫폼 제출은 사용자 수행 전까지 미완료로 유지**합니다. 제출 문구는 [제출 초안](docs/br-b/submission-draft.md) 참고.
