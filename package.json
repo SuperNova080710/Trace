@@ -16,7 +16,7 @@
     "check:brb-data": "node scripts/build-br-b-heldout.mjs --check"
   },
   "dependencies": {
-    "next": "16.3.8",
+    "next": "16.4.2",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -25,7 +25,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "16.3.8",
+    "eslint-config-next": "16.4.2",
     "typescript": "^5.9.0"
   },
   "engines": {
