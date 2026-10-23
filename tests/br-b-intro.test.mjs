@@ -56,3 +56,13 @@ test("the first route does not falsely imply finished interactive sample explora
   assert.match(source, /import InteractiveExplorer/);
   assert.doesNotMatch(source, /localStorage|fetch\(|navigator|window\./);
 });
+
+test("BR-B hero preserves a readable two-line headline on desktop without isolating the final particle", () => {
+  assert.match(source, /<span className=\{styles\.heroHeadline\}>암호화된 연결 뒤의 탐지 결과를<\/span>/);
+  assert.match(source, /<span className=\{styles\.heroAccent\}>숫자로 검증하다\.<\/span>/);
+  assert.doesNotMatch(source, /암호화된 연결 뒤의 탐지 결과를<br/);
+  assert.match(css, /\.hero h1 \.heroHeadline \{ display: block; white-space: nowrap; \}/);
+  assert.match(css, /\.hero h1 \.heroAccent \{ display: block; color: #8fc6ff; \}/);
+  assert.match(css, /font-size: clamp\(30px, 3\.25vw, 44px\)/);
+  assert.match(css, /@media \(max-width: 600px\)[\s\S]*?\.hero h1 \.heroHeadline \{ white-space: normal; \}/);
+});
