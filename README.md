@@ -4,13 +4,24 @@
 
 ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소개·실제 프로젝트 근거·출처별 활동 지표를 공개하고, 개인 원본 기록·지원 문서·후보 생성 결과는 공개 페이지와 분리합니다.
 
-## 현재 진행 상태 — 2026-10-23
+## BR-B 마스터 승인 완료 · 다음 실습 단계 진입 — 2026-10-23
+
+- **BR-B 과제 제출:** 사용자가 ALEPH 제출을 직접 확인했습니다. 플랫폼의 내부 제출 기록을 별도로 조회한 것은 아닙니다.
+- **제출 URL:** https://trace-eight-topaz.vercel.app/ech-beacon-explorer
+- **최종 문서:** PR [#50](https://github.com/SuperNova080710/Trace/pull/50) `main` 병합 완료.
+- **개발/검증:** Next.js 16.4.2, 품질·보안 및 Chromium CI 성공. 익명 동료 후기와 3가지 기능 무설명 사용 확인 완료.
+- **과제 결과:** 사용자가 BR-B **마스터 최종 승인 및 다음 실습 단계 진입**을 확인했습니다. 제출 [#38](https://github.com/SuperNova080710/Trace/issues/38), 승인 추적 [#51](https://github.com/SuperNova080710/Trace/issues/51), 최종 단계 [#24](https://github.com/SuperNova080710/Trace/issues/24), 핵심 구현 [#21](https://github.com/SuperNova080710/Trace/issues/21) 모두 완료로 종료했습니다.
+- **별도 유지보수:** 수동 키보드·스크린리더 검사는 [#30](https://github.com/SuperNova080710/Trace/issues/30)에서 미확인 상태로 관리합니다. 과제 마스터 승인은 확인됐지만 모든 접근성 점검이 끝난 것은 아닙니다.
+
+**현재 최신 상태는 마스터 승인 완료입니다.** 강사·마스터 개별 심사표는 직접 조회하지 않았으며, 사용자 보고에 근거합니다. 다음 실습의 구체 요구사항은 아직 전달되지 않았습니다. 하단의 이전 '미제출/승인 대기' 표기는 과거 작업 기록입니다.
+
+## 지난 진행 상태 — 2026-10-23 (참고 이력)
 
 - **BR-A:** 마스터 승인 완료.
 - **BR-B:** ECH Beacon Explorer 구현, 포트폴리오 대표작 연결, Vercel 공개 배포 및 비로그인 시크릿 창 접근 확인.
 - **동료 검증:** 동료가 앱 링크만 받고 설명 없이 실험 선택·판정 비교·효과/비용 비교의 세 기능을 모두 사용한 사실을 사용자 확인. 익명 UI 한 줄 후기 확보·조치 완료([#37](https://github.com/SuperNova080710/Trace/issues/37), PR [#47](https://github.com/SuperNova080710/Trace/pull/47)).
 - **보안 및 브라우저 검사:** Next.js 16.4.2 패치 PR [#49](https://github.com/SuperNova080710/Trace/pull/49) main 병합 완료. main 품질·보안 [CI 성공](https://github.com/SuperNova080710/Trace/actions/runs/39878909485) 및 [Chrome QA 성공](https://github.com/SuperNova080710/Trace/actions/runs/39878909880).
-- **BR-B 최종 제출:** [제출문 정본](docs/br-b/submission-draft.md) 준비 완료. 공개 URL 단독 제출 가능. 플랫폼 실제 전송 및 강사·마스터 승인은 아직 확인되지 않음. 수동 스크린리더/키보드 점검은 별도 열린 이슈 [#30](https://github.com/SuperNova080710/Trace/issues/30).
+- **BR-B 최종 제출:** [제출 기록 정본](docs/br-b/submission-draft.md). **제출 및 마스터 승인 완료, 다음 실습 단계 진입을 사용자 확인.** 수동 스크린리더/키보드 점검은 과제 승인과 별개인 [#30](https://github.com/SuperNova080710/Trace/issues/30)으로 관리.
 
 이 아래의 이전 시점 서술은 작업 당시 이력입니다. 현재 상태는 본 섹션을 우선합니다.
 
@@ -21,7 +32,7 @@ ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소�
 - **기술:** Next.js 16.4.2 · React 19.2.8 · TypeScript · 정적 HTML 내보내기 (`output: "export"`)
 - **운영 기준:** 2026-10-22 · BR-A 마스터 승인, BR-B PR #44 main 병합 완료.
 - **배포 확인:** 사용자가 2026-10-22 Vercel 운영 페이지에서 세 활동 지표가 실제 표시되는 것을 확인했습니다.
-- **과제 상태:** BR-A 마스터 승인 완료. BR-B 공개 앱 구현·배포·시크릿 창 비로그인 접근 사용자 확인. 동료 무설명 사용·실제 익명 후기 확인 완료, 실제 플랫폼 제출은 미완료.
+- **과제 상태:** BR-A와 BR-B 모두 마스터 승인 완료(2026-10-23 사용자 확인), 다음 실습 단계 진입. BR-B 공개 앱 구현·배포·동료 검증 완료.
 
 ## 공개 페이지 탐색
 
@@ -134,3 +145,10 @@ npm run dev
 - 2026-10-23 기존 `main` CI의 프로덕션 감사에서 Next.js 16.3.8의 심각한 취약점이 발견되어 [#48](https://github.com/SuperNova080710/Trace/issues/48)에서 16.4.2 패치 후 PR #49를 main에 병합했으며, 품질 CI와 Chrome QA 모두 통과했습니다. 임시 잠금 파일 생성 CI 워크플로는 사용 후 삭제했습니다.
 - 정적 UI 브라우저 QA: `scripts/check-brb-browser.mjs`, `.github/workflows/brb-browser-qa.yml`; 여러 데스크톱·모바일 폭과 필터·빈 결과·판정 비교 흐름을 자동 검사합니다. 이는 동료/스크린리더 수동 평가를 대체하지 않습니다.
 - **실제 BR-B 플랫폼 제출은 사용자 수행 전까지 미완료로 유지**합니다. 제출 문구는 [최종 제출용 정본](docs/br-b/submission-draft.md) 참고.
+
+### 과제 완료 후 기록 · 2026-10-23
+
+- ALEPH BR-B 마스터 최종 승인 및 다음 실습 단계 진입을 사용자가 직접 확인했습니다. 제출 이전 상태 기록은 과거 이력입니다.
+- 완료 상태로 종료한 이슈: [#21 핵심 앱](https://github.com/SuperNova080710/Trace/issues/21), [#24 최종 단계](https://github.com/SuperNova080710/Trace/issues/24), [#38 실제 제출](https://github.com/SuperNova080710/Trace/issues/38), [#51 승인 결과](https://github.com/SuperNova080710/Trace/issues/51).
+- 계속 유지하는 [#30 수동 접근성 검증](https://github.com/SuperNova080710/Trace/issues/30)은 선택적 품질 개선으로서, BR-B 마스터 승인 여부와 별개입니다.
+- 다음 실습 과제는 별도 안내를 받은 뒤 독립 이슈/브랜치로 관리합니다. 아직 다음 실습의 요구사항·기간·시스템은 지정하지 않습니다.
