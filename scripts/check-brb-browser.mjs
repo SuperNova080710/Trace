@@ -83,6 +83,34 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
     } finally {
       await page.close();
     }
+
+    // A separate smoke check against the real public deployment, not the local static build.
+    // This confirms that PR #47's title fix actually reached Vercel.
+    const publicUrl = "https://trace-eight-topaz.vercel.app/ech-beacon-explorer";
+    const production = await browser.newPage({viewport:{width:1366,height:900}});
+    try {
+      const response = await production.goto(publicUrl, {waitUntil:"domcontentloaded", timeout:30000});
+      assert.equal(response?.status(),200,"Public Vercel BR-B URL must respond 200");
+      await production.locator("#explorer-title > span").first().waitFor({timeout:15000});
+      for (const width of [1366,1920]) {
+        await production.setViewportSize({width,height:900});
+        const live = await production.evaluate(() => {
+          const first=document.querySelector("#explorer-title").firstElementChild;
+          const second=first.nextElementSibling;
+          const range=document.createRange();range.selectNodeContents(first);
+          const ranges=[...range.getClientRects()];
+          return {first:first.textContent.trim(),second:second.textContent.trim(),lines:ranges.length,
+            right:Math.max(...ranges.map(r=>r.right)),available:first.getBoundingClientRect().right,
+            whitespace:getComputedStyle(first).whiteSpace};
+        });
+        assert.equal(live.first,"암호화된 연결 뒤의 탐지 결과를");
+        assert.equal(live.second,"숫자로 검증하다.");
+        assert.equal(live.whitespace,"nowrap");
+        assert.equal(live.lines,1);
+        assert.ok(live.right <= live.available+2,"Production title overflows at "+width);
+        console.log("PASS production Vercel title width="+width+"px");
+      }
+    } finally { await production.close(); }
   } finally {
     await browser.close();
   }
