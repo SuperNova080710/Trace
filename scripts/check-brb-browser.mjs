@@ -17,11 +17,11 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
       try {
         const response = await page.goto(base + "/ech-beacon-explorer.html", {waitUntil:"networkidle", timeout:30000});
         assert.equal(response?.status(),200, "HTTP 200 at "+width);
-        await page.locator("#explorer-title .heroHeadline").waitFor();
+        await page.locator("#explorer-title > span").first().waitFor();
         const layout = await page.evaluate(() => {
           const heading=document.querySelector("#explorer-title");
-          const first=heading.querySelector(".heroHeadline");
-          const second=heading.querySelector(".heroAccent");
+          const first=heading.firstElementChild;
+          const second=heading.lastElementChild;
           const range=document.createRange();
           range.selectNodeContents(first);
           const parts=[...range.getClientRects()];
