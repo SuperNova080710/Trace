@@ -10,7 +10,7 @@ const base = process.env.BRB_QA_BASE_URL || "http://127.0.0.1:4173";
 const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
 
 (async () => {
-  const browser = await chromium.launch({headless: true});
+  const browser = await chromium.launch({headless: true, executablePath: process.env.BRB_CHROME_BIN || undefined, args:["--no-sandbox"]});
   try {
     for (const width of widths) {
       const page = await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
