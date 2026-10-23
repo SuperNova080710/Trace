@@ -32,4 +32,4 @@ jobs:
             if curl -fsS http://127.0.0.1:4173/ech-beacon-explorer.html -o /dev/null; then break; fi
             sleep 1
           done
-          node scripts/check-brb-browser.cjs
+          node scripts/check-brb-browser.mjs
