@@ -200,3 +200,23 @@ test("T10 research display is limited to supported Held-out evaluation", async (
   assert.match(page, /가설은 지지되지 않았습니다/);
   assert.match(page, /학술지 게재 실적으로 표시하지 않습니다/);
 });
+
+
+test("application document cards reuse pointer glow and lift only for fine pointers", async () => {
+  const lab = await read("src/components/trace-lab.tsx");
+  const css = await read("src/app/globals.css");
+  const start = lab.indexOf('className="document-list"');
+  const end = lab.indexOf("</section>", start);
+  assert.ok(start > 0 && end > start);
+  const documents = lab.slice(start, end);
+  assert.equal((documents.match(/className="document-item spotlight-card" onPointerMove=\{onSpotlightMove\}/g) ?? []).length, 3);
+  for (const slug of ["resume", "personal-statement", "project-experience"]) {
+    assert.ok(documents.includes(`href="/documents/${slug}/"`));
+  }
+  assert.match(css, /\.document-item\.spotlight-card::after\s*\{[\s\S]*?radial-gradient/);
+  assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{\s*\.document-item\.spotlight-card:hover/);
+  assert.match(css, /\.document-item\.spotlight-card:hover\s*\{\s*transform:\s*translateY\(-6px\)/);
+  assert.match(css, /\.document-item\.spotlight-card:focus-within/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.document-item\.spotlight-card:hover\s*\{\s*transform:\s*none/);
+  assert.match(css, /\.document-item\.spotlight-card::after\s*\{\s*display:\s*none/);
+});
