@@ -1,0 +1,24 @@
+.application-page{min-height:100vh;background:#f5f8ff;color:#10213f;font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.8;word-break:keep-all}
+.application-page *{box-sizing:border-box}
+.application-header{height:75px;background:#091b34;color:#c8dbf3;display:flex;justify-content:space-between;align-items:center;padding:0 max(30px,calc((100vw - 1200px)/2));font-size:12px;letter-spacing:.05em}
+.application-header a{color:#fff;font-weight:700;text-decoration:none}
+.application-layout{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:215px minmax(0,1fr);gap:48px;padding:62px 30px 110px}
+.application-sidebar{align-self:start;position:sticky;top:30px}.application-sidebar>p:first-child{font-weight:800;color:#4774b2;font-size:11px;letter-spacing:.12em;margin:0 0 20px}
+.application-sidebar nav{display:grid;gap:8px}.application-sidebar nav a{display:flex;gap:13px;padding:13px 14px;border-radius:9px;color:#526d90;text-decoration:none;font-size:13px;font-weight:700;border:1px solid transparent}
+.application-sidebar nav a span{color:#80a5d7}.application-sidebar nav a.selected{background:#e5efff;border-color:#b6d2fa;color:#0a4b9d}
+.application-disclaimer{font-size:11px;color:#7084a0;line-height:1.8;margin-top:32px}
+.application-intro{padding-bottom:18px}.application-kicker{color:#2463bd;font-weight:800;font-size:11px;letter-spacing:.14em}.application-intro h1{font-size:clamp(36px,5vw,58px);letter-spacing:-.055em;line-height:1.3;margin:10px 0}
+.application-subtitle{font-weight:800;color:#38618c}.application-summary{color:#556c8a;margin-top:16px;font-size:14px}
+.application-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 32px}.application-actions button{background:white;color:#16417d;border:1px solid #bcd1ea;border-radius:9px;padding:12px 18px;cursor:pointer;font-size:13px;font-weight:800}
+.application-actions button.primary{background:#2563eb;border-color:#2563eb;color:#fff}.application-actions button:hover{filter:brightness(.93)}
+.application-actions p{flex-basis:100%;font-size:11px;color:#637c9d;margin:2px 0 0}
+.application-paper{background:#fff;border:1px solid #dde7f4;border-radius:8px;box-shadow:0 22px 70px #16417d12;padding:clamp(26px,5vw,66px);overflow-wrap:anywhere}
+.paper-header{display:flex;justify-content:space-between;border-bottom:1px solid #dbe6f4;padding-bottom:15px;letter-spacing:.12em;font-size:10px;color:#8698ae}.paper-header strong{font-size:20px;color:#215bb9}
+.paper-heading{margin:38px 0 28px}.paper-heading>p{font-size:10px;color:#397ac4;letter-spacing:.14em;font-weight:800}.paper-heading h2{font-size:36px;letter-spacing:-.045em;margin:6px 0;color:#102748}.paper-heading>span{font-size:13px;color:#617994}
+.paper-section{margin:36px 0;break-inside:avoid-page}.paper-section-heading{display:flex;align-items:baseline;gap:15px;border-bottom:1px solid #e4edf6;padding-bottom:12px;margin-bottom:17px}
+.paper-section-heading span{font-size:10px;font-weight:800;color:#4384d0}.paper-section h3{font-size:18px;color:#173d72;letter-spacing:-.03em;margin:0}
+.paper-section p,.paper-section li{font-size:13px;color:#334f70;line-height:1.9;margin:9px 0;white-space:pre-line}
+.paper-section li{padding-left:5px;margin:8px 0}.paper-section ul{padding-left:22px;margin:13px 0}
+.paper-footer{font-size:10px;color:#8393a8;text-align:right;border-top:1px solid #e6edf6;padding-top:15px;margin-top:45px}
+@media(max-width:750px){.application-header{padding:0 20px}.application-header span{display:none}.application-layout{display:block;padding:30px 18px 60px}.application-sidebar{position:static;margin-bottom:35px}.application-sidebar nav{display:flex;flex-wrap:wrap}.application-sidebar nav a{padding:10px}.application-disclaimer{display:none}.application-paper{padding:25px 20px}.paper-heading h2{font-size:29px}}
+@media print{@page{size:A4;margin:17mm 16mm}.application-page{background:#fff}.application-header,.application-sidebar,.application-intro,.application-actions{display:none!important}.application-layout{display:block;padding:0;max-width:none}.application-main{width:100%}.application-paper{border:0;box-shadow:none;border-radius:0;padding:0}.paper-section{break-inside:auto;page-break-inside:auto}.paper-section-heading{break-after:avoid-page}.paper-section p,.paper-section li{orphans:3;widows:3}.paper-footer{font-size:9px}}
