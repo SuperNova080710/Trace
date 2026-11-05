@@ -3,7 +3,7 @@ import { join, relative, resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 
 // Static audit reads out/ only; never modifies or approves personal documents.
-const disallowedPath = /(^|\\/)(?:private|\\.env(?:\\..*)?|\\.git|credentials\\.json)(?:\\/|$)|(?:\\.pdf|\\.docx|\\.zip|\\.pem|\\.key)$|ritual-history-[^/]+\\.json$/i;
+const disallowedPath = /(^|\/)(?:private|\.env(?:\..*)?|\.git|credentials\.json)(?:\/|$)|(?:\.pdf|\.docx|\.zip|\.pem|\.key)$|ritual-history-[^/]+\.json$/i;
 const approvedDocuments = new Set(["downloads/TRACE_resume.docx", "downloads/TRACE_personal-statement.docx", "downloads/TRACE_project-experience.docx"]);
 const approvedPages = new Set(["documents/resume.html", "documents/personal-statement.html", "documents/project-experience.html"]);
 const sensitiveContent = [
