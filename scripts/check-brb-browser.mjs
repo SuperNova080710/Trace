@@ -84,6 +84,54 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
       await page.close();
     }
 
+    // TRACE homepage document-card interaction (Issue #58).
+    // Verify live CSS, pointer positioning, reduced-motion and link destinations.
+    const documentsPage = await browser.newPage({viewport:{width:1366,height:900}});
+    try {
+      const response = await documentsPage.goto(base + "/", {waitUntil:"networkidle", timeout:30000});
+      assert.equal(response?.status(),200,"TRACE portfolio must respond 200");
+      const cards = documentsPage.locator("#documents .document-item.spotlight-card");
+      assert.equal(await cards.count(),3,"All application documents should react to pointer hover");
+      const links = [
+        "/documents/resume",
+        "/documents/personal-statement",
+        "/documents/project-experience"
+      ];
+      for (let i=0;i<3;i++) {
+        const link = cards.nth(i).locator(".document-download");
+        const href = await link.getAttribute("href");
+        assert.ok(href === links[i] || href === links[i] + "/", "Document link changed: " + href);
+      }
+      const first = cards.first();
+      await first.hover();
+      const rect = await first.boundingBox();
+      assert.ok(rect,"Document card must be visible");
+      await documentsPage.mouse.move(rect.x + 30,rect.y + 35);
+      await documentsPage.waitForTimeout(430);
+      const active = await first.evaluate((element)=>({
+        x: element.style.getPropertyValue("--spotlight-x"),
+        y: element.style.getPropertyValue("--spotlight-y"),
+        transform: getComputedStyle(element).transform,
+        glow: getComputedStyle(element,"::after").opacity,
+        overflow: document.documentElement.scrollWidth - window.innerWidth
+      }));
+      assert.match(active.x,/px$/,"Cursor x should update a CSS custom property");
+      assert.match(active.y,/px$/,"Cursor y should update a CSS custom property");
+      assert.notEqual(active.transform,"none","Hover should lift document card");
+      assert.equal(active.glow,"1","Mouse glow should be visible on hover");
+      assert.ok(active.overflow <= 2,"Document hover causes horizontal overflow");
+      await documentsPage.emulateMedia({reducedMotion:"reduce"});
+      const reduced = await first.evaluate(element=>({
+        transform:getComputedStyle(element).transform,
+        glowDisplay:getComputedStyle(element,"::after").display
+      }));
+      assert.equal(reduced.transform,"none","Reduced motion should disable card lift");
+      assert.equal(reduced.glowDisplay,"none","Reduced motion should disable glow");
+      console.log("PASS TRACE document-card pointer glow, floating hover, reduced motion and links");
+    } finally {
+      await documentsPage.close();
+    }
+
     // A separate smoke check against the real public deployment, not the local static build.
     // This confirms that PR #47's title fix actually reached Vercel.
     const publicUrl = "https://trace-eight-topaz.vercel.app/ech-beacon-explorer";
