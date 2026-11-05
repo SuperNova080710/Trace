@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import Link from "next/link";
 import type { ApprovedNarrative, EvidenceMetric } from "@/content/public-profile";
 import { detectorMetrics, t10Research } from "@/content/research-evidence";
 
@@ -617,13 +618,13 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
-              <p className="section-subtitle">이력서, 자기소개서, 프로젝트 경험기술서는 제작·검증을 마쳤고 BR-A 제출 시 비공개 파일로 제공할 예정입니다. 사이트에서는 아직 다운로드 가능한 파일이 아닙니다.</p>
+              <p className="section-subtitle">메모리얼 파크의 경험 기록과 검증된 프로젝트 성과를 바탕으로 작성한 공개용 지원 문서입니다. 각 문서를 바로 읽거나 파일로 내려받고, PDF로 저장할 수 있습니다.</p>
             </div>
           </div>
-          <div className="document-list" aria-label="서류 준비 현황">
-            <div className="document-item"><span className="document-number">01</span><strong>이력서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
-            <div className="document-item"><span className="document-number">02</span><strong>자기소개서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
-            <div className="document-item"><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><span className="document-status">제출 준비 완료 · 웹 비공개</span></div>
+          <div className="document-list" aria-label="지원 서류 열람 및 다운로드">
+            <div className="document-item"><span className="document-number">01</span><strong>이력서</strong><Link className="document-download" href="/documents/resume/">열람·다운로드 ↗</Link></div>
+            <div className="document-item"><span className="document-number">02</span><strong>자기소개서</strong><Link className="document-download" href="/documents/personal-statement/">열람·다운로드 ↗</Link></div>
+            <div className="document-item"><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><Link className="document-download" href="/documents/project-experience/">열람·다운로드 ↗</Link></div>
           </div>
         </div>
       </section>

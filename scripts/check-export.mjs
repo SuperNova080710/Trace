@@ -17,7 +17,15 @@ assert.ok(html.includes("프로젝트 경험기술서"), "Documents status secti
 assert.ok(html.includes("Native ECH Beacon Detection"), "T10 research missing");
 assert.ok(html.includes("ECH Beacon Explorer"), "BR-B featured application missing");
 assert.ok(html.includes('href="/ech-beacon-explorer"'), "BR-B app route missing from portfolio");
-assert.ok(html.includes("아직 다운로드 가능한 파일이 아닙니다"), "Documents must not falsely claim available downloads");
+for (const slug of ["resume", "personal-statement", "project-experience"]) {
+  assert.ok(new RegExp(`href="/documents/${slug}/?"`).test(html), `Missing document link: ${slug}`);
+  const documentPage = await readFile(new URL(`../out/documents/${slug}.html`, import.meta.url), "utf8");
+  assert.ok(documentPage.includes("Word 다운로드"), `Missing DOCX action: ${slug}`);
+  assert.ok(documentPage.includes(`/downloads/TRACE_${slug}.docx`), `Missing DOCX link: ${slug}`);
+  assert.ok(documentPage.includes("PDF로 저장"), `Missing PDF print option: ${slug}`);
+  const docx = await readFile(new URL(`../out/downloads/TRACE_${slug}.docx`, import.meta.url));
+  assert.ok(docx.length > 2000 && docx.subarray(0, 2).toString("latin1") === "PK", `Invalid DOCX: ${slug}`);
+}
 assert.ok(!html.includes("ritual-history-2026-10-21.json"), "Private source filename must not be rendered");
 for (const term of [
   "리추얼 기록 날짜",
