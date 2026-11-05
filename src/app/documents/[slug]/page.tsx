@@ -45,7 +45,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
             <p className="application-subtitle">{document.subtitle}</p>
             <p className="application-summary">{document.summary}</p>
           </div>
-          <DocumentActions title={document.title} />
+          <DocumentActions title={document.title} slug={document.slug} />
           <article id="application-document" className="application-paper">
             <div className="paper-header"><strong>TRACE.</strong><span>APPLICATION DOCUMENTS</span></div>
             <div className="paper-heading"><p>BACKEND · FULL-STACK DEVELOPMENT</p><h2>{document.title}</h2><span>{document.subtitle}</span></div>
