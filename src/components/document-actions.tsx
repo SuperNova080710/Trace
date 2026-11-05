@@ -1,6 +1,6 @@
 "use client";
 
-export function DocumentActions({ title }: { title: string }) {
+export function DocumentActions({ title, slug }: { title: string; slug: string }) {
   function downloadHtml() {
     const documentElement = document.querySelector<HTMLElement>("#application-document");
     if (!documentElement) return;
@@ -25,9 +25,10 @@ export function DocumentActions({ title }: { title: string }) {
   }
   return (
     <div className="application-actions" aria-label="문서 다운로드">
-      <button type="button" onClick={downloadHtml}>문서 파일 다운로드 (.html)</button>
+      <a className="application-word-download" href={`/downloads/TRACE_${slug}.docx`} download>Word 다운로드 (.docx)</a>
+      <button type="button" onClick={downloadHtml}>HTML 다운로드</button>
       <button type="button" className="primary" onClick={() => window.print()}>PDF로 저장 / 인쇄</button>
-      <p>PDF 저장을 누른 다음 인쇄 대상에서 ‘PDF로 저장’을 선택하세요. 첫 번째 버튼은 오프라인에서도 열 수 있는 HTML 문서 파일을 즉시 다운로드합니다.</p>
+      <p>PDF 저장을 누른 다음 인쇄 대상에서 ‘PDF로 저장’을 선택하세요. Word와 HTML 파일은 클릭 즉시 다운로드됩니다.</p>
     </div>
   );
 }
