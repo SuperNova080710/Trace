@@ -9,7 +9,8 @@
 .application-disclaimer{font-size:11px;color:#7084a0;line-height:1.8;margin-top:32px}
 .application-intro{padding-bottom:18px}.application-kicker{color:#2463bd;font-weight:800;font-size:11px;letter-spacing:.14em}.application-intro h1{font-size:clamp(36px,5vw,58px);letter-spacing:-.055em;line-height:1.3;margin:10px 0}
 .application-subtitle{font-weight:800;color:#38618c}.application-summary{color:#556c8a;margin-top:16px;font-size:14px}
-.application-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 32px}.application-actions button{background:white;color:#16417d;border:1px solid #bcd1ea;border-radius:9px;padding:12px 18px;cursor:pointer;font-size:13px;font-weight:800}
+.application-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 32px}.application-actions .application-word-download{display:inline-flex;align-items:center;background:#103b70;color:#fff;border:1px solid #103b70;border-radius:9px;padding:12px 18px;font-size:13px;font-weight:800;text-decoration:none}.application-actions .application-word-download:hover{background:#215b9b}
+.application-actions button{background:white;color:#16417d;border:1px solid #bcd1ea;border-radius:9px;padding:12px 18px;cursor:pointer;font-size:13px;font-weight:800}
 .application-actions button.primary{background:#2563eb;border-color:#2563eb;color:#fff}.application-actions button:hover{filter:brightness(.93)}
 .application-actions p{flex-basis:100%;font-size:11px;color:#637c9d;margin:2px 0 0}
 .application-paper{background:#fff;border:1px solid #dde7f4;border-radius:8px;box-shadow:0 22px 70px #16417d12;padding:clamp(26px,5vw,66px);overflow-wrap:anywhere}
