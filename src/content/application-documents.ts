@@ -3,7 +3,7 @@
  * narrative, earlier BR-A drafts, and selected Memorial Park records.
  * No raw ritual logs, personal photos, or unverified awards are published.
  */
-export type DocumentSection = { heading: string; paragraphs: readonly string[]; bullets?: readonly string[] };
+export type DocumentSection = { heading: string; paragraphs?: readonly string[]; bullets?: readonly string[] };
 export type ApplicationDocument = {
   slug: "resume" | "personal-statement" | "project-experience";
   title: string;
