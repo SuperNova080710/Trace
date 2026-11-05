@@ -18,7 +18,7 @@ assert.ok(html.includes("Native ECH Beacon Detection"), "T10 research missing");
 assert.ok(html.includes("ECH Beacon Explorer"), "BR-B featured application missing");
 assert.ok(html.includes('href="/ech-beacon-explorer"'), "BR-B app route missing from portfolio");
 for (const slug of ["resume", "personal-statement", "project-experience"]) {
-  assert.ok(html.includes(`href="/documents/${slug}/"`), `Missing document link: ${slug}`);
+  assert.ok(new RegExp(`href="/documents/${slug}/?"`).test(html), `Missing document link: ${slug}`);
   const documentPage = await readFile(new URL(`../out/documents/${slug}.html`, import.meta.url), "utf8");
   assert.ok(documentPage.includes("Word 다운로드"), `Missing DOCX action: ${slug}`);
   assert.ok(documentPage.includes(`/downloads/TRACE_${slug}.docx`), `Missing DOCX link: ${slug}`);
