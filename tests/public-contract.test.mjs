@@ -217,6 +217,6 @@ test("application document cards reuse pointer glow and lift only for fine point
   assert.match(css, /@media \(hover: hover\) and \(pointer: fine\)\s*\{\s*\.document-item\.spotlight-card:hover/);
   assert.match(css, /\.document-item\.spotlight-card:hover\s*\{\s*transform:\s*translateY\(-6px\)/);
   assert.match(css, /\.document-item\.spotlight-card:focus-within/);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.document-item\.spotlight-card:hover\s*\{\s*transform:\s*none/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.document-item\.spotlight-card\s*\{\s*transition:\s*none;\s*\}\s*\.document-item\.spotlight-card:hover\s*\{\s*transform:\s*none/);
   assert.match(css, /\.document-item\.spotlight-card::after\s*\{\s*display:\s*none/);
 });
