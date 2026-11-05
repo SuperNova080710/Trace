@@ -551,6 +551,7 @@ section[id] { scroll-margin-top: 85px; }
   box-shadow: 0 0 0 2px rgb(37 99 235 / 18%), 0 12px 27px rgb(26 73 138 / 9%);
 }
 @media (prefers-reduced-motion: reduce) {
+  .document-item.spotlight-card { transition: none; }
   .document-item.spotlight-card:hover { transform: none; }
   .document-item.spotlight-card::after { display: none; }
 }
