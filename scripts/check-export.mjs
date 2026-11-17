@@ -24,7 +24,7 @@ for (const term of [
   "대학생 논문경진대회 동상",
   "KCI 등재 학술지",
   'href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003279319"',
-  'href="https://journal.dcs.or.kr/_PR/view/?aidx=47684&amp;bidx=4303"',
+  'href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12528426"',
 ]) {
   assert.ok(featured.includes(term), "Missing from the first project: " + term);
 }

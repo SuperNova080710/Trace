@@ -1,6 +1,20 @@
 /* Trace UI — T01-inspired structure: midnight-blue hero, airy light sections.
  * An independent visual identity, not a copy of the T01 source.
  */
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("/fonts/NanumSquareRoundR.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("/fonts/NanumSquareRoundB.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
 :root {
   --navy: #07172e;
   --navy-light: #102748;
@@ -14,7 +28,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 98px; }
-body { margin: 0; font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+body { margin: 0; font-family: "NanumSquareRound", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif; }
 .trace-page { color: var(--text); background: var(--canvas); line-height: 1.7; word-break: keep-all; overflow-x: clip; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
@@ -51,7 +65,7 @@ section[id] { scroll-margin-top: 85px; }
 .eyebrow-line { display: inline-block; height: 2px; width: 24px; vertical-align: middle; margin-right: 9px; background: currentColor; }
 .hero-hello { margin: 28px 0 0; font-size: 14px; color: #c1d5ef; }
 .hero-hello strong { color: white; }
-.hero h1 { margin: 15px 0 20px; color: white; font-size: clamp(38px,4.2vw,59px); line-height: 1.38; font-weight: 800; letter-spacing: -.06em; }
+.hero h1 { margin: 15px 0 20px; color: white; font-size: clamp(38px,4.2vw,59px); line-height: 1.38; font-weight: 700; letter-spacing: -.04em; }
 .hero h1 span { display: block; color: #79c8ff; }
 .hero-description { margin: 0; color: #bdd0e9; font-size: 15px; line-height: 1.95; }
 .hero-note { color: #9db7d5; margin: 13px 0 0; font-size: 11px; line-height: 1.7; max-width: 520px; }
@@ -93,7 +107,7 @@ section[id] { scroll-margin-top: 85px; }
 .section-heading { display: grid; grid-template-columns: 110px 1fr; gap: 20px; align-items: start; margin-bottom: 41px; }
 .section-side { display: flex; align-items: center; gap: 15px; padding-top: 3px; color: #6d92c8; font-size: 12px; font-weight: 800; }
 .side-rule { width: 40px; height: 1px; background: #bbd3f2; }
-.section-heading h2 { margin: 13px 0 0; font-size: clamp(29px,3.1vw,43px); line-height: 1.43; letter-spacing: -.055em; font-weight: 800; }
+.section-heading h2 { margin: 13px 0 0; font-size: clamp(29px,3.1vw,43px); line-height: 1.43; letter-spacing: -.035em; font-weight: 700; }
 .section-heading h2 span { color: var(--blue); }
 .section-subtitle { color: var(--muted); font-size: 14px; line-height: 1.9; margin: 12px 0 0; }
 .about-grid { margin-left: 130px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, .78fr); gap: 48px; }

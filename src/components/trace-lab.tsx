@@ -502,7 +502,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             </div>
             <div className="research-links" aria-label="스마트 캠퍼스 게재 논문">
               <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003279319" target="_blank" rel="noopener noreferrer">KCI 논문 정보 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
-              <a href="https://journal.dcs.or.kr/_PR/view/?aidx=47684&amp;bidx=4303" target="_blank" rel="noopener noreferrer">학회 논문 페이지 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+              <a href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12528426" target="_blank" rel="noopener noreferrer">DBpia 논문 상세 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
             </div>
           </article>
           <article className="research-feature" id="project-t10" aria-labelledby="t10-title">
