@@ -40,11 +40,12 @@ test("app has Korean semantics and keyboard-operable accordion", async () => {
   assert.match(lab, /End/);
 });
 
-test("T01-like structure uses light sections with a restrained navy hero", async () => {
+test("project-led home presents the role, proof and résumé before the narrative", async () => {
   const css = await read("src/app/globals.css");
   const lab = await read("src/components/trace-lab.tsx");
   assert.match(css, /\.section-white\s*\{\s*background:\s*#fff/);
-  assert.match(css, /\.hero\s*\{[^}]*var\(--navy\)/s);
+  assert.match(lab, /백엔드 · 풀스택 개발자[\s\S]*이력서 보기[\s\S]*hero-proof/);
+  assert.ok(lab.indexOf('id="projects"') < lab.indexOf('id="about"'));
   assert.match(lab, /className="project-grid"/);
   assert.doesNotMatch(lab, /orbit-outer|stage-coordinate|PERSPECTIVE \/|SIGNAL: GROWTH/);
 });
@@ -141,7 +142,7 @@ test("issue #3 provides accessible mobile navigation and distinct future documen
   assert.match(lab, /\["documents", "지원 서류"\]/);
   assert.match(lab, /id="documents"/);
   assert.match(lab, /href="#contact"/);
-  assert.match(lab, /문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람/);
+  assert.match(lab, /백엔드 · 풀스택 개발자/);
   assert.match(lab, /href="\/documents\/resume\/"/);
   assert.match(lab, /href="\/documents\/personal-statement\/"/);
   assert.match(lab, /href="\/documents\/project-experience\/"/);

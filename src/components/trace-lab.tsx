@@ -39,12 +39,6 @@ const approaches = [
   },
 ] as const;
 
-const projects = [{
-  number: "02", type: "WEB DEVELOPMENT", title: "Full-stack Blog",
-  description: "Next.js 프런트엔드와 NestJS 백엔드를 나누어 구현한 웹 프로젝트입니다. 기능과 역할은 순차적으로 보강합니다.",
-  href: "https://github.com/SuperNova080710/Blog-frontend", link: "프런트엔드 코드 보기", tone: "web", monogram: "WEB",
-}] as const;
-
 export function TraceLab({ displayName, contactEmail, narrative, metrics }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -179,7 +173,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       const readingNodes = Array.from(main.querySelectorAll<HTMLElement>(
         ".about-main p, .story-chapter-body h3, .story-chapter-body p, " +
         ".story-closing p, .ability-summary h3, .section-heading h2, " +
-        ".project-content h3, .evidence-placeholder h3, .document-item strong, " +
+        ".project-row h3, .evidence-placeholder h3, .document-item strong, " +
         ".contact-inner h2"
       ));
       const visible = readingNodes
@@ -302,68 +296,97 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       </header>
 
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-glow" aria-hidden="true" />
         <div className="container hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow light"><span className="eyebrow-line" /> DEVELOPER · PERSONAL ARCHIVE</p>
-            <p className="hero-hello">안녕하세요. 개발자 <strong>{displayName}</strong>입니다.</p>
-            <h1 id="hero-title">문제의 흐름을 읽고,<span>과정으로 답을 찾습니다.</span></h1>
-            <p className="hero-identity"><span aria-hidden="true" className="identity-mark" />문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람</p>
-            <p className="hero-description">
-              기록을 통해 지나온 과정을 이해하고,<br className="desktop-break" />
-              검증 가능한 결과로 다음 단계를 준비합니다.
-            </p>
-            <p className="hero-note">이 페이지는 BR-A 포트폴리오 제작 중인 버전입니다. 자기소개 본문은 본인의 검토와 승인을 거쳐 반영했습니다.</p>
+            <p className="hero-role">백엔드 · 풀스택 개발자</p>
+            <h1 id="hero-title">{displayName}</h1>
+            <p className="hero-description">서버와 프런트엔드를 연결해 기능을 구현하고, 로그와 테스트로 문제의 원인을 좁혀 갑니다.</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#projects">프로젝트 살펴보기 <span aria-hidden="true">↗</span></a>
-              <a className="button button-outline" href="#about">소개 더 보기 <span aria-hidden="true">↓</span></a>
+              <a className="button button-primary" href="#projects" onClick={() => focusSection("projects")}>프로젝트 보기 <span aria-hidden="true">↓</span></a>
+              <Link className="button button-outline" href="/documents/resume/">이력서 보기 <span aria-hidden="true">→</span></Link>
             </div>
-            <div className="hero-tags" aria-label="핵심 주제">
-              <span>Root Cause</span><span>Documentation</span><span>Verification</span>
-            </div>
-            <a className="hero-email" href="#contact" aria-label="하단 연락처에서 이메일 주소 확인하기">
-              <span>EMAIL</span> {contactEmail} <span aria-hidden="true">↓</span>
-            </a>
           </div>
-
-          <div className="hero-visual" aria-label="문제의 관찰, 분석, 검증을 순서대로 정리한 과정 카드">
-            <div className="trace-panel spotlight-card" onPointerMove={onSpotlightMove}>
-              <div className="trace-panel-top">
-                <span className="window-dots" aria-hidden="true"><i /><i /><i /></span>
-                <span>trace / workflow</span>
-                <span className="panel-status">● ACTIVE</span>
-              </div>
-              <div className="trace-panel-body">
-                <div className="trace-panel-intro">How I approach problems</div>
-                <div className="trace-step">
-                  <span className="trace-step-index">01</span>
-                  <div><strong>Observe</strong><small>현상을 정확히 파악합니다.</small></div>
-                  <span className="step-check" aria-hidden="true">✓</span>
-                </div>
-                <div className="trace-connector" aria-hidden="true" />
-                <div className="trace-step">
-                  <span className="trace-step-index">02</span>
-                  <div><strong>Understand</strong><small>원인과 흐름을 분석합니다.</small></div>
-                  <span className="step-check" aria-hidden="true">✓</span>
-                </div>
-                <div className="trace-connector" aria-hidden="true" />
-                <div className="trace-step">
-                  <span className="trace-step-index">03</span>
-                  <div><strong>Verify</strong><small>검증하고 기록으로 남깁니다.</small></div>
-                  <span className="step-check" aria-hidden="true">✓</span>
-                </div>
-              </div>
-              <div className="trace-panel-bottom"><span>TRACE / WORKFLOW</span><span>BUILD WITH EVIDENCE</span></div>
+          <aside className="hero-proof" aria-labelledby="hero-proof-title">
+            <p className="hero-role">대표 프로젝트 · 탐지 실험</p>
+            <h2 id="hero-proof-title">{t10Research.title}</h2>
+            <p>암호화된 연결에서 시간 간격만 사용할 때와 여러 특징을 함께 사용할 때의 탐지 결과를 비교했습니다.</p>
+            <div className="hero-result">
+              <strong>{t10Research.timingOnly.fp} → {t10Research.multiFeature.fp}건</strong>
+              <span>합성 Held-out {t10Research.heldout.trials}건에서 비교한 정상 연결 오탐</span>
             </div>
+            <a className="hero-proof-link" href="#project-t10">실험 설계와 결과 보기 <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section className="section section-white" id="projects" aria-labelledby="projects-title">
+        <div className="container">
+          <div className="section-heading">
+            <div className="section-side"><span>01</span><span className="side-rule" /></div>
+            <div>
+              <p className="eyebrow">SELECTED WORK</p>
+              <h2 id="projects-title" tabIndex={-1}>결과를 확인할 수 있는 <span>프로젝트</span></h2>
+              <p className="section-subtitle">T10의 연구 원고·평가 원본·재현 데이터를 공개 근거와 함께 확인할 수 있습니다.</p>
+            </div>
+          </div>
+          <article className="research-feature" id="project-t10" aria-labelledby="t10-title">
+            <div className="research-feature-top">
+              <p className="research-eyebrow">01 / FEATURED RESEARCH · ALEPH T10 · main-v1</p>
+              <h3 id="t10-title">{t10Research.title}</h3>
+              <p>{t10Research.paperTitle}</p>
+              <p>Native ECH 환경의 합성 HTTPS Beacon 탐지에서 Timing-only와 Multi-feature 탐지기를 비교한 연구 원고와 실험 결과입니다.</p>
+            </div>
+            <div className="research-numbers" aria-label="T10 평가 결과">
+              <div><span>전체 합성 실험</span><strong>{t10Research.totalTrials}<small> Trials</small></strong><small>Beacon 100 · Normal 100</small></div>
+              <div><span>Held-out 평가</span><strong>{t10Research.heldout.trials}<small> Trials</small></strong><small>Beacon 50 · Normal 60</small></div>
+              <div><span>오탐 · Timing → Multi</span><strong>{t10Research.timingOnly.fp}<small> → </small>{t10Research.multiFeature.fp}<small>건</small></strong><small>동일 정상 표본 기준</small></div>
+              <div><span>F1 · Timing → Multi</span><strong className="research-f1">{detectorMetrics(t10Research.timingOnly).f1.toFixed(4)}<small> → </small>{detectorMetrics(t10Research.multiFeature).f1.toFixed(4)}</strong><small>두 모델 Recall 1.0000</small></div>
+            </div>
+            <div className="research-detail">
+              <div>
+                <h4>문제와 검증</h4>
+                <p><b>상황</b> ECH 환경에서 비콘의 연결 간격에 지터가 발생할 때 탐지 성능을 비교할 필요가 있었습니다.</p>
+                <p><b>실험 설계</b> Native ECH 테스트베드와 200개 Trial을 구성하고, 사전 고정된 Calibration/Held-out 분할로 두 탐지기를 평가했습니다.</p>
+                <p><b>결과</b> Held-out 110개에서 Multi-feature는 정상 오탐 10건을 7건으로 줄였습니다. 두 모델 모두 Recall 1.0000으로, 고지터 재현율 우위 가설은 지지되지 않았습니다.</p>
+                <p className="research-crosslink">연결 역량: <a href="#approach">원인 분석과 검증</a> · <a href="#about">성장 서사</a></p>
+              </div>
+              <aside aria-label="연구 결과 해석상의 한계">
+                <h4>해석의 한계</h4>
+                <p>단일 통제 환경의 합성 트래픽 실험입니다. 실제 악성 트래픽 및 운영망 일반화 성능을 검증한 결과가 아닙니다. Multi-feature는 추론 비용도 더 높았습니다.</p>
+              </aside>
+            </div>
+            <div className="research-links" aria-label="T10 공개 근거">
+              <a href={t10Research.sources.manuscript} target="_blank" rel="noopener noreferrer">연구 원고 <span aria-hidden="true">↗</span></a>
+              <a href={t10Research.sources.evaluation} target="_blank" rel="noopener noreferrer">평가 JSON <span aria-hidden="true">↗</span></a>
+              <a href={t10Research.sources.release} target="_blank" rel="noopener noreferrer">PCAP 200개 Release <span aria-hidden="true">↗</span></a>
+              <a href={t10Research.sources.log} target="_blank" rel="noopener noreferrer">연구 기록 <span aria-hidden="true">↗</span></a>
+            </div>
+            <p className="research-footnote">T10은 별도의 연구 원고이며 이전 Digital Twin 논문과 다릅니다. 학술지 게재 실적으로 표시하지 않습니다.</p>
+          </article>
+          <div className="project-grid">
+            <article className="project-row">
+              <h3>ECH Beacon Explorer</h3>
+              <div>
+                <p>T10의 합성 실험 110건을 탐색하고 두 탐지기의 판정, 오탐, 추론 비용을 비교하는 연구 앱입니다.</p>
+                <a href="/ech-beacon-explorer">Explorer 열기 <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article className="project-row">
+              <h3>Full-stack Blog</h3>
+              <div>
+                <p>Next.js 프런트엔드와 NestJS 백엔드를 나누어 구현한 웹 프로젝트입니다.</p>
+                <a href="https://github.com/SuperNova080710/Blog-frontend" target="_blank" rel="noopener noreferrer">프런트엔드 코드 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+                <a href="https://github.com/SuperNova080710/Blog-backend" target="_blank" rel="noopener noreferrer">백엔드 코드 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+              </div>
+            </article>
           </div>
         </div>
-        <div className="container hero-bottom"><span>작은 과정이 모여 한 사람의 기록이 됩니다.</span><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
       </section>
 
       <section className="section section-white" id="about" aria-labelledby="about-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>01</span><span className="side-rule" /></div>
+            <div className="section-side"><span>02</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">ABOUT ME</p>
               <h2 id="about-title" tabIndex={-1}>제가 중요하게 생각하는 것은<br /><span>문제를 풀어내는 과정입니다.</span></h2>
@@ -448,7 +471,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       <section className="section section-tint" id="approach" aria-labelledby="approach-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>02</span><span className="side-rule" /></div>
+            <div className="section-side"><span>03</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">HOW I WORK</p>
               <h2 id="approach-title" tabIndex={-1}>제가 일하는 <span>세 가지 방식</span></h2>
@@ -491,84 +514,6 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 </article>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-white" id="projects" aria-labelledby="projects-title">
-        <div className="container">
-          <div className="section-heading">
-            <div className="section-side"><span>03</span><span className="side-rule" /></div>
-            <div>
-              <p className="eyebrow">SELECTED WORK</p>
-              <h2 id="projects-title" tabIndex={-1}>결과를 확인할 수 있는 <span>프로젝트</span></h2>
-              <p className="section-subtitle">T10의 연구 원고·평가 원본·재현 데이터를 공개 근거와 함께 확인할 수 있습니다.</p>
-            </div>
-          </div>
-          <article className="research-feature" id="project-t10" aria-labelledby="t10-title">
-            <div className="research-feature-top">
-              <p className="research-eyebrow">01 / FEATURED RESEARCH · ALEPH T10 · main-v1</p>
-              <h3 id="t10-title">{t10Research.title}</h3>
-              <p>{t10Research.paperTitle}</p>
-              <p>Native ECH 환경의 합성 HTTPS Beacon 탐지에서 Timing-only와 Multi-feature 탐지기를 비교한 연구 원고와 실험 결과입니다.</p>
-            </div>
-            <div className="research-numbers" aria-label="T10 평가 결과">
-              <div><span>전체 합성 실험</span><strong>{t10Research.totalTrials}<small> Trials</small></strong><small>Beacon 100 · Normal 100</small></div>
-              <div><span>Held-out 평가</span><strong>{t10Research.heldout.trials}<small> Trials</small></strong><small>Beacon 50 · Normal 60</small></div>
-              <div><span>오탐 · Timing → Multi</span><strong>{t10Research.timingOnly.fp}<small> → </small>{t10Research.multiFeature.fp}<small>건</small></strong><small>동일 정상 표본 기준</small></div>
-              <div><span>F1 · Timing → Multi</span><strong className="research-f1">{detectorMetrics(t10Research.timingOnly).f1.toFixed(4)}<small> → </small>{detectorMetrics(t10Research.multiFeature).f1.toFixed(4)}</strong><small>두 모델 Recall 1.0000</small></div>
-            </div>
-            <div className="research-detail">
-              <div>
-                <h4>상황 · 행동 · 결과</h4>
-                <p><b>상황</b> ECH 환경에서 비콘의 연결 간격에 지터가 발생할 때 탐지 성능을 비교할 필요가 있었습니다.</p>
-                <p><b>행동</b> Native ECH 테스트베드와 200개 Trial을 구성하고, 사전 고정된 Calibration/Held-out 분할로 두 탐지기를 평가했습니다.</p>
-                <p><b>결과</b> Held-out 110개에서 Multi-feature는 정상 오탐 10건을 7건으로 줄였습니다. 두 모델 모두 Recall 1.0000으로, 고지터 재현율 우위 가설은 지지되지 않았습니다.</p>
-                <p className="research-crosslink">연결 역량: <a href="#approach">원인 분석과 검증</a> · <a href="#about">성장 서사</a></p>
-              </div>
-              <aside aria-label="연구 결과 해석상의 한계">
-                <h4>해석의 한계</h4>
-                <p>단일 통제 환경의 합성 트래픽 실험입니다. 실제 악성 트래픽 및 운영망 일반화 성능을 검증한 결과가 아닙니다. Multi-feature는 추론 비용도 더 높았습니다.</p>
-              </aside>
-            </div>
-            <div className="research-links" aria-label="T10 공개 근거">
-              <a href={t10Research.sources.manuscript} target="_blank" rel="noopener noreferrer">연구 원고 <span aria-hidden="true">↗</span></a>
-              <a href={t10Research.sources.evaluation} target="_blank" rel="noopener noreferrer">평가 JSON <span aria-hidden="true">↗</span></a>
-              <a href={t10Research.sources.release} target="_blank" rel="noopener noreferrer">PCAP 200개 Release <span aria-hidden="true">↗</span></a>
-              <a href={t10Research.sources.log} target="_blank" rel="noopener noreferrer">연구 기록 <span aria-hidden="true">↗</span></a>
-            </div>
-            <p className="research-footnote">T10은 별도의 연구 원고이며 이전 Digital Twin 논문과 다릅니다. 학술지 게재 실적으로 표시하지 않습니다.</p>
-          </article>
-          <div className="project-grid">
-            {projects.map((project) => (
-              <article className="project-card spotlight-card" key={project.number} onPointerMove={onSpotlightMove}>
-                <div className={"project-art project-art-" + project.tone}>
-                  <span className="art-number">{project.number} / {project.type}</span>
-                  <span className="art-monogram" aria-hidden="true">{project.monogram}</span>
-                  <span className="art-corner" aria-hidden="true">↗</span>
-                </div>
-                <div className="project-content">
-                  <span className="project-category">{project.type}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <a href={project.href} target="_blank" rel="noopener noreferrer">
-                    {project.link} <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span>
-                  </a>
-                </div>
-              </article>
-            ))}
-            <article className="project-card project-future spotlight-card" onPointerMove={onSpotlightMove}>
-              <div className="project-art project-art-future">
-                <span className="art-number">03 / BR-B · RESEARCH APPLICATION</span>
-                <span className="art-monogram" aria-hidden="true">ECH</span>
-              </div>
-              <div className="project-content">
-                <span className="project-category">INTERACTIVE RESEARCH LAB</span>
-                <h3>ECH Beacon Explorer</h3>
-                <p>T10 논문을 바탕으로 보안 학습자가 합성 Held-out 110건의 판정을 직접 비교하고 오탐 감소와 추론 비용의 균형을 살펴보는 공개 앱입니다.</p>
-                <a href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">↗</span></a>
-              </div>
-            </article>
           </div>
         </div>
       </section>
@@ -662,7 +607,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       <footer className="site-footer">
         <div className="container footer-inner">
           <a href="#top" className="footer-brand">TRACE<span>.</span></a>
-          <p>오리온의 개발 기록 · 제작 중</p>
+          <p>오리온의 개발 기록</p>
           <a href="#top">맨 위로 ↑</a>
         </div>
       </footer>
