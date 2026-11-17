@@ -48,6 +48,7 @@ const projects = [{
 export function TraceLab({ displayName, contactEmail, narrative, metrics }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentSection, setCurrentSection] = useState("");
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const storyTimelineRef = useRef<HTMLDivElement>(null);
@@ -126,6 +127,20 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
     }
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    function syncLocation() {
+      setCurrentSection(window.location.hash.slice(1));
+    }
+    syncLocation();
+    window.addEventListener("hashchange", syncLocation);
+    return () => window.removeEventListener("hashchange", syncLocation);
+  }, []);
+
+  function focusSection(id: string) {
+    setMobileMenuOpen(false);
+    document.getElementById(`${id}-title`)?.focus({ preventScroll: true });
+  }
 
   // Close the mobile menu on viewport changes, without altering desktop navigation.
   useEffect(() => {
@@ -268,15 +283,20 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               }
             }}
           >
-            <a href="#about" onClick={() => setMobileMenuOpen(false)}>소개</a>
-            <a href="#approach" onClick={() => setMobileMenuOpen(false)}>작업 방식</a>
-            <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
-            <a href="#evidence" onClick={() => setMobileMenuOpen(false)}>기록</a>
-            <a href="#documents" onClick={() => setMobileMenuOpen(false)}>지원 서류</a>
-            <a href="#contact" className="mobile-contact-link" onClick={() => setMobileMenuOpen(false)}>연락하기 <span aria-hidden="true">↓</span></a>
+            {[
+              ["projects", "프로젝트"],
+              ["documents", "지원 서류"],
+              ["about", "소개"],
+              ["approach", "작업 방식"],
+              ["evidence", "기록"],
+            ].map(([id, label]) => (
+              <a key={id} href={`#${id}`} aria-current={currentSection === id ? "location" : undefined}
+                 onClick={() => focusSection(id)}>{label}</a>
+            ))}
+            <a href="#contact" className="mobile-contact-link" onClick={() => focusSection("contact")}>연락하기</a>
           </nav>
           <a className="header-contact" href="#contact">
-            Contact <span aria-hidden="true">↓</span>
+            연락하기 <span aria-hidden="true">↓</span>
           </a>
         </div>
       </header>
@@ -346,7 +366,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div className="section-side"><span>01</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">ABOUT ME</p>
-              <h2 id="about-title">제가 중요하게 생각하는 것은<br /><span>문제를 풀어내는 과정입니다.</span></h2>
+              <h2 id="about-title" tabIndex={-1}>제가 중요하게 생각하는 것은<br /><span>문제를 풀어내는 과정입니다.</span></h2>
             </div>
           </div>
           <div className="about-grid">
@@ -431,7 +451,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div className="section-side"><span>02</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">HOW I WORK</p>
-              <h2 id="approach-title">제가 일하는 <span>세 가지 방식</span></h2>
+              <h2 id="approach-title" tabIndex={-1}>제가 일하는 <span>세 가지 방식</span></h2>
               <p className="section-subtitle">각 항목을 선택하면 구체적인 접근 방식을 확인할 수 있습니다.</p>
             </div>
           </div>
@@ -481,7 +501,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div className="section-side"><span>03</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">SELECTED WORK</p>
-              <h2 id="projects-title">결과를 확인할 수 있는 <span>프로젝트</span></h2>
+              <h2 id="projects-title" tabIndex={-1}>결과를 확인할 수 있는 <span>프로젝트</span></h2>
               <p className="section-subtitle">T10의 연구 원고·평가 원본·재현 데이터를 공개 근거와 함께 확인할 수 있습니다.</p>
             </div>
           </div>
@@ -559,7 +579,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div className="section-side"><span>04</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">GROWTH & EVIDENCE</p>
-              <h2 id="evidence-title">기록은 숫자가 아니라 <span>근거와 함께</span></h2>
+              <h2 id="evidence-title" tabIndex={-1}>기록은 숫자가 아니라 <span>근거와 함께</span></h2>
               <p className="section-subtitle">2026년 10월 21일 기준으로 검증·공개 승인한 과거 집계입니다. 이후 추가된 기록이나 현재 진행 상황은 반영하지 않았습니다.</p>
             </div>
           </div>
@@ -617,7 +637,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div className="section-side"><span>05</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
-              <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
+              <h2 id="documents-title" tabIndex={-1}>지원에 필요한 <span>세 가지 문서</span></h2>
               <p className="section-subtitle">메모리얼 파크의 경험 기록과 검증된 프로젝트 성과를 바탕으로 작성한 공개용 지원 문서입니다. 각 문서를 바로 읽거나 파일로 내려받고, PDF로 저장할 수 있습니다.</p>
             </div>
           </div>
@@ -633,7 +653,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
         <div className="container contact-inner">
           <div>
             <p className="eyebrow light">CONTACT</p>
-            <h2 id="contact-title">함께 이야기할 준비가 되어 있습니다.</h2>
+            <h2 id="contact-title" tabIndex={-1}>함께 이야기할 준비가 되어 있습니다.</h2>
             <p>프로젝트, 협업 또는 궁금한 점이 있다면 편하게 연락해 주세요.</p>
           </div>
           <a className="contact-mail" href={"mailto:" + contactEmail}>{contactEmail} <span aria-hidden="true">↗</span></a>

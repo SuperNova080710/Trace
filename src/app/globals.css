@@ -13,13 +13,13 @@
   --ease: cubic-bezier(.22, 1, .36, 1);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 98px; }
+html { scroll-behavior: smooth; scroll-padding-top: 78px; }
 body { margin: 0; font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
 .trace-page { color: var(--text); background: var(--canvas); line-height: 1.7; word-break: keep-all; overflow-x: clip; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 a:focus-visible, button:focus-visible { outline: 3px solid #29a8ee; outline-offset: 4px; }
-section[id] { scroll-margin-top: 85px; }
+article[id] { scroll-margin-top: 12px; }
 .container { width: min(100% - 68px, 1160px); margin-inline: auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .skip-link { position: fixed; z-index: 200; left: 16px; top: 10px; transform: translateY(-180%); background: var(--navy); color: white; padding: 10px 16px; border-radius: 8px; }
@@ -36,7 +36,7 @@ section[id] { scroll-margin-top: 85px; }
 .main-nav a { font-size: 13px; color: #425978; font-weight: 700; padding: 24px 0; position: relative; white-space: nowrap; }
 .main-nav a:after { content: ""; position: absolute; bottom: 16px; left: 0; right: 0; height: 2px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease); }
 .main-nav a:hover { color: var(--blue); }
-.main-nav a:hover:after, .main-nav a:focus-visible:after { transform: scaleX(1); }
+.main-nav a:hover:after, .main-nav a:focus-visible:after, .main-nav a[aria-current]::after { transform: scaleX(1); }
 .header-contact { display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; border: 1px solid #cbdcf3; border-radius: 9px; font-size: 12px; font-weight: 800; padding: 10px 15px; transition: background .2s ease, color .2s ease; }
 .header-contact:hover { background: var(--blue); color: white; }
 .header-contact span { color: var(--blue); }
@@ -554,4 +554,9 @@ section[id] { scroll-margin-top: 85px; }
   .document-item.spotlight-card { transition: none; }
   .document-item.spotlight-card:hover { transform: none; }
   .document-item.spotlight-card::after { display: none; }
+}
+
+.main-nav a[aria-current] { color: #174394; }
+@media (max-width: 760px) {
+  .main-nav a[aria-current] { background: #eff5ff; text-decoration: underline; text-underline-offset: .3em; }
 }

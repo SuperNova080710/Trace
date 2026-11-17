@@ -138,7 +138,7 @@ test("issue #3 provides accessible mobile navigation and distinct future documen
   assert.match(lab, /aria-expanded=\{mobileMenuOpen\}/);
   assert.match(lab, /aria-controls="trace-main-nav"/);
   assert.match(lab, /event\.key === "Escape"/);
-  assert.match(lab, /href="#documents"/);
+  assert.match(lab, /\["documents", "지원 서류"\]/);
   assert.match(lab, /id="documents"/);
   assert.match(lab, /href="#contact"/);
   assert.match(lab, /문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람/);
