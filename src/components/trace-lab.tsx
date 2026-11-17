@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
-import Link from "next/link";
-import type { ApprovedNarrative, EvidenceMetric } from "@/content/public-profile";
+import { BrandMark } from "@/components/brand-mark";
+import { RouteLink } from "@/components/route-link";
+import type { ApprovedNarrative } from "@/content/public-profile";
 import { detectorMetrics, t10Research } from "@/content/research-evidence";
 
 type Props = {
   displayName: string;
   contactEmail: string;
   narrative: ApprovedNarrative[];
-  metrics: EvidenceMetric[];
 };
 
 const approaches = [
@@ -45,7 +45,7 @@ const projects = [{
   href: "https://github.com/SuperNova080710/Blog-frontend", link: "프런트엔드 코드 보기", tone: "web", monogram: "WEB",
 }] as const;
 
-export function TraceLab({ displayName, contactEmail, narrative, metrics }: Props) {
+export function TraceLab({ displayName, contactEmail, narrative }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -164,7 +164,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       const readingNodes = Array.from(main.querySelectorAll<HTMLElement>(
         ".about-main p, .story-chapter-body h3, .story-chapter-body p, " +
         ".story-closing p, .ability-summary h3, .section-heading h2, " +
-        ".project-content h3, .evidence-placeholder h3, .document-item strong, " +
+        ".research-feature h3, .project-content h3, .document-item strong, " +
         ".contact-inner h2"
       ));
       const visible = readingNodes
@@ -243,7 +243,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#top" aria-label="Trace 맨 위로">
-            <span className="brand-mark">T<span>.</span></span>
+            <BrandMark />
             <span className="brand-name">TRACE <small>DEVELOPER PORTFOLIO</small></span>
           </a>
           <button
@@ -271,7 +271,6 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <a href="#about" onClick={() => setMobileMenuOpen(false)}>소개</a>
             <a href="#approach" onClick={() => setMobileMenuOpen(false)}>작업 방식</a>
             <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
-            <a href="#evidence" onClick={() => setMobileMenuOpen(false)}>기록</a>
             <a href="#documents" onClick={() => setMobileMenuOpen(false)}>지원 서류</a>
             <a href="#contact" className="mobile-contact-link" onClick={() => setMobileMenuOpen(false)}>연락하기 <span aria-hidden="true">↓</span></a>
           </nav>
@@ -293,7 +292,6 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               기록을 통해 지나온 과정을 이해하고,<br className="desktop-break" />
               검증 가능한 결과로 다음 단계를 준비합니다.
             </p>
-            <p className="hero-note">이 페이지는 BR-A 포트폴리오 제작 중인 버전입니다. 자기소개 본문은 본인의 검토와 승인을 거쳐 반영했습니다.</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">프로젝트 살펴보기 <span aria-hidden="true">↗</span></a>
               <a className="button button-outline" href="#about">소개 더 보기 <span aria-hidden="true">↓</span></a>
@@ -419,7 +417,6 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                   <small>근거: 2026-09-17 · 2026-09-16</small>
                 </article>
               </div>
-              <p className="story-source-note">본문은 본인이 승인한 자기소개를 바탕으로 작성했습니다. 소설 T11의 허구화된 장면이나 미확인 수치는 사실처럼 사용하지 않았습니다.</p>
             </div>
           </div>
         </div>
@@ -482,9 +479,31 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">SELECTED WORK</p>
               <h2 id="projects-title">결과를 확인할 수 있는 <span>프로젝트</span></h2>
-              <p className="section-subtitle">T10의 연구 원고·평가 원본·재현 데이터를 공개 근거와 함께 확인할 수 있습니다.</p>
             </div>
           </div>
+          <article className="research-feature" id="project-smart-campus" aria-labelledby="smart-campus-title">
+            <div className="research-feature-top">
+              <p className="research-eyebrow">대표 프로젝트 · 캡스톤디자인</p>
+              <h3 id="smart-campus-title">디지털 트윈 및 메타버스 융합형 스마트 캠퍼스</h3>
+              <p>현실 장치의 상태를 Unreal Engine 가상 캠퍼스에서 확인하고, 가상 공간에서도 실제 장치를 제어할 수 있는 양방향 시스템을 구현했습니다.</p>
+            </div>
+            <div className="research-detail">
+              <div>
+                <h4>담당한 구현</h4>
+                <p>ESP32 장치, MQTT 메시지, 서버와 Unreal Engine 사이의 연동을 담당했습니다. 메시지가 늦게 도착하거나 누락됐을 때는 장치부터 가상 공간까지 구간별로 확인해 문제가 생긴 지점을 좁혔습니다.</p>
+              </div>
+              <div>
+                <h4>캡스톤·수상·게재</h4>
+                <p><b>2024</b> 캡스톤디자인에서 시스템 구현 및 시연</p>
+                <p><b><time dateTime="2025-07-05">2025.07</time></b> 한국디지털콘텐츠학회 하계종합학술대회 대학생 논문경진대회 동상</p>
+                <p><b><time dateTime="2025-12">2025.12</time></b> KCI 등재 학술지 《디지털콘텐츠학회논문지》 제26권 제12호 게재</p>
+              </div>
+            </div>
+            <div className="research-links" aria-label="스마트 캠퍼스 게재 논문">
+              <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003279319" target="_blank" rel="noopener noreferrer">KCI 논문 정보 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+              <a href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12528426" target="_blank" rel="noopener noreferrer">DBpia 논문 상세 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+            </div>
+          </article>
           <article className="research-feature" id="project-t10" aria-labelledby="t10-title">
             <div className="research-feature-top">
               <p className="research-eyebrow">01 / FEATURED RESEARCH · ALEPH T10 · main-v1</p>
@@ -537,7 +556,8 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 </div>
               </article>
             ))}
-            <article className="project-card project-future spotlight-card" onPointerMove={onSpotlightMove}>
+            <article className="project-card project-future spotlight-card trace-origin" id="research-app"
+                     tabIndex={-1} onPointerMove={onSpotlightMove}>
               <div className="project-art project-art-future">
                 <span className="art-number">03 / BR-B · RESEARCH APPLICATION</span>
                 <span className="art-monogram" aria-hidden="true">ECH</span>
@@ -546,67 +566,9 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
                 <span className="project-category">INTERACTIVE RESEARCH LAB</span>
                 <h3>ECH Beacon Explorer</h3>
                 <p>T10 논문을 바탕으로 보안 학습자가 합성 Held-out 110건의 판정을 직접 비교하고 오탐 감소와 추론 비용의 균형을 살펴보는 공개 앱입니다.</p>
-                <a href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">↗</span></a>
+                <RouteLink href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
               </div>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-tint" id="evidence" aria-labelledby="evidence-title">
-        <div className="container">
-          <div className="section-heading">
-            <div className="section-side"><span>04</span><span className="side-rule" /></div>
-            <div>
-              <p className="eyebrow">GROWTH & EVIDENCE</p>
-              <h2 id="evidence-title">기록은 숫자가 아니라 <span>근거와 함께</span></h2>
-              <p className="section-subtitle">2026년 10월 21일 기준으로 검증·공개 승인한 과거 집계입니다. 이후 추가된 기록이나 현재 진행 상황은 반영하지 않았습니다.</p>
-            </div>
-          </div>
-          {metrics.length > 0 ? (
-            <div className="metrics-grid">
-              {metrics.map((metric) => (
-                <article className="metric-card" key={metric.id}>
-                  <p>{metric.label}</p>
-                  <strong>{metric.value.toLocaleString("ko-KR")} <small>{metric.unit}</small></strong>
-                  <span>{metric.from === metric.to ? "자료 기준일: " + metric.to : "집계 기간: " + metric.from + " ~ " + metric.to}</span>
-                  <dl className="metric-facts">
-                    <div><dt>자료 유형</dt><dd>{({
-                      ritual: "개인 리추얼 기록",
-                      "official-attendance-snapshot": "공식 출석 요약",
-                      "official-challenge-snapshot": "공식 과제 승인 요약",
-                    } as const)[metric.sourceKind]}</dd></div>
-                    <div><dt>기준일</dt><dd>{metric.asOf}</dd></div>
-                    <div><dt>출처</dt><dd>{metric.source}</dd></div>
-                    <div><dt>정의</dt><dd>{metric.definition}</dd></div>
-                    <div><dt>산식</dt><dd>{metric.calculation}</dd></div>
-                    <div><dt>분모</dt><dd>{metric.denominator === null ? "원본에 별도 분모 없음" : metric.denominator.toLocaleString("ko-KR")}</dd></div>
-                  </dl>
-                  {metric.provisional && (
-                    <p className="metric-provisional">잠정 수치 · 공식 확정 또는 승인 상태 변경 시 재검증 필요</p>
-                  )}
-                  {metric.limitations.length > 0 && (
-                    <ul className="metric-limitations" aria-label="해석상의 한계">
-                      {metric.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}
-                    </ul>
-                  )}
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="evidence-placeholder">
-              <span className="evidence-icon" aria-hidden="true">↗</span>
-              <div>
-                <h3>검증한 기록만 보여드리겠습니다.</h3>
-                <p>리추얼 기록과 공식 출석·과제 수치는 서로 다른 출처와 산식으로 검증했습니다. 다만 본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며, 확정 전 출석은 잠정값으로 다룹니다.</p>
-              </div>
-              <span className="evidence-badge">DATA REVIEW</span>
-            </div>
-          )}
-          <div className="evidence-links">
-            <span>공개 활동 근거</span>
-            <a href="https://github.com/SuperNova080710/ech-beacon-detection" target="_blank" rel="noopener noreferrer">T10 연구 기록 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
-            <a href="https://github.com/SuperNova080710/Blog-backend" target="_blank" rel="noopener noreferrer">Backend 코드 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
           </div>
         </div>
       </section>
@@ -614,7 +576,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       <section className="section section-white documents-section" id="documents" aria-labelledby="documents-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>05</span><span className="side-rule" /></div>
+            <div className="section-side"><span>04</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
@@ -622,9 +584,21 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             </div>
           </div>
           <div className="document-list" aria-label="지원 서류 열람 및 다운로드">
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">01</span><strong>이력서</strong><Link className="document-download" href="/documents/resume/">열람·다운로드 ↗</Link></div>
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">02</span><strong>자기소개서</strong><Link className="document-download" href="/documents/personal-statement/">열람·다운로드 ↗</Link></div>
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><Link className="document-download" href="/documents/project-experience/">열람·다운로드 ↗</Link></div>
+            <div className="document-item spotlight-card trace-origin" id="document-resume" tabIndex={-1} onPointerMove={onSpotlightMove}>
+              <span className="document-number">01</span>
+              <strong id="document-resume-title">이력서</strong>
+              <RouteLink className="document-download" href="/documents/resume/" aria-describedby="document-resume-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+            </div>
+            <div className="document-item spotlight-card trace-origin" id="document-personal-statement" tabIndex={-1} onPointerMove={onSpotlightMove}>
+              <span className="document-number">02</span>
+              <strong id="document-personal-statement-title">자기소개서</strong>
+              <RouteLink className="document-download" href="/documents/personal-statement/" aria-describedby="document-personal-statement-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+            </div>
+            <div className="document-item spotlight-card trace-origin" id="document-project-experience" tabIndex={-1} onPointerMove={onSpotlightMove}>
+              <span className="document-number">03</span>
+              <strong id="document-project-experience-title">프로젝트 경험기술서</strong>
+              <RouteLink className="document-download" href="/documents/project-experience/" aria-describedby="document-project-experience-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+            </div>
           </div>
         </div>
       </section>

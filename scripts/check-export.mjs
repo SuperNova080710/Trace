@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const html = await readFile(new URL("../out/index.html", import.meta.url), "utf8");
-const requiredTargets = ["main-content", "about", "approach", "projects", "evidence", "documents", "contact"];
+const requiredTargets = ["main-content", "about", "approach", "projects", "documents", "contact"];
 
 assert.match(html, /<html[^>]+lang="ko"/);
 for (const id of requiredTargets) {
@@ -15,11 +15,28 @@ assert.ok(html.includes("문제의 원인을 확인하고 해결 과정을 기�
 assert.ok(html.includes("모르는 문제가 생기면 제가 아는 지식 내에서 차근차근 찾아보는 사람입니다"), "Approved narrative opening missing");
 assert.ok(html.includes("프로젝트 경험기술서"), "Documents status section missing");
 assert.ok(html.includes("Native ECH Beacon Detection"), "T10 research missing");
+const projects = html.match(/<section\b[^>]*\bid="projects"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? "";
+const featured = projects.match(/<article\b[^>]*>[\s\S]*?<\/article>/)?.[0] ?? "";
+for (const term of [
+  'id="project-smart-campus"',
+  "디지털 트윈 및 메타버스 융합형 스마트 캠퍼스",
+  "캡스톤디자인에서 시스템 구현 및 시연",
+  "대학생 논문경진대회 동상",
+  "KCI 등재 학술지",
+  'href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003279319"',
+  'href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12528426"',
+]) {
+  assert.ok(featured.includes(term), "Missing from the first project: " + term);
+}
 assert.ok(html.includes("ECH Beacon Explorer"), "BR-B featured application missing");
 assert.ok(html.includes('href="/ech-beacon-explorer"'), "BR-B app route missing from portfolio");
+assert.ok(html.includes('id="research-app"'), "Research app return anchor missing");
+assert.doesNotMatch(html, /class="(?:hero-note|story-source-note)"/);
 for (const slug of ["resume", "personal-statement", "project-experience"]) {
   assert.ok(new RegExp(`href="/documents/${slug}/?"`).test(html), `Missing document link: ${slug}`);
+  assert.ok(html.includes(`id="document-${slug}"`), `Missing document return anchor: ${slug}`);
   const documentPage = await readFile(new URL(`../out/documents/${slug}.html`, import.meta.url), "utf8");
+  assert.ok(documentPage.includes(`href="/#document-${slug}"`), `Document must link back to its card: ${slug}`);
   assert.ok(documentPage.includes("Word 다운로드"), `Missing DOCX action: ${slug}`);
   assert.ok(documentPage.includes(`/downloads/TRACE_${slug}.docx`), `Missing DOCX link: ${slug}`);
   assert.ok(documentPage.includes("PDF로 저장"), `Missing PDF print option: ${slug}`);
@@ -31,14 +48,14 @@ for (const term of [
   "리추얼 기록 날짜",
   "공식 출석일",
   "핵심 과제 마스터 승인",
-  "2026-10-21",
   "리추얼 원본에 날짜별 기록",
   "2일은 미확정 상태",
   "마지막 A·B 과제는 이 수치에 포함하지 않습니다",
 ]) {
-  assert.ok(html.includes(term), "Approved historic evidence missing from static export: " + term);
+  assert.ok(!html.includes(term), "Historical activity metrics must stay off the home page: " + term);
 }
-assert.ok(!html.includes("본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며"), "Pre-approval placeholder must not be shown after author approval");
+assert.doesNotMatch(html, /id="evidence"|href="#evidence"|기록은 숫자가 아니라/);
+assert.match(html, /id="documents"[^>]*>[\s\S]*?class="section-side"><span>04<\/span>/);
 console.log("PASS: public static HTML contains all required anchors, contact and visible approved content");
 
 const brbHtml = await readFile(new URL("../out/ech-beacon-explorer.html", import.meta.url), "utf8");
@@ -54,5 +71,6 @@ for (const term of [
   assert.ok(brbHtml.includes(term), "BR-B static page missing required introductory content: " + term);
 }
 assert.ok(brbHtml.includes('href="/#projects"'), "BR-B backlink to portfolio missing");
+assert.ok(brbHtml.includes('href="/#research-app"'), "BR-B must link back to its card");
 assert.ok(!brbHtml.includes("ritual-history-2026-10-21.json"), "BR-B static page must not expose private input name");
 console.log("PASS: BR-B independent static research introduction exported with clear limitations");

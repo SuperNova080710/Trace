@@ -13,9 +13,9 @@
 .root a { color: inherit; text-decoration: none; }
 .root a:focus-visible { outline: 3px solid #a5d6ff; outline-offset: 5px; border-radius: 4px; }
 .shell { max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
-.nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 88px; border-bottom: 1px solid var(--panel-edge); }
+.navFrame { --trace-nav-surface: var(--night); position: relative; background: var(--trace-nav-surface); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 88px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 800; letter-spacing: .1em; white-space: nowrap; }
-.brandSymbol { width: 33px; height: 33px; border: 1px solid rgba(165, 214, 255, .7); display: grid; place-items: center; border-radius: 10px; color: #a5d6ff; font-weight: 900; font-size: 19px; }
 .brandSecondary { color: #91a6c7; font-size: 11px; font-weight: 600; }
 .back { color: #c4d6eb !important; font-size: 13px; font-weight: 600; border-bottom: 1px solid rgba(196,214,235,.35); padding-bottom: 5px; }
 .back:hover, .paperLink:hover, .footer a:hover { color: #9fd2ff !important; }
