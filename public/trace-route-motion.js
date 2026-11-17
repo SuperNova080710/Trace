@@ -1,11 +1,15 @@
 (function () {
   const storageKey = "trace-route-reveal-origin";
 
-  function pageKey(url) {
-    return url.pathname.replace(/(?:\/index)?\.html$/, "").replace(/\/$/, "") + url.hash;
+  function routePath(url) {
+    return url.pathname.replace(/(?:\/index)?\.html$/, "").replace(/\/$/, "");
   }
 
-  function visibleCenter(element) {
+  function pageKey(url) {
+    return routePath(url) + url.hash;
+  }
+
+  function visibleBounds(element) {
     if (!element) return null;
 
     const rect = element.getBoundingClientRect();
@@ -16,8 +20,10 @@
     if (right <= left || bottom <= top) return null;
 
     return {
-      x: (left + right) * 50 / window.innerWidth,
-      y: (top + bottom) * 50 / window.innerHeight,
+      left: left * 100 / window.innerWidth,
+      right: right * 100 / window.innerWidth,
+      top: top * 100 / window.innerHeight,
+      bottom: bottom * 100 / window.innerHeight,
     };
   }
 
@@ -37,29 +43,25 @@
     const link = active && matchesDestination(active)
       ? active
       : Array.from(document.links).find(matchesDestination);
-    const point = visibleCenter(link?.closest(".trace-origin") ?? link);
+    const bounds = visibleBounds(link?.closest(".trace-origin, .application-tab"));
 
     try {
       sessionStorage.removeItem(storageKey);
-      if (point) {
+      if (bounds) {
         const from = pageKey(new URL(window.location.href));
-        sessionStorage.setItem(storageKey, JSON.stringify({ from, to, point }));
+        sessionStorage.setItem(storageKey, JSON.stringify({ from, to, bounds }));
       }
     } catch {
       // The CSS origin covers browsers that restrict session storage.
     }
   });
 
-  function takePreviousOrigin() {
-    const fromUrl = window.navigation?.activation?.from?.url;
-    if (!fromUrl) return null;
-
+  function takePreviousBounds(from, to) {
     try {
       const saved = JSON.parse(sessionStorage.getItem(storageKey) ?? "null");
       sessionStorage.removeItem(storageKey);
-      if (saved?.from === pageKey(new URL(fromUrl)) &&
-          saved.to === pageKey(new URL(window.location.href))) {
-        return saved.point;
+      if (saved?.from === pageKey(from) && saved.to === pageKey(to)) {
+        return saved.bounds;
       }
     } catch {
       // Use the CSS origin when no saved coordinates are available.
@@ -67,25 +69,64 @@
     return null;
   }
 
-  window.addEventListener("pagereveal", (event) => {
-    if (!event.viewTransition) return;
-
-    const previousOrigin = takePreviousOrigin();
-    const point = visibleCenter(document.querySelector(".trace-origin:target")) ?? previousOrigin;
-    if (!point) return;
-
-    const farX = Math.max(point.x, 100 - point.x) * window.innerWidth / 100;
-    const farY = Math.max(point.y, 100 - point.y) * window.innerHeight / 100;
-    const revealLimit = Math.hypot(farX, farY / 0.84) + 4;
-    const rootStyle = document.documentElement.style;
-    rootStyle.setProperty("--trace-reveal-x", `${point.x}%`);
-    rootStyle.setProperty("--trace-reveal-y", `${point.y}%`);
-    rootStyle.setProperty("--trace-reveal-limit", `${revealLimit}px`);
+  function playReveal(transition, mode, variables) {
+    const root = document.documentElement;
+    root.dataset.traceReveal = mode;
+    for (const [name, value] of Object.entries(variables)) {
+      root.style.setProperty(name, value);
+    }
     const reset = () => {
-      rootStyle.removeProperty("--trace-reveal-x");
-      rootStyle.removeProperty("--trace-reveal-y");
-      rootStyle.removeProperty("--trace-reveal-limit");
+      delete root.dataset.traceReveal;
+      for (const name of Object.keys(variables)) root.style.removeProperty(name);
     };
-    void event.viewTransition.finished.then(reset, reset);
+    void transition.finished.then(reset, reset);
+  }
+
+  function playLiquidReveal(transition, bounds) {
+    const x = bounds ? (bounds.left + bounds.right) / 2 : 50;
+    const y = bounds ? (bounds.top + bounds.bottom) / 2 : 22;
+    const farX = Math.max(x, 100 - x) * window.innerWidth / 100;
+    const farY = Math.max(y, 100 - y) * window.innerHeight / 100;
+    const revealLimit = Math.hypot(farX, farY / 0.84) + 4;
+    playReveal(transition, "liquid", {
+      "--trace-reveal-x": `${x}%`,
+      "--trace-reveal-y": `${y}%`,
+      "--trace-reveal-limit": `${revealLimit}px`,
+    });
+  }
+
+  function playCardReveal(transition, mode, bounds) {
+    const inset = [bounds.top, 100 - bounds.right, 100 - bounds.bottom, bounds.left];
+    playReveal(transition, mode, {
+      "--trace-card-inset": inset.map((value) => `${value}%`).join(" "),
+    });
+  }
+
+  window.addEventListener("pagereveal", (event) => {
+    const fromUrl = window.navigation?.activation?.from?.url || document.referrer;
+    const transition = event.viewTransition;
+    if (!transition || !fromUrl) return;
+
+    const from = new URL(fromUrl);
+    const to = new URL(window.location.href);
+    if (from.origin !== to.origin) return;
+
+    const previousBounds = takePreviousBounds(from, to);
+    const fromPath = routePath(from);
+    const toPath = routePath(to);
+
+    if (fromPath.startsWith("/documents/") && toPath.startsWith("/documents/")) {
+      const activeTab = document.querySelector('.application-tab[aria-current="page"]');
+      playLiquidReveal(transition, previousBounds ?? visibleBounds(activeTab));
+    } else if (previousBounds && fromPath === "" && document.querySelector(".trace-route-panel")) {
+      playCardReveal(transition, "expand", previousBounds);
+    } else if (toPath === "") {
+      const matchingLink = Array.from(document.querySelectorAll(".trace-origin a")).find(
+        (link) => routePath(new URL(link.href)) === fromPath
+      );
+      const card = document.querySelector(".trace-origin:target") ?? matchingLink?.closest(".trace-origin");
+      const bounds = visibleBounds(card);
+      if (bounds) playCardReveal(transition, "collapse", bounds);
+    }
   });
 })();

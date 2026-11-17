@@ -36,8 +36,8 @@ html:has(.trace-origin:target) {
     mix-blend-mode: normal;
   }
 
-  /* Only the mask grows. Both snapshots keep their original text and geometry. */
-  ::view-transition-new(root) {
+  /* Only the visible area changes; the captured viewport keeps its geometry. */
+  :root[data-trace-reveal="liquid"]::view-transition-new(root) {
     --trace-blob-x: var(--trace-reveal-x, 50%);
     --trace-blob-y: var(--trace-reveal-y, 22%);
     --trace-blob-r: var(--trace-reveal-radius);
@@ -54,6 +54,15 @@ html:has(.trace-origin:target) {
     animation: trace-liquid-reveal 460ms cubic-bezier(.48, .13, .34, .99) both;
   }
 
+  :root[data-trace-reveal="expand"]::view-transition-new(root) {
+    animation: trace-card-reveal 430ms var(--ease) both;
+  }
+
+  :root[data-trace-reveal="collapse"]::view-transition-old(root) {
+    z-index: 1;
+    animation: trace-card-reveal 430ms var(--ease) reverse both;
+  }
+
   @media (max-width: 600px) {
     .main-nav.is-open {
       animation: trace-menu-in 200ms var(--ease) both;
@@ -63,6 +72,11 @@ html:has(.trace-origin:target) {
 
 @keyframes trace-liquid-reveal {
   to { --trace-reveal-radius: var(--trace-reveal-limit, 175vmax); }
+}
+
+@keyframes trace-card-reveal {
+  from { clip-path: inset(var(--trace-card-inset) round 14px); }
+  to { clip-path: inset(0% 0% 0% 0% round 0px); }
 }
 
 @keyframes trace-menu-in {

@@ -21,7 +21,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
   if (!document) return null;
 
   return (
-    <main className="application-page trace-route-panel">
+    <main className="application-page trace-route-panel" data-document={document.slug}>
       <header className="application-header">
         <RouteLink href={`/#document-${slug}`} className="application-back">
           <BrandMark />
@@ -30,18 +30,14 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
         <span>APPLICATION DOCUMENTS / 2026</span>
       </header>
       <div className="application-layout">
-        <aside className="application-sidebar" aria-label="문서 선택">
-          <p>지원 서류</p>
-          <nav>
-            {applicationDocuments.map((item, i) => (
-              <RouteLink className={item.slug === slug ? "selected" : ""} aria-current={item.slug === slug ? "page" : undefined}
-                    key={item.slug} href={`/documents/${item.slug}/`}>
-                <span>0{i + 1}</span>{item.title}
-              </RouteLink>
-            ))}
-          </nav>
-          <p className="application-disclaimer">공개용 이름으로 작성된 개발자 지원 문서입니다. 기업별 지원 시 연락처·지원 직무를 확인하세요.</p>
-        </aside>
+        <nav className="application-tabs" aria-label="지원 서류 선택">
+          {applicationDocuments.map((item) => (
+            <RouteLink className="application-tab" aria-current={item.slug === slug ? "page" : undefined}
+                       key={item.slug} href={`/documents/${item.slug}/`}>
+              {item.title}
+            </RouteLink>
+          ))}
+        </nav>
         <div className="application-main">
           <div className="application-intro">
             <p className="application-kicker">TRACE / CAREER PROFILE</p>
@@ -50,6 +46,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
             <p className="application-summary">{document.summary}</p>
           </div>
           <DocumentActions title={document.title} slug={document.slug} />
+          <p className="application-disclaimer">공개용 이름으로 작성된 개발자 지원 문서입니다. 기업별 지원 시 연락처·지원 직무를 확인하세요.</p>
           <article id="application-document" className="application-paper">
             <div className="paper-header"><strong>TRACE.</strong><span>APPLICATION DOCUMENTS</span></div>
             <div className="paper-heading"><p>BACKEND · FULL-STACK DEVELOPMENT</p><h2>{document.title}</h2><span>{document.subtitle}</span></div>
