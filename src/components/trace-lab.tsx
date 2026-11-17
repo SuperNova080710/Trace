@@ -2,14 +2,13 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import Link from "next/link";
-import type { ApprovedNarrative, EvidenceMetric } from "@/content/public-profile";
+import type { ApprovedNarrative } from "@/content/public-profile";
 import { detectorMetrics, t10Research } from "@/content/research-evidence";
 
 type Props = {
   displayName: string;
   contactEmail: string;
   narrative: ApprovedNarrative[];
-  metrics: EvidenceMetric[];
 };
 
 const approaches = [
@@ -45,7 +44,7 @@ const projects = [{
   href: "https://github.com/SuperNova080710/Blog-frontend", link: "프런트엔드 코드 보기", tone: "web", monogram: "WEB",
 }] as const;
 
-export function TraceLab({ displayName, contactEmail, narrative, metrics }: Props) {
+export function TraceLab({ displayName, contactEmail, narrative }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -164,7 +163,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
       const readingNodes = Array.from(main.querySelectorAll<HTMLElement>(
         ".about-main p, .story-chapter-body h3, .story-chapter-body p, " +
         ".story-closing p, .ability-summary h3, .section-heading h2, " +
-        ".project-content h3, .evidence-placeholder h3, .document-item strong, " +
+        ".research-feature h3, .project-content h3, .document-item strong, " +
         ".contact-inner h2"
       ));
       const visible = readingNodes
@@ -271,7 +270,6 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <a href="#about" onClick={() => setMobileMenuOpen(false)}>소개</a>
             <a href="#approach" onClick={() => setMobileMenuOpen(false)}>작업 방식</a>
             <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
-            <a href="#evidence" onClick={() => setMobileMenuOpen(false)}>기록</a>
             <a href="#documents" onClick={() => setMobileMenuOpen(false)}>지원 서류</a>
             <a href="#contact" className="mobile-contact-link" onClick={() => setMobileMenuOpen(false)}>연락하기 <span aria-hidden="true">↓</span></a>
           </nav>
@@ -482,9 +480,31 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">SELECTED WORK</p>
               <h2 id="projects-title">결과를 확인할 수 있는 <span>프로젝트</span></h2>
-              <p className="section-subtitle">T10의 연구 원고·평가 원본·재현 데이터를 공개 근거와 함께 확인할 수 있습니다.</p>
             </div>
           </div>
+          <article className="research-feature" id="project-smart-campus" aria-labelledby="smart-campus-title">
+            <div className="research-feature-top">
+              <p className="research-eyebrow">대표 프로젝트 · 캡스톤디자인</p>
+              <h3 id="smart-campus-title">디지털 트윈 및 메타버스 융합형 스마트 캠퍼스</h3>
+              <p>현실 장치의 상태를 Unreal Engine 가상 캠퍼스에서 확인하고, 가상 공간에서도 실제 장치를 제어할 수 있는 양방향 시스템을 구현했습니다.</p>
+            </div>
+            <div className="research-detail">
+              <div>
+                <h4>담당한 구현</h4>
+                <p>ESP32 장치, MQTT 메시지, 서버와 Unreal Engine 사이의 연동을 담당했습니다. 메시지가 늦게 도착하거나 누락됐을 때는 장치부터 가상 공간까지 구간별로 확인해 문제가 생긴 지점을 좁혔습니다.</p>
+              </div>
+              <div>
+                <h4>캡스톤·수상·게재</h4>
+                <p><b>2024</b> 캡스톤디자인에서 시스템 구현 및 시연</p>
+                <p><b><time dateTime="2025-07-05">2025.07</time></b> 한국디지털콘텐츠학회 하계종합학술대회 대학생 논문경진대회 동상</p>
+                <p><b><time dateTime="2025-12">2025.12</time></b> KCI 등재 학술지 《디지털콘텐츠학회논문지》 제26권 제12호 게재</p>
+              </div>
+            </div>
+            <div className="research-links" aria-label="스마트 캠퍼스 게재 논문">
+              <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003279319" target="_blank" rel="noopener noreferrer">KCI 논문 정보 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+              <a href="https://journal.dcs.or.kr/_PR/view/?aidx=47684&amp;bidx=4303" target="_blank" rel="noopener noreferrer">학회 논문 페이지 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+            </div>
+          </article>
           <article className="research-feature" id="project-t10" aria-labelledby="t10-title">
             <div className="research-feature-top">
               <p className="research-eyebrow">01 / FEATURED RESEARCH · ALEPH T10 · main-v1</p>
@@ -553,68 +573,10 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
         </div>
       </section>
 
-      <section className="section section-tint" id="evidence" aria-labelledby="evidence-title">
-        <div className="container">
-          <div className="section-heading">
-            <div className="section-side"><span>04</span><span className="side-rule" /></div>
-            <div>
-              <p className="eyebrow">GROWTH & EVIDENCE</p>
-              <h2 id="evidence-title">기록은 숫자가 아니라 <span>근거와 함께</span></h2>
-              <p className="section-subtitle">2026년 10월 21일 기준으로 검증·공개 승인한 과거 집계입니다. 이후 추가된 기록이나 현재 진행 상황은 반영하지 않았습니다.</p>
-            </div>
-          </div>
-          {metrics.length > 0 ? (
-            <div className="metrics-grid">
-              {metrics.map((metric) => (
-                <article className="metric-card" key={metric.id}>
-                  <p>{metric.label}</p>
-                  <strong>{metric.value.toLocaleString("ko-KR")} <small>{metric.unit}</small></strong>
-                  <span>{metric.from === metric.to ? "자료 기준일: " + metric.to : "집계 기간: " + metric.from + " ~ " + metric.to}</span>
-                  <dl className="metric-facts">
-                    <div><dt>자료 유형</dt><dd>{({
-                      ritual: "개인 리추얼 기록",
-                      "official-attendance-snapshot": "공식 출석 요약",
-                      "official-challenge-snapshot": "공식 과제 승인 요약",
-                    } as const)[metric.sourceKind]}</dd></div>
-                    <div><dt>기준일</dt><dd>{metric.asOf}</dd></div>
-                    <div><dt>출처</dt><dd>{metric.source}</dd></div>
-                    <div><dt>정의</dt><dd>{metric.definition}</dd></div>
-                    <div><dt>산식</dt><dd>{metric.calculation}</dd></div>
-                    <div><dt>분모</dt><dd>{metric.denominator === null ? "원본에 별도 분모 없음" : metric.denominator.toLocaleString("ko-KR")}</dd></div>
-                  </dl>
-                  {metric.provisional && (
-                    <p className="metric-provisional">잠정 수치 · 공식 확정 또는 승인 상태 변경 시 재검증 필요</p>
-                  )}
-                  {metric.limitations.length > 0 && (
-                    <ul className="metric-limitations" aria-label="해석상의 한계">
-                      {metric.limitations.map((limitation) => <li key={limitation}>{limitation}</li>)}
-                    </ul>
-                  )}
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="evidence-placeholder">
-              <span className="evidence-icon" aria-hidden="true">↗</span>
-              <div>
-                <h3>검증한 기록만 보여드리겠습니다.</h3>
-                <p>리추얼 기록과 공식 출석·과제 수치는 서로 다른 출처와 산식으로 검증했습니다. 다만 본인이 웹 공개를 승인하기 전에는 개인 수치를 표시하지 않으며, 확정 전 출석은 잠정값으로 다룹니다.</p>
-              </div>
-              <span className="evidence-badge">DATA REVIEW</span>
-            </div>
-          )}
-          <div className="evidence-links">
-            <span>공개 활동 근거</span>
-            <a href="https://github.com/SuperNova080710/ech-beacon-detection" target="_blank" rel="noopener noreferrer">T10 연구 기록 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
-            <a href="https://github.com/SuperNova080710/Blog-backend" target="_blank" rel="noopener noreferrer">Backend 코드 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
-          </div>
-        </div>
-      </section>
-
       <section className="section section-white documents-section" id="documents" aria-labelledby="documents-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>05</span><span className="side-rule" /></div>
+            <div className="section-side"><span>04</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
