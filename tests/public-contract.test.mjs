@@ -30,12 +30,12 @@ test("public data contains only the approved contact fields at foundation stage"
 });
 
 
-test("T01-like structure uses light sections with a restrained navy hero", async () => {
+test("portfolio layout keeps a sticky profile beside the project column", async () => {
   const css = await read("src/app/globals.css");
   const lab = await read("src/components/trace-lab.tsx");
-  assert.match(css, /\.section-white\s*\{\s*background:\s*#fff/);
-  assert.match(css, /\.hero\s*\{[^}]*var\(--navy\)/s);
-  assert.match(lab, /className="research-feature"/);
+  assert.match(css, /\.portfolio-profile \{ position: sticky/);
+  assert.match(lab, /className="container portfolio-layout"/);
+  assert.match(lab, /className="portfolio-content"/);
   assert.doesNotMatch(lab, /orbit-outer|stage-coordinate|PERSPECTIVE \/|SIGNAL: GROWTH/);
 });
 
@@ -58,11 +58,11 @@ test("no private folder present in project root", async () => {
 });
 
 
-test("header Contact scrolls to the contact section while footer email opens the mail app", async () => {
+test("profile navigation reaches contact while the email opens the mail app", async () => {
   const lab = await read("src/components/trace-lab.tsx");
-  assert.match(lab, /className="header-contact" href="#contact"/);
+  assert.match(lab, /href="#contact">연락처/);
   assert.match(lab, /id="contact" aria-labelledby="contact-title"/);
-  assert.ok(lab.includes('className="contact-mail" href={"mailto:" + contactEmail}'));
+  assert.ok(lab.includes('className="portfolio-email" href={"mailto:" + contactEmail}'));
 });
 
 
