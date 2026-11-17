@@ -20,6 +20,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="ko">
       <head>
+        <link rel="preload" href="/fonts/NanumSquareRoundR.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/NanumSquareRoundB.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         {/* The browser must see the opt-in before revealing the destination. */}
         <style media="(prefers-reduced-motion: no-preference)">
           {"@view-transition { navigation: auto; }"}

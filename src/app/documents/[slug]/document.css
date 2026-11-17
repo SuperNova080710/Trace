@@ -1,6 +1,6 @@
 .application-page{min-height:100vh;background:#f5f8ff;color:#10213f;line-height:1.8;word-break:keep-all}
 .application-page *{box-sizing:border-box}
-.application-header{height:75px;background:#091b34;color:#c8dbf3;display:flex;justify-content:space-between;align-items:center;padding:0 max(30px,calc((100vw - 1200px)/2));font-size:12px;letter-spacing:.05em}
+.application-header{--trace-nav-surface:#091b34;position:relative;height:75px;background:var(--trace-nav-surface);color:#c8dbf3;display:flex;justify-content:space-between;align-items:center;padding:0 max(30px,calc((100vw - 1200px)/2));font-size:12px;letter-spacing:.05em}
 .application-header a{color:#fff;font-weight:700;text-decoration:none}
 .application-back{display:inline-flex;align-items:center;gap:9px}
 .application-back .brand-mark{width:30px}

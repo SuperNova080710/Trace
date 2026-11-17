@@ -36,15 +36,16 @@ export default function ExplorerIntro() {
 
   return (
     <main id="main-content" className={`${styles.root} trace-route-panel`}>
-      <div className={styles.shell}>
-        <nav className={styles.nav} aria-label="ECH Beacon Explorer 이동">
+      <header className={`${styles.navFrame} trace-explorer-header`}>
+        <nav className={`${styles.nav} ${styles.shell}`} aria-label="ECH Beacon Explorer 이동">
           <RouteLink href="/" className={styles.brand} aria-label="TRACE 포트폴리오 홈">
             <BrandMark />
             <span>TRACE <span className={styles.brandSecondary}>/ RESEARCH LAB</span></span>
           </RouteLink>
           <RouteLink href="/#research-app" className={styles.back}><span aria-hidden="true">←</span> 프로젝트로 돌아가기</RouteLink>
         </nav>
-
+      </header>
+      <div className={styles.shell}>
         <section className={styles.hero} aria-labelledby="explorer-title">
           <div className={styles.heroContent}>
             <p className={styles.kicker}><span className={styles.liveDot} aria-hidden="true" /> ALEPH BR-B · T10 RESEARCH APPLICATION</p>

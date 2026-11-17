@@ -1,58 +1,91 @@
 (function () {
-  const sharedName = "trace-route-card";
+  const storageKey = "trace-route-reveal-origin";
 
-  // Static exports serve the same page with or without a trailing slash.
-  function routePath(url) {
-    return new URL(url).pathname.replace(/\.html$/, "").replace(/\/$/, "");
+  function pageKey(url) {
+    return url.pathname.replace(/(?:\/index)?\.html$/, "").replace(/\/$/, "") + url.hash;
   }
 
-  function nameSurface(transition, other, phase) {
-    if (!transition || !other) return;
+  function visibleCenter(element) {
+    if (!element) return null;
 
-    const otherPath = routePath(other);
-    const documentContent = phase === "in" && otherPath.startsWith("/documents/")
-      ? document.querySelector(".application-main")
-      : null;
-    if (documentContent) {
-      // Keep the new document shell steady instead of blending two full-page snapshots.
-      transition.skipTransition();
-      documentContent.animate(
-        [{ transform: "translateY(5px)" }, { transform: "none" }],
-        { duration: 180, easing: "ease-out" }
-      );
-      return;
-    }
+    const rect = element.getBoundingClientRect();
+    const left = Math.max(0, rect.left);
+    const right = Math.min(window.innerWidth, rect.right);
+    const top = Math.max(0, rect.top);
+    const bottom = Math.min(window.innerHeight, rect.bottom);
+    if (right <= left || bottom <= top) return null;
 
-    const onHome = document.querySelector(".trace-page");
-    if (onHome) {
-      const link = Array.from(onHome.querySelectorAll(".trace-origin a"))
-        .find((anchor) => routePath(anchor.href) === otherPath);
-      const card = link?.closest(".trace-origin");
-      const rect = card?.getBoundingClientRect();
-      if (!rect || rect.bottom <= 0 || rect.top >= window.innerHeight) {
-        transition.skipTransition();
-        return;
-      }
-      capture(card, transition, phase);
-    } else if (["", "/index"].includes(otherPath) &&
-               document.querySelector(".trace-route-panel")) {
-      capture(document.documentElement, transition, phase);
-    }
-  }
-
-  function capture(surface, transition, phase) {
-    surface.style.viewTransitionName = sharedName;
-    // The outgoing name must also be removed if this page is restored from BFCache.
-    const captured = phase === "out" ? transition.finished : transition.ready;
-    const reset = () => surface.style.removeProperty("view-transition-name");
-    void captured.then(reset, reset);
+    return {
+      x: (left + right) * 50 / window.innerWidth,
+      y: (top + bottom) * 50 / window.innerHeight,
+    };
   }
 
   window.addEventListener("pageswap", (event) => {
-    nameSurface(event.viewTransition, event.activation?.entry?.url, "out");
+    const nextUrl = event.activation?.entry?.url;
+    if (!event.viewTransition || !nextUrl) return;
+
+    const destination = new URL(nextUrl);
+    if (destination.origin !== window.location.origin) return;
+
+    const to = pageKey(destination);
+    const matchesDestination = (link) => {
+      const url = new URL(link.href);
+      return url.origin === destination.origin && pageKey(url) === to;
+    };
+    const active = document.activeElement?.closest("a[href]");
+    const link = active && matchesDestination(active)
+      ? active
+      : Array.from(document.links).find(matchesDestination);
+    const point = visibleCenter(link?.closest(".trace-origin") ?? link);
+
+    try {
+      sessionStorage.removeItem(storageKey);
+      if (point) {
+        const from = pageKey(new URL(window.location.href));
+        sessionStorage.setItem(storageKey, JSON.stringify({ from, to, point }));
+      }
+    } catch {
+      // The CSS origin covers browsers that restrict session storage.
+    }
   });
 
+  function takePreviousOrigin() {
+    const fromUrl = window.navigation?.activation?.from?.url;
+    if (!fromUrl) return null;
+
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(storageKey) ?? "null");
+      sessionStorage.removeItem(storageKey);
+      if (saved?.from === pageKey(new URL(fromUrl)) &&
+          saved.to === pageKey(new URL(window.location.href))) {
+        return saved.point;
+      }
+    } catch {
+      // Use the CSS origin when no saved coordinates are available.
+    }
+    return null;
+  }
+
   window.addEventListener("pagereveal", (event) => {
-    nameSurface(event.viewTransition, window.navigation?.activation?.from?.url, "in");
+    if (!event.viewTransition) return;
+
+    const previousOrigin = takePreviousOrigin();
+    const point = visibleCenter(document.querySelector(".trace-origin:target")) ?? previousOrigin;
+    if (!point) return;
+
+    const farX = Math.max(point.x, 100 - point.x) * window.innerWidth / 100;
+    const farY = Math.max(point.y, 100 - point.y) * window.innerHeight / 100;
+    const revealLimit = Math.hypot(farX, farY / 0.84) + 4;
+    const rootStyle = document.documentElement.style;
+    rootStyle.setProperty("--trace-reveal-x", `${point.x}%`);
+    rootStyle.setProperty("--trace-reveal-y", `${point.y}%`);
+    rootStyle.setProperty("--trace-reveal-limit", `${revealLimit}px`);
+    const reset = () => {
+      rootStyle.removeProperty("--trace-reveal-x");
+      rootStyle.removeProperty("--trace-reveal-y");
+      rootStyle.removeProperty("--trace-reveal-limit");
+    };
+    void event.viewTransition.finished.then(reset, reset);
   });
 })();

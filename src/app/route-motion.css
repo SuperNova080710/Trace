@@ -11,57 +11,47 @@ html:has(.trace-origin:target) {
   scroll-behavior: auto;
 }
 
-/* The linked card and the destination viewport share their capture name.
-   The browser interpolates their bounds while the two snapshots crossfade. */
+@property --trace-reveal-radius {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 1px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  :root {
-    --route-duration: 430ms;
-  }
-
-  :root::view-transition {
+  ::view-transition {
     overflow: clip;
   }
 
-  ::view-transition-group(trace-route-card) {
-    z-index: 1;
-    animation-duration: var(--route-duration);
-    animation-timing-function: var(--ease);
+  ::view-transition-group(root) {
+    animation: none;
   }
 
-  ::view-transition-image-pair(trace-route-card) {
-    overflow: clip;
-    animation: trace-card-corners var(--route-duration) var(--ease) both;
-    box-shadow: 0 0 36px rgb(6 23 46 / 22%);
-  }
-
-  :root:has(.trace-page)::view-transition-image-pair(trace-route-card) {
-    animation-direction: reverse;
-  }
-
-  ::view-transition-old(trace-route-card),
-  ::view-transition-new(trace-route-card) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: none;
     object-position: top left;
+    animation: none;
     mix-blend-mode: normal;
   }
 
-  ::view-transition-old(trace-route-card) {
-    animation: trace-card-fade-out var(--route-duration) ease both;
-  }
-
-  ::view-transition-new(trace-route-card) {
-    animation: trace-card-fade-in var(--route-duration) ease both;
-  }
-
-  :root:has(.trace-route-panel)::view-transition-old(root),
-  :root:has(.trace-page)::view-transition-new(root) {
-    animation: trace-route-backdrop var(--route-duration) ease both;
-    mix-blend-mode: normal;
-  }
-
-  :root:has(.trace-page)::view-transition-new(root) {
-    animation-direction: reverse;
+  /* Only the mask grows. Both snapshots keep their original text and geometry. */
+  ::view-transition-new(root) {
+    --trace-blob-x: var(--trace-reveal-x, 50%);
+    --trace-blob-y: var(--trace-reveal-y, 22%);
+    --trace-blob-r: var(--trace-reveal-radius);
+    mask-image:
+      radial-gradient(
+        ellipse var(--trace-blob-r) calc(var(--trace-blob-r) * .84) at var(--trace-blob-x) var(--trace-blob-y),
+        #000 max(0px, calc(100% - 3px)), transparent 100%
+      ),
+      radial-gradient(
+        circle max(1px, calc(var(--trace-blob-r) * .37))
+          at calc(var(--trace-blob-x) + var(--trace-blob-r) * .57) calc(var(--trace-blob-y) + var(--trace-blob-r) * .39),
+        #000 max(0px, calc(100% - 3px)), transparent 100%
+      );
+    animation: trace-liquid-reveal 460ms cubic-bezier(.48, .13, .34, .99) both;
   }
 
   @media (max-width: 600px) {
@@ -71,24 +61,8 @@ html:has(.trace-origin:target) {
   }
 }
 
-@keyframes trace-card-corners {
-  from { border-radius: 14px; }
-  to { border-radius: 0; }
-}
-
-@keyframes trace-card-fade-out {
-  0%, 15% { opacity: 1; }
-  65%, 100% { opacity: 0; }
-}
-
-@keyframes trace-card-fade-in {
-  0%, 15% { opacity: 0; }
-  65%, 100% { opacity: 1; }
-}
-
-@keyframes trace-route-backdrop {
-  from { filter: brightness(1); }
-  to { filter: brightness(.84); }
+@keyframes trace-liquid-reveal {
+  to { --trace-reveal-radius: var(--trace-reveal-limit, 175vmax); }
 }
 
 @keyframes trace-menu-in {
