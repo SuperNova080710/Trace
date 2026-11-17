@@ -56,7 +56,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
                 {section.bullets && <ul>{section.bullets.map((line) => <li key={line}>{line}</li>)}</ul>}
               </section>
             ))}
-            <footer className="paper-footer">오리온 · 2026년 11월 5일 기준 · 공개용 지원 문서</footer>
+            <footer className="paper-footer">오리온 · 2026년 11월 17일 기준 · 공개용 지원 문서</footer>
           </article>
         </div>
       </div>
