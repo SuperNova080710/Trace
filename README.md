@@ -39,7 +39,7 @@
 | 확인 항목 | 페이지 위치 | 현재 제공 내용 |
 | --- | --- | --- |
 | 지원 직무·이력서·GitHub | [첫 화면](https://trace-eight-topaz.vercel.app/) | 백엔드·풀스택 지원 직무와 서류·코드 진입점 |
-| 프로젝트 | [`#projects`](https://trace-eight-topaz.vercel.app/#projects) | Full-stack Blog, 디지털 트윈 기반 스마트 캠퍼스, ECH 연구와 Explorer |
+| 프로젝트 | [`#projects`](https://trace-eight-topaz.vercel.app/#projects) | [디지털 트윈 기반 스마트 캠퍼스](https://trace-eight-topaz.vercel.app/projects/digital-twin/), Full-stack Blog, ECH 연구와 Explorer |
 | 지원 문서 | [`#documents`](https://trace-eight-topaz.vercel.app/#documents) | 이력서·자기소개서·프로젝트 경험기술서 열람, Word·HTML 다운로드, PDF 인쇄 저장 |
 | 연락 | [`#contact`](https://trace-eight-topaz.vercel.app/#contact) | 공개 이메일 |
 

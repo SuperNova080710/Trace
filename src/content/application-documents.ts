@@ -21,8 +21,8 @@ export const applicationDocuments: readonly ApplicationDocument[] = [
     sections: [
       { heading: "기본 정보", paragraphs: ["이름: 오리온 (포트폴리오 공개용 이름)", "지원 직무: 백엔드 개발자 · 풀스택 개발자", "이메일: lionoh00@gmail.com", "GitHub: https://github.com/SuperNova080710", "학력: 나사렛대학교 IT융합학부 컴퓨터소프트웨어 트랙 · 2025년 2월 졸업"] },
       { heading: "주요 프로젝트", bullets: [
+        "디지털 트윈 기반 스마트 캠퍼스 — 3D 모델링을 제외한 시스템 전체와 실제 장치·가상 캠퍼스의 양방향 연동을 구현했습니다. 2025년 디지털콘텐츠학회논문지(KCI 등재) 게재.",
         "Full-stack Blog — NestJS·PostgreSQL 기반 인증과 게시글 API를 구현하고 Next.js 화면과 연결했습니다. 게시글 수정·삭제 권한을 서버에서 작성자 기준으로 확인합니다.",
-        "디지털 트윈 기반 스마트 캠퍼스 — IoT 장치와 Unreal Engine의 양방향 연동을 구간별로 점검했습니다. 2025년 디지털콘텐츠학회논문지(KCI 등재) 게재.",
         "ECH 탐지 연구 — 합성 평가 110건에서 두 탐지 방식을 비교해 정상 연결 오탐 10건에서 7건으로 줄어든 결과를 확인했습니다."
       ] },
       { heading: "기술 경험", bullets: [
@@ -44,7 +44,7 @@ export const applicationDocuments: readonly ApplicationDocument[] = [
     summary: "막힌 문제를 작은 구간으로 나누고 원인을 확인했던 경험을 중심으로 작성한 자기소개서입니다.",
     sections: [
       { heading: "연결 문제를 바라보는 방식이 바뀐 경험", paragraphs: [
-        "2024년 디지털 트윈 기반 스마트 캠퍼스 프로젝트에서 팀과 함께 실제 장치의 상태를 Unreal Engine에 반영하고, 가상 공간에서 장치를 제어하는 시스템을 만들었습니다. MQTT 메시지 전달과 서버 연동에서 오류가 반복되자 처음에는 여러 부분을 동시에 수정했습니다. 변경이 쌓일수록 어느 구간에서 문제가 발생하는지 파악하기 어려웠습니다.",
+        "2024년 디지털 트윈 기반 스마트 캠퍼스 팀 프로젝트에서 3D 모델링을 제외한 시스템 전반을 구현했습니다. 실제 장치의 상태를 Unreal Engine에 반영하고, 가상 공간에서 실제 장치를 제어하도록 만들었습니다. MQTT 메시지 전달과 서버 연동에서 오류가 반복되자 처음에는 여러 부분을 동시에 수정했습니다. 변경이 쌓일수록 어느 구간에서 문제가 발생하는지 파악하기 어려웠습니다.",
         "ESP32, 네트워크, 서버, Unreal Engine으로 데이터가 지나가는 길을 나누고 각 구간에서 정상적으로 동작하는 부분부터 확인했습니다. 팀과 최종 시연을 완성했고, 같은 프로젝트를 논문경진대회와 2025년 디지털콘텐츠학회논문지 게재로 이어갔습니다. 이후에는 수정에 앞서 어디까지 동작하는지 확인하고, 다음 변경의 결과를 비교할 기준부터 세웁니다."
       ] },
       { heading: "백엔드에 관심을 둔 이유", paragraphs: [
@@ -58,19 +58,19 @@ export const applicationDocuments: readonly ApplicationDocument[] = [
     subtitle: "오리온 · 수행 내용과 검증 근거",
     summary: "프로젝트별 목표, 수행 범위, 결과, 한계를 구분했습니다. AI 보조 개발에서는 본인 기여를 구체적으로 명시했습니다.",
     sections: [
-      { heading: "01 · Full-stack Blog | 백엔드·풀스택 구현", paragraphs: [
+      { heading: "01 · 디지털 트윈 기반 스마트 캠퍼스", paragraphs: [
+        "2024년 캡스톤에서 출발해 논문경진대회 및 2025년 디지털콘텐츠학회논문지 게재로 이어졌습니다. 사용 기술은 ESP32, MQTT, 서버, Unreal Engine입니다.",
+        "상황: 물리 장치 상태를 가상환경에 반영하고 가상환경에서 장치를 제어하는 통합 과정에서 통신 지연, 데이터 처리, 영상 연동 오류가 반복됐습니다.",
+        "본인 역할: 3D 모델링을 제외한 시스템 전반을 직접 구현했습니다. ESP32 장치, MQTT 통신, 서버, Unreal Engine을 연결했고, 연동 오류가 발생했을 때 데이터 흐름을 구간별로 점검했습니다.",
+        "팀 결과: 실제 장치 상태 반영과 가상 공간에서의 장치 제어를 시연했습니다. 게재 논문 「디지털 트윈 및 메타버스 융합형 스마트 캠퍼스 설계 및 구현」은 디지털콘텐츠학회논문지(KCI 등재) 26권 12호에 실렸습니다. DOI 10.9728/dcs.2025.26.12.3391."
+      ] },
+      { heading: "02 · Full-stack Blog | 백엔드·풀스택 구현", paragraphs: [
         "기술: NestJS 11, Node.js 22, TypeORM 0.3, PostgreSQL 16, JWT, Next.js 16, React 19, TypeScript.",
         "상황: 인증과 게시글 CRUD를 수행하는 웹 서비스를 프런트엔드와 백엔드로 나누어 구축해야 했습니다.",
         "수행: JWT 로그인·토큰 갱신과 게시글 CRUD 및 페이지네이션을 구현했습니다. 새 글의 작성자는 인증된 사용자로 저장하고, 수정·삭제는 서비스에서 저장된 작성자 ID와 요청 사용자 ID를 비교해 처리했습니다.",
         "코드와 API 문서에서 확인할 수 있는 수정 응답은 작성자 200, 다른 로그인 사용자 403, 미인증 요청 401입니다. PostgreSQL 스키마 변경은 TypeORM 마이그레이션으로 관리했습니다.",
         "권한 검사 코드: https://github.com/SuperNova080710/Blog-backend/blob/main/src/modules/posts/posts.service.ts",
         "API 문서: https://github.com/SuperNova080710/Blog-backend/blob/main/docs/api/posts.md"
-      ] },
-      { heading: "02 · 디지털 트윈 기반 스마트 캠퍼스", paragraphs: [
-        "2024년 캡스톤에서 출발해 논문경진대회 및 2025년 디지털콘텐츠학회논문지 게재로 이어졌습니다. 사용 기술은 ESP32, MQTT, 서버, Unreal Engine입니다.",
-        "상황: 물리 장치 상태를 가상환경에 반영하고 가상환경에서 장치를 제어하는 통합 과정에서 통신 지연, 데이터 처리, 영상 연동 오류가 반복됐습니다.",
-        "본인 역할: ESP32→네트워크→서버→Unreal Engine으로 구간을 나누어 각 구간의 동작을 확인하고 원인을 좁혔습니다.",
-        "팀 결과: 실제 장치 상태 반영과 가상 공간에서의 장치 제어를 시연했습니다. 게재 논문 「디지털 트윈 및 메타버스 융합형 스마트 캠퍼스 설계 및 구현」은 디지털콘텐츠학회논문지(KCI 등재) 26권 12호에 실렸습니다. DOI 10.9728/dcs.2025.26.12.3391."
       ] },
       { heading: "03 · Native ECH Beacon Detection | 재현 가능한 보안 연구", paragraphs: [
         "기술: TLS 1.3, ECH, Python, Docker, OpenSSL, curl, nginx, PCAP.",
