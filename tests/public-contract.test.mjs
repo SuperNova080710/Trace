@@ -210,6 +210,7 @@ test("application document cards reuse pointer glow and lift only for fine point
   const end = lab.indexOf("</section>", start);
   assert.ok(start > 0 && end > start);
   const documents = lab.slice(start, end);
+  for (const label of ["이력서 열람", "자기소개서 열람", "경험기술서 열람"]) assert.ok(documents.includes(label));
   assert.equal((documents.match(/className="document-item spotlight-card" onPointerMove=\{onSpotlightMove\}/g) ?? []).length, 3);
   for (const slug of ["resume", "personal-statement", "project-experience"]) {
     assert.ok(documents.includes(`href="/documents/${slug}/"`));

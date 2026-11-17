@@ -335,15 +335,9 @@ article[id] { scroll-margin-top: 12px; }
 /* Issue #3: accessible mobile navigation and primary content wayfinding. */
 .menu-button { display: none; }
 .mobile-contact-link { display: none; }
-.document-list { margin-left: 130px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
-.document-item { display: flex; flex-direction: column; gap: 11px; min-height: 142px; padding: 22px; background: #f7faff; border: 1px solid #dbe7f6; border-radius: 12px; }
-.document-number { color: #2766c0; font-size: 11px; font-weight: 800; }
-.document-item strong { font-size: 17px; color: #19375d; }
-.document-status { margin-top: auto; align-self: flex-start; padding: 4px 10px; border-radius: 6px; background: #e7f0ff; color: #496f9f; font-size: 11px; }
-@media(max-width: 1050px) {
-  .document-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .document-item:last-child { grid-column: span 2; }
-}
+.document-list { margin: 0 0 0 130px; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.document-item { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; column-gap: 14px; padding: 7px 14px; border-bottom: 1px solid var(--line); }
+.document-item strong { font-size: 16px; color: #19375d; }
 @media(max-width: 760px) {
   .site-header { isolation: isolate; }
   .header-inner { flex-wrap: nowrap; }
@@ -396,9 +390,7 @@ article[id] { scroll-margin-top: 12px; }
   .main-nav a:hover, .main-nav a:focus-visible { background: #eff5ff; }
   .main-nav a::after { display: none; }
   .mobile-contact-link { color: #165fc2 !important; background: #eaf3ff; margin-top: 6px; }
-  .document-list { margin-left: 0; grid-template-columns: 1fr; }
-  .document-item:last-child { grid-column: auto; }
-  .document-item { min-height: 116px; }
+  .document-list { margin-left: 0; }
 }
 @media(max-width: 520px) {
   .main-nav a:nth-child(4) { display: flex; }
@@ -468,11 +460,11 @@ article[id] { scroll-margin-top: 12px; }
 .document-item .document-download {
   display: inline-flex;
   align-items: center;
-  align-self: flex-start;
-  margin-top: auto;
+
+  min-height: 44px;
   padding: 6px 10px;
   border-radius: 7px;
-  background: #e8f1ff;
+  background: transparent;
   border: 1px solid #cfe0f7;
   color: #205ca8;
   font-size: 11px;

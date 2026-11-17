@@ -21,18 +21,19 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
 
   return (
     <main className="application-page">
+      <a className="skip-link application-skip" href="#application-title">문서 본문 바로가기</a>
       <header className="application-header">
-        <Link href="/#documents" className="application-back">← TRACE 포트폴리오</Link>
-        <span>APPLICATION DOCUMENTS / 2026</span>
+        <Link href="/#documents" className="application-back">← 지원 서류 목록</Link>
+        <span>TRACE</span>
       </header>
       <div className="application-layout">
         <aside className="application-sidebar" aria-label="문서 선택">
           <p>지원 서류</p>
-          <nav>
-            {applicationDocuments.map((item, i) => (
+          <nav aria-label="지원 서류 선택">
+            {applicationDocuments.map((item) => (
               <Link className={item.slug === slug ? "selected" : ""} aria-current={item.slug === slug ? "page" : undefined}
                     key={item.slug} href={`/documents/${item.slug}/`}>
-                <span>0{i + 1}</span>{item.title}
+                {item.title}
               </Link>
             ))}
           </nav>
@@ -40,8 +41,7 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
         </aside>
         <div className="application-main">
           <div className="application-intro">
-            <p className="application-kicker">TRACE / CAREER PROFILE</p>
-            <h1>{document.title}</h1>
+            <h1 id="application-title" tabIndex={-1}>{document.title}</h1>
             <p className="application-subtitle">{document.subtitle}</p>
             <p className="application-summary">{document.summary}</p>
           </div>

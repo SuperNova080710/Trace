@@ -586,11 +586,11 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               <p className="section-subtitle">메모리얼 파크의 경험 기록과 검증된 프로젝트 성과를 바탕으로 작성한 공개용 지원 문서입니다. 각 문서를 바로 읽거나 파일로 내려받고, PDF로 저장할 수 있습니다.</p>
             </div>
           </div>
-          <div className="document-list" aria-label="지원 서류 열람 및 다운로드">
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">01</span><strong>이력서</strong><Link className="document-download" href="/documents/resume/">열람·다운로드 ↗</Link></div>
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">02</span><strong>자기소개서</strong><Link className="document-download" href="/documents/personal-statement/">열람·다운로드 ↗</Link></div>
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><Link className="document-download" href="/documents/project-experience/">열람·다운로드 ↗</Link></div>
-          </div>
+          <ul className="document-list" aria-label="지원 서류">
+            <li className="document-item spotlight-card" onPointerMove={onSpotlightMove}><strong>이력서</strong><Link className="document-download" href="/documents/resume/">이력서 열람 <span aria-hidden="true">→</span></Link></li>
+            <li className="document-item spotlight-card" onPointerMove={onSpotlightMove}><strong>자기소개서</strong><Link className="document-download" href="/documents/personal-statement/">자기소개서 열람 <span aria-hidden="true">→</span></Link></li>
+            <li className="document-item spotlight-card" onPointerMove={onSpotlightMove}><strong>프로젝트 경험기술서</strong><Link className="document-download" href="/documents/project-experience/">경험기술서 열람 <span aria-hidden="true">→</span></Link></li>
+          </ul>
         </div>
       </section>
 
