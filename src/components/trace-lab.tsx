@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type PointerEvent } from "react";
 import Link from "next/link";
 import type { ApprovedNarrative, EvidenceMetric } from "@/content/public-profile";
 import { detectorMetrics, t10Research } from "@/content/research-evidence";
@@ -131,8 +131,17 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
     return () => window.removeEventListener("hashchange", syncLocation);
   }, []);
 
-  function focusSection(id: string) {
+  function focusSection(event: MouseEvent<HTMLAnchorElement>, id: string) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    event.preventDefault();
+    const hash = `#${id}`;
+    if (window.location.hash !== hash) window.history.pushState(null, "", hash);
+    setCurrentSection(id);
     setMobileMenuOpen(false);
+    section.scrollIntoView();
     document.getElementById(`${id}-title`)?.focus({ preventScroll: true });
   }
 
@@ -285,9 +294,9 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
               ["evidence", "기록"],
             ].map(([id, label]) => (
               <a key={id} href={`#${id}`} aria-current={currentSection === id ? "location" : undefined}
-                 onClick={() => focusSection(id)}>{label}</a>
+                 onClick={(event) => focusSection(event, id)}>{label}</a>
             ))}
-            <a href="#contact" className="mobile-contact-link" onClick={() => focusSection("contact")}>연락하기</a>
+            <a href="#contact" className="mobile-contact-link" onClick={(event) => focusSection(event, "contact")}>연락하기</a>
           </nav>
           <a className="header-contact" href="#contact">
             연락하기 <span aria-hidden="true">↓</span>
@@ -302,7 +311,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <h1 id="hero-title">{displayName}</h1>
             <p className="hero-description">서버와 프런트엔드를 연결해 기능을 구현하고, 로그와 테스트로 문제의 원인을 좁혀 갑니다.</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#projects" onClick={() => focusSection("projects")}>프로젝트 보기 <span aria-hidden="true">↓</span></a>
+              <a className="button button-primary" href="#projects" onClick={(event) => focusSection(event, "projects")}>프로젝트 보기 <span aria-hidden="true">↓</span></a>
               <Link className="button button-outline" href="/documents/resume/">이력서 보기 <span aria-hidden="true">→</span></Link>
             </div>
           </div>
@@ -390,6 +399,7 @@ export function TraceLab({ displayName, contactEmail, narrative, metrics }: Prop
             <div>
               <p className="eyebrow">ABOUT ME</p>
               <h2 id="about-title" tabIndex={-1}>제가 중요하게 생각하는 것은<br /><span>문제를 풀어내는 과정입니다.</span></h2>
+              <p className="section-subtitle">문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람</p>
             </div>
           </div>
           <div className="about-grid">

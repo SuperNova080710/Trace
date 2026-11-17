@@ -2,7 +2,7 @@
 
 > 작은 과정이 모여 한 사람의 기록이 됩니다.
 
-ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소개·실제 프로젝트 근거·출처별 활동 지표를 공개하고, 개인 원본 기록·지원 문서·후보 생성 결과는 공개 페이지와 분리합니다.
+ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소개·실제 프로젝트 근거·출처별 활동 지표를 공개하고, 공개용 지원 문서를 제공하며 개인 원본 기록·비공개 제출 문서·후보 생성 결과는 공개 페이지와 분리합니다.
 
 ## BR-B 마스터 승인 완료 · 다음 실습 단계 진입 — 2026-10-23
 
@@ -42,7 +42,7 @@ ALEPH **BR-A (마지막 A)** 공개 진로 포트폴리오입니다. 자기소�
 | 세 가지 역량 | `#about` / [`#approach`](https://trace-eight-topaz.vercel.app/#approach) | 자기조절력·대인관계력·자기동기력. **대인관계력의 개인 행동 장면은 추가 대조가 필요합니다** |
 | 대표작 | [`#projects`](https://trace-eight-topaz.vercel.app/#projects) | T10 Native ECH 연구 원고·Held-out 평가·공개 근거. BR-B ECH Beacon Explorer 앱 카드 및 링크 제공 |
 | 활동 근거 | [`#evidence`](https://trace-eight-topaz.vercel.app/#evidence) | 사용자 승인된 **2026-10-21 기준** 리추얼·공식 출석·핵심 승인 집계 3종과 출처·산식·한계 |
-| 지원 문서 | [`#documents`](https://trace-eight-topaz.vercel.app/#documents) | 이력서·자기소개서·프로젝트 경험기술서 제작 상태. **사이트 다운로드는 미승인**이며 채점용 비공개 ZIP에 별도 포함 |
+| 지원 문서 | [`#documents`](https://trace-eight-topaz.vercel.app/#documents) | 공개용 이력서·자기소개서·프로젝트 경험기술서 웹 열람, Word·HTML 다운로드, 인쇄 창에서 PDF 저장. 채점용 비공개 ZIP은 별도 관리 |
 | 연락 | [`#contact`](https://trace-eight-topaz.vercel.app/#contact) | 승인된 공개 이메일 |
 
 ### 공개 승인된 활동 지표 (2026-10-21 역사적 스냅샷)

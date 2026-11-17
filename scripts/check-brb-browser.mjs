@@ -132,6 +132,50 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
       await documentsPage.close();
     }
 
+    const portfolio = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
+    try {
+      await portfolio.goto(base + "/", { waitUntil: "networkidle" });
+      const menu = portfolio.getByRole("button", { name: "메뉴 열기" });
+      const hero = portfolio.locator(".hero");
+      assert.ok(await hero.getByRole("link", { name: "이력서 보기" }).isVisible());
+      assert.match(await hero.innerText(), /합성 Held-out 110건/);
+      assert.ok(await portfolio.locator("#projects").evaluate((section) =>
+        Boolean(section.compareDocumentPosition(document.querySelector("#about")) & Node.DOCUMENT_POSITION_FOLLOWING)
+      ));
+      for (const width of [320, 390, 1024, 1366]) {
+        await portfolio.setViewportSize({ width, height: 844 });
+        assert.ok(await portfolio.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Home overflow at " + width);
+      }
+      await portfolio.setViewportSize({ width: 390, height: 844 });
+      await menu.press("Enter");
+      await portfolio.getByRole("navigation", { name: "주요 메뉴" }).getByRole("link", { name: "지원 서류" }).press("Enter");
+      await portfolio.waitForURL("**/#documents");
+      assert.equal(await portfolio.evaluate(() => document.activeElement?.id), "documents-title");
+      assert.equal(await menu.getAttribute("aria-expanded"), "false");
+
+      for (const [slug, title] of [["resume", "이력서"], ["personal-statement", "자기소개서"], ["project-experience", "프로젝트 경험기술서"]]) {
+        const response = await portfolio.goto(base + "/documents/" + slug + ".html", { waitUntil: "networkidle" });
+        assert.equal(response?.status(), 200, "Document responds at " + slug);
+        assert.equal(await portfolio.locator("h1").innerText(), title);
+        assert.equal(await portfolio.locator('nav a[aria-current="page"]').innerText(), title);
+        for (const [name, extension] of [["Word 다운로드 (.docx)", ".docx"], ["HTML 다운로드", ".html"]]) {
+          const [download] = await Promise.all([
+            portfolio.waitForEvent("download", { timeout: 5000 }),
+            portfolio.getByText(name, { exact: true }).click(),
+          ]);
+          assert.ok(download.suggestedFilename().endsWith(extension));
+          assert.equal(await download.failure(), null);
+        }
+        await portfolio.emulateMedia({ media: "print" });
+        assert.ok(await portfolio.locator("#application-document").isVisible());
+        assert.equal(await portfolio.getByRole("button", { name: "PDF로 저장 / 인쇄" }).isVisible(), false);
+        await portfolio.emulateMedia({ media: "screen" });
+      }
+      console.log("PASS project home, mobile keyboard navigation and three document downloads and print layouts");
+    } finally {
+      await portfolio.close();
+    }
+
     // A separate smoke check against the real public deployment, not the local static build.
     // This confirms that PR #47's title fix actually reached Vercel.
     const publicUrl = "https://trace-eight-topaz.vercel.app/ech-beacon-explorer";
