@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import "./route-motion.css";
 
 export const metadata: Metadata = {
   title: "TRACE | 오리온의 개발 기록",
@@ -18,6 +19,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="ko">
+      <head>
+        {/* The browser must see the opt-in before revealing the destination. */}
+        <style media="(prefers-reduced-motion: no-preference)">
+          {"@view-transition { navigation: auto; }"}
+        </style>
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
-import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
+import { RouteLink } from "@/components/route-link";
 import type { ApprovedNarrative } from "@/content/public-profile";
 import { detectorMetrics, t10Research } from "@/content/research-evidence";
 
@@ -242,7 +243,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#top" aria-label="Trace 맨 위로">
-            <span className="brand-mark">T<span>.</span></span>
+            <BrandMark />
             <span className="brand-name">TRACE <small>DEVELOPER PORTFOLIO</small></span>
           </a>
           <button
@@ -291,7 +292,6 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
               기록을 통해 지나온 과정을 이해하고,<br className="desktop-break" />
               검증 가능한 결과로 다음 단계를 준비합니다.
             </p>
-            <p className="hero-note">이 페이지는 BR-A 포트폴리오 제작 중인 버전입니다. 자기소개 본문은 본인의 검토와 승인을 거쳐 반영했습니다.</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">프로젝트 살펴보기 <span aria-hidden="true">↗</span></a>
               <a className="button button-outline" href="#about">소개 더 보기 <span aria-hidden="true">↓</span></a>
@@ -417,7 +417,6 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                   <small>근거: 2026-09-17 · 2026-09-16</small>
                 </article>
               </div>
-              <p className="story-source-note">본문은 본인이 승인한 자기소개를 바탕으로 작성했습니다. 소설 T11의 허구화된 장면이나 미확인 수치는 사실처럼 사용하지 않았습니다.</p>
             </div>
           </div>
         </div>
@@ -557,7 +556,8 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                 </div>
               </article>
             ))}
-            <article className="project-card project-future spotlight-card" onPointerMove={onSpotlightMove}>
+            <article className="project-card project-future spotlight-card trace-origin" id="research-app"
+                     tabIndex={-1} onPointerMove={onSpotlightMove}>
               <div className="project-art project-art-future">
                 <span className="art-number">03 / BR-B · RESEARCH APPLICATION</span>
                 <span className="art-monogram" aria-hidden="true">ECH</span>
@@ -566,7 +566,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                 <span className="project-category">INTERACTIVE RESEARCH LAB</span>
                 <h3>ECH Beacon Explorer</h3>
                 <p>T10 논문을 바탕으로 보안 학습자가 합성 Held-out 110건의 판정을 직접 비교하고 오탐 감소와 추론 비용의 균형을 살펴보는 공개 앱입니다.</p>
-                <a href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">↗</span></a>
+                <RouteLink href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
               </div>
             </article>
           </div>
@@ -584,9 +584,21 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             </div>
           </div>
           <div className="document-list" aria-label="지원 서류 열람 및 다운로드">
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">01</span><strong>이력서</strong><Link className="document-download" href="/documents/resume/">열람·다운로드 ↗</Link></div>
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">02</span><strong>자기소개서</strong><Link className="document-download" href="/documents/personal-statement/">열람·다운로드 ↗</Link></div>
-            <div className="document-item spotlight-card" onPointerMove={onSpotlightMove}><span className="document-number">03</span><strong>프로젝트 경험기술서</strong><Link className="document-download" href="/documents/project-experience/">열람·다운로드 ↗</Link></div>
+            <div className="document-item spotlight-card trace-origin" id="document-resume" tabIndex={-1} onPointerMove={onSpotlightMove}>
+              <span className="document-number">01</span>
+              <strong id="document-resume-title">이력서</strong>
+              <RouteLink className="document-download" href="/documents/resume/" aria-describedby="document-resume-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+            </div>
+            <div className="document-item spotlight-card trace-origin" id="document-personal-statement" tabIndex={-1} onPointerMove={onSpotlightMove}>
+              <span className="document-number">02</span>
+              <strong id="document-personal-statement-title">자기소개서</strong>
+              <RouteLink className="document-download" href="/documents/personal-statement/" aria-describedby="document-personal-statement-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+            </div>
+            <div className="document-item spotlight-card trace-origin" id="document-project-experience" tabIndex={-1} onPointerMove={onSpotlightMove}>
+              <span className="document-number">03</span>
+              <strong id="document-project-experience-title">프로젝트 경험기술서</strong>
+              <RouteLink className="document-download" href="/documents/project-experience/" aria-describedby="document-project-experience-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+            </div>
           </div>
         </div>
       </section>

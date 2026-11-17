@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
+import { RouteLink } from "@/components/route-link";
 import { applicationDocuments, getApplicationDocument } from "@/content/application-documents";
 import { DocumentActions } from "@/components/document-actions";
 import "./document.css";
@@ -20,9 +21,12 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
   if (!document) return null;
 
   return (
-    <main className="application-page">
+    <main className="application-page trace-route-panel">
       <header className="application-header">
-        <Link href="/#documents" className="application-back">← TRACE 포트폴리오</Link>
+        <RouteLink href={`/#document-${slug}`} className="application-back">
+          <BrandMark />
+          <span><span aria-hidden="true">←</span> 지원 서류로 돌아가기</span>
+        </RouteLink>
         <span>APPLICATION DOCUMENTS / 2026</span>
       </header>
       <div className="application-layout">
@@ -30,10 +34,10 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
           <p>지원 서류</p>
           <nav>
             {applicationDocuments.map((item, i) => (
-              <Link className={item.slug === slug ? "selected" : ""} aria-current={item.slug === slug ? "page" : undefined}
+              <RouteLink className={item.slug === slug ? "selected" : ""} aria-current={item.slug === slug ? "page" : undefined}
                     key={item.slug} href={`/documents/${item.slug}/`}>
                 <span>0{i + 1}</span>{item.title}
-              </Link>
+              </RouteLink>
             ))}
           </nav>
           <p className="application-disclaimer">공개용 이름으로 작성된 개발자 지원 문서입니다. 기업별 지원 시 연락처·지원 직무를 확인하세요.</p>

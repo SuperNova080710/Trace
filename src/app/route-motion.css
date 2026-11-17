@@ -1,0 +1,77 @@
+.trace-origin {
+  scroll-margin-top: 16px;
+}
+
+.trace-origin:target {
+  outline: 2px solid #75aafb;
+  outline-offset: 4px;
+}
+
+html:has(.trace-origin:target) {
+  scroll-behavior: auto;
+}
+
+/* Keep the outgoing view under the incoming pane. On return, the pane
+   moves away to reveal the portfolio at its restored scroll position. */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --route-slide: translateX(clamp(64px, 17vw, 192px));
+    --route-duration: 360ms;
+  }
+
+  :root::view-transition {
+    overflow: clip;
+  }
+
+  :root:has(.trace-route-panel)::view-transition-old(root),
+  :root:has(.trace-page)::view-transition-new(root) {
+    animation: trace-route-backdrop var(--route-duration) ease both;
+    mix-blend-mode: normal;
+  }
+
+  :root:has(.trace-page)::view-transition-new(root) {
+    animation-direction: reverse;
+  }
+
+  :root:has(.trace-route-panel)::view-transition-new(root),
+  :root:has(.trace-page)::view-transition-old(root) {
+    z-index: 1;
+    animation: trace-route-pane var(--route-duration) var(--ease) both;
+    box-shadow: 0 0 38px rgb(6 23 46 / 24%);
+    mix-blend-mode: normal;
+  }
+
+  :root:has(.trace-page)::view-transition-old(root) {
+    animation-name: trace-route-pane-exit;
+  }
+
+  @media (max-width: 600px) {
+    :root {
+      --route-slide: translateY(clamp(52px, 14svh, 112px));
+    }
+
+    .main-nav.is-open {
+      animation: trace-menu-in 200ms var(--ease) both;
+    }
+  }
+}
+
+@keyframes trace-route-pane {
+  from { transform: var(--route-slide); opacity: .4; }
+  to { transform: none; opacity: 1; }
+}
+
+@keyframes trace-route-pane-exit {
+  from { transform: none; opacity: 1; }
+  to { transform: var(--route-slide); opacity: 0; }
+}
+
+@keyframes trace-route-backdrop {
+  from { filter: brightness(1); }
+  to { filter: brightness(.84); }
+}
+
+@keyframes trace-menu-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}

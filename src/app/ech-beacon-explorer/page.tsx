@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { BrandMark } from "@/components/brand-mark";
+import { RouteLink } from "@/components/route-link";
 import research from "@/content/br-b-research-contract.json";
 import styles from "./explorer.module.css";
 import InteractiveExplorer from "./interactive-explorer";
@@ -34,14 +35,14 @@ export default function ExplorerIntro() {
   const { timingOnly, multiFeature } = research.detectors;
 
   return (
-    <main id="main-content" className={styles.root}>
+    <main id="main-content" className={`${styles.root} trace-route-panel`}>
       <div className={styles.shell}>
         <nav className={styles.nav} aria-label="ECH Beacon Explorer 이동">
-          <Link href="/" className={styles.brand}>
-            <span className={styles.brandSymbol} aria-hidden="true">T</span>
+          <RouteLink href="/" className={styles.brand} aria-label="TRACE 포트폴리오 홈">
+            <BrandMark />
             <span>TRACE <span className={styles.brandSecondary}>/ RESEARCH LAB</span></span>
-          </Link>
-          <Link href="/#projects" className={styles.back}>포트폴리오로 돌아가기 <span aria-hidden="true">↗</span></Link>
+          </RouteLink>
+          <RouteLink href="/#research-app" className={styles.back}><span aria-hidden="true">←</span> 프로젝트로 돌아가기</RouteLink>
         </nav>
 
         <section className={styles.hero} aria-labelledby="explorer-title">
@@ -140,7 +141,7 @@ export default function ExplorerIntro() {
           <span>ECH BEACON EXPLORER · TRACE / ALEPH BR-B</span>
           <div>
             <a href="https://github.com/SuperNova080710/ech-beacon-detection/blob/main/results/metrics/main-v1/heldout-evaluation.json" target="_blank" rel="noopener noreferrer">평가 데이터 ↗</a>
-            <Link href="/">TRACE 포트폴리오 ↗</Link>
+            <RouteLink href="/#projects">TRACE 프로젝트 <span aria-hidden="true">←</span></RouteLink>
           </div>
         </footer>
       </div>

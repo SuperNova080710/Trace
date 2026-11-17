@@ -30,9 +30,13 @@ for (const term of [
 }
 assert.ok(html.includes("ECH Beacon Explorer"), "BR-B featured application missing");
 assert.ok(html.includes('href="/ech-beacon-explorer"'), "BR-B app route missing from portfolio");
+assert.ok(html.includes('id="research-app"'), "Research app return anchor missing");
+assert.doesNotMatch(html, /class="(?:hero-note|story-source-note)"/);
 for (const slug of ["resume", "personal-statement", "project-experience"]) {
   assert.ok(new RegExp(`href="/documents/${slug}/?"`).test(html), `Missing document link: ${slug}`);
+  assert.ok(html.includes(`id="document-${slug}"`), `Missing document return anchor: ${slug}`);
   const documentPage = await readFile(new URL(`../out/documents/${slug}.html`, import.meta.url), "utf8");
+  assert.ok(documentPage.includes(`href="/#document-${slug}"`), `Document must link back to its card: ${slug}`);
   assert.ok(documentPage.includes("Word 다운로드"), `Missing DOCX action: ${slug}`);
   assert.ok(documentPage.includes(`/downloads/TRACE_${slug}.docx`), `Missing DOCX link: ${slug}`);
   assert.ok(documentPage.includes("PDF로 저장"), `Missing PDF print option: ${slug}`);
@@ -67,5 +71,6 @@ for (const term of [
   assert.ok(brbHtml.includes(term), "BR-B static page missing required introductory content: " + term);
 }
 assert.ok(brbHtml.includes('href="/#projects"'), "BR-B backlink to portfolio missing");
+assert.ok(brbHtml.includes('href="/#research-app"'), "BR-B must link back to its card");
 assert.ok(!brbHtml.includes("ritual-history-2026-10-21.json"), "BR-B static page must not expose private input name");
 console.log("PASS: BR-B independent static research introduction exported with clear limitations");
