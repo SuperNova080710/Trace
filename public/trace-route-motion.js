@@ -10,6 +10,19 @@
     if (!transition || !other) return;
 
     const otherPath = routePath(other);
+    const documentContent = phase === "in" && otherPath.startsWith("/documents/")
+      ? document.querySelector(".application-main")
+      : null;
+    if (documentContent) {
+      // Keep the new document shell steady instead of blending two full-page snapshots.
+      transition.skipTransition();
+      documentContent.animate(
+        [{ transform: "translateY(5px)" }, { transform: "none" }],
+        { duration: 180, easing: "ease-out" }
+      );
+      return;
+    }
+
     const onHome = document.querySelector(".trace-page");
     if (onHome) {
       const link = Array.from(onHome.querySelectorAll(".trace-origin a"))
