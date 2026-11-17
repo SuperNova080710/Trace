@@ -15,7 +15,7 @@ assert.ok(html.includes("백엔드 · 풀스택 개발자"), "Candidate role mis
 const blog = html.indexOf('id="project-blog"');
 const capstone = html.indexOf('id="capstone-title"');
 const research = html.indexOf('id="project-t10"');
-assert.ok(blog >= 0 && blog < capstone && capstone < research, "Project order in the hiring flow changed");
+assert.ok(capstone >= 0 && capstone < blog && blog < research, "Project order in the hiring flow changed");
 assert.ok(html.includes("프로젝트 경험기술서"), "Documents status section missing");
 assert.ok(html.includes("Native ECH Beacon Detection"), "T10 research missing");
 assert.ok(html.includes("ECH Beacon Explorer"), "BR-B featured application missing");
@@ -51,3 +51,10 @@ for (const term of [
 assert.ok(brbHtml.includes('href="/#projects"'), "BR-B backlink to portfolio missing");
 assert.ok(!brbHtml.includes("ritual-history-2026-10-21.json"), "BR-B static page must not expose private input name");
 console.log("PASS: BR-B independent static research introduction exported with clear limitations");
+
+
+const twinHtml = await readFile(new URL("../out/projects/digital-twin.html", import.meta.url), "utf8");
+for (const term of ["시스템 구성도", "상태 반영", "장치 제어", "3D 모델링을 제외한 시스템 전반", "10.9728/dcs.2025.26.12.3391"]) {
+  assert.ok(twinHtml.includes(term), "Digital twin flagship content missing: " + term);
+}
+assert.match(html, /href="\/projects\/digital-twin\/?"/);

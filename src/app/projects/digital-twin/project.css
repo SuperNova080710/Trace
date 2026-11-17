@@ -1,0 +1,22 @@
+.twin-project {
+  width: min(100% - 40px, 900px);
+  margin-inline: auto;
+  padding-block: 30px 72px;
+  color: var(--text);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+.twin-project a { color: #1958b9; font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+.twin-back { display: inline-flex; align-items: center; min-height: 44px; }
+.twin-intro { margin-block: 18px 30px; }
+.twin-intro h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.2; letter-spacing: -.05em; }
+.twin-intro p, .twin-section > p { max-width: 72ch; }
+.twin-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line); }
+.twin-section h2 { margin: 0; font-size: 1.45rem; line-height: 1.35; }
+.twin-diagram { margin: 12px 0 0; }
+.twin-flow h3 { margin: 12px 0 4px; font-size: 1rem; }
+.twin-flow ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 4vw, 30px); margin: 0; padding: 0; list-style: none; }
+.twin-flow li { position: relative; display: grid; align-content: start; gap: 3px; padding: 8px; background: var(--canvas); border-top: 2px solid #1958b9; font-size: .875rem; }
+.twin-flow li > span:not(.twin-arrow) { color: var(--muted); overflow-wrap: anywhere; }
+.twin-arrow { position: absolute; inset-inline-end: 100%; top: 6px; width: clamp(10px, 4vw, 30px); color: #1958b9; text-align: center; }
+.twin-diagram figcaption { margin-top: 10px; color: var(--muted); font-size: .875rem; }

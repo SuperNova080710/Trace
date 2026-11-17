@@ -88,6 +88,15 @@ export function TraceLab({ displayName, contactEmail }: Props) {
         <div className="portfolio-content">
           <section id="projects" aria-labelledby="projects-title">
             <h2 id="projects-title">프로젝트</h2>
+            <article className="portfolio-project" id="approach" aria-labelledby="capstone-title">
+              <h3 id="capstone-title">디지털 트윈 기반 스마트 캠퍼스</h3>
+              <p>실제 IoT 장치와 Unreal Engine 가상 캠퍼스를 양방향으로 연결했습니다. 3D 모델링을 제외한 시스템 전반을 직접 구현했습니다.</p>
+              <p className="portfolio-publication">디지털콘텐츠학회논문지 게재 · KCI 등재 · 2025</p>
+              <div className="portfolio-links">
+                <Link href="/projects/digital-twin/">프로젝트 상세 <span aria-hidden="true">→</span></Link>
+                <a href="https://doi.org/10.9728/dcs.2025.26.12.3391">게재 논문 보기 <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
             <article className="portfolio-project" id="project-blog" aria-labelledby="blog-title">
               <h3 id="blog-title">Full-stack Blog</h3>
               <p>Next.js 화면과 NestJS·PostgreSQL API를 연결해 로그인, 토큰 갱신, 게시글 기능을 구현했습니다. 수정·삭제 요청은 서버에서 작성자 ID를 확인해 처리합니다.</p>
@@ -102,20 +111,6 @@ export function TraceLab({ displayName, contactEmail }: Props) {
                   <a href="https://github.com/SuperNova080710/Blog-backend/blob/main/src/modules/posts/posts.service.ts">권한 검사 코드</a>
                   <a href="https://github.com/SuperNova080710/Blog-backend/blob/main/docs/api/posts.md">게시글 API 문서</a>
                 </div>
-              </details>
-            </article>
-            <article className="portfolio-project" id="approach" aria-labelledby="capstone-title">
-              <h3 id="capstone-title">디지털 트윈 기반 스마트 캠퍼스</h3>
-              <p>실제 IoT 장치와 Unreal Engine 가상 캠퍼스를 양방향으로 연결한 팀 프로젝트입니다.</p>
-              <p className="portfolio-publication">디지털콘텐츠학회논문지 게재 · KCI 등재 · 2025</p>
-              <div className="portfolio-links">
-                <a href="https://doi.org/10.9728/dcs.2025.26.12.3391">게재 논문 보기 <span aria-hidden="true">↗</span></a>
-              </div>
-              <details>
-                <summary>구현 역할과 프로젝트 이력</summary>
-                <p>2024년 캡스톤에서 시작한 시스템을 논문경진대회로 이어갔고, 2025년 디지털콘텐츠학회논문지에 연구를 게재했습니다.</p>
-                <p>MQTT 메시지 지연과 연동 오류가 반복되었을 때 ESP32, 네트워크, 서버, Unreal Engine을 구간별로 점검했습니다. 팀은 실제 장치의 상태를 가상 공간에 반영하고 가상 공간에서 장치를 제어하는 흐름을 시연했습니다.</p>
-                <p>「디지털 트윈 및 메타버스 융합형 스마트 캠퍼스 설계 및 구현」, 디지털콘텐츠학회논문지 26권 12호, 3391–3397쪽.</p>
               </details>
             </article>
             <article className="portfolio-project" id="project-t10" aria-labelledby="t10-title">

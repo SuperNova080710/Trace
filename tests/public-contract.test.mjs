@@ -122,10 +122,10 @@ test("application document cards reuse pointer glow and lift only for fine point
 });
 
 
-test("hiring review starts with the blog and retains the project evidence and documents", async () => {
+test("hiring review starts with the digital twin and retains the project evidence and documents", async () => {
   const lab = await read("src/components/trace-lab.tsx");
-  assert.ok(lab.indexOf('id="project-blog"') < lab.indexOf('id="capstone-title"'));
-  assert.ok(lab.indexOf('id="capstone-title"') < lab.indexOf('id="project-t10"'));
+  assert.ok(lab.indexOf('id="capstone-title"') < lab.indexOf('id="project-blog"'));
+  assert.ok(lab.indexOf('id="project-blog"') < lab.indexOf('id="project-t10"'));
   assert.match(lab, /작성자에게 200, 다른 로그인 사용자에게 403, 인증 정보가 없는 요청에 401/);
   assert.match(lab, /posts\.service\.ts/);
   assert.match(lab, /<details[\s\S]*?<summary>실험 설계와 공개 근거/);
