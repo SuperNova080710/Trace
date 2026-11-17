@@ -11,16 +11,47 @@ html:has(.trace-origin:target) {
   scroll-behavior: auto;
 }
 
-/* Keep the outgoing view under the incoming pane. On return, the pane
-   moves away to reveal the portfolio at its restored scroll position. */
+/* The linked card and the destination viewport share their capture name.
+   The browser interpolates their bounds while the two snapshots crossfade. */
 @media (prefers-reduced-motion: no-preference) {
   :root {
-    --route-slide: translateX(clamp(64px, 17vw, 192px));
-    --route-duration: 360ms;
+    --route-duration: 430ms;
   }
 
   :root::view-transition {
     overflow: clip;
+  }
+
+  ::view-transition-group(trace-route-card) {
+    z-index: 1;
+    animation-duration: var(--route-duration);
+    animation-timing-function: var(--ease);
+  }
+
+  ::view-transition-image-pair(trace-route-card) {
+    overflow: clip;
+    animation: trace-card-corners var(--route-duration) var(--ease) both;
+    box-shadow: 0 0 36px rgb(6 23 46 / 22%);
+  }
+
+  :root:has(.trace-page)::view-transition-image-pair(trace-route-card) {
+    animation-direction: reverse;
+  }
+
+  ::view-transition-old(trace-route-card),
+  ::view-transition-new(trace-route-card) {
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(trace-route-card) {
+    animation: trace-card-fade-out var(--route-duration) ease both;
+  }
+
+  ::view-transition-new(trace-route-card) {
+    animation: trace-card-fade-in var(--route-duration) ease both;
   }
 
   :root:has(.trace-route-panel)::view-transition-old(root),
@@ -33,37 +64,26 @@ html:has(.trace-origin:target) {
     animation-direction: reverse;
   }
 
-  :root:has(.trace-route-panel)::view-transition-new(root),
-  :root:has(.trace-page)::view-transition-old(root) {
-    z-index: 1;
-    animation: trace-route-pane var(--route-duration) var(--ease) both;
-    box-shadow: 0 0 38px rgb(6 23 46 / 24%);
-    mix-blend-mode: normal;
-  }
-
-  :root:has(.trace-page)::view-transition-old(root) {
-    animation-name: trace-route-pane-exit;
-  }
-
   @media (max-width: 600px) {
-    :root {
-      --route-slide: translateY(clamp(52px, 14svh, 112px));
-    }
-
     .main-nav.is-open {
       animation: trace-menu-in 200ms var(--ease) both;
     }
   }
 }
 
-@keyframes trace-route-pane {
-  from { transform: var(--route-slide); opacity: .4; }
-  to { transform: none; opacity: 1; }
+@keyframes trace-card-corners {
+  from { border-radius: 14px; }
+  to { border-radius: 0; }
 }
 
-@keyframes trace-route-pane-exit {
-  from { transform: none; opacity: 1; }
-  to { transform: var(--route-slide); opacity: 0; }
+@keyframes trace-card-fade-out {
+  0%, 15% { opacity: 1; }
+  65%, 100% { opacity: 0; }
+}
+
+@keyframes trace-card-fade-in {
+  0%, 15% { opacity: 0; }
+  65%, 100% { opacity: 1; }
 }
 
 @keyframes trace-route-backdrop {

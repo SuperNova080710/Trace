@@ -24,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <style media="(prefers-reduced-motion: no-preference)">
           {"@view-transition { navigation: auto; }"}
         </style>
+        <script src="/trace-route-motion.js" defer blocking="render" />
       </head>
       <body>{children}</body>
     </html>
