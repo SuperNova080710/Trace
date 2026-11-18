@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BrandMark } from "@/components/brand-mark";
 import { RouteLink } from "@/components/route-link";
-import { applicationDocuments, getApplicationDocument } from "@/content/application-documents";
+import { applicationDocuments, applicationDocumentsUpdatedAt, getApplicationDocument } from "@/content/application-documents";
 import { DocumentActions } from "@/components/document-actions";
 import "./document.css";
 
@@ -55,9 +55,16 @@ export default async function ApplicationPage({ params }: { params: Promise<{ sl
                 <div className="paper-section-heading"><span>{String(index + 1).padStart(2, "0")}</span><h3>{section.heading}</h3></div>
                 {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 {section.bullets && <ul>{section.bullets.map((line) => <li key={line}>{line}</li>)}</ul>}
+                {section.links && (
+                  <ul className="paper-links">
+                    {section.links.map(({ label, url }) => (
+                      <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{label}</a></li>
+                    ))}
+                  </ul>
+                )}
               </section>
             ))}
-            <footer className="paper-footer">오리온 · 2026년 11월 5일 기준 · 공개용 지원 문서</footer>
+            <footer className="paper-footer">오리온 · {applicationDocumentsUpdatedAt} 기준 · 공개용 지원 문서</footer>
           </article>
         </div>
       </div>

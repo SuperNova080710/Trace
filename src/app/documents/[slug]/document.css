@@ -93,6 +93,9 @@
 .paper-section-heading span{font-size:10px;font-weight:800;color:#4384d0}.paper-section h3{font-size:18px;color:#173d72;letter-spacing:-.03em;margin:0}
 .paper-section p,.paper-section li{font-size:13px;color:#334f70;line-height:1.9;margin:9px 0;white-space:pre-line}
 .paper-section li{padding-left:5px;margin:8px 0}.paper-section ul{padding-left:22px;margin:13px 0}
+.paper-section .paper-links{display:flex;flex-wrap:wrap;gap:4px 16px;list-style:none;padding:0;margin:12px 0 0}
+.paper-section .paper-links li{margin:0;padding:0}
+.paper-links a{color:var(--application-accent,#225486);text-decoration:underline;text-underline-offset:3px}
 .paper-footer{font-size:10px;color:#8393a8;text-align:right;border-top:1px solid #e6edf6;padding-top:15px;margin-top:45px}
 @media (max-width: 750px) {
   .application-header { padding: 0 20px; }
