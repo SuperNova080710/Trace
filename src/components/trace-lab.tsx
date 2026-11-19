@@ -41,8 +41,8 @@ const approaches = [
 
 const projects = [{
   number: "02", type: "WEB DEVELOPMENT", title: "Full-stack Blog",
-  description: "Next.js 프런트엔드와 NestJS 백엔드를 나누어 구현한 웹 프로젝트입니다. 기능과 역할은 순차적으로 보강합니다.",
-  href: "https://github.com/SuperNova080710/Blog-frontend", link: "프런트엔드 코드 보기", tone: "web", monogram: "WEB",
+  description: "Next.js 프론트엔드와 NestJS 백엔드를 나누어 구현한 웹 프로젝트입니다. 기능과 역할은 순차적으로 보강합니다.",
+  href: "https://github.com/SuperNova080710/Blog-frontend", link: "프론트엔드 코드 보기", tone: "web", monogram: "WEB",
 }] as const;
 
 export function TraceLab({ displayName, contactEmail, narrative }: Props) {
