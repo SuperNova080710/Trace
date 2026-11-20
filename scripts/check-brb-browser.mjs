@@ -256,7 +256,9 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
         });
         await navigationPage.addInitScript(() => {
           window.addEventListener("pagereveal", ({viewTransition}) => {
+            window.routeLaunchFrames = undefined;
             if (!viewTransition) return;
+            window.routeLaunchFinished = viewTransition.finished;
             void viewTransition.ready.then(() => {
               const group = document.getAnimations().find(animation => animation.effect?.pseudoElement === "::view-transition-group(trace-launch)");
               window.routeLaunchFrames = group?.effect.getKeyframes().map(frame => {
@@ -283,6 +285,7 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
           assert.ok(start.every((value, index) => Math.abs(value - [button.x, button.y, button.width, button.height][index]) <= 6),
             `${path} should open from its link bounds, received ${start}`);
           assert.ok(expanded[2] >= width * 0.95 && expanded[3] >= 890, `${path} should expand to the viewport`);
+          await navigationPage.evaluate(() => window.routeLaunchFinished);
 
           if (backHash) {
             await navigationPage.locator(`a[href="/${backHash}"]`).click();

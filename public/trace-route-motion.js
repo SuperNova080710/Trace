@@ -1,5 +1,6 @@
 (function () {
   const storageKey = "trace-route-reveal-origin";
+  let clearLaunch;
 
   function routePath(url) {
     return url.pathname.replace(/(?:\/index)?\.html$/, "").replace(/\/$/, "");
@@ -26,13 +27,17 @@
   }
 
   function playLaunch(transition, direction, surface) {
+    clearLaunch?.();
     const root = document.documentElement;
     root.dataset.traceRouteTransition = direction;
     surface.setAttribute("data-trace-route-surface", "");
     const reset = () => {
+      if (clearLaunch !== reset) return;
+      clearLaunch = undefined;
       delete root.dataset.traceRouteTransition;
       surface.removeAttribute("data-trace-route-surface");
     };
+    clearLaunch = reset;
     void transition.finished.then(reset, reset);
   }
 
