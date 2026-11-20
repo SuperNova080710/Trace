@@ -148,13 +148,16 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
             };
             const result = {
               button: button.textContent.trim(),
-              start: rect(opening ? button : dialog),
+              start: null,
               end: null,
               frames: [],
               animations: [],
               finished: false,
             };
-            const transition = startTransition(update);
+            const transition = startTransition(() => {
+              result.start = rect(opening ? button : dialog);
+              return update();
+            });
             window.alephViewTransitions.push(result);
             void transition.ready.then(() => {
               const animations = document.getAnimations();

@@ -31,6 +31,8 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
 
     const root = document.documentElement;
     const attribute = "data-trace-credential-transition";
+    // Capture the button where it was pressed even during a smooth scroll.
+    window.scrollTo({left: window.scrollX, top: window.scrollY, behavior: "instant"});
     root.setAttribute(attribute, direction);
     const transition = document.startViewTransition(update);
     transitionRef.current = transition;
