@@ -23,7 +23,7 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
   const transitionRef = useRef<ViewTransition | null>(null);
   const [credential, setCredential] = useState<Credential | null>(null);
 
-  function updateViewer(update: () => void) {
+  function updateViewer(update: () => void, direction: "open" | "close") {
     if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       update();
       return;
@@ -31,7 +31,7 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
 
     const root = document.documentElement;
     const attribute = "data-trace-credential-transition";
-    root.setAttribute(attribute, "");
+    root.setAttribute(attribute, direction);
     const transition = document.startViewTransition(update);
     transitionRef.current = transition;
     void transition.finished.finally(() => {
@@ -46,15 +46,13 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
     const dialog = dialogRef.current;
     if (!dialog || dialog.open) return;
 
-    updateViewer(() => {
-      flushSync(() => setCredential(item));
-      dialog.showModal();
-    });
+    flushSync(() => setCredential(item));
+    updateViewer(() => dialog.showModal(), "open");
   }
 
   function closeCredential() {
     const dialog = dialogRef.current;
-    if (dialog?.open) updateViewer(() => dialog.close());
+    if (dialog?.open) updateViewer(() => dialog.close(), "close");
   }
 
   return (
@@ -78,7 +76,15 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
               <p className={styles.summary}>AI 보안 에이전트 개발 과정을 수료하고 <strong>케테르(최고 등급)</strong> 인증을 받았습니다.</p>
               <div className={styles.actions}>
                 {credentials.map((item) => (
-                  <button type="button" className={styles.open} aria-haspopup="dialog" aria-controls="aleph-document-viewer" key={item.title} onClick={() => showCredential(item)}>
+                  <button
+                    type="button"
+                    className={styles.open}
+                    aria-haspopup="dialog"
+                    aria-controls="aleph-document-viewer"
+                    data-trace-credential-origin={credential === item ? "" : undefined}
+                    key={item.title}
+                    onClick={() => showCredential(item)}
+                  >
                     {`${item.title} 보기`} <span aria-hidden="true">→</span>
                   </button>
                 ))}

@@ -132,19 +132,39 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
       await documentsPage.close();
     }
 
-    for (const [width, reducedMotion] of [[1366, "no-preference"], [390, "reduce"]]) {
+    for (const [width, reducedMotion] of [[1366, "no-preference"], [390, "no-preference"], [390, "reduce"]]) {
       const experiencePage = await browser.newPage({viewport: {width, height: 900}, reducedMotion});
       try {
         await experiencePage.addInitScript(() => {
           const startTransition = document.startViewTransition.bind(document);
           window.alephViewTransitions = [];
           document.startViewTransition = update => {
+            const dialog = document.querySelector("#aleph-document-viewer");
+            const button = document.querySelector("[data-trace-credential-origin]");
+            const opening = !dialog.open;
+            const rect = element => {
+              const {x, y, width, height} = element.getBoundingClientRect();
+              return [x, y, width, height];
+            };
+            const result = {
+              button: button.textContent.trim(),
+              start: rect(opening ? button : dialog),
+              end: null,
+              frames: [],
+              animations: [],
+              finished: false,
+            };
             const transition = startTransition(update);
-            const result = {ready: false, finished: false, animations: []};
             window.alephViewTransitions.push(result);
             void transition.ready.then(() => {
-              result.ready = true;
-              result.animations = document.getAnimations().map(animation => animation.animationName);
+              const animations = document.getAnimations();
+              const group = animations.find(animation => animation.effect?.pseudoElement === "::view-transition-group(trace-credential)");
+              result.end = rect(opening ? dialog : button);
+              result.animations = animations.map(animation => animation.animationName);
+              result.frames = group?.effect.getKeyframes().map(frame => {
+                const {e, f} = new DOMMatrix(frame.transform);
+                return [e, f, parseFloat(frame.width), parseFloat(frame.height)];
+              }) ?? [];
             }, () => {});
             void transition.finished.then(() => { result.finished = true; });
             return transition;
@@ -155,7 +175,7 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
         const dialog = experiencePage.locator("#experience dialog");
         let expectedTransitions = 0;
 
-        async function checkViewTransition() {
+        async function checkViewTransition(title) {
           if (reducedMotion === "reduce") {
             assert.equal(await experiencePage.evaluate(() => window.alephViewTransitions.length), 0);
             return;
@@ -167,14 +187,18 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
             return transitions.length === count && transitions.at(-1).finished;
           }, expectedTransitions);
           const result = await experiencePage.evaluate(() => window.alephViewTransitions.at(-1));
-          assert.equal(result.ready, true, "Credential view transition should reach its animation phase");
-          assert.ok(result.animations.includes("trace-credential-reveal"), "Dialog snapshot should animate");
+          assert.ok(result.button.startsWith(`${title} 보기`));
+          assert.equal(result.frames.length, 2, "Shared View Transition group should animate position and size");
+          for (const [frame, bounds] of [[result.frames[0], result.start], [result.frames[1], result.end]]) {
+            assert.ok(frame.every((value, index) => Math.abs(value - bounds[index]) <= 5),
+              `View Transition frame ${frame} should match element bounds ${bounds}`);
+          }
           assert.ok(result.animations.includes("trace-credential-backdrop"), "Backdrop snapshot should animate");
         }
 
         for (const [title, asset] of [["수료증", "completion"], ["인증서", "certification"]]) {
           const trigger = card.getByRole("button", {name: `${title} 보기`});
-          if (reducedMotion === "no-preference") {
+          if (width > 760) {
             const background = await trigger.evaluate(el => getComputedStyle(el).backgroundColor);
             await trigger.hover();
             const hover = await trigger.evaluate(async el => {
@@ -192,12 +216,12 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
           const image = viewer.getByRole("img");
           assert.equal(await image.getAttribute("src"), `/experience/aleph-${asset}.jpg`);
           await image.evaluate(element => element.decode());
-          await checkViewTransition();
+          await checkViewTransition(title);
 
           if (asset === "completion") await experiencePage.keyboard.press("Escape");
           else await viewer.getByRole("button", {name: "닫기"}).click();
           await dialog.waitFor({state: "hidden"});
-          await checkViewTransition();
+          await checkViewTransition(title);
           assert.ok(await trigger.evaluate(element => document.activeElement === element));
         }
         console.log(`PASS ALEPH certificate dialog at ${width}px (${reducedMotion})`);
