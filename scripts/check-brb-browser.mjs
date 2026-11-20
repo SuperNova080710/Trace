@@ -289,7 +289,7 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
             await navigationPage.waitForURL(`**/${backHash}`);
           } else {
             await navigationPage.goBack({waitUntil: "commit"});
-            await navigationPage.waitForURL(home);
+            await navigationPage.waitForURL(url => url.pathname === "/", {waitUntil: "commit"});
           }
           await navigationPage.waitForFunction(() => window.routeLaunchFrames?.length === 2);
           assert.ok(await navigationPage.evaluate(() => window.routeLaunchAbovePage),
