@@ -71,7 +71,8 @@ html:has(.trace-origin:target) {
   }
 
   :root:is([data-trace-credential-transition="close"], [data-trace-route-transition="close"])::view-transition-group(trace-launch) {
-    animation-duration: 320ms;
+    animation-duration: 390ms;
+    animation-timing-function: cubic-bezier(.25, .65, .35, 1);
   }
 
   ::view-transition-image-pair(trace-launch) {
