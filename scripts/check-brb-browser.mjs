@@ -135,42 +135,69 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
     for (const [width, reducedMotion] of [[1366, "no-preference"], [390, "reduce"]]) {
       const experiencePage = await browser.newPage({viewport: {width, height: 900}, reducedMotion});
       try {
+        await experiencePage.addInitScript(() => {
+          const startTransition = document.startViewTransition.bind(document);
+          window.alephViewTransitions = [];
+          document.startViewTransition = update => {
+            const transition = startTransition(update);
+            const result = {ready: false, finished: false, animations: []};
+            window.alephViewTransitions.push(result);
+            void transition.ready.then(() => {
+              result.ready = true;
+              result.animations = document.getAnimations().map(animation => animation.animationName);
+            }, () => {});
+            void transition.finished.then(() => { result.finished = true; });
+            return transition;
+          };
+        });
         await experiencePage.goto(base + "/#experience", {waitUntil: "networkidle"});
         const card = experiencePage.locator("#experience .project-card");
         const dialog = experiencePage.locator("#experience dialog");
-        await dialog.evaluate(element => {
-          element.addEventListener("transitionrun", event => {
-            if (event.propertyName === "opacity") {
-              element.dataset[element.open ? "entered" : "exited"] = "true";
-            }
-          });
-        });
+        let expectedTransitions = 0;
+
+        async function checkViewTransition() {
+          if (reducedMotion === "reduce") {
+            assert.equal(await experiencePage.evaluate(() => window.alephViewTransitions.length), 0);
+            return;
+          }
+
+          expectedTransitions++;
+          await experiencePage.waitForFunction(count => {
+            const transitions = window.alephViewTransitions;
+            return transitions.length === count && transitions.at(-1).finished;
+          }, expectedTransitions);
+          const result = await experiencePage.evaluate(() => window.alephViewTransitions.at(-1));
+          assert.equal(result.ready, true, "Credential view transition should reach its animation phase");
+          assert.ok(result.animations.includes("trace-credential-reveal"), "Dialog snapshot should animate");
+          assert.ok(result.animations.includes("trace-credential-backdrop"), "Backdrop snapshot should animate");
+        }
 
         for (const [title, asset] of [["수료증", "completion"], ["인증서", "certification"]]) {
-          await dialog.evaluate(element => {
-            delete element.dataset.entered;
-            delete element.dataset.exited;
-          });
           const trigger = card.getByRole("button", {name: `${title} 보기`});
+          if (reducedMotion === "no-preference") {
+            const background = await trigger.evaluate(el => getComputedStyle(el).backgroundColor);
+            await trigger.hover();
+            const hover = await trigger.evaluate(async el => {
+              await Promise.all(el.getAnimations().map(animation => animation.finished));
+              const style = getComputedStyle(el);
+              return {background: style.backgroundColor, decoration: style.textDecorationLine};
+            });
+            assert.notEqual(hover.background, background);
+            assert.equal(hover.decoration, "none");
+          }
+
           await trigger.press("Enter");
           const viewer = experiencePage.getByRole("dialog", {name: `SKT ALEPH ${title}`});
           await viewer.waitFor();
           const image = viewer.getByRole("img");
           assert.equal(await image.getAttribute("src"), `/experience/aleph-${asset}.jpg`);
           await image.evaluate(element => element.decode());
-          if (reducedMotion === "no-preference") {
-            await experiencePage.waitForFunction(() => {
-              const element = document.querySelector("#experience dialog");
-              return element.dataset.entered && getComputedStyle(element).opacity === "1";
-            });
-          }
+          await checkViewTransition();
 
           if (asset === "completion") await experiencePage.keyboard.press("Escape");
           else await viewer.getByRole("button", {name: "닫기"}).click();
           await dialog.waitFor({state: "hidden"});
-          const animated = reducedMotion === "no-preference" ? "true" : null;
-          assert.equal(await dialog.getAttribute("data-entered"), animated);
-          assert.equal(await dialog.getAttribute("data-exited"), animated);
+          await checkViewTransition();
           assert.ok(await trigger.evaluate(element => document.activeElement === element));
         }
         console.log(`PASS ALEPH certificate dialog at ${width}px (${reducedMotion})`);

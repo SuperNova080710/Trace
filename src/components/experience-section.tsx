@@ -20,11 +20,40 @@ type Credential = (typeof credentials)[number];
 
 export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: PointerEventHandler<HTMLElement> }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const transitionRef = useRef<ViewTransition | null>(null);
   const [credential, setCredential] = useState<Credential | null>(null);
 
+  function updateViewer(update: () => void) {
+    if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      update();
+      return;
+    }
+
+    const root = document.documentElement;
+    root.dataset.traceCredentialTransition = "";
+    const transition = document.startViewTransition(update);
+    transitionRef.current = transition;
+    void transition.finished.finally(() => {
+      if (transitionRef.current === transition) {
+        transitionRef.current = null;
+        delete root.dataset.traceCredentialTransition;
+      }
+    }).catch(() => {});
+  }
+
   function showCredential(item: Credential) {
-    flushSync(() => setCredential(item));
-    dialogRef.current?.showModal();
+    const dialog = dialogRef.current;
+    if (!dialog || dialog.open) return;
+
+    updateViewer(() => {
+      flushSync(() => setCredential(item));
+      dialog.showModal();
+    });
+  }
+
+  function closeCredential() {
+    const dialog = dialogRef.current;
+    if (dialog?.open) updateViewer(() => dialog.close());
   }
 
   return (
@@ -48,7 +77,7 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
               <p className={styles.summary}>AI 보안 에이전트 개발 과정을 수료하고 <strong>케테르(최고 등급)</strong> 인증을 받았습니다.</p>
               <div className={styles.actions}>
                 {credentials.map((item) => (
-                  <button type="button" className={styles.open} aria-haspopup="dialog" key={item.title} onClick={() => showCredential(item)}>
+                  <button type="button" className={styles.open} aria-haspopup="dialog" aria-controls="aleph-document-viewer" key={item.title} onClick={() => showCredential(item)}>
                     {`${item.title} 보기`} <span aria-hidden="true">→</span>
                   </button>
                 ))}
@@ -58,12 +87,19 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
         </div>
       </div>
 
-      <dialog className={styles.dialog} ref={dialogRef} aria-labelledby="aleph-document-title">
+      <dialog
+        id="aleph-document-viewer"
+        className={styles.dialog}
+        ref={dialogRef}
+        aria-labelledby="aleph-document-title"
+        onCancel={(event) => {
+          event.preventDefault();
+          closeCredential();
+        }}
+      >
         <div className={styles.dialogHeader}>
           <h3 id="aleph-document-title">SKT ALEPH {credential?.title}</h3>
-          <form method="dialog">
-            <button className={styles.close} type="submit">닫기</button>
-          </form>
+          <button className={styles.close} type="button" onClick={closeCredential}>닫기</button>
         </div>
         {credential && (
           <Image
@@ -72,6 +108,7 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
             alt={credential.description}
             width={1813}
             height={1281}
+            loading="eager"
             unoptimized
           />
         )}

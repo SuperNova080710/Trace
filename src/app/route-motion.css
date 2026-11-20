@@ -63,6 +63,26 @@ html:has(.trace-origin:target) {
     animation: trace-card-reveal 430ms var(--ease) reverse both;
   }
 
+  :root[data-trace-credential-transition] #aleph-document-viewer[open] {
+    view-transition-name: trace-credential;
+  }
+
+  :root[data-trace-credential-transition]::view-transition-new(root) {
+    animation: trace-credential-backdrop 240ms ease both;
+  }
+
+  ::view-transition-group(trace-credential) {
+    animation: none;
+  }
+
+  ::view-transition-new(trace-credential) {
+    animation: trace-credential-reveal 260ms var(--ease) both;
+  }
+
+  ::view-transition-old(trace-credential) {
+    animation: trace-credential-reveal 210ms ease-in reverse both;
+  }
+
   @media (max-width: 600px) {
     .main-nav.is-open {
       animation: trace-menu-in 200ms var(--ease) both;
@@ -77,6 +97,16 @@ html:has(.trace-origin:target) {
 @keyframes trace-card-reveal {
   from { clip-path: inset(var(--trace-card-inset) round 14px); }
   to { clip-path: inset(0% 0% 0% 0% round 0px); }
+}
+
+@keyframes trace-credential-backdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes trace-credential-reveal {
+  from { opacity: 0; transform: translateY(18px) scale(.97); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes trace-menu-in {
