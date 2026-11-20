@@ -25,7 +25,7 @@ const sources = {
   rollingUpdate: { label: "롤링 업데이트와 롤백", url: "https://odyz.tistory.com/42" },
   rolloutFailure: { label: "ImagePullBackOff 원인 분석과 롤백", url: "https://odyz.tistory.com/43" },
   blogBackend: { label: "Blog 백엔드 코드", url: "https://github.com/SuperNova080710/Blog-backend" },
-  blogFrontend: { label: "Blog 프런트엔드 코드", url: "https://github.com/SuperNova080710/Blog-frontend" },
+  blogFrontend: { label: "Blog 프론트엔드 코드", url: "https://github.com/SuperNova080710/Blog-frontend" },
   ech: { label: "Native ECH 연구 저장소", url: "https://github.com/SuperNova080710/ech-beacon-detection" },
   explorer: { label: "ECH Beacon Explorer", url: "https://trace-eight-topaz.vercel.app/ech-beacon-explorer" },
   arena: { label: "한판아레나", url: "https://alkkagi-alpha.vercel.app/" },
@@ -51,7 +51,7 @@ export const applicationDocuments: readonly ApplicationDocument[] = [
       ] },
       { heading: "기술 경험", bullets: [
         "백엔드: Node.js, NestJS, TypeScript, TypeORM, REST API, JWT 인증·토큰 갱신",
-        "프런트엔드: Next.js, React, Tailwind CSS",
+        "프론트엔드: Next.js, React, Tailwind CSS",
         "데이터베이스·배포: PostgreSQL, Supabase Auth·RLS·Realtime, Docker, Vercel",
         "인프라 실습: Ubuntu, Kubernetes(k3s), kubectl, YAML, Traefik Ingress",
         "개발·검증: GitHub Issue·PR·CI, 로그 기반 오류 재현, 브라우저 동작 확인",
@@ -111,7 +111,7 @@ export const applicationDocuments: readonly ApplicationDocument[] = [
       ], links: [sources.paper] },
       { heading: "Full-stack Blog | 인증과 게시글 API", paragraphs: [
         "기술: NestJS 11, TypeORM 0.3, PostgreSQL 16, Next.js 16, React 19, TypeScript, Docker.",
-        "담당: JWT 로그인·토큰 갱신·로그아웃·사용자 조회와 게시글 CRUD를 구현했습니다. 프런트엔드에서 토큰 갱신 후 요청을 다시 보내도록 연결했고, API에서 게시글 소유권을 확인했습니다.",
+        "담당: JWT 로그인·토큰 갱신·로그아웃·사용자 조회와 게시글 CRUD를 구현했습니다. 프론트엔드에서 토큰 갱신 후 요청을 다시 보내도록 연결했고, API에서 게시글 소유권을 확인했습니다.",
         "검증: 로그인, 토큰 갱신, 사용자별 게시글 접근을 확인했습니다. Docker 환경에서 마이그레이션과 CORS 설정도 점검했습니다.",
       ], links: [sources.blogBackend, sources.blogFrontend] },
       { heading: "Kubernetes(k3s) | 배포와 장애 복구 실습", paragraphs: [
