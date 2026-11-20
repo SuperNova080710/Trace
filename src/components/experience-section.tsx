@@ -30,13 +30,14 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
     }
 
     const root = document.documentElement;
-    root.dataset.traceCredentialTransition = "";
+    const attribute = "data-trace-credential-transition";
+    root.setAttribute(attribute, "");
     const transition = document.startViewTransition(update);
     transitionRef.current = transition;
     void transition.finished.finally(() => {
       if (transitionRef.current === transition) {
         transitionRef.current = null;
-        delete root.dataset.traceCredentialTransition;
+        root.removeAttribute(attribute);
       }
     }).catch(() => {});
   }
