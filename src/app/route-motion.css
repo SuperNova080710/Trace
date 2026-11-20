@@ -54,42 +54,38 @@ html:has(.trace-origin:target) {
     animation: trace-liquid-reveal 460ms cubic-bezier(.48, .13, .34, .99) both;
   }
 
-  :root[data-trace-reveal="expand"]::view-transition-new(root) {
-    animation: trace-card-reveal 430ms var(--ease) both;
-  }
-
-  :root[data-trace-reveal="collapse"]::view-transition-old(root) {
-    z-index: 1;
-    animation: trace-card-reveal 430ms var(--ease) reverse both;
-  }
-
+  [data-trace-route-surface],
   :root[data-trace-credential-transition] #aleph-document-viewer[open],
   :root[data-trace-credential-transition]:not(:has(#aleph-document-viewer[open])) [data-trace-credential-origin] {
-    view-transition-name: trace-credential;
+    view-transition-name: trace-launch;
   }
 
   :root[data-trace-credential-transition]::view-transition-new(root) {
     animation: trace-credential-backdrop 240ms ease both;
   }
 
-  ::view-transition-group(trace-credential) {
+  ::view-transition-group(trace-launch) {
     animation-duration: 400ms;
     animation-timing-function: cubic-bezier(.22, .8, .24, 1);
   }
 
-  :root[data-trace-credential-transition="close"]::view-transition-group(trace-credential) {
+  :root:is([data-trace-credential-transition="close"], [data-trace-route-transition="close"])::view-transition-group(trace-launch) {
     animation-duration: 320ms;
   }
 
-  ::view-transition-image-pair(trace-credential) {
+  ::view-transition-image-pair(trace-launch) {
     overflow: clip;
-    animation: trace-credential-shape both;
+    animation: trace-launch-shape both;
     animation-duration: inherit;
     animation-timing-function: inherit;
   }
 
-  ::view-transition-new(trace-credential),
-  ::view-transition-old(trace-credential) {
+  :root[data-trace-route-transition]::view-transition-image-pair(trace-launch) {
+    --trace-launch-panel-radius: 0px;
+  }
+
+  ::view-transition-new(trace-launch),
+  ::view-transition-old(trace-launch) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -99,26 +95,26 @@ html:has(.trace-origin:target) {
     animation-fill-mode: both;
   }
 
-  ::view-transition-old(trace-credential) {
-    animation-name: trace-credential-button;
+  ::view-transition-old(trace-launch) {
+    animation-name: trace-launch-button;
   }
 
-  ::view-transition-new(trace-credential) {
-    animation-name: trace-credential-window;
+  ::view-transition-new(trace-launch) {
+    animation-name: trace-launch-panel;
   }
 
-  :root[data-trace-credential-transition="close"]::view-transition-image-pair(trace-credential) {
+  :root:is([data-trace-credential-transition="close"], [data-trace-route-transition="close"])::view-transition-image-pair(trace-launch),
+  :root:is([data-trace-credential-transition="close"], [data-trace-route-transition="close"])::view-transition-old(trace-launch),
+  :root:is([data-trace-credential-transition="close"], [data-trace-route-transition="close"])::view-transition-new(trace-launch) {
     animation-direction: reverse;
   }
 
-  :root[data-trace-credential-transition="close"]::view-transition-old(trace-credential) {
-    animation-name: trace-credential-window;
-    animation-direction: reverse;
+  :root:is([data-trace-credential-transition="close"], [data-trace-route-transition="close"])::view-transition-old(trace-launch) {
+    animation-name: trace-launch-panel;
   }
 
-  :root[data-trace-credential-transition="close"]::view-transition-new(trace-credential) {
-    animation-name: trace-credential-button;
-    animation-direction: reverse;
+  :root:is([data-trace-credential-transition="close"], [data-trace-route-transition="close"])::view-transition-new(trace-launch) {
+    animation-name: trace-launch-button;
   }
 
   @media (max-width: 600px) {
@@ -132,27 +128,22 @@ html:has(.trace-origin:target) {
   to { --trace-reveal-radius: var(--trace-reveal-limit, 175vmax); }
 }
 
-@keyframes trace-card-reveal {
-  from { clip-path: inset(var(--trace-card-inset) round 14px); }
-  to { clip-path: inset(0% 0% 0% 0% round 0px); }
-}
-
 @keyframes trace-credential-backdrop {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes trace-credential-shape {
+@keyframes trace-launch-shape {
   from { border-radius: 6px; background: #edf4ff; }
-  to { border-radius: 12px; background: #fff; }
+  to { border-radius: var(--trace-launch-panel-radius, 12px); background: #fff; }
 }
 
-@keyframes trace-credential-button {
+@keyframes trace-launch-button {
   from { opacity: 1; }
   44%, to { opacity: 0; }
 }
 
-@keyframes trace-credential-window {
+@keyframes trace-launch-panel {
   from, 10% { opacity: 0; }
   60%, to { opacity: 1; }
 }

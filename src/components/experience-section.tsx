@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRef, useState, type PointerEventHandler } from "react";
+import { useRef, useState, type MouseEvent, type PointerEventHandler } from "react";
 import { flushSync } from "react-dom";
 import styles from "./experience-section.module.css";
 
@@ -18,8 +18,16 @@ const credentials = [
 
 type Credential = (typeof credentials)[number];
 
+function isBackdrop(event: MouseEvent<HTMLDialogElement>) {
+  if (event.target !== event.currentTarget) return false;
+
+  const { left, right, top, bottom } = event.currentTarget.getBoundingClientRect();
+  return event.clientX < left || event.clientX >= right || event.clientY < top || event.clientY >= bottom;
+}
+
 export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: PointerEventHandler<HTMLElement> }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const pressedBackdrop = useRef(false);
   const transitionRef = useRef<ViewTransition | null>(null);
   const [credential, setCredential] = useState<Credential | null>(null);
 
@@ -104,6 +112,12 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
         onCancel={(event) => {
           event.preventDefault();
           closeCredential();
+        }}
+        onPointerDown={(event) => { pressedBackdrop.current = event.button === 0 && isBackdrop(event); }}
+        onClick={(event) => {
+          const clickedBackdrop = pressedBackdrop.current && isBackdrop(event);
+          pressedBackdrop.current = false;
+          if (clickedBackdrop) closeCredential();
         }}
       >
         <div className={styles.dialogHeader}>

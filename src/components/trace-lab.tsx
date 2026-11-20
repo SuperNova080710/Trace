@@ -568,7 +568,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                 <span className="project-category">INTERACTIVE RESEARCH LAB</span>
                 <h3>ECH Beacon Explorer</h3>
                 <p>T10 논문을 바탕으로 보안 학습자가 합성 Held-out 110건의 판정을 직접 비교하고 오탐 감소와 추론 비용의 균형을 살펴보는 공개 앱입니다.</p>
-                <RouteLink href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
+                <RouteLink href="/ech-beacon-explorer" data-trace-launch-link>연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
               </div>
             </article>
           </div>
@@ -591,17 +591,17 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             <div className="document-item spotlight-card trace-origin" id="document-resume" tabIndex={-1} onPointerMove={onSpotlightMove}>
               <span className="document-number">01</span>
               <strong id="document-resume-title">이력서</strong>
-              <RouteLink className="document-download" href="/documents/resume/" aria-describedby="document-resume-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+              <RouteLink className="document-download" href="/documents/resume/" aria-describedby="document-resume-title" data-trace-launch-link>열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
             </div>
             <div className="document-item spotlight-card trace-origin" id="document-personal-statement" tabIndex={-1} onPointerMove={onSpotlightMove}>
               <span className="document-number">02</span>
               <strong id="document-personal-statement-title">자기소개서</strong>
-              <RouteLink className="document-download" href="/documents/personal-statement/" aria-describedby="document-personal-statement-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+              <RouteLink className="document-download" href="/documents/personal-statement/" aria-describedby="document-personal-statement-title" data-trace-launch-link>열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
             </div>
             <div className="document-item spotlight-card trace-origin" id="document-project-experience" tabIndex={-1} onPointerMove={onSpotlightMove}>
               <span className="document-number">03</span>
               <strong id="document-project-experience-title">프로젝트 경험기술서</strong>
-              <RouteLink className="document-download" href="/documents/project-experience/" aria-describedby="document-project-experience-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+              <RouteLink className="document-download" href="/documents/project-experience/" aria-describedby="document-project-experience-title" data-trace-launch-link>열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
             </div>
           </div>
         </div>
