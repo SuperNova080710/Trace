@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { BrandMark } from "@/components/brand-mark";
+import { ExperienceSection } from "@/components/experience-section";
 import { RouteLink } from "@/components/route-link";
 import type { ApprovedNarrative } from "@/content/public-profile";
 import { detectorMetrics, t10Research } from "@/content/research-evidence";
@@ -271,6 +272,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             <a href="#about" onClick={() => setMobileMenuOpen(false)}>소개</a>
             <a href="#approach" onClick={() => setMobileMenuOpen(false)}>작업 방식</a>
             <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
+            <a href="#experience" onClick={() => setMobileMenuOpen(false)}>경험</a>
             <a href="#documents" onClick={() => setMobileMenuOpen(false)}>지원 서류</a>
             <a href="#contact" className="mobile-contact-link" onClick={() => setMobileMenuOpen(false)}>연락하기 <span aria-hidden="true">↓</span></a>
           </nav>
@@ -572,6 +574,8 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
           </div>
         </div>
       </section>
+
+      <ExperienceSection />
 
       <section className="section section-white documents-section" id="documents" aria-labelledby="documents-title">
         <div className="container">

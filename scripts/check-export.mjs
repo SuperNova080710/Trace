@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const html = await readFile(new URL("../out/index.html", import.meta.url), "utf8");
-const requiredTargets = ["main-content", "about", "approach", "projects", "documents", "contact"];
+const requiredTargets = ["main-content", "about", "approach", "projects", "experience", "documents", "contact"];
 
 assert.match(html, /<html[^>]+lang="ko"/);
 for (const id of requiredTargets) {
@@ -14,6 +14,13 @@ assert.ok(html.includes('href="mailto:lionoh00@gmail.com"'), "Actual contact mai
 assert.ok(html.includes("문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람"), "Approved-style one-line hook missing");
 assert.ok(html.includes("모르는 문제가 생기면 제가 아는 지식 내에서 차근차근 찾아보는 사람입니다"), "Approved narrative opening missing");
 assert.ok(html.includes("프로젝트 경험기술서"), "Documents status section missing");
+assert.ok(html.includes('href="#experience"'), "Experience navigation link missing");
+assert.match(html, /id="projects"[\s\S]*?id="experience"[\s\S]*?id="documents"/);
+assert.match(html, /id="experience"[\s\S]*?케테르\(최고 등급\)[\s\S]*?수료증 보기[\s\S]*?인증서 보기/);
+for (const kind of ["completion", "certification"]) {
+  const preview = await readFile(new URL(`../out/experience/aleph-${kind}.jpg`, import.meta.url));
+  assert.equal(preview.subarray(0, 3).toString("hex"), "ffd8ff", `Invalid ALEPH document image: ${kind}`);
+}
 assert.ok(html.includes("Native ECH Beacon Detection"), "T10 research missing");
 const projects = html.match(/<section\b[^>]*\bid="projects"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? "";
 const featured = projects.match(/<article\b[^>]*>[\s\S]*?<\/article>/)?.[0] ?? "";

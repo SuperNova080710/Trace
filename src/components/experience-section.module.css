@@ -1,0 +1,155 @@
+.section {
+  padding-block: clamp(56px, 7vw, 90px);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.content h2 {
+  margin: -2px 0 0;
+  font-size: clamp(25px, 2.6vw, 36px);
+  line-height: 1.4;
+  letter-spacing: -.035em;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 12px 28px;
+  padding-block: 20px;
+  border-block: 1px solid #cbd9ee;
+}
+
+.period,
+.summary {
+  margin: 0;
+  color: var(--muted);
+}
+
+.period {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.copy h3 {
+  margin: 5px 0 3px;
+  font-size: clamp(22px, 2.1vw, 29px);
+  line-height: 1.4;
+  letter-spacing: -.025em;
+}
+
+.summary {
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.summary strong {
+  color: #164b9a;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 22px;
+}
+
+.open,
+.close {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #194e97;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.open:hover,
+.close:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.dialog {
+  width: min(960px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: clamp(14px, 3vw, 24px);
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 28px 100px #07172e50;
+}
+
+.dialog::backdrop {
+  background: #07172eb8;
+}
+
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.dialogHeader h3 {
+  margin: 0;
+  font-size: clamp(17px, 2.5vw, 23px);
+  line-height: 1.4;
+}
+
+.document {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dialogFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3px 18px;
+  margin-top: 12px;
+}
+
+.note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.dialogFooter a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: #194e97;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 880px) {
+  .entry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
