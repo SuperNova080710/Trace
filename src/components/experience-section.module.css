@@ -1,51 +1,10 @@
-.section {
-  padding-block: clamp(56px, 7vw, 90px);
-}
-
-.content {
-  display: grid;
-  grid-template-columns: 110px minmax(0, 1fr);
-  align-items: start;
-  gap: 20px;
-}
-
-.content h2 {
-  margin: -2px 0 0;
-  font-size: clamp(25px, 2.6vw, 36px);
-  line-height: 1.4;
-  letter-spacing: -.035em;
-}
-
-.entry {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 12px 28px;
-  padding-block: 20px;
-  border-block: 1px solid #cbd9ee;
-}
-
-.period,
-.summary {
-  margin: 0;
-  color: var(--muted);
+.section .heading h2 {
+  margin-top: 0;
 }
 
 .period {
-  font-size: 13px;
   font-variant-numeric: tabular-nums;
-}
-
-.copy h3 {
-  margin: 5px 0 3px;
-  font-size: clamp(22px, 2.1vw, 29px);
-  line-height: 1.4;
-  letter-spacing: -.025em;
-}
-
-.summary {
-  font-size: 15px;
-  line-height: 1.75;
+  letter-spacing: .03em;
 }
 
 .summary strong {
@@ -55,7 +14,7 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 22px;
+  gap: 6px 12px;
 }
 
 .open,
@@ -77,6 +36,21 @@
 .close:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.open {
+  padding-inline: 10px;
+  border-radius: 6px;
+  background: #edf4ff;
+}
+
+.open:hover,
+.open:focus-visible {
+  background: #e0edff;
+}
+
+.open:active {
+  background: #cdddff;
 }
 
 .dialog {
@@ -141,15 +115,53 @@
   text-underline-offset: 4px;
 }
 
-@media (max-width: 880px) {
-  .entry {
+@media (max-width: 760px) {
+  .section .grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (max-width: 760px) {
-  .content {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
+@media (prefers-reduced-motion: no-preference) {
+  .open {
+    transition: background-color 150ms ease, transform 150ms ease;
+  }
+
+  .open:active {
+    transform: translateY(2px);
+  }
+
+  .dialog {
+    opacity: 0;
+    transform: translateY(18px) scale(.97);
+    transition: opacity 230ms var(--ease), transform 270ms var(--ease);
+    transition: opacity 230ms var(--ease), transform 270ms var(--ease),
+      display 270ms allow-discrete, overlay 270ms allow-discrete;
+  }
+
+  .dialog[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .dialog::backdrop {
+    background-color: transparent;
+    transition: background-color 230ms ease;
+    transition: background-color 230ms ease, display 270ms allow-discrete,
+      overlay 270ms allow-discrete;
+  }
+
+  .dialog[open]::backdrop {
+    background-color: #07172eb8;
+  }
+
+  @starting-style {
+    .dialog[open] {
+      opacity: 0;
+      transform: translateY(18px) scale(.97);
+    }
+
+    .dialog[open]::backdrop {
+      background-color: transparent;
+    }
   }
 }

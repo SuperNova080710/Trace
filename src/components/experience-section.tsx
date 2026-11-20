@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, type PointerEventHandler } from "react";
+import { flushSync } from "react-dom";
 import styles from "./experience-section.module.css";
 
 const credentials = [
@@ -15,43 +16,49 @@ const credentials = [
   },
 ] as const;
 
-export function ExperienceSection() {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const [credential, setCredential] = useState<(typeof credentials)[number] | null>(null);
+type Credential = (typeof credentials)[number];
 
-  useEffect(() => {
-    if (credential) dialogRef.current?.showModal();
-  }, [credential]);
+export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: PointerEventHandler<HTMLElement> }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [credential, setCredential] = useState<Credential | null>(null);
+
+  function showCredential(item: Credential) {
+    flushSync(() => setCredential(item));
+    dialogRef.current?.showModal();
+  }
 
   return (
     <section className={`section section-tint ${styles.section}`} id="experience" aria-labelledby="experience-title">
-      <div className={`container ${styles.content}`}>
-        <h2 id="experience-title">경험</h2>
-        <article className={styles.entry} aria-labelledby="aleph-title">
-          <div className={styles.copy}>
-            <p className={styles.period}>
-              <time dateTime="2026-08-11">2026.08.11</time>–<time dateTime="2026-11-12">2026.11.12</time> · 대전 B반
-            </p>
-            <h3 id="aleph-title">SKT ALEPH</h3>
-            <p className={styles.summary}>AI 보안 에이전트 개발 과정을 수료하고 <strong>케테르(최고 등급)</strong> 인증을 받았습니다.</p>
-          </div>
-          <div className={styles.actions}>
-            {credentials.map((item) => (
-              <button
-                type="button"
-                className={styles.open}
-                aria-haspopup="dialog"
-                key={item.title}
-                onClick={() => setCredential(item)}
-              >
-                {`${item.title} 보기`} <span aria-hidden="true">→</span>
-              </button>
-            ))}
-          </div>
-        </article>
+      <div className="container">
+        <div className={`section-heading ${styles.heading}`}>
+          <div className="section-side" aria-hidden="true"><span>04</span><span className="side-rule" /></div>
+          <h2 id="experience-title"><span>경험</span></h2>
+        </div>
+        <div className={`project-grid ${styles.grid}`}>
+          <article className="project-card spotlight-card" aria-labelledby="aleph-title" onPointerMove={onSpotlightMove}>
+            <div className="project-art project-art-future">
+              <span className="art-number">01 / 교육 과정</span>
+              <span className="art-monogram" aria-hidden="true">ALEPH</span>
+            </div>
+            <div className="project-content">
+              <span className={`project-category ${styles.period}`}>
+                <time dateTime="2026-08-11">2026.08.11</time>–<time dateTime="2026-11-12">2026.11.12</time> · 대전 B반
+              </span>
+              <h3 id="aleph-title">SKT ALEPH</h3>
+              <p className={styles.summary}>AI 보안 에이전트 개발 과정을 수료하고 <strong>케테르(최고 등급)</strong> 인증을 받았습니다.</p>
+              <div className={styles.actions}>
+                {credentials.map((item) => (
+                  <button type="button" className={styles.open} aria-haspopup="dialog" key={item.title} onClick={() => showCredential(item)}>
+                    {`${item.title} 보기`} <span aria-hidden="true">→</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
 
-      <dialog className={styles.dialog} ref={dialogRef} aria-labelledby="aleph-document-title" onClose={() => setCredential(null)}>
+      <dialog className={styles.dialog} ref={dialogRef} aria-labelledby="aleph-document-title">
         <div className={styles.dialogHeader}>
           <h3 id="aleph-document-title">SKT ALEPH {credential?.title}</h3>
           <form method="dialog">

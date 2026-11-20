@@ -575,12 +575,12 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
         </div>
       </section>
 
-      <ExperienceSection />
+      <ExperienceSection onSpotlightMove={onSpotlightMove} />
 
       <section className="section section-white documents-section" id="documents" aria-labelledby="documents-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>04</span><span className="side-rule" /></div>
+            <div className="section-side"><span>05</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
