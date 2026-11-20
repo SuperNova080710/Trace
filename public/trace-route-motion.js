@@ -9,18 +9,15 @@
     return routePath(url) + url.hash;
   }
 
-  function detailAnchor(path) {
-    if (path === "/ech-beacon-explorer") return "#research-app";
-    if (path.startsWith("/documents/")) return `#document-${path.slice("/documents/".length)}`;
-    return null;
+  function isLaunchDetail(path) {
+    return path === "/ech-beacon-explorer" || path.startsWith("/documents/");
   }
 
-  function launchDirection(from, to, navigationType) {
+  function launchDirection(from, to) {
     const fromPath = routePath(from);
     const toPath = routePath(to);
-    if (fromPath === "" && detailAnchor(toPath)) return "open";
-    const anchor = detailAnchor(fromPath);
-    if (toPath === "" && anchor && (navigationType === "traverse" || !to.hash || to.hash === anchor)) return "close";
+    if (fromPath === "" && isLaunchDetail(toPath)) return "open";
+    if (toPath === "" && isLaunchDetail(fromPath)) return "close";
     return null;
   }
 
@@ -65,7 +62,7 @@
     if (destination.origin !== window.location.origin) return;
 
     const current = new URL(window.location.href);
-    const direction = launchDirection(current, destination, event.activation.navigationType);
+    const direction = launchDirection(current, destination);
     if (direction) {
       const surface = direction === "open" ? launchLink(routePath(destination)) : document.documentElement;
       if (surface) playLaunch(event.viewTransition, direction, surface);
@@ -143,7 +140,7 @@
     const to = new URL(window.location.href);
     if (from.origin !== to.origin) return;
 
-    const direction = launchDirection(from, to, window.navigation?.activation?.navigationType);
+    const direction = launchDirection(from, to);
     if (direction === "open" && document.querySelector(".trace-route-panel")) {
       playLaunch(transition, direction, document.documentElement);
     } else if (direction === "close") {

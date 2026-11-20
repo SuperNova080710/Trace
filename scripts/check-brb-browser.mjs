@@ -10,7 +10,7 @@ const base = process.env.BRB_QA_BASE_URL || "http://127.0.0.1:4173";
 const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
 
 (async () => {
-  const browser = await chromium.launch({headless: true, executablePath: process.env.BRB_CHROME_BIN || undefined, args:["--no-sandbox"]});
+  const browser = await chromium.launch({headless: true, executablePath: process.env.BRB_CHROME_BIN || undefined, args:["--no-sandbox"], ignoreDefaultArgs:["--disable-back-forward-cache"]});
   try {
     for (const width of widths) {
       const page = await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
@@ -238,10 +238,12 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
     }
 
     const launchRoutes = [
-      ["research-app", "/ech-beacon-explorer"],
-      ["document-resume", "/documents/resume"],
-      ["document-personal-statement", "/documents/personal-statement"],
-      ["document-project-experience", "/documents/project-experience"],
+      ["research-app", "/ech-beacon-explorer", "#research-app"],
+      ["document-resume", "/documents/resume", "#document-resume"],
+      ["document-personal-statement", "/documents/personal-statement", "#document-personal-statement"],
+      ["document-project-experience", "/documents/project-experience", "#document-project-experience"],
+      ["research-app", "/ech-beacon-explorer", "#projects"],
+      ["document-resume", "/documents/resume", null],
     ];
     for (const width of [1366, 390]) {
       const navigationPage = await browser.newPage({viewport: {width, height: 900}});
@@ -261,12 +263,16 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
                 const {e, f} = new DOMMatrix(frame.transform);
                 return [e, f, parseFloat(frame.width), parseFloat(frame.height)];
               });
+              const root = document.documentElement;
+              const layer = name => Number(getComputedStyle(root, `::view-transition-group(${name})`).zIndex) || 0;
+              window.routeLaunchAbovePage = layer("trace-launch") > layer("root");
             }, () => {});
           });
         });
 
-        for (const [id, path] of launchRoutes) {
-          await navigationPage.goto(base + "/");
+        for (const [index, [id, path, backHash]] of launchRoutes.entries()) {
+          const home = `${base}/?launch-test=${index}`;
+          await navigationPage.goto(home);
           const trigger = navigationPage.locator(`#${id} a[data-trace-launch-link]`);
           await trigger.scrollIntoViewIfNeeded();
           const button = await trigger.boundingBox();
@@ -278,16 +284,23 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
             `${path} should open from its link bounds, received ${start}`);
           assert.ok(expanded[2] >= width * 0.95 && expanded[3] >= 890, `${path} should expand to the viewport`);
 
-          await navigationPage.locator(`a[href="/#${id}"]`).click();
-          await navigationPage.waitForURL(`**/#${id}`);
+          if (backHash) {
+            await navigationPage.locator(`a[href="/${backHash}"]`).click();
+            await navigationPage.waitForURL(`**/${backHash}`);
+          } else {
+            await navigationPage.goBack({waitUntil: "commit"});
+            await navigationPage.waitForURL(home);
+          }
           await navigationPage.waitForFunction(() => window.routeLaunchFrames?.length === 2);
+          assert.ok(await navigationPage.evaluate(() => window.routeLaunchAbovePage),
+            `${path} should shrink above the returning homepage`);
           const [expandedBeforeClose, end] = await navigationPage.evaluate(() => window.routeLaunchFrames);
           const returned = await trigger.boundingBox();
           assert.ok(expandedBeforeClose[2] >= width * 0.95 && expandedBeforeClose[3] >= 890);
           assert.ok(end.every((value, index) => Math.abs(value - [returned.x, returned.y, returned.width, returned.height][index]) <= 6),
             `${path} should close to its link bounds, received ${end}`);
         }
-        console.log(`PASS shared View Transition for four home links at ${width}px`);
+        console.log(`PASS home link transitions, ECH footer and browser back at ${width}px`);
       } finally {
         await navigationPage.close();
       }

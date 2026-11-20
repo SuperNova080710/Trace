@@ -65,6 +65,7 @@ html:has(.trace-origin:target) {
   }
 
   ::view-transition-group(trace-launch) {
+    z-index: 1;
     animation-duration: 400ms;
     animation-timing-function: cubic-bezier(.22, .8, .24, 1);
   }
