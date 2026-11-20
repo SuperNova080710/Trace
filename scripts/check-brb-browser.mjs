@@ -10,7 +10,7 @@ const base = process.env.BRB_QA_BASE_URL || "http://127.0.0.1:4173";
 const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
 
 (async () => {
-  const browser = await chromium.launch({headless: true, executablePath: process.env.BRB_CHROME_BIN || undefined, args:["--no-sandbox"]});
+  const browser = await chromium.launch({headless: true, executablePath: process.env.BRB_CHROME_BIN || undefined, args:["--no-sandbox"], ignoreDefaultArgs:["--disable-back-forward-cache"]});
   try {
     for (const width of widths) {
       const page = await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
@@ -130,6 +130,183 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
       console.log("PASS TRACE document-card pointer glow, floating hover, reduced motion and links");
     } finally {
       await documentsPage.close();
+    }
+
+    for (const [width, reducedMotion] of [[1366, "no-preference"], [390, "no-preference"], [390, "reduce"]]) {
+      const experiencePage = await browser.newPage({viewport: {width, height: 900}, reducedMotion});
+      try {
+        await experiencePage.addInitScript(() => {
+          const startTransition = document.startViewTransition.bind(document);
+          window.alephViewTransitions = [];
+          document.startViewTransition = update => {
+            const dialog = document.querySelector("#aleph-document-viewer");
+            const button = document.querySelector("[data-trace-credential-origin]");
+            const opening = !dialog.open;
+            const rect = element => {
+              const {x, y, width, height} = element.getBoundingClientRect();
+              return [x, y, width, height];
+            };
+            const result = {
+              button: button.textContent.trim(),
+              start: null,
+              end: null,
+              frames: [],
+              animations: [],
+              finished: false,
+            };
+            const transition = startTransition(() => {
+              result.start = rect(opening ? button : dialog);
+              return update();
+            });
+            window.alephViewTransitions.push(result);
+            void transition.ready.then(() => {
+              const animations = document.getAnimations();
+              const group = animations.find(animation => animation.effect?.pseudoElement === "::view-transition-group(trace-launch)");
+              result.end = rect(opening ? dialog : button);
+              result.animations = animations.map(animation => animation.animationName);
+              result.frames = group?.effect.getKeyframes().map(frame => {
+                const {e, f} = new DOMMatrix(frame.transform);
+                return [e, f, parseFloat(frame.width), parseFloat(frame.height)];
+              }) ?? [];
+            }, () => {});
+            void transition.finished.then(() => { result.finished = true; });
+            return transition;
+          };
+        });
+        await experiencePage.goto(base + "/#experience", {waitUntil: "networkidle"});
+        const card = experiencePage.locator("#experience .project-card");
+        const dialog = experiencePage.locator("#experience dialog");
+        let expectedTransitions = 0;
+
+        async function checkViewTransition(title) {
+          if (reducedMotion === "reduce") {
+            assert.equal(await experiencePage.evaluate(() => window.alephViewTransitions.length), 0);
+            return;
+          }
+
+          expectedTransitions++;
+          await experiencePage.waitForFunction(count => {
+            const transitions = window.alephViewTransitions;
+            return transitions.length === count && transitions.at(-1).finished;
+          }, expectedTransitions);
+          const result = await experiencePage.evaluate(() => window.alephViewTransitions.at(-1));
+          assert.ok(result.button.startsWith(`${title} 보기`));
+          assert.equal(result.frames.length, 2, "Shared View Transition group should animate position and size");
+          for (const [frame, bounds] of [[result.frames[0], result.start], [result.frames[1], result.end]]) {
+            assert.ok(frame.every((value, index) => Math.abs(value - bounds[index]) <= 5),
+              `View Transition frame ${frame} should match element bounds ${bounds}`);
+          }
+          assert.ok(result.animations.includes("trace-credential-backdrop"), "Backdrop snapshot should animate");
+        }
+
+        for (const [title, asset] of [["수료증", "completion"], ["인증서", "certification"]]) {
+          const trigger = card.getByRole("button", {name: `${title} 보기`});
+          if (width > 760) {
+            const background = await trigger.evaluate(el => getComputedStyle(el).backgroundColor);
+            await trigger.hover();
+            const hover = await trigger.evaluate(async el => {
+              await Promise.all(el.getAnimations().map(animation => animation.finished));
+              const style = getComputedStyle(el);
+              return {background: style.backgroundColor, decoration: style.textDecorationLine};
+            });
+            assert.notEqual(hover.background, background);
+            assert.equal(hover.decoration, "none");
+          }
+
+          await trigger.press("Enter");
+          const viewer = experiencePage.getByRole("dialog", {name: `SKT ALEPH ${title}`});
+          await viewer.waitFor();
+          const image = viewer.getByRole("img");
+          assert.equal(await image.getAttribute("src"), `/experience/aleph-${asset}.jpg`);
+          await image.evaluate(element => element.decode());
+          await checkViewTransition(title);
+
+          if (width === 1366) {
+            await viewer.getByRole("heading").click();
+            assert.ok(await viewer.isVisible(), "Clicking inside a credential should leave it open");
+            await experiencePage.mouse.click(4, 20);
+          } else if (asset === "completion") await experiencePage.keyboard.press("Escape");
+          else await viewer.getByRole("button", {name: "닫기"}).click();
+          await dialog.waitFor({state: "hidden"});
+          await checkViewTransition(title);
+          assert.ok(await trigger.evaluate(element => document.activeElement === element));
+        }
+        console.log(`PASS ALEPH certificate dialog at ${width}px (${reducedMotion})`);
+      } finally {
+        await experiencePage.close();
+      }
+    }
+
+    const launchRoutes = [
+      ["research-app", "/ech-beacon-explorer", "#research-app"],
+      ["document-resume", "/documents/resume", "#document-resume"],
+      ["document-personal-statement", "/documents/personal-statement", "#document-personal-statement"],
+      ["document-project-experience", "/documents/project-experience", "#document-project-experience"],
+      ["research-app", "/ech-beacon-explorer", "#projects"],
+      ["document-resume", "/documents/resume", null],
+    ];
+    for (const width of [1366, 390]) {
+      const navigationPage = await browser.newPage({viewport: {width, height: 900}});
+      try {
+        // Serve the exported HTML at the same extensionless URLs used by the deployed site.
+        await navigationPage.route(/\/(?:ech-beacon-explorer|documents\/[^/.]+)\/?$/, async route => {
+          const url = new URL(route.request().url());
+          url.pathname = url.pathname.replace(/\/$/, "") + ".html";
+          await route.fulfill({response: await route.fetch({url: url.href})});
+        });
+        await navigationPage.addInitScript(() => {
+          window.addEventListener("pagereveal", ({viewTransition}) => {
+            window.routeLaunchFrames = undefined;
+            if (!viewTransition) return;
+            window.routeLaunchFinished = viewTransition.finished;
+            void viewTransition.ready.then(() => {
+              const group = document.getAnimations().find(animation => animation.effect?.pseudoElement === "::view-transition-group(trace-launch)");
+              window.routeLaunchFrames = group?.effect.getKeyframes().map(frame => {
+                const {e, f} = new DOMMatrix(frame.transform);
+                return [e, f, parseFloat(frame.width), parseFloat(frame.height)];
+              });
+              const root = document.documentElement;
+              const layer = name => Number(getComputedStyle(root, `::view-transition-group(${name})`).zIndex) || 0;
+              window.routeLaunchAbovePage = layer("trace-launch") > layer("root");
+            }, () => {});
+          });
+        });
+
+        for (const [index, [id, path, backHash]] of launchRoutes.entries()) {
+          const home = `${base}/?launch-test=${index}`;
+          await navigationPage.goto(home);
+          const trigger = navigationPage.locator(`#${id} a[data-trace-launch-link]`);
+          await trigger.scrollIntoViewIfNeeded();
+          const button = await trigger.boundingBox();
+          await trigger.click();
+          await navigationPage.waitForURL(url => url.pathname.replace(/\/$/, "") === path);
+          await navigationPage.waitForFunction(() => window.routeLaunchFrames?.length === 2);
+          const [start, expanded] = await navigationPage.evaluate(() => window.routeLaunchFrames);
+          assert.ok(start.every((value, index) => Math.abs(value - [button.x, button.y, button.width, button.height][index]) <= 6),
+            `${path} should open from its link bounds, received ${start}`);
+          assert.ok(expanded[2] >= width * 0.95 && expanded[3] >= 890, `${path} should expand to the viewport`);
+          await navigationPage.evaluate(() => window.routeLaunchFinished);
+
+          if (backHash) {
+            await navigationPage.locator(`a[href="/${backHash}"]`).click();
+            await navigationPage.waitForURL(`**/${backHash}`);
+          } else {
+            await navigationPage.goBack({waitUntil: "commit"});
+            await navigationPage.waitForURL(url => url.pathname === "/", {waitUntil: "commit"});
+          }
+          await navigationPage.waitForFunction(() => window.routeLaunchFrames?.length === 2);
+          assert.ok(await navigationPage.evaluate(() => window.routeLaunchAbovePage),
+            `${path} should shrink above the returning homepage`);
+          const [expandedBeforeClose, end] = await navigationPage.evaluate(() => window.routeLaunchFrames);
+          const returned = await trigger.boundingBox();
+          assert.ok(expandedBeforeClose[2] >= width * 0.95 && expandedBeforeClose[3] >= 890);
+          assert.ok(end.every((value, index) => Math.abs(value - [returned.x, returned.y, returned.width, returned.height][index]) <= 6),
+            `${path} should close to its link bounds, received ${end}`);
+        }
+        console.log(`PASS home link transitions, ECH footer and browser back at ${width}px`);
+      } finally {
+        await navigationPage.close();
+      }
     }
 
     // A separate smoke check against the real public deployment, not the local static build.

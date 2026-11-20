@@ -1,5 +1,6 @@
 (function () {
   const storageKey = "trace-route-reveal-origin";
+  let clearLaunch;
 
   function routePath(url) {
     return url.pathname.replace(/(?:\/index)?\.html$/, "").replace(/\/$/, "");
@@ -7,6 +8,37 @@
 
   function pageKey(url) {
     return routePath(url) + url.hash;
+  }
+
+  function isLaunchDetail(path) {
+    return path === "/ech-beacon-explorer" || path.startsWith("/documents/");
+  }
+
+  function launchDirection(from, to) {
+    const fromPath = routePath(from);
+    const toPath = routePath(to);
+    if (fromPath === "" && isLaunchDetail(toPath)) return "open";
+    if (toPath === "" && isLaunchDetail(fromPath)) return "close";
+    return null;
+  }
+
+  function launchLink(path) {
+    return Array.from(document.querySelectorAll("a[data-trace-launch-link]")).find((link) => routePath(new URL(link.href)) === path);
+  }
+
+  function playLaunch(transition, direction, surface) {
+    clearLaunch?.();
+    const root = document.documentElement;
+    root.dataset.traceRouteTransition = direction;
+    surface.setAttribute("data-trace-route-surface", "");
+    const reset = () => {
+      if (clearLaunch !== reset) return;
+      clearLaunch = undefined;
+      delete root.dataset.traceRouteTransition;
+      surface.removeAttribute("data-trace-route-surface");
+    };
+    clearLaunch = reset;
+    void transition.finished.then(reset, reset);
   }
 
   function visibleBounds(element) {
@@ -34,6 +66,16 @@
     const destination = new URL(nextUrl);
     if (destination.origin !== window.location.origin) return;
 
+    const current = new URL(window.location.href);
+    const direction = launchDirection(current, destination);
+    if (direction) {
+      const surface = direction === "open" ? launchLink(routePath(destination)) : document.documentElement;
+      if (surface) playLaunch(event.viewTransition, direction, surface);
+      return;
+    }
+
+    if (!routePath(current).startsWith("/documents/") || !routePath(destination).startsWith("/documents/")) return;
+
     const to = pageKey(destination);
     const matchesDestination = (link) => {
       const url = new URL(link.href);
@@ -43,13 +85,12 @@
     const link = active && matchesDestination(active)
       ? active
       : Array.from(document.links).find(matchesDestination);
-    const bounds = visibleBounds(link?.closest(".trace-origin, .application-tab"));
+    const bounds = visibleBounds(link?.closest(".application-tab"));
 
     try {
       sessionStorage.removeItem(storageKey);
       if (bounds) {
-        const from = pageKey(new URL(window.location.href));
-        sessionStorage.setItem(storageKey, JSON.stringify({ from, to, bounds }));
+        sessionStorage.setItem(storageKey, JSON.stringify({ from: pageKey(current), to, bounds }));
       }
     } catch {
       // The CSS origin covers browsers that restrict session storage.
@@ -95,13 +136,6 @@
     });
   }
 
-  function playCardReveal(transition, mode, bounds) {
-    const inset = [bounds.top, 100 - bounds.right, 100 - bounds.bottom, bounds.left];
-    playReveal(transition, mode, {
-      "--trace-card-inset": inset.map((value) => `${value}%`).join(" "),
-    });
-  }
-
   window.addEventListener("pagereveal", (event) => {
     const fromUrl = window.navigation?.activation?.from?.url || document.referrer;
     const transition = event.viewTransition;
@@ -111,22 +145,23 @@
     const to = new URL(window.location.href);
     if (from.origin !== to.origin) return;
 
-    const previousBounds = takePreviousBounds(from, to);
+    const direction = launchDirection(from, to);
+    if (direction === "open" && document.querySelector(".trace-route-panel")) {
+      playLaunch(transition, direction, document.documentElement);
+    } else if (direction === "close") {
+      const link = launchLink(routePath(from));
+      if (link) {
+        if (!visibleBounds(link)) link.scrollIntoView({ block: "nearest", behavior: "instant" });
+        playLaunch(transition, direction, link);
+      }
+    }
+
     const fromPath = routePath(from);
     const toPath = routePath(to);
 
     if (fromPath.startsWith("/documents/") && toPath.startsWith("/documents/")) {
       const activeTab = document.querySelector('.application-tab[aria-current="page"]');
-      playLiquidReveal(transition, previousBounds ?? visibleBounds(activeTab));
-    } else if (previousBounds && fromPath === "" && document.querySelector(".trace-route-panel")) {
-      playCardReveal(transition, "expand", previousBounds);
-    } else if (toPath === "") {
-      const matchingLink = Array.from(document.querySelectorAll(".trace-origin a")).find(
-        (link) => routePath(new URL(link.href)) === fromPath
-      );
-      const card = document.querySelector(".trace-origin:target") ?? matchingLink?.closest(".trace-origin");
-      const bounds = visibleBounds(card);
-      if (bounds) playCardReveal(transition, "collapse", bounds);
+      playLiquidReveal(transition, takePreviousBounds(from, to) ?? visibleBounds(activeTab));
     }
   });
 })();

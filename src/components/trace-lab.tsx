@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { BrandMark } from "@/components/brand-mark";
+import { ExperienceSection } from "@/components/experience-section";
 import { RouteLink } from "@/components/route-link";
 import type { ApprovedNarrative } from "@/content/public-profile";
 import { detectorMetrics, t10Research } from "@/content/research-evidence";
@@ -271,6 +272,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             <a href="#about" onClick={() => setMobileMenuOpen(false)}>소개</a>
             <a href="#approach" onClick={() => setMobileMenuOpen(false)}>작업 방식</a>
             <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
+            <a href="#experience" onClick={() => setMobileMenuOpen(false)}>경험</a>
             <a href="#documents" onClick={() => setMobileMenuOpen(false)}>지원 서류</a>
             <a href="#contact" className="mobile-contact-link" onClick={() => setMobileMenuOpen(false)}>연락하기 <span aria-hidden="true">↓</span></a>
           </nav>
@@ -566,17 +568,19 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                 <span className="project-category">INTERACTIVE RESEARCH LAB</span>
                 <h3>ECH Beacon Explorer</h3>
                 <p>T10 논문을 바탕으로 보안 학습자가 합성 Held-out 110건의 판정을 직접 비교하고 오탐 감소와 추론 비용의 균형을 살펴보는 공개 앱입니다.</p>
-                <RouteLink href="/ech-beacon-explorer">연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
+                <RouteLink href="/ech-beacon-explorer" data-trace-launch-link>연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
               </div>
             </article>
           </div>
         </div>
       </section>
 
+      <ExperienceSection onSpotlightMove={onSpotlightMove} />
+
       <section className="section section-white documents-section" id="documents" aria-labelledby="documents-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>04</span><span className="side-rule" /></div>
+            <div className="section-side"><span>05</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
@@ -587,17 +591,17 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             <div className="document-item spotlight-card trace-origin" id="document-resume" tabIndex={-1} onPointerMove={onSpotlightMove}>
               <span className="document-number">01</span>
               <strong id="document-resume-title">이력서</strong>
-              <RouteLink className="document-download" href="/documents/resume/" aria-describedby="document-resume-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+              <RouteLink className="document-download" href="/documents/resume/" aria-describedby="document-resume-title" data-trace-launch-link>열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
             </div>
             <div className="document-item spotlight-card trace-origin" id="document-personal-statement" tabIndex={-1} onPointerMove={onSpotlightMove}>
               <span className="document-number">02</span>
               <strong id="document-personal-statement-title">자기소개서</strong>
-              <RouteLink className="document-download" href="/documents/personal-statement/" aria-describedby="document-personal-statement-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+              <RouteLink className="document-download" href="/documents/personal-statement/" aria-describedby="document-personal-statement-title" data-trace-launch-link>열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
             </div>
             <div className="document-item spotlight-card trace-origin" id="document-project-experience" tabIndex={-1} onPointerMove={onSpotlightMove}>
               <span className="document-number">03</span>
               <strong id="document-project-experience-title">프로젝트 경험기술서</strong>
-              <RouteLink className="document-download" href="/documents/project-experience/" aria-describedby="document-project-experience-title">열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
+              <RouteLink className="document-download" href="/documents/project-experience/" aria-describedby="document-project-experience-title" data-trace-launch-link>열람·다운로드 <span aria-hidden="true">→</span></RouteLink>
             </div>
           </div>
         </div>
