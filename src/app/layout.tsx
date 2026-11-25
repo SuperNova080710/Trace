@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import "./portfolio.css";
 import "./route-motion.css";
 
 export const metadata: Metadata = {
