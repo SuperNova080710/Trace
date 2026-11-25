@@ -84,6 +84,58 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
       await page.close();
     }
 
+    // Check both directions, interrupted disclosure motion and the non-View-Transition dialog path.
+    for (const width of [390, 700]) {
+      const mobile = await browser.newPage({viewport: {width, height: 844}});
+      try {
+        await mobile.addInitScript(() => {
+          Object.defineProperty(document, "startViewTransition", {value: undefined});
+        });
+        await mobile.goto(base + "/", {waitUntil: "networkidle"});
+        const nav = mobile.locator("#trace-main-nav");
+        const menu = mobile.locator(".menu-button");
+        await menu.click();
+        await nav.waitFor({state: "visible"});
+        await nav.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished)));
+        await nav.getByText("프로젝트", {exact: true}).focus();
+        await mobile.keyboard.press("Escape");
+        await nav.waitFor({state: "hidden"});
+        assert.ok(await menu.evaluate(el => el === document.activeElement));
+        for (const name of [".story-disclosure", ".research-disclosure"]) {
+          const details = mobile.locator(name);
+          const result = await details.evaluate(async el => {
+            const trigger = el.querySelector("summary");
+            const body = trigger.nextElementSibling;
+            trigger.click();
+            const entry = body.getAnimations()[0];
+            if (!entry) throw Error("Missing disclosure entry");
+            await entry.finished;
+            trigger.click();
+            const exiting = body.getAnimations().length > 0 && el.open && body.inert;
+            trigger.click();
+            await Promise.all(body.getAnimations().map(a => a.finished));
+            const reopened = el.open && !body.inert;
+            trigger.click();
+            await Promise.all(body.getAnimations().map(a => a.finished));
+            await new Promise(requestAnimationFrame);
+            return {exiting, reopened, closed: !el.open};
+          });
+          assert.deepEqual(result, {exiting: true, reopened: true, closed: true});
+        }
+        const origin = mobile.getByRole("button", {name: "인증서 보기"});
+        await origin.click();
+        const dialog = mobile.locator("dialog");
+        await dialog.waitFor({state: "visible"});
+        await dialog.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished)));
+        await mobile.keyboard.press("Escape");
+        await dialog.waitFor({state: "hidden"});
+        assert.ok(await origin.evaluate(el => el === document.activeElement));
+        console.log("PASS mobile menu, disclosures and fallback modal at " + width + "px");
+      } finally {
+        await mobile.close();
+      }
+    }
+
     // TRACE homepage document-card interaction (Issue #58).
     // Verify live CSS, pointer positioning, reduced-motion and link destinations.
     const documentsPage = await browser.newPage({viewport:{width:1366,height:900}});

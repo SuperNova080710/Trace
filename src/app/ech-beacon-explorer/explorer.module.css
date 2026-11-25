@@ -30,7 +30,7 @@
 .lead { max-width: 665px; margin: 28px 0; color: #c3d1e2; font-size: clamp(14px, 1.4vw, 17px); line-height: 1.9; word-break: keep-all; }
 .lead strong { color: #fff; }
 .heroMeta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
-.heroMeta span { border: 1px solid rgba(144, 179, 225, .25); border-radius: 5px; padding: 8px 10px; color: #aec6e2; font-size: 10px; font-weight: 750; letter-spacing: .04em; background: rgba(32, 59, 95, .3); }
+.heroMeta span { border: 1px solid rgba(144, 179, 225, .25); border-radius: var(--compact-radius); corner-shape: var(--corner); padding: 8px 10px; color: #aec6e2; font-size: 10px; font-weight: 750; letter-spacing: .04em; background: rgba(32, 59, 95, .3); }
 .heroVisual { min-height: 300px; display: flex; align-items: center; justify-content: center; position: relative; }
 .orbitOuter { width: clamp(220px, 24vw, 300px); aspect-ratio: 1; border: 1px solid rgba(131, 186, 247, .3); border-radius: 50%; background: radial-gradient(circle, rgba(42, 101, 175, .26) 0, transparent 52%), repeating-radial-gradient(circle, transparent 0 31px, rgba(112, 174, 246, .1) 32px 33px); position: relative; display: grid; place-items: center; box-shadow: inset 0 0 70px rgba(15,90,173,.16), 0 0 80px rgba(17,89,161,.10); }
 .orbitOuter::before, .orbitOuter::after { content: ""; position: absolute; inset: 13%; border: 1px dashed rgba(151, 209, 254, .3); border-radius: 50%; }
@@ -40,17 +40,17 @@
 .visualLabelTop, .visualLabelBottom { position: absolute; font-size: 9px; letter-spacing: .13em; font-weight: 800; color: #83a7d4; }
 .visualLabelTop { top: 20px; left: 2%; }
 .visualLabelBottom { right: 0; bottom: 21px; }
-.paper { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; background: linear-gradient(135deg, rgba(27, 50, 81, .86), rgba(20, 32, 52, .96)); border: 1px solid var(--panel-edge); padding: clamp(22px, 3vw, 38px); border-radius: 14px; }
+.paper { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; background: linear-gradient(135deg, rgba(27, 50, 81, .86), rgba(20, 32, 52, .96)); border: 1px solid var(--panel-edge); padding: clamp(22px, 3vw, 38px); border-radius: var(--surface-radius); corner-shape: var(--corner); }
 .paper h2, .results h2, .actions h2 { font-size: clamp(23px, 2.6vw, 33px); margin: 10px 0 14px; letter-spacing: -.05em; font-weight: 800; }
 .paperTitle { color: #dcecff; font-weight: 700; font-size: 15px; line-height: 1.7; margin: 0 0 13px; }
 .muted { color: var(--muted); font-size: 13px; line-height: 1.85; max-width: 750px; word-break: keep-all; }
-.paperLink { display: inline-flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; color: #a9d9ff !important; font-size: 13px; font-weight: 800; border: 1px solid rgba(137, 189, 242, .45); border-radius: 8px; padding: 12px 16px; }
+.paperLink { display: inline-flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; color: #a9d9ff !important; font-size: 13px; font-weight: 800; border: 1px solid rgba(137, 189, 242, .45); border-radius: var(--control-radius); corner-shape: var(--corner); padding: 12px 16px; }
 .results, .actions { padding: 83px 0 0; }
 .sectionHead { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 25px; }
 .sectionHead .muted { margin: 0; }
-.frozenLabel { font-size: 10px; color: #c3defb; border: 1px solid rgba(165, 213, 255, .32); background: rgba(62, 96, 143, .22); padding: 8px 11px; font-weight: 800; border-radius: 5px; white-space: nowrap; letter-spacing: .06em; }
+.frozenLabel { font-size: 10px; color: #c3defb; border: 1px solid rgba(165, 213, 255, .32); background: rgba(62, 96, 143, .22); padding: 8px 11px; font-weight: 800; border-radius: var(--compact-radius); corner-shape: var(--corner); white-space: nowrap; letter-spacing: .06em; }
 .metricGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-.metricCard { padding: 29px 25px; min-width: 0; background: rgba(18, 31, 51, .87); border: 1px solid var(--panel-edge); border-radius: 13px; }
+.metricCard { padding: 29px 25px; min-width: 0; background: rgba(18, 31, 51, .87); border: 1px solid var(--panel-edge); border-radius: var(--surface-radius); corner-shape: var(--corner); }
 .metricEyebrow { color: #9fb7d4; font-size: 10px; line-height: 1.6; letter-spacing: .09em; font-weight: 800; }
 .metricNumber { font-size: clamp(39px, 4vw, 56px); font-weight: 850; letter-spacing: -.055em; margin: 15px 0 8px; line-height: 1; font-variant-numeric: tabular-nums; }
 .metricNumber span { color: #9db5d1; font-size: 17px; font-weight: 650; margin-left: 4px; }
@@ -59,13 +59,13 @@
 .metricTrack { margin-top: 20px; background: #283b53; border-radius: 999px; height: 5px; max-width: 250px; overflow: hidden; }
 .metricTrack span { display: block; background: #88c5f9; height: 100%; border-radius: 999px; }
 .metricFine { font-size: 11px !important; color: #8da5c0 !important; margin-top: 6px; }
-.interpretation { border: 1px solid rgba(127, 176, 221, .21); border-left: 3px solid #69baff; border-radius: 6px; display: flex; gap: 14px; align-items: start; padding: 20px 25px; background: rgba(34, 64, 102, .23); margin-top: 18px; }
+.interpretation { border: 1px solid rgba(127, 176, 221, .21); border-left: 3px solid #69baff; border-radius: var(--surface-radius); corner-shape: var(--corner); display: flex; gap: 14px; align-items: start; padding: 20px 25px; background: rgba(34, 64, 102, .23); margin-top: 18px; }
 .interpretationMark { flex: none; background: #244f79; color: #a5d6ff; border-radius: 50%; font-weight: 900; width: 24px; height: 24px; display: grid; place-items: center; }
 .interpretation p { margin: 0; font-size: 13px; line-height: 1.85; color: #bfd1e7; word-break: keep-all; }
 .interpretation strong { color: #e8f5ff; }
 .stageTag { color: #94b2d2; font-size: 12px; white-space: nowrap; }
 .stepGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-.step { min-width: 0; border-top: 2px solid #4c85bf; padding: 22px 20px 24px; background: rgba(21, 39, 63, .65); border-radius: 0 0 10px 10px; }
+.step { min-width: 0; border-top: 2px solid #4c85bf; padding: 22px 20px 24px; background: rgba(21, 39, 63, .65); border-radius: var(--surface-radius); corner-shape: var(--corner); }
 .stepNumber { font-size: 37px; line-height: 1; font-weight: 900; color: #507ca9; letter-spacing: -.05em; }
 .stepTag { display: block; color: #8cc5f7; letter-spacing: .08em; font-size: 10px; font-weight: 800; margin: 21px 0 9px; }
 .step h3 { font-size: 17px; line-height: 1.5; font-weight: 750; margin: 0 0 12px; color: #e8f3ff; letter-spacing: -.04em; }

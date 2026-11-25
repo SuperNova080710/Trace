@@ -67,13 +67,14 @@
   background: #07172eb8;
 }
 
-@supports (corner-shape: squircle) {
-  .open, .dialog {
-    corner-shape: squircle;
-  }
-  .open { border-radius: 21px; }
-  .dialog { border-radius: 32px; }
+.open, .dialog, .close { corner-shape: var(--corner); }
+.close { padding-inline: 14px; border-radius: var(--control-radius); background: #edf3fa; }
+@media (prefers-reduced-motion: no-preference) {
+  .dialog[data-motion="open"]::backdrop { animation: credential-shade 320ms ease both; }
+  .dialog[data-motion="close"]::backdrop { animation: credential-shade-out 280ms ease both; }
 }
+@keyframes credential-shade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes credential-shade-out { from { opacity: 1; } to { opacity: 0; } }
 
 .dialogHeader {
   display: flex;

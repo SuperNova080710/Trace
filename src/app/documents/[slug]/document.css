@@ -34,7 +34,8 @@
   align-items: stretch;
   padding: 8px clamp(10px, 2vw, 20px) 0;
   background: #e7edf4;
-  border-radius: 16px 16px 0 0;
+  border-radius: var(--surface-radius) var(--surface-radius) 0 0;
+  corner-shape: var(--corner);
 }
 .application-tab {
   position: relative;
@@ -42,7 +43,8 @@
   place-items: center;
   min-height: 46px;
   padding: 9px clamp(9px, 3vw, 27px);
-  border-radius: 11px 11px 0 0;
+  border-radius: var(--control-radius) var(--control-radius) 0 0;
+  corner-shape: var(--corner);
   color: #465b75;
   font-size: clamp(11px, 3.7vw, 14px);
   font-weight: 700;
@@ -76,17 +78,18 @@
 }
 .application-main {
   padding: clamp(21px, 4.5vw, 56px);
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 var(--surface-radius) var(--surface-radius);
+  corner-shape: var(--corner);
   background: var(--application-surface);
 }
 .application-disclaimer{font-size:11px;color:#485e77;line-height:1.8;margin:0 0 20px}
 .application-intro{padding-bottom:18px}.application-kicker{color:var(--application-accent);font-weight:800;font-size:11px;letter-spacing:.14em}.application-intro h1{font-size:clamp(36px,5vw,58px);letter-spacing:-.055em;line-height:1.3;margin:10px 0}
 .application-subtitle{font-weight:800;color:var(--application-accent)}.application-summary{color:#364c65;margin-top:16px;font-size:14px}
-.application-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 32px}.application-actions .application-word-download{display:inline-flex;align-items:center;background:#103b70;color:#fff;border:1px solid #103b70;border-radius:9px;padding:12px 18px;font-size:13px;font-weight:800;text-decoration:none}.application-actions .application-word-download:hover{background:#215b9b}
-.application-actions button{background:white;color:#16417d;border:1px solid #bcd1ea;border-radius:9px;padding:12px 18px;cursor:pointer;font-size:13px;font-weight:800}
+.application-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 32px}.application-actions .application-word-download{display:inline-flex;align-items:center;background:#103b70;color:#fff;border:1px solid #103b70;corner-shape:var(--corner);border-radius:var(--control-radius);padding:12px 18px;font-size:13px;font-weight:800;text-decoration:none}.application-actions .application-word-download:hover{background:#215b9b}
+.application-actions button{background:white;color:#16417d;border:1px solid #bcd1ea;corner-shape:var(--corner);border-radius:var(--control-radius);padding:12px 18px;cursor:pointer;font-size:13px;font-weight:800}
 .application-actions button.primary{background:#2563eb;border-color:#2563eb;color:#fff}.application-actions button:hover{filter:brightness(.93)}
 .application-actions p{flex-basis:100%;font-size:11px;color:#637c9d;margin:2px 0 0}
-.application-paper{background:color-mix(in srgb,var(--application-surface,#fff) 25%,#fff);border:1px solid #dde7f4;border-radius:8px;box-shadow:0 22px 70px #16417d12;padding:clamp(20px,5vw,66px);overflow-wrap:anywhere}
+.application-paper{background:color-mix(in srgb,var(--application-surface,#fff) 25%,#fff);border:1px solid #dde7f4;corner-shape:var(--corner);border-radius:var(--surface-radius);box-shadow:0 22px 70px #16417d12;padding:clamp(20px,5vw,66px);overflow-wrap:anywhere}
 .paper-header{display:flex;justify-content:space-between;border-bottom:1px solid #dbe6f4;padding-bottom:15px;letter-spacing:.12em;font-size:10px;color:#8698ae}.paper-header strong{font-size:20px;color:#215bb9}
 .paper-heading{margin:38px 0 28px}.paper-heading>p{font-size:10px;color:#397ac4;letter-spacing:.14em;font-weight:800}.paper-heading h2{font-size:36px;letter-spacing:-.045em;margin:6px 0;color:#102748}.paper-heading>span{font-size:13px;color:#617994}
 .paper-section{margin:36px 0;break-inside:avoid-page}.paper-section-heading{display:flex;align-items:baseline;gap:15px;border-bottom:1px solid #e4edf6;padding-bottom:12px;margin-bottom:17px}

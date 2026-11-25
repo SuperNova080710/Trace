@@ -29,11 +29,37 @@ export function ExperienceSection({ onSpotlightMove }: { onSpotlightMove: Pointe
   const dialogRef = useRef<HTMLDialogElement>(null);
   const pressedBackdrop = useRef(false);
   const transitionRef = useRef<ViewTransition | null>(null);
+  const fallbackRef = useRef<Animation | null>(null);
   const [credential, setCredential] = useState<Credential | null>(null);
 
   function updateViewer(update: () => void, direction: "open" | "close") {
-    if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      fallbackRef.current?.cancel();
+      delete dialog.dataset.motion;
       update();
+      return;
+    }
+    if (!document.startViewTransition) {
+      if (dialog.dataset.motion === direction) return;
+      const opening = direction === "open";
+      const current = getComputedStyle(dialog);
+      const shown = { opacity: current.opacity, transform: current.transform };
+      const hidden = { opacity: 0, transform: "translateY(12px) scale(.965)" };
+      fallbackRef.current?.cancel();
+      if (opening) update();
+      dialog.dataset.motion = direction;
+      const animation = dialog.animate(opening ? [hidden, {opacity: 1, transform: "none"}] : [shown, hidden], {
+        duration: opening ? 320 : 280, easing: "cubic-bezier(.22,.75,.28,1)",
+      });
+      fallbackRef.current = animation;
+      animation.onfinish = () => {
+        if (fallbackRef.current !== animation) return;
+        if (!opening) update();
+        fallbackRef.current = null;
+        delete dialog.dataset.motion;
+      };
       return;
     }
 

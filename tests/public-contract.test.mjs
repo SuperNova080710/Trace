@@ -146,7 +146,7 @@ test("issue #3 provides accessible mobile navigation and distinct future documen
   assert.match(lab, /href="\/documents\/personal-statement\/"/);
   assert.match(lab, /href="\/documents\/project-experience\/"/);
   assert.doesNotMatch(lab, /아직 다운로드 가능한 파일이 아닙니다/);
-  assert.match(css, /\.main-nav\.is-open \{ display: flex; \}/);
+  assert.match(css, /\.main-nav\.is-open \{[^}]*visibility: visible/);
   assert.match(page, /id="main-content" tabIndex=\{-1\}/);
 });
 

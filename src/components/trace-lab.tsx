@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { BrandMark } from "@/components/brand-mark";
+import { Disclosure } from "@/components/disclosure";
 import { ExperienceSection } from "@/components/experience-section";
 import { RouteLink } from "@/components/route-link";
 import type { ApprovedNarrative } from "@/content/public-profile";
@@ -356,8 +357,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
               <p>ECH 환경의 탐지 비교를 연구 주제로 선정했습니다. ECH Beacon Explorer에서 같은 표본에 대한 두 탐지기의 판정을 살펴볼 수 있습니다.</p>
               <RouteLink className="archive-launch" href="/ech-beacon-explorer" data-trace-launch-link>연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
             </div>
-            <details className="research-disclosure">
-              <summary>실험 결과와 공개 자료</summary>
+            <Disclosure className="research-disclosure" title="실험 결과와 공개 자료">
               <div className="research-numbers" aria-label="T10 평가 결과">
                 <div><span>전체 합성 실험</span><strong>{t10Research.totalTrials}<small> Trials</small></strong><small>Beacon 100 · Normal 100</small></div>
                 <div><span>Held-out 평가</span><strong>{t10Research.heldout.trials}<small> Trials</small></strong><small>Beacon 50 · Normal 60</small></div>
@@ -384,7 +384,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                 <a href={t10Research.sources.log} target="_blank" rel="noopener noreferrer">연구 기록 <span aria-hidden="true">↗</span></a>
               </div>
               <p className="research-footnote">T10은 별도의 연구 원고이며 이전 Digital Twin 논문과 다릅니다. 학술지 게재 실적으로 표시하지 않습니다.</p>
-            </details>
+            </Disclosure>
           </article>
         </div>
       </section>
@@ -419,8 +419,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
               <span className="story-timeline-eyebrow">MY JOURNEY · 2024—2026</span>
               <p>문제를 만나고 다시 시도한 기록</p>
             </div>
-            <details className="story-disclosure">
-              <summary>개발 회고 펼쳐 읽기</summary>
+            <Disclosure className="story-disclosure" title="개발 회고">
               <div className="story-chapters" ref={storyTimelineRef}>
                 <span className="story-timeline-fill" aria-hidden="true" />
               {([
@@ -442,7 +441,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                 );
               })}
               </div>
-            </details>
+            </Disclosure>
             {narrative.filter((entry) => entry.chapter === "closing").map((entry) => (
               <blockquote className="story-closing" key={entry.id}>
                 <span className="story-closing-label">앞으로의 방향</span>
