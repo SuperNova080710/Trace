@@ -29,7 +29,7 @@
 @media (hover: hover) and (pointer: fine) {
   a[href]:hover .brand-mark { filter: brightness(1.15); }
   :is(.work-card, .profile-row, .research-crosslink, .site-footer, .paper-links, dialog) a[href]:hover,
-  .application-back:hover { text-decoration: underline; text-underline-offset: .24em; text-decoration-thickness: .1em; }
+  .hero-bottom a:hover, .application-back:hover { text-decoration: underline; text-underline-offset: .24em; text-decoration-thickness: .1em; }
   :is(.approach-trigger, summary):hover { background-color: var(--hover-wash); }
   .archive-launch:hover, .application-tab:hover { box-shadow: inset 0 -2px var(--feedback-ring); }
   .menu-button:hover { box-shadow: inset 0 0 0 1px var(--feedback-ring); }

@@ -281,21 +281,58 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
         <div className="hero-glow" aria-hidden="true" />
         <div className="container hero-inner">
           <div className="hero-copy">
-            <p className="hero-hello"><strong>{displayName}</strong><span>백엔드 · 풀스택 개발자</span></p>
+            <p className="eyebrow light"><span className="eyebrow-line" /> DEVELOPER · PERSONAL ARCHIVE</p>
+            <p className="hero-hello">안녕하세요. 개발자 <strong>{displayName}</strong>입니다.</p>
             <h1 id="hero-title">문제의 흐름을 읽고,<span>과정으로 답을 찾습니다.</span></h1>
-            <p className="hero-description">문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람입니다.</p>
+            <p className="hero-identity"><span aria-hidden="true" className="identity-mark" />문제의 원인을 확인하고 해결 과정을 기록으로 남기는 사람</p>
+            <p className="hero-description">
+              기록을 통해 지나온 과정을 이해하고,<br className="desktop-break" />
+              검증 가능한 결과로 다음 단계를 준비합니다.
+            </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">프로젝트 살펴보기 <span aria-hidden="true">↗</span></a>
               <a className="button button-outline" href="#about">소개 더 보기 <span aria-hidden="true">↓</span></a>
             </div>
+            <div className="hero-tags" aria-label="핵심 주제">
+              <span>Root Cause</span><span>Documentation</span><span>Verification</span>
+            </div>
+            <a className="hero-email" href="#contact" aria-label="하단 연락처에서 이메일 주소 확인하기">
+              <span>EMAIL</span> {contactEmail} <span aria-hidden="true">↓</span>
+            </a>
           </div>
-          <figure className="case-note">
-            <figcaption><span>개발 노트</span>스마트 캠퍼스 · 2024</figcaption>
-            <h2>메시지는 어디까지 도착했을까?</h2>
-            <p>센서 값이 가상 캠퍼스에 늦게 반영됐습니다. 장치부터 화면까지 구간을 나눠 전달 여부를 확인했습니다.</p>
-            <div className="note-path" aria-label="확인 구간"><span>ESP32</span><i aria-hidden="true" /><span>서버</span><i aria-hidden="true" /><span>Unreal</span></div>
-          </figure>
+
+          <div className="hero-visual" aria-label="문제의 관찰, 분석, 검증을 순서대로 정리한 과정 카드">
+            <div className="trace-panel spotlight-card" onPointerMove={onSpotlightMove}>
+              <div className="trace-panel-top">
+                <span className="window-dots" aria-hidden="true"><i /><i /><i /></span>
+                <span>trace / workflow</span>
+                <span className="panel-status">● ACTIVE</span>
+              </div>
+              <div className="trace-panel-body">
+                <div className="trace-panel-intro">How I approach problems</div>
+                <div className="trace-step">
+                  <span className="trace-step-index">01</span>
+                  <div><strong>Observe</strong><small>현상을 정확히 파악합니다.</small></div>
+                  <span className="step-check" aria-hidden="true">✓</span>
+                </div>
+                <div className="trace-connector" aria-hidden="true" />
+                <div className="trace-step">
+                  <span className="trace-step-index">02</span>
+                  <div><strong>Understand</strong><small>원인과 흐름을 분석합니다.</small></div>
+                  <span className="step-check" aria-hidden="true">✓</span>
+                </div>
+                <div className="trace-connector" aria-hidden="true" />
+                <div className="trace-step">
+                  <span className="trace-step-index">03</span>
+                  <div><strong>Verify</strong><small>검증하고 기록으로 남깁니다.</small></div>
+                  <span className="step-check" aria-hidden="true">✓</span>
+                </div>
+              </div>
+              <div className="trace-panel-bottom"><span>TRACE / WORKFLOW</span><span>BUILD WITH EVIDENCE</span></div>
+            </div>
+          </div>
         </div>
+        <div className="container hero-bottom"><span>작은 과정이 모여 한 사람의 기록이 됩니다.</span><a href="#projects">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
       </section>
 
       <section className="section section-white" id="projects" aria-labelledby="projects-title">
