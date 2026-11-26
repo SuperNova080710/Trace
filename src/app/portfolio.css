@@ -140,10 +140,6 @@ html:has(.trace-page) { scroll-padding-top: 77px; }
   .campus-flow { padding-inline: 14px; }
   .flow-track small { font-size: .75rem; }
 }
-@media (prefers-reduced-motion: no-preference) {
-  .button:active, .archive-launch:active { transform: scale(.98); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .trace-page .main-nav, .trace-page .approach-detail { transition-delay: 0s; }
 }

@@ -84,6 +84,41 @@ const widths = [1920, 1366, 1024, 861, 860, 600, 390, 320];
       await page.close();
     }
 
+    // Exercise real pointer-down, keyboard focus and native field activation.
+    const feedback = await browser.newPage({viewport: {width: 1366, height: 900}});
+    try {
+      for (const [route, selector] of [
+        ["/", ".hero-actions a"],
+        ["/documents/resume.html", ".application-actions button"],
+        ["/ech-beacon-explorer.html", "button[type=button]"],
+      ]) {
+        await feedback.goto(base + route, {waitUntil: "networkidle"});
+        const control = feedback.locator(selector).first();
+        await control.hover();
+        await feedback.mouse.down();
+        await feedback.waitForFunction(sel => Number(getComputedStyle(document.querySelector(sel)).opacity) < .9, selector);
+        await feedback.mouse.move(1, 1);
+        await feedback.mouse.up();
+      }
+      const checkbox = feedback.getByRole("checkbox");
+      await checkbox.locator("..").click();
+      assert.ok(await checkbox.isChecked());
+      await checkbox.focus();
+      await feedback.keyboard.press("Space");
+      assert.equal(await checkbox.isChecked(), false);
+      assert.ok(await checkbox.evaluate(el => el.matches(":focus-visible")));
+      assert.ok(await feedback.getByRole("button", {name: "이전", exact: true}).isDisabled());
+      await feedback.emulateMedia({reducedMotion: "reduce"});
+      const reset = feedback.getByRole("button", {name: "전체 조건 초기화"});
+      await reset.hover();
+      await feedback.mouse.down();
+      assert.equal(await reset.evaluate(el => getComputedStyle(el).scale), "none");
+      await feedback.mouse.up();
+      console.log("PASS interaction feedback on home, document and explorer controls");
+    } finally {
+      await feedback.close();
+    }
+
     // Check both directions, interrupted disclosure motion and the non-View-Transition dialog path.
     for (const width of [390, 700]) {
       const mobile = await browser.newPage({viewport: {width, height: 844}});

@@ -19,6 +19,11 @@
 .brandSecondary { color: #91a6c7; font-size: 11px; font-weight: 600; }
 .back { color: #c4d6eb !important; font-size: 13px; font-weight: 600; border-bottom: 1px solid rgba(196,214,235,.35); padding-bottom: 5px; }
 .back:hover, .paperLink:hover, .footer a:hover { color: #9fd2ff !important; }
+@media (hover: hover) and (pointer: fine) {
+  .root .back:hover, .root .footer a:hover { text-decoration: underline; text-underline-offset: .25em; }
+  .paperLink:hover { background-color: var(--hover-wash); border-color: var(--feedback-ring); }
+}
+.paperLink:active { background-color: var(--press-wash); }
 .hero { min-height: 450px; display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(220px, .7fr); align-items: center; gap: 30px; padding: 60px 0 62px; }
 .heroContent { position: relative; z-index: 1; }
 .kicker, .sectionEyebrow { font-size: 11px; font-weight: 800; letter-spacing: .18em; color: #85c4ff; text-transform: uppercase; }

@@ -124,7 +124,9 @@ section[id] { scroll-margin-top: 85px; }
 .hero-description { margin: 0; color: #bdd0e9; font-size: 15px; line-height: 1.95; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 22px; border-radius: 10px; border: 1px solid transparent; padding: 11px 20px; font-size: 13px; font-weight: 800; transition: transform .2s ease, background .2s ease; }
-.button:hover { transform: translateY(-3px); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .button:hover { transform: translateY(-2px); }
+}
 .button-primary { color: white; background: var(--blue); box-shadow: 0 12px 25px #2563eb35; }
 .button-primary:hover { background: #1d4ed8; }
 .button-outline { color: #eaf5ff; background: #ffffff12; border-color: #b3cff34a; }
