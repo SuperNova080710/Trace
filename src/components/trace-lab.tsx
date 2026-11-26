@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { BrandMark } from "@/components/brand-mark";
+import { Disclosure } from "@/components/disclosure";
 import { ExperienceSection } from "@/components/experience-section";
 import { RouteLink } from "@/components/route-link";
 import type { ApprovedNarrative } from "@/content/public-profile";
@@ -19,7 +20,7 @@ const approaches = [
     title: "문제의 원인을 추적합니다",
     lead: "당장의 오류보다 문제가 발생한 흐름을 먼저 이해합니다.",
     description:
-      "관찰한 현상과 재현 조건을 구분하고, 로그와 요청·응답 흐름을 확인하면서 원인을 좁혀 갑니다. 구체적인 사례와 결과는 사실 확인 후 이 영역에 연결합니다.",
+      "관찰한 현상과 재현 조건을 구분하고, 로그와 요청·응답 흐름을 확인하면서 원인을 좁혀 갑니다. 스마트 캠퍼스에서도 장치와 서버가 주고받는 MQTT 메시지를 구간별로 확인했습니다.",
     tags: ["문제 분석", "원인 추적"],
   },
   {
@@ -39,12 +40,6 @@ const approaches = [
     tags: ["테스트", "재현"],
   },
 ] as const;
-
-const projects = [{
-  number: "02", type: "WEB DEVELOPMENT", title: "Full-stack Blog",
-  description: "Next.js 프론트엔드와 NestJS 백엔드를 나누어 구현한 웹 프로젝트입니다. 기능과 역할은 순차적으로 보강합니다.",
-  href: "https://github.com/SuperNova080710/Blog-frontend", link: "프론트엔드 코드 보기", tone: "web", monogram: "WEB",
-}] as const;
 
 export function TraceLab({ displayName, contactEmail, narrative }: Props) {
   const [expanded, setExpanded] = useState<number | null>(0);
@@ -269,9 +264,9 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
               }
             }}
           >
+            <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
             <a href="#about" onClick={() => setMobileMenuOpen(false)}>소개</a>
             <a href="#approach" onClick={() => setMobileMenuOpen(false)}>작업 방식</a>
-            <a href="#projects" onClick={() => setMobileMenuOpen(false)}>프로젝트</a>
             <a href="#experience" onClick={() => setMobileMenuOpen(false)}>경험</a>
             <a href="#documents" onClick={() => setMobileMenuOpen(false)}>지원 서류</a>
             <a href="#contact" className="mobile-contact-link" onClick={() => setMobileMenuOpen(false)}>연락하기 <span aria-hidden="true">↓</span></a>
@@ -301,9 +296,6 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             <div className="hero-tags" aria-label="핵심 주제">
               <span>Root Cause</span><span>Documentation</span><span>Verification</span>
             </div>
-            <a className="hero-email" href="#contact" aria-label="하단 연락처에서 이메일 주소 확인하기">
-              <span>EMAIL</span> {contactEmail} <span aria-hidden="true">↓</span>
-            </a>
           </div>
 
           <div className="hero-visual" aria-label="문제의 관찰, 분석, 검증을 순서대로 정리한 과정 카드">
@@ -337,13 +329,103 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             </div>
           </div>
         </div>
-        <div className="container hero-bottom"><span>작은 과정이 모여 한 사람의 기록이 됩니다.</span><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
+      </section>
+
+      <section className="section section-white" id="projects" aria-labelledby="projects-title">
+        <div className="container">
+          <div className="section-heading">
+            <div className="section-side"><span>01</span><span className="side-rule" /></div>
+            <div>
+              <p className="eyebrow">SELECTED WORK</p>
+              <h2 id="projects-title">대표 <span>프로젝트</span></h2>
+            </div>
+          </div>
+          <article className="research-feature" id="project-smart-campus" aria-labelledby="smart-campus-title">
+            <div className="research-feature-top">
+              <p className="research-eyebrow">대표 프로젝트 · 캡스톤디자인</p>
+              <h3 id="smart-campus-title">디지털 트윈 및 메타버스 융합형 스마트 캠퍼스</h3>
+              <p>현실 장치의 상태를 Unreal Engine 가상 캠퍼스에서 확인하고, 가상 공간에서도 실제 장치를 제어할 수 있는 양방향 시스템을 구현했습니다.</p>
+            </div>
+            <figure className="campus-flow">
+              <figcaption>스마트 캠퍼스 연동 구조</figcaption>
+              <div className="flow-caption">센서 상태 전달 <span aria-hidden="true">→</span></div>
+              <div className="flow-track"><strong>ESP32<small>현실 장치</small></strong><span aria-hidden="true">⇄</span><strong>MQTT · 서버<small>메시지 전달</small></strong><span aria-hidden="true">⇄</span><strong>Unreal Engine<small>가상 캠퍼스</small></strong></div>
+              <div className="flow-caption reverse"><span aria-hidden="true">←</span> 장치 제어 명령</div>
+            </figure>
+            <div className="research-detail">
+              <div>
+                <h4>담당한 구현</h4>
+                <p>ESP32 장치, MQTT 메시지, 서버와 Unreal Engine 사이의 연동을 담당했습니다. 메시지가 늦게 도착하거나 누락됐을 때는 장치부터 가상 공간까지 구간별로 확인해 문제가 생긴 지점을 좁혔습니다.</p>
+              </div>
+              <div>
+                <h4>캡스톤·수상·게재</h4>
+                <p><b>2024</b> 캡스톤디자인에서 시스템 구현 및 시연</p>
+                <p><b><time dateTime="2025-07-05">2025.07</time></b> 한국디지털콘텐츠학회 하계종합학술대회 대학생 논문경진대회 동상</p>
+                <p><b><time dateTime="2025-12">2025.12</time></b> KCI 등재 학술지 《디지털콘텐츠학회논문지》 제26권 제12호 게재</p>
+              </div>
+            </div>
+            <div className="research-links" aria-label="스마트 캠퍼스 게재 논문">
+              <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003279319" target="_blank" rel="noopener noreferrer">KCI 논문 정보 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+              <a href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12528426" target="_blank" rel="noopener noreferrer">DBpia 논문 상세 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
+            </div>
+          </article>
+          <div className="project-grid">
+            <article className="work-card arena-work">
+              <div className="game-symbol" aria-hidden="true"><i /><i /><i /><i /><i /></div>
+              <h3>한판아레나</h3>
+              <p>알까기·오목·체스를 한곳에서 즐기는 온라인 대전 서비스입니다. 친구 초대와 재도전 흐름을 설계하고, 실제 플레이로 턴 표시와 메신저 동작을 검증했습니다.</p>
+              <a href="https://alkkagi-alpha.vercel.app/" target="_blank" rel="noopener noreferrer">서비스 체험 <span aria-hidden="true">↗</span></a>
+            </article>
+            <article className="work-card blog-work">
+              <div className="code-symbol" aria-hidden="true">{'{ }'}</div>
+              <h3>Full-stack Blog</h3>
+              <p>Next.js 화면을 NestJS API에 연결했습니다. JWT 갱신 후 요청 재시도와 게시글 소유권 확인까지 구현했습니다.</p>
+              <div className="work-links"><a href="https://github.com/SuperNova080710/Blog-backend" target="_blank" rel="noopener noreferrer">백엔드 코드 ↗</a><a href="https://github.com/SuperNova080710/Blog-frontend" target="_blank" rel="noopener noreferrer">프론트엔드 코드 ↗</a></div>
+            </article>
+          </div>
+          <article className="research-feature research-archive" id="project-t10" aria-labelledby="t10-title">
+            <div id="research-app" className="archive-intro trace-origin" tabIndex={-1}>
+              <p className="eyebrow">연구 · ALEPH T10</p>
+              <h3 id="t10-title">{t10Research.title}</h3>
+              <p>ECH 환경의 탐지 비교를 연구 주제로 선정했습니다. ECH Beacon Explorer에서 같은 표본에 대한 두 탐지기의 판정을 살펴볼 수 있습니다.</p>
+              <RouteLink className="archive-launch" href="/ech-beacon-explorer" data-trace-launch-link>연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
+            </div>
+            <Disclosure className="research-disclosure" title="실험 결과와 공개 자료">
+              <div className="research-numbers" aria-label="T10 평가 결과">
+                <div><span>전체 합성 실험</span><strong>{t10Research.totalTrials}<small> Trials</small></strong><small>Beacon 100 · Normal 100</small></div>
+                <div><span>Held-out 평가</span><strong>{t10Research.heldout.trials}<small> Trials</small></strong><small>Beacon 50 · Normal 60</small></div>
+                <div><span>오탐 · Timing → Multi</span><strong>{t10Research.timingOnly.fp}<small> → </small>{t10Research.multiFeature.fp}<small>건</small></strong><small>동일 정상 표본 기준</small></div>
+                <div><span>F1 · Timing → Multi</span><strong className="research-f1">{detectorMetrics(t10Research.timingOnly).f1.toFixed(4)}<small> → </small>{detectorMetrics(t10Research.multiFeature).f1.toFixed(4)}</strong><small>두 모델 Recall 1.0000</small></div>
+              </div>
+              <div className="research-detail">
+                <div>
+                  <h4>상황 · 행동 · 결과</h4>
+                  <p><b>상황</b> ECH 환경에서 비콘의 연결 간격에 지터가 발생할 때 탐지 성능을 비교할 필요가 있었습니다.</p>
+                  <p><b>행동</b> Native ECH 테스트베드와 200개 Trial을 구성하고, 사전 고정된 Calibration/Held-out 분할로 두 탐지기를 평가했습니다.</p>
+                  <p><b>결과</b> Held-out 110개에서 Multi-feature는 정상 오탐 10건을 7건으로 줄였습니다. 두 모델 모두 Recall 1.0000으로, 고지터 재현율 우위 가설은 지지되지 않았습니다.</p>
+                  <p className="research-crosslink">연결 역량: <a href="#approach">원인 분석과 검증</a> · <a href="#about">성장 서사</a></p>
+                </div>
+                <aside aria-label="연구 결과 해석상의 한계">
+                  <h4>해석의 한계</h4>
+                  <p>단일 통제 환경의 합성 트래픽 실험입니다. 실제 악성 트래픽 및 운영망 일반화 성능을 검증한 결과가 아닙니다. Multi-feature는 추론 비용도 더 높았습니다.</p>
+                </aside>
+              </div>
+              <div className="research-links" aria-label="T10 공개 근거">
+                <a href={t10Research.sources.manuscript} target="_blank" rel="noopener noreferrer">연구 원고 <span aria-hidden="true">↗</span></a>
+                <a href={t10Research.sources.evaluation} target="_blank" rel="noopener noreferrer">평가 JSON <span aria-hidden="true">↗</span></a>
+                <a href={t10Research.sources.release} target="_blank" rel="noopener noreferrer">PCAP 200개 Release <span aria-hidden="true">↗</span></a>
+                <a href={t10Research.sources.log} target="_blank" rel="noopener noreferrer">연구 기록 <span aria-hidden="true">↗</span></a>
+              </div>
+              <p className="research-footnote">T10은 별도의 연구 원고이며 이전 Digital Twin 논문과 다릅니다. 학술지 게재 실적으로 표시하지 않습니다.</p>
+            </Disclosure>
+          </article>
+        </div>
       </section>
 
       <section className="section section-white" id="about" aria-labelledby="about-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>01</span><span className="side-rule" /></div>
+            <div className="section-side"><span>02</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">ABOUT ME</p>
               <h2 id="about-title">제가 중요하게 생각하는 것은<br /><span>문제를 풀어내는 과정입니다.</span></h2>
@@ -354,7 +436,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
               {narrative.filter((entry) => entry.chapter === "opening").map((entry) => (
                 <p className="about-lead approved-opening" key={entry.id}>{entry.text}</p>
               ))}
-              <p className="about-context">2024년의 캡스톤디자인과 2026년의 문제 해결 기록을 바탕으로, 제가 무엇을 어려워했고 어떻게 접근 방식을 바꿨는지 정리했습니다.</p>
+              <p className="about-context">캡스톤에서 여러 부분을 한꺼번에 고칠 때는 문제가 어디에 있는지 알기 어려웠습니다. 장치, 네트워크, 서버로 나눠 어디까지 정상인지 확인하면서 접근 방식이 바뀌었습니다.</p>
             </div>
             <aside className="about-aside spotlight-card" aria-label="프로필 요약" onPointerMove={onSpotlightMove}>
               <p className="aside-label">PROFILE</p>
@@ -368,29 +450,31 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
           <div className="approved-story" aria-label="오리온의 자기소개 본문">
             <div className="story-timeline-heading">
               <span className="story-timeline-eyebrow">MY JOURNEY · 2024—2026</span>
-              <p>한 번에 완성된 결과가 아니라, 문제를 마주하고 다시 시도해 온 기록입니다.</p>
+              <p>문제를 만나고 다시 시도한 기록</p>
             </div>
-            <div className="story-chapters" ref={storyTimelineRef}>
-              <span className="story-timeline-fill" aria-hidden="true" />
-            {([
-              { id: "difficulty", number: "01", title: "막혔던 순간", subtitle: "2024 · 디지털 트윈 캡스톤" },
-              { id: "turning", number: "02", title: "접근 방식을 바꾸다", subtitle: "2024–2026 · 다시 확인하고 다시 시작하기" },
-              { id: "growth", number: "03", title: "지금도 남기는 기록", subtitle: "2026 · 기록, 협업, AI의 검증" },
-            ] as const).map((chapter) => {
-              const paragraphs = narrative.filter((entry) => entry.chapter === chapter.id);
-              if (paragraphs.length === 0) return null;
-              return (
-                <section className="story-chapter" data-step={chapter.number} key={chapter.id} aria-labelledby={`story-${chapter.id}`}>
-                  <div className="story-chapter-number" aria-hidden="true"><span>{chapter.number}</span></div>
-                  <div className="story-chapter-body">
-                    <p className="story-chapter-kicker">{chapter.subtitle}</p>
-                    <h3 id={`story-${chapter.id}`}>{chapter.title}</h3>
-                    {paragraphs.map((entry) => <p key={entry.id}>{entry.text}</p>)}
-                  </div>
-                </section>
-              );
-            })}
-            </div>
+            <Disclosure className="story-disclosure" title="개발 회고">
+              <div className="story-chapters" ref={storyTimelineRef}>
+                <span className="story-timeline-fill" aria-hidden="true" />
+              {([
+                { id: "difficulty", number: "01", title: "막혔던 순간", subtitle: "2024 · 디지털 트윈 캡스톤" },
+                { id: "turning", number: "02", title: "접근 방식을 바꾸다", subtitle: "2024–2026 · 다시 확인하고 다시 시작하기" },
+                { id: "growth", number: "03", title: "지금도 남기는 기록", subtitle: "2026 · 기록, 협업, AI의 검증" },
+              ] as const).map((chapter) => {
+                const paragraphs = narrative.filter((entry) => entry.chapter === chapter.id);
+                if (paragraphs.length === 0) return null;
+                return (
+                  <section className="story-chapter" data-step={chapter.number} key={chapter.id} aria-labelledby={`story-${chapter.id}`}>
+                    <div className="story-chapter-number" aria-hidden="true"><span>{chapter.number}</span></div>
+                    <div className="story-chapter-body">
+                      <p className="story-chapter-kicker">{chapter.subtitle}</p>
+                      <h3 id={`story-${chapter.id}`}>{chapter.title}</h3>
+                      {paragraphs.map((entry) => <p key={entry.id}>{entry.text}</p>)}
+                    </div>
+                  </section>
+                );
+              })}
+              </div>
+            </Disclosure>
             {narrative.filter((entry) => entry.chapter === "closing").map((entry) => (
               <blockquote className="story-closing" key={entry.id}>
                 <span className="story-closing-label">앞으로의 방향</span>
@@ -409,8 +493,8 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
                 <article>
                   <span className="ability-index">02 · RELATIONSHIP</span>
                   <h4>대인관계력</h4>
-                  <p>팀으로 시스템을 구현하며 설명과 공유의 필요성을 배웠습니다. 구체적인 개인 역할은 추가 검증이 필요합니다.</p>
-                  <small>근거: 2024 캡스톤 · 세부 행동 보완 예정</small>
+                  <p>캡스톤 팀에서 장치와 가상 캠퍼스의 연동을 맡으며, 각 구간의 동작을 설명하고 공유하는 경험을 쌓았습니다.</p>
+                  <small>근거: 2024 스마트 캠퍼스 캡스톤</small>
                 </article>
                 <article>
                   <span className="ability-index">03 · MOTIVATION</span>
@@ -427,7 +511,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
       <section className="section section-tint" id="approach" aria-labelledby="approach-title">
         <div className="container">
           <div className="section-heading">
-            <div className="section-side"><span>02</span><span className="side-rule" /></div>
+            <div className="section-side"><span>03</span><span className="side-rule" /></div>
             <div>
               <p className="eyebrow">HOW I WORK</p>
               <h2 id="approach-title">제가 일하는 <span>세 가지 방식</span></h2>
@@ -474,107 +558,6 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
         </div>
       </section>
 
-      <section className="section section-white" id="projects" aria-labelledby="projects-title">
-        <div className="container">
-          <div className="section-heading">
-            <div className="section-side"><span>03</span><span className="side-rule" /></div>
-            <div>
-              <p className="eyebrow">SELECTED WORK</p>
-              <h2 id="projects-title">결과를 확인할 수 있는 <span>프로젝트</span></h2>
-            </div>
-          </div>
-          <article className="research-feature" id="project-smart-campus" aria-labelledby="smart-campus-title">
-            <div className="research-feature-top">
-              <p className="research-eyebrow">대표 프로젝트 · 캡스톤디자인</p>
-              <h3 id="smart-campus-title">디지털 트윈 및 메타버스 융합형 스마트 캠퍼스</h3>
-              <p>현실 장치의 상태를 Unreal Engine 가상 캠퍼스에서 확인하고, 가상 공간에서도 실제 장치를 제어할 수 있는 양방향 시스템을 구현했습니다.</p>
-            </div>
-            <div className="research-detail">
-              <div>
-                <h4>담당한 구현</h4>
-                <p>ESP32 장치, MQTT 메시지, 서버와 Unreal Engine 사이의 연동을 담당했습니다. 메시지가 늦게 도착하거나 누락됐을 때는 장치부터 가상 공간까지 구간별로 확인해 문제가 생긴 지점을 좁혔습니다.</p>
-              </div>
-              <div>
-                <h4>캡스톤·수상·게재</h4>
-                <p><b>2024</b> 캡스톤디자인에서 시스템 구현 및 시연</p>
-                <p><b><time dateTime="2025-07-05">2025.07</time></b> 한국디지털콘텐츠학회 하계종합학술대회 대학생 논문경진대회 동상</p>
-                <p><b><time dateTime="2025-12">2025.12</time></b> KCI 등재 학술지 《디지털콘텐츠학회논문지》 제26권 제12호 게재</p>
-              </div>
-            </div>
-            <div className="research-links" aria-label="스마트 캠퍼스 게재 논문">
-              <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003279319" target="_blank" rel="noopener noreferrer">KCI 논문 정보 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
-              <a href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12528426" target="_blank" rel="noopener noreferrer">DBpia 논문 상세 <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span></a>
-            </div>
-          </article>
-          <article className="research-feature" id="project-t10" aria-labelledby="t10-title">
-            <div className="research-feature-top">
-              <p className="research-eyebrow">01 / FEATURED RESEARCH · ALEPH T10 · main-v1</p>
-              <h3 id="t10-title">{t10Research.title}</h3>
-              <p>{t10Research.paperTitle}</p>
-              <p>Native ECH 환경의 합성 HTTPS Beacon 탐지에서 Timing-only와 Multi-feature 탐지기를 비교한 연구 원고와 실험 결과입니다.</p>
-            </div>
-            <div className="research-numbers" aria-label="T10 평가 결과">
-              <div><span>전체 합성 실험</span><strong>{t10Research.totalTrials}<small> Trials</small></strong><small>Beacon 100 · Normal 100</small></div>
-              <div><span>Held-out 평가</span><strong>{t10Research.heldout.trials}<small> Trials</small></strong><small>Beacon 50 · Normal 60</small></div>
-              <div><span>오탐 · Timing → Multi</span><strong>{t10Research.timingOnly.fp}<small> → </small>{t10Research.multiFeature.fp}<small>건</small></strong><small>동일 정상 표본 기준</small></div>
-              <div><span>F1 · Timing → Multi</span><strong className="research-f1">{detectorMetrics(t10Research.timingOnly).f1.toFixed(4)}<small> → </small>{detectorMetrics(t10Research.multiFeature).f1.toFixed(4)}</strong><small>두 모델 Recall 1.0000</small></div>
-            </div>
-            <div className="research-detail">
-              <div>
-                <h4>상황 · 행동 · 결과</h4>
-                <p><b>상황</b> ECH 환경에서 비콘의 연결 간격에 지터가 발생할 때 탐지 성능을 비교할 필요가 있었습니다.</p>
-                <p><b>행동</b> Native ECH 테스트베드와 200개 Trial을 구성하고, 사전 고정된 Calibration/Held-out 분할로 두 탐지기를 평가했습니다.</p>
-                <p><b>결과</b> Held-out 110개에서 Multi-feature는 정상 오탐 10건을 7건으로 줄였습니다. 두 모델 모두 Recall 1.0000으로, 고지터 재현율 우위 가설은 지지되지 않았습니다.</p>
-                <p className="research-crosslink">연결 역량: <a href="#approach">원인 분석과 검증</a> · <a href="#about">성장 서사</a></p>
-              </div>
-              <aside aria-label="연구 결과 해석상의 한계">
-                <h4>해석의 한계</h4>
-                <p>단일 통제 환경의 합성 트래픽 실험입니다. 실제 악성 트래픽 및 운영망 일반화 성능을 검증한 결과가 아닙니다. Multi-feature는 추론 비용도 더 높았습니다.</p>
-              </aside>
-            </div>
-            <div className="research-links" aria-label="T10 공개 근거">
-              <a href={t10Research.sources.manuscript} target="_blank" rel="noopener noreferrer">연구 원고 <span aria-hidden="true">↗</span></a>
-              <a href={t10Research.sources.evaluation} target="_blank" rel="noopener noreferrer">평가 JSON <span aria-hidden="true">↗</span></a>
-              <a href={t10Research.sources.release} target="_blank" rel="noopener noreferrer">PCAP 200개 Release <span aria-hidden="true">↗</span></a>
-              <a href={t10Research.sources.log} target="_blank" rel="noopener noreferrer">연구 기록 <span aria-hidden="true">↗</span></a>
-            </div>
-            <p className="research-footnote">T10은 별도의 연구 원고이며 이전 Digital Twin 논문과 다릅니다. 학술지 게재 실적으로 표시하지 않습니다.</p>
-          </article>
-          <div className="project-grid">
-            {projects.map((project) => (
-              <article className="project-card spotlight-card" key={project.number} onPointerMove={onSpotlightMove}>
-                <div className={"project-art project-art-" + project.tone}>
-                  <span className="art-number">{project.number} / {project.type}</span>
-                  <span className="art-monogram" aria-hidden="true">{project.monogram}</span>
-                  <span className="art-corner" aria-hidden="true">↗</span>
-                </div>
-                <div className="project-content">
-                  <span className="project-category">{project.type}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <a href={project.href} target="_blank" rel="noopener noreferrer">
-                    {project.link} <span aria-hidden="true">↗</span><span className="sr-only"> (새 탭)</span>
-                  </a>
-                </div>
-              </article>
-            ))}
-            <article className="project-card project-future spotlight-card trace-origin" id="research-app"
-                     tabIndex={-1} onPointerMove={onSpotlightMove}>
-              <div className="project-art project-art-future">
-                <span className="art-number">03 / BR-B · RESEARCH APPLICATION</span>
-                <span className="art-monogram" aria-hidden="true">ECH</span>
-              </div>
-              <div className="project-content">
-                <span className="project-category">INTERACTIVE RESEARCH LAB</span>
-                <h3>ECH Beacon Explorer</h3>
-                <p>T10 논문을 바탕으로 보안 학습자가 합성 Held-out 110건의 판정을 직접 비교하고 오탐 감소와 추론 비용의 균형을 살펴보는 공개 앱입니다.</p>
-                <RouteLink href="/ech-beacon-explorer" data-trace-launch-link>연구 기반 앱 체험 <span aria-hidden="true">→</span></RouteLink>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <ExperienceSection onSpotlightMove={onSpotlightMove} />
 
       <section className="section section-white documents-section" id="documents" aria-labelledby="documents-title">
@@ -584,7 +567,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             <div>
               <p className="eyebrow">APPLICATION DOCUMENTS</p>
               <h2 id="documents-title">지원에 필요한 <span>세 가지 문서</span></h2>
-              <p className="section-subtitle">메모리얼 파크의 경험 기록과 검증된 프로젝트 성과를 바탕으로 작성한 공개용 지원 문서입니다. 각 문서를 바로 읽거나 파일로 내려받고, PDF로 저장할 수 있습니다.</p>
+              <p className="section-subtitle">웹에서 읽거나 Word 파일로 내려받을 수 있습니다.</p>
             </div>
           </div>
           <div className="document-list" aria-label="지원 서류 열람 및 다운로드">
@@ -620,7 +603,7 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
       <footer className="site-footer">
         <div className="container footer-inner">
           <a href="#top" className="footer-brand">TRACE<span>.</span></a>
-          <p>오리온의 개발 기록 · 제작 중</p>
+          <p>오리온의 개발 기록</p>
           <a href="#top">맨 위로 ↑</a>
         </div>
       </footer>

@@ -38,8 +38,8 @@
 }
 
 .open {
-  padding-inline: 10px;
-  border-radius: 6px;
+  padding-inline: 14px;
+  border-radius: var(--control-radius);
   background: #edf4ff;
 }
 
@@ -57,7 +57,7 @@
   max-height: calc(100dvh - 32px);
   padding: clamp(14px, 3vw, 24px);
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--surface-radius);
   background: #fff;
   color: var(--text);
   box-shadow: 0 28px 100px #07172e50;
@@ -66,6 +66,15 @@
 .dialog::backdrop {
   background: #07172eb8;
 }
+
+.open, .dialog, .close { corner-shape: var(--corner); }
+.close { padding-inline: 14px; border-radius: var(--control-radius); background: #edf3fa; }
+@media (prefers-reduced-motion: no-preference) {
+  .dialog[data-motion="open"]::backdrop { animation: credential-shade 320ms ease both; }
+  .dialog[data-motion="close"]::backdrop { animation: credential-shade-out 280ms ease both; }
+}
+@keyframes credential-shade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes credential-shade-out { from { opacity: 1; } to { opacity: 0; } }
 
 .dialogHeader {
   display: flex;

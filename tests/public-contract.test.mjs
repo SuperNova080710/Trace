@@ -96,14 +96,14 @@ test("issue #2 publishes only author-approved narrative in three factual chapter
   for (const id of ["difficulty", "turning", "growth", "closing"]) {
     assert.ok(lab.includes('chapter === "' + id + '"') || lab.includes('id: "' + id + '"'));
   }
-  assert.match(lab, /구체적인 개인 역할은 추가 검증이 필요합니다/);
+  assert.match(lab, /장치와 가상 캠퍼스의 연동을 맡으며/);
   assert.doesNotMatch(lab, /원고와 실제 기록을 대조한 자기소개 본문은 사용자 검토 후 추가할 예정입니다/);
   assert.doesNotMatch(story, /\b(?:ghp_|sk_live_|-----BEGIN PRIVATE KEY)/);
 });
 
 test("three capabilities have distinct evidence boundaries", async () => {
   const lab = await read("src/components/trace-lab.tsx");
-  for (const term of ["자기조절력", "대인관계력", "자기동기력", "세부 행동 보완 예정"]) {
+  for (const term of ["자기조절력", "대인관계력", "자기동기력", "2024 스마트 캠퍼스 캡스톤"]) {
     assert.ok(lab.includes(term));
   }
 });
@@ -146,7 +146,7 @@ test("issue #3 provides accessible mobile navigation and distinct future documen
   assert.match(lab, /href="\/documents\/personal-statement\/"/);
   assert.match(lab, /href="\/documents\/project-experience\/"/);
   assert.doesNotMatch(lab, /아직 다운로드 가능한 파일이 아닙니다/);
-  assert.match(css, /\.main-nav\.is-open \{ display: flex; \}/);
+  assert.match(css, /\.main-nav\.is-open \{[^}]*visibility: visible/);
   assert.match(page, /id="main-content" tabIndex=\{-1\}/);
 });
 

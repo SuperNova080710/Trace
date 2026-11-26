@@ -1,0 +1,52 @@
+/* Feedback follows the native control, including links rendered by RouteLink. */
+@media screen {
+  :root {
+    --press-wash: rgb(36 104 210 / 12%);
+    --hover-wash: rgb(36 104 210 / 7%);
+    --feedback-ring: #287bc6;
+    --feedback-time: 160ms;
+  }
+  :is(.hero, .contact-section, .application-header, .trace-route-panel:not(.application-page)) {
+    --press-wash: rgb(145 200 255 / 20%);
+    --hover-wash: rgb(145 200 255 / 11%);
+    --feedback-ring: #9ed5ff;
+  }
+  :where(a[href], button:enabled, summary, select:enabled, input:enabled, label) {
+    -webkit-tap-highlight-color: var(--press-wash);
+  }
+  :where(a[href], button:enabled, summary, select:enabled, input[type="checkbox"]:enabled) { cursor: pointer; }
+  :where(a[href], button:enabled, summary, select:enabled, input:enabled):focus-visible {
+    outline: 3px solid var(--feedback-ring);
+    outline-offset: 3px;
+  }
+  :where(a[href], button:enabled, summary):active { opacity: .78; }
+  :is(.approach-trigger, summary):active { background-color: var(--press-wash); }
+  .approach-trigger, .approach-item h3 { border-radius: inherit; corner-shape: var(--corner); }
+  .application-tab:active, .application-tab:focus-visible { box-shadow: inset 0 -3px var(--feedback-ring); }
+  a[href] .brand-mark { transition: transform var(--feedback-time) var(--ease); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a[href]:hover .brand-mark { filter: brightness(1.15); }
+  :is(.work-card, .profile-row, .research-crosslink, .site-footer, .paper-links, dialog) a[href]:hover,
+  .application-back:hover { text-decoration: underline; text-underline-offset: .24em; text-decoration-thickness: .1em; }
+  :is(.approach-trigger, summary):hover { background-color: var(--hover-wash); }
+  .archive-launch:hover, .application-tab:hover { box-shadow: inset 0 -2px var(--feedback-ring); }
+  .menu-button:hover { box-shadow: inset 0 0 0 1px var(--feedback-ring); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root :is(a[href], button, summary, select, input) {
+    transition: background-color var(--feedback-time) ease, color var(--feedback-time) ease,
+      border-color var(--feedback-time) ease, box-shadow var(--feedback-time) ease,
+      opacity 100ms ease, transform var(--feedback-time) var(--ease), scale var(--feedback-time) var(--ease);
+  }
+  :root :is(a[href], button:enabled, summary):active { transition-duration: 65ms; }
+  /* Keep full-width rows, text links and launch origins in place. */
+  button:enabled:not(.approach-trigger, [aria-pressed], [aria-haspopup="dialog"]):active,
+  :is(.button, .header-contact, .contact-mail, .application-word-download):active { scale: .97; }
+  a[href]:active .brand-mark { transform: scale(.92); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  a[href]:hover:not(:active) .brand-mark { transform: translateY(-1px) rotate(-4deg); }
+}
