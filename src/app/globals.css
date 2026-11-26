@@ -152,9 +152,6 @@ section[id] { scroll-margin-top: 85px; }
 .step-check { color: #7be4be; font-size: 17px; }
 .trace-connector { height: 22px; width: 1px; background: #56769b; margin-left: 18px; }
 .trace-panel-bottom { display: flex; justify-content: space-between; gap: 12px; padding: 15px 20px; background: #112743; border-top: 1px solid #2c486d; color: #8ea9cf; font: 10px ui-monospace, SFMono-Regular, Consolas, monospace; }
-.hero-bottom { position: relative; z-index: 1; display: flex; justify-content: space-between; padding-block: 17px; border-top: 1px solid #8bb8f129; color: #95b3d6; font-size: 11px; }
-.hero-bottom a { color: #abd7f9; font-size: 10px; font-weight: 800; letter-spacing: .08em; white-space: nowrap; }
-.hero-bottom a span { font-size: 16px; vertical-align: -1px; margin-left: 8px; }
 
 .section { padding: clamp(70px,8vw,110px) 0; }
 .section-white { background: #fff; }
@@ -331,7 +328,6 @@ section[id] { scroll-margin-top: 85px; }
   .hero-visual { min-height: 0; }
   .trace-panel { max-width: 520px; }
   .hero h1 { font-size: clamp(36px,6.5vw,50px); }
-  .hero-bottom { gap: 14px; }
   .section-heading { grid-template-columns: 1fr; gap: 10px; }
   .section-side { padding: 0; }
   .about-grid,.approach-list,.project-grid { margin-left: 0; }
@@ -355,8 +351,6 @@ section[id] { scroll-margin-top: 85px; }
   .button { gap: 10px; padding: 11px 14px; font-size: 12px; }
   .trace-panel-body { padding: 22px 20px; }
   .trace-panel-top { padding: 0 12px; }
-  .hero-bottom { font-size: 10px; }
-  .hero-bottom a { font-size: 9px; }
   .section-heading h2 { font-size: 28px; }
   .section-subtitle { font-size: 13px; }
   .about-lead { font-size: 20px; }
@@ -426,9 +420,6 @@ section[id] { scroll-margin-top: 85px; }
   letter-spacing: -.025em;
 }
 .identity-mark { flex: 0 0 4px; width: 4px; height: 18px; margin-top: 3px; background: #7dd3fc; border-radius: 5px; }
-.hero-email { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; color: #b6ceec; font-size: 12px; border-bottom: 1px solid #6c94c53d; padding-bottom: 4px; overflow-wrap: anywhere; }
-.hero-email > span:first-child { color: #7dd3fc; letter-spacing: .09em; font-size: 9px; font-weight: 800; }
-.hero-email:hover, .hero-email:focus-visible { color: #fff; border-bottom-color: #91cff7; }
 .document-list { margin-left: 130px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
 .document-item { display: flex; flex-direction: column; gap: 11px; min-height: 142px; padding: 22px; background: #f7faff; border: 1px solid #dbe7f6; border-radius: 12px; }
 .document-number { color: #2766c0; font-size: 11px; font-weight: 800; }
@@ -516,7 +507,6 @@ section[id] { scroll-margin-top: 85px; }
 @media(max-width: 520px) {
   .main-nav a:nth-child(4) { display: flex; }
   .hero-identity { font-size: 13px; }
-  .hero-email { font-size: 11px; }
 }
 
 /* Issue #5 — focused, evidence-first research card. */
