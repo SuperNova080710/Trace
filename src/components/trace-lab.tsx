@@ -301,9 +301,6 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             <div className="hero-tags" aria-label="핵심 주제">
               <span>Root Cause</span><span>Documentation</span><span>Verification</span>
             </div>
-            <a className="hero-email" href="#contact" aria-label="하단 연락처에서 이메일 주소 확인하기">
-              <span>EMAIL</span> {contactEmail} <span aria-hidden="true">↓</span>
-            </a>
           </div>
 
           <div className="hero-visual" aria-label="문제의 관찰, 분석, 검증을 순서대로 정리한 과정 카드">
@@ -337,7 +334,6 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
             </div>
           </div>
         </div>
-        <div className="container hero-bottom"><span>작은 과정이 모여 한 사람의 기록이 됩니다.</span><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
       </section>
 
       <section className="section section-white" id="about" aria-labelledby="about-title">
