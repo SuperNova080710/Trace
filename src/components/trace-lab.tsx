@@ -362,10 +362,6 @@ export function TraceLab({ displayName, contactEmail, narrative }: Props) {
           </div>
 
           <div className="approved-story" aria-label="오리온의 자기소개 본문">
-            <div className="story-timeline-heading">
-              <span className="story-timeline-eyebrow">MY JOURNEY · 2024—2026</span>
-              <p>한 번에 완성된 결과가 아니라, 문제를 마주하고 다시 시도해 온 기록입니다.</p>
-            </div>
             <div className="story-chapters" ref={storyTimelineRef}>
               <span className="story-timeline-fill" aria-hidden="true" />
             {([
